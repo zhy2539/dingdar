@@ -27,8 +27,8 @@ const { eyebrow, title, lead, img, imgAlt, ctaPrimary, ctaSecondary, trust } = A
     <p class="lead">{lead}</p>
     <div class="cta-row">
       {ctaPrimary && (
-        ctaPrimary.href === '/contact/' ? (
-          <a href="/contact/" class="btn btn--primary btn--lg" data-modal-open>{ctaPrimary.label}</a>
+        ctaPrimary.href.endsWith('/contact/') ? (
+          <a href={ctaPrimary.href} class="btn btn--primary btn--lg" data-modal-open>{ctaPrimary.label}</a>
         ) : (
           <a href={ctaPrimary.href} class="btn btn--primary btn--lg">{ctaPrimary.label}</a>
         )

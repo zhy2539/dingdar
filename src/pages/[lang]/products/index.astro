@@ -1,0 +1,101 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PageHero from '../../../components/PageHero.astro';
+import CtaBand from '../../../components/CtaBand.astro';
+import { CATEGORIES } from '../../../data/products';
+import { MATERIALS } from '../../../data/config';
+import { dicts, LANG_CODES, getT, langPath, type Lang } from '../../../i18n';
+
+export function getStaticPaths() {
+  return LANG_CODES.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params;
+const t = getT(lang as Lang);
+const prod = (key: string) => t('prod.' + key);
+const common = (key: string) => t('common.' + key);
+const langHref = (enPath: string) => langPath(lang as Lang, enPath);
+---
+
+<BaseLayout
+  title={t('meta.products.title')}
+  description={t('meta.products.desc')}
+  path={langPath(lang as Lang, '/products/')}
+  lang={lang}
+  enPath="/products/"
+>
+  <PageHero
+    eyebrow={prod('heroEyebrow')}
+    title={prod('heroTitle')}
+    lead={prod('heroLead')}
+    img="/images/H62bf48ffa42e4eba99efa99b67123d8bN.webp"
+    imgAlt="Mining crusher wear parts application"
+    ctaPrimary={{ label: common('requestQuote'), href: langHref('/contact/') }}
+    ctaSecondary={{ label: common('askQuestion'), href: langHref('/faq/') }}
+  />
+
+  <section class="section">
+    <div class="container">
+      <div class="sec-head center">
+        <span class="eyebrow">{prod('catEyebrow')}</span>
+        <h2>{prod('catH2')}</h2>
+        <p>{prod('catP')}</p>
+      </div>
+      <div class="grid grid--3">
+        {CATEGORIES.map((c) => (
+          <a href={langHref('/products/' + c.slug + '/')} class="card card--hover prod-card">
+            <div class="thumb"><img src={c.heroImg} alt={t('p.' + c.slug + '.cardTitle')} loading="lazy" width="800" height="600" /></div>
+            <div class="body">
+              <h3>{t('p.' + c.slug + '.cardTitle')}</h3>
+              <p>{t('p.' + c.slug + '.cardDesc')}</p>
+              <span class="code" style="display:inline-block;margin-top:12px;">{common('explore')} →</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="sec-head">
+        <span class="eyebrow">{prod('matEyebrow')}</span>
+        <h2>{prod('matH2')}</h2>
+        <p>{prod('matP')}</p>
+      </div>
+      <div class="card" style="overflow-x:auto;">
+        <table class="tbl">
+          <thead>
+            <tr><th>{prod('mth0')}</th><th>{prod('mth1')}</th><th>{prod('mth2')}</th></tr>
+          </thead>
+          <tbody>
+            {MATERIALS.map((m) => (
+              <tr><td>{m.name}</td><td>{m.grades}</td><td>{m.use}</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="sec-head">
+        <span class="eyebrow">{prod('oemEyebrow')}</span>
+        <h2>{prod('oemH2')}</h2>
+        <p>{prod('oemP')}</p>
+      </div>
+      <div class="grid grid--3">
+        {[0, 1, 2].map((i) => (
+          <div class="card step"><span class="n" style="counter-increment:none;">{i + 1}</span><h3>{prod('s' + i + '.title')}</h3><p>{prod('s' + i + '.text')}</p></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand
+    title={prod('ctaTitle')}
+    text={prod('ctaText')}
+    cta={common('discussPart')}
+  />
+</BaseLayout>

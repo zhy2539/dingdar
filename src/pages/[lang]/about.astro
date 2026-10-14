@@ -1,0 +1,238 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { CAPABILITY_STATS, STATS, COMPLIANCE, OEM_STEPS, OEM_CUSTOMIZABLE } from '../../data/config';
+import { dicts, LANG_CODES, getT, langPath, type Lang } from '../../i18n';
+
+export function getStaticPaths() {
+  return LANG_CODES.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params;
+const t = getT(lang as Lang);
+const ab = (key: string) => t('ab.' + key);
+const common = (key: string) => t('common.' + key);
+const langHref = (enPath: string) => langPath(lang as Lang, enPath);
+
+const routes = [ab('r0'), ab('r1'), ab('r2'), ab('r3')];
+const facts = [ab('facts0'), ab('facts1'), ab('facts2')];
+const moqRows = [0, 1, 2].map((i) => ({ scale: ab('mr' + i + '.scale'), typical: ab('mr' + i + '.typical'), confirmed: ab('mr' + i + '.confirmed') }));
+const capCards = CAPABILITY_STATS.map((s, i) => ({ value: s.value, label: ab('cap' + i) }));
+---
+
+<BaseLayout
+  title={t('meta.about.title')}
+  description={t('meta.about.desc')}
+  path={langPath(lang as Lang, '/about/')}
+  lang={lang}
+  enPath="/about/"
+>
+  <PageHero
+    eyebrow={ab('heroEyebrow')}
+    title={ab('heroTitle')}
+    lead={ab('heroLead')}
+    img="/images/factory-mould-line.webp"
+    imgAlt="Foundry moulding production line"
+    ctaPrimary={{ label: common('contactUs'), href: langHref('/contact/') }}
+  />
+
+  <section class="section" style="padding-top:0;">
+    <div class="container">
+      <div class="stats">
+        {STATS.map((s, i) => (
+          <div><div class="num">{s.value}</div><div class="lab">{t('home.qual' + i)}</div></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid grid--2" style="align-items:center;">
+        <div>
+          <span class="eyebrow">{ab('whoEyebrow')}</span>
+          <h2>{ab('whoH2')}</h2>
+          <p style="margin-top:16px;">{ab('whoPara')}</p>
+          <ul style="margin-top:18px;">
+            {facts.map((f) => (
+              <li style="padding:8px 0;border-top:1px solid var(--bg-tint);display:flex;gap:10px;font-size:0.95rem;">
+                <span style="color:var(--accent);font-weight:800;">✓</span>{f}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="grid grid--2">
+          {capCards.map((s) => (
+            <div class="card" style="padding:28px 24px;text-align:center;">
+              <div style="font-size:1.9rem;font-weight:800;color:var(--ink);">{s.value}</div>
+              <div style="font-size:0.88rem;color:var(--muted);margin-top:6px;">{s.label}</div>
+            </div>
+          ))}
+          <div class="card" style="padding:28px 24px;text-align:center;">
+            <div style="font-size:1.9rem;font-weight:800;color:var(--ink);">4</div>
+            <div style="font-size:0.88rem;color:var(--muted);margin-top:6px;">{ab('cap2')}</div>
+          </div>
+          <div class="card" style="padding:28px 24px;text-align:center;">
+            <div style="font-size:1.9rem;font-weight:800;color:var(--ink);">12–24h</div>
+            <div style="font-size:0.88rem;color:var(--muted);margin-top:6px;">{ab('cap4')}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="sec-head center">
+        <span class="eyebrow">{ab('routesEyebrow')}</span>
+        <h2>{ab('routesH2')}</h2>
+      </div>
+      <div class="grid grid--4">
+        {routes.map((r) => (
+          <div class="card" style="padding:22px 24px;text-align:center;"><h3 style="font-size:1.02rem;">{r}</h3></div>
+        ))}
+      </div>
+      <div class="grid grid--3" style="margin-top:40px;">
+        <div class="card" style="overflow:hidden;">
+          <img src="/images/foundry-pouring.webp" alt="Casting pouring operation" loading="lazy" width="900" height="450" style="width:100%;height:220px;object-fit:cover;" />
+          <div style="padding:20px 22px;"><h3 style="font-size:1.02rem;">{ab('cc0.title')}</h3><p style="font-size:0.9rem;color:var(--muted);margin-top:6px;">{ab('cc0.text')}</p></div>
+        </div>
+        <div class="card" style="overflow:hidden;">
+          <img src="/images/factory-machined-parts.webp" alt="Machined casting parts" loading="lazy" width="900" height="450" style="width:100%;height:220px;object-fit:cover;" />
+          <div style="padding:20px 22px;"><h3 style="font-size:1.02rem;">{ab('cc1.title')}</h3><p style="font-size:0.9rem;color:var(--muted);margin-top:6px;">{ab('cc1.text')}</p></div>
+        </div>
+        <div class="card" style="overflow:hidden;">
+          <img src="/images/quality-inspection.webp" alt="Quality inspection" loading="lazy" width="900" height="450" style="width:100%;height:220px;object-fit:cover;" />
+          <div style="padding:20px 22px;"><h3 style="font-size:1.02rem;">{ab('cc2.title')}</h3><p style="font-size:0.9rem;color:var(--muted);margin-top:6px;">{ab('cc2.text')}</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft" id="oem">
+    <div class="container">
+      <div class="sec-head center">
+        <span class="eyebrow">{ab('oemEyebrow')}</span>
+        <h2>{ab('oemH2')}</h2>
+        <p>{ab('oemP')}</p>
+      </div>
+      <div class="steps">
+        {OEM_STEPS.map((s, i) => (
+          <div class="step">
+            <span class="n">{s.step}</span>
+            <h3>{ab('st' + i + '.name')}</h3>
+            <p style="font-size:0.85rem;color:var(--accent);font-weight:600;">{ab('st' + i + '.time')}</p>
+            <p style="font-size:0.9rem;color:var(--muted);margin-top:4px;">{ab('st' + i + '.desc')}</p>
+          </div>
+        ))}
+      </div>
+      <div class="table-wrap" style="margin-top:40px;">
+        <table>
+          <thead>
+            <tr><th>{ab('moqH0')}</th><th>{ab('moqH1')}</th><th>{ab('moqH2')}</th></tr>
+          </thead>
+          <tbody>
+            {moqRows.map((r) => (
+              <tr><td>{r.scale}</td><td>{r.typical}</td><td>{r.confirmed}</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:0.85rem;color:var(--muted);margin-top:12px;">{ab('moqNote')}</p>
+      <div class="sec-head" style="margin-top:44px;">
+        <span class="eyebrow">{ab('custEyebrow')}</span>
+        <h2>{ab('custH2')}</h2>
+      </div>
+      <div class="grid grid--3">
+        {OEM_CUSTOMIZABLE.map((x, i) => (
+          <div class="card" style="padding:22px 24px;text-align:center;">
+            <h3 style="font-size:1rem;">{ab('co' + i)}</h3>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="compliance">
+    <div class="container">
+      <div class="sec-head">
+        <span class="eyebrow">{ab('matEyebrow')}</span>
+        <h2>{ab('matH2')}</h2>
+        <p>{ab('matP')}</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>{ab('mth0')}</th><th>{ab('mth1')}</th><th>{ab('mth2')}</th><th>{ab('mth3')}</th></tr>
+          </thead>
+          <tbody>
+            {COMPLIANCE.materials.map((m, i) => (
+              <tr>
+                <td style="font-weight:700;color:var(--ink);background:var(--bg-tint);">{ab('am' + i + '.name')}</td>
+                <td>{ab('am' + i + '.grades')}</td>
+                <td>{ab('am' + i + '.detail')}</td>
+                <td>{ab('am' + i + '.standard')}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <p style="font-size:0.84rem;color:var(--muted);margin-top:10px;">{ab('matNote')}</p>
+      </div>
+
+      <div class="sec-head" style="margin-top:44px;">
+        <span class="eyebrow">{ab('inspEyebrow')}</span>
+        <h2>{ab('inspH2')}</h2>
+        <p>{ab('inspP')}</p>
+      </div>
+      <div class="grid grid--3">
+        {COMPLIANCE.inspection.map((x, i) => (
+          <div class="card" style="padding:22px 24px;">
+            <h3 style="font-size:1rem;color:var(--accent);">✓ {ab('insp' + i)}</h3>
+          </div>
+        ))}
+      </div>
+
+      <div class="card" style="padding:34px 34px;max-width:860px;margin:40px auto 0;">
+        <h2 style="font-size:1.35rem;margin-bottom:14px;">{ab('certTitle')}</h2>
+        <p style="font-size:0.97rem;line-height:1.75;color:var(--ink-2);">{ab('certP')}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="sec-head">
+        <span class="eyebrow">{ab('verifyEyebrow')}</span>
+        <h2>{ab('verifyH2')}</h2>
+        <p>{ab('verifyP')}</p>
+      </div>
+      <div class="grid grid--4" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));">
+        {COMPLIANCE.verify.map((v, i) => (
+          <div class="card" style="padding:22px 24px;">
+            <span class="eyebrow" style="font-size:0.72rem;letter-spacing:0.08em;">{ab('v' + i + '.k')}</span>
+            <p style="font-size:0.98rem;margin-top:10px;line-height:1.6;">{ab('v' + i + '.v')}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="card" style="padding:26px 28px;margin-top:22px;max-width:860px;">
+        <h3 style="font-size:1.05rem;margin-bottom:12px;">{ab('vLinkTitle')}</h3>
+        <ul style="list-style:none;padding:0;margin:0;">
+          {COMPLIANCE.verifyLinks.map((l, i) => (
+            <li style="padding:10px 0;border-top:1px solid var(--bg-tint);">
+              <a href={l.url} target="_blank" rel="noopener" style="font-weight:700;color:var(--accent);">{ab('l' + i + '.label')} →</a>
+              <p style="font-size:0.86rem;color:var(--muted);margin-top:3px;">{ab('l' + i + '.note')}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand
+    title={ab('ctaTitle')}
+    text={ab('ctaText')}
+    cta={common('contactUs')}
+  />
+</BaseLayout>

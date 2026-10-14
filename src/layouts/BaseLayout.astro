@@ -4,6 +4,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import ModalContact from '../components/ModalContact.astro';
 import { SITE } from '../data/config';
+import { HTML_LANGS, OG_LOCALES, hreflangUrls, langPath, type AnyLang } from '../i18n';
 
 interface Props {
   title: string;
@@ -12,11 +13,17 @@ interface Props {
   noindex?: boolean;
   jsonLd?: object | object[];
   path?: string;
+  // 多语言：lang 为当前页面语言（默认 en）；enPath 为该页面的英文路径（用于 hreflang）
+  lang?: AnyLang;
+  enPath?: string;
 }
 
-const { title, description, image, noindex, jsonLd, path } = Astro.props;
-const canonical = path ? `${SITE.domain}${path}` : Astro.url.origin + Astro.url.pathname;
+const { title, description, image, noindex, jsonLd, path, lang = 'en', enPath = path || '/' } = Astro.props;
+const canonical = lang === 'en' ? (path ? `${SITE.domain}${path}` : Astro.url.origin + Astro.url.pathname) : `${SITE.domain}${langPath(lang as AnyLang, enPath)}`;
 const ogImage = image ? `${SITE.domain}${image}` : `${SITE.domain}/images/og-default.webp`;
+const htmlLang = HTML_LANGS[lang];
+const ogLocale = OG_LOCALES[lang];
+const hreflang = lang === 'en' ? null : hreflangUrls(enPath);
 
 const orgLd = {
   '@context': 'https://schema.org',
@@ -39,7 +46,7 @@ const ld = noindex ? jsonLd : [orgLd, ...(Array.isArray(jsonLd) ? jsonLd : jsonL
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={htmlLang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -49,6 +56,15 @@ const ld = noindex ? jsonLd : [orgLd, ...(Array.isArray(jsonLd) ? jsonLd : jsonL
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/png" href="/images/logo.png" />
 
+    {hreflang && (
+      <>
+        {hreflang.map((h) => (
+          <link rel="alternate" hreflang={h.code} href={SITE.domain + h.url} />
+        ))}
+        <link rel="alternate" hreflang="x-default" href={SITE.domain + hreflang[0].url} />
+      </>
+    )}
+
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="DINGDAR Casting" />
@@ -56,7 +72,8 @@ const ld = noindex ? jsonLd : [orgLd, ...(Array.isArray(jsonLd) ? jsonLd : jsonL
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
-    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale" content={ogLocale} />
+    {hreflang && hreflang.map((h) => h.code !== lang && <meta property="og:locale:alternate" content={OG_LOCALES[h.code]} />)}
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -84,10 +101,10 @@ gtag('config', '${SITE.gaId}');`} />
     )}
   </head>
   <body>
-    <Header />
+    <Header lang={lang} enPath={enPath} />
     <main><slot /></main>
-    <Footer />
-    <ModalContact />
+    <Footer lang={lang} enPath={enPath} />
+    <ModalContact lang={lang} />
 
     <a
       href={'https://wa.me/' + SITE.whatsappTel}

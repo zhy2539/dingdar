@@ -1,0 +1,198 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PageHero from '../../../components/PageHero.astro';
+import CtaBand from '../../../components/CtaBand.astro';
+import FaqList from '../../../components/FaqList.astro';
+import ProductCard from '../../../components/ProductCard.astro';
+import { CATEGORIES, getCategory } from '../../../data/products';
+import { SITE } from '../../../data/config';
+import { dicts, LANG_CODES, getT, langPath, type Lang } from '../../../i18n';
+
+export function getStaticPaths() {
+  const out = [];
+  for (const lang of LANG_CODES) {
+    for (const c of CATEGORIES) {
+      out.push({ params: { lang, slug: c.slug } });
+    }
+  }
+  return out;
+}
+
+const { lang, slug } = Astro.params;
+const cat = getCategory(slug!);
+if (!cat) throw new Error('Unknown category ' + slug);
+
+const t = getT(lang as Lang);
+const p = (key: string) => t('p.' + cat.slug + '.' + key);
+const pui = (key: string) => t('pui.' + key);
+const common = (key: string) => t('common.' + key);
+const langHref = (enPath: string) => langPath(lang as Lang, enPath);
+const path = langPath(lang as Lang, '/products/' + cat.slug + '/');
+
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: t('nav.0'), item: SITE.domain + langPath(lang as Lang, '/') },
+    { '@type': 'ListItem', position: 2, name: t('nav.1'), item: SITE.domain + langPath(lang as Lang, '/products/') },
+    { '@type': 'ListItem', position: 3, name: p('cardTitle'), item: SITE.domain + path },
+  ],
+};
+const productLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: p('cardTitle'),
+  description: p('intro'),
+  brand: { '@type': 'Brand', name: 'DINGDAR' },
+  category: 'Casting wear parts',
+};
+const customOptions = [pui('custom0'), pui('custom1'), pui('custom2'), pui('custom3')];
+const reviewSteps = [pui('r0'), pui('r1'), pui('r2'), pui('r3')];
+const apps = [0, 1, 2, 3].map((i) => p('app' + i)).filter((x) => x);
+const specs = [0, 1, 2, 3, 4].map((i) => p('spec' + i)).filter((x) => x);
+const partName = (i: number, fallback: string) => t('p.' + cat.slug + '.part' + i) || fallback;
+const faqs = [
+  { q: p('q0.q'), a: p('q0.a') },
+  { q: p('q1.q'), a: p('q1.a') },
+];
+if (p('q2.q') && p('q2.a')) {
+  faqs.push({ q: p('q2.q'), a: p('q2.a') });
+}
+---
+
+<BaseLayout title={p('title')} description={p('cardDesc')} path={path} lang={lang} enPath={'/products/' + cat.slug + '/'} jsonLd={[breadcrumbLd, productLd]}>
+  <PageHero
+    eyebrow={pui('heroEyebrow')}
+    title={p('h1')}
+    lead={p('intro')}
+    img={cat.heroImg}
+    imgAlt={p('cardTitle')}
+    ctaPrimary={{ label: common('requestQuote'), href: langHref('/contact/') }}
+    ctaSecondary={{ label: pui('browseParts'), href: '#parts' }}
+  />
+
+  <section class="section section--soft anchor" id="parts">
+    <div class="container">
+      <div class="sec-head center">
+        <span class="eyebrow">{pui('partsEyebrow')}</span>
+        <h2>{pui('partsH2')}</h2>
+        <p>{pui('partsP')}</p>
+      </div>
+      <div class="grid grid--3">
+        {cat.parts.map((pt, i) => <ProductCard code={pt.code} name={partName(i, pt.name)} img={pt.img} />)}
+      </div>
+      <div class="card" style="margin-top:32px;padding:26px 28px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;">
+        <div>
+          <h3 style="font-size:1.1rem;">{pui('cantFindTitle')}</h3>
+          <p style="font-size:0.94rem;color:var(--muted);margin-top:6px;">{pui('cantFindText')}</p>
+        </div>
+        <a href={langHref('/contact/')} class="btn btn--primary" data-modal-open>{pui('discussBtn')}</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="sec-head">
+        <span class="eyebrow">{pui('oemEyebrow')}</span>
+        <h2>{pui('oemH2')}</h2>
+        <p>{pui('oemP')}</p>
+      </div>
+      <div class="grid grid--4">
+        {customOptions.map((o) => (
+          <div class="card" style="padding:22px 24px;text-align:center;">
+            <h3 style="font-size:1rem;">{o}</h3>
+          </div>
+        ))}
+      </div>
+      <div style="margin-top:36px;">
+        <h3 style="margin-bottom:18px;">{pui('reviewTitle')}</h3>
+        <div class="grid grid--4">
+          {reviewSteps.map((s, i) => (
+            <div class="step"><span class="n"></span><h3>{s}</h3><p>{pui('stage')} {i + 1} {pui('stageSuffix')}</p></div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="sec-head">
+        <span class="eyebrow">{pui('appsEyebrow')}</span>
+        <h2>{pui('appsH2')}</h2>
+      </div>
+      <div class="grid grid--2">
+        {apps.map((a) => (
+          <div class="card" style="padding:20px 24px;">
+            <h3 style="font-size:1rem;">{a}</h3>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="sec-head">
+        <span class="eyebrow">{pui('specEyebrow')}</span>
+        <h2>{pui('specH2')}</h2>
+        <p>{pui('specP')}</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <tbody>
+            {specs.map((s) => {
+              const i = s.indexOf(':');
+              return (
+                <tr>
+                  <td style="width:220px;font-weight:700;color:var(--ink);background:var(--bg-tint);">{s.slice(0, i)}</td>
+                  <td>{s.slice(i + 1).trim()}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:0.85rem;color:var(--muted);margin-top:12px;">{pui('specNote')}</p>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="sec-head">
+        <span class="eyebrow">{pui('selEyebrow')}</span>
+        <h2>{pui('selH2')}</h2>
+      </div>
+      <FaqList items={faqs} />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="sec-head">
+        <span class="eyebrow">{pui('relEyebrow')}</span>
+        <h2>{pui('relH2')}</h2>
+        <p>{pui('relP')}</p>
+      </div>
+      <div class="grid grid--3">
+        {CATEGORIES.filter((c) => c.slug !== cat.slug).slice(0, 3).map((c) => (
+          <a href={langHref('/products/' + c.slug + '/')} class="card card--hover prod-card">
+            <div class="thumb"><img src={c.heroImg} alt={t('p.' + c.slug + '.cardTitle')} loading="lazy" width="800" height="600" /></div>
+            <div class="body">
+              <h3>{t('p.' + c.slug + '.cardTitle')}</h3>
+              <p>{t('p.' + c.slug + '.cardDesc')}</p>
+              <span class="code" style="display:inline-block;margin-top:12px;">{common('explore')} →</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand
+    title={pui('ctaTitlePrefix') + p('cardTitle')}
+    text={pui('ctaText')}
+    cta={common('requestQuote')}
+  />
+</BaseLayout>

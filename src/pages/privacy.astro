@@ -1,0 +1,92 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import { SITE } from '../data/config';
+
+const path = '/privacy/';
+---
+
+<BaseLayout
+  title="Privacy Policy | DINGDAR Casting"
+  description="How DINGDAR collects, uses and protects your data when you use dingdar.com — inquiry data, analytics and your rights."
+  path={path}
+>
+  <PageHero
+    eyebrow="Privacy"
+    title="Privacy Policy"
+    lead="This page explains what data dingdar.com collects, why we collect it, and the rights you have over your information. We keep data collection to the minimum needed to answer your inquiry and operate the site."
+    img="/images/foundry-pouring.webp"
+    imgAlt="DINGDAR foundry production floor"
+    ctaPrimary={{ label: 'Contact Us', href: '/contact/' }}
+  />
+
+  <section class="section">
+    <div class="container" style="max-width:860px;">
+      <h2 style="font-size:1.4rem;margin-bottom:18px;">Who we are</h2>
+      <p style="line-height:1.8;color:var(--ink-2);">
+        {SITE.legalName} operates the website dingdar.com (and its language versions under /es/, /fr/, /ru/ and /pt/).
+        This privacy policy applies to all versions of the site. If you contact us by email or WhatsApp, this policy also describes how we handle that information.
+      </p>
+
+      <h2 style="font-size:1.4rem;margin:34px 0 18px;">What we collect</h2>
+      <ul style="line-height:1.9;color:var(--ink-2);">
+        <li><strong>Inquiry data</strong> — the fields you submit through our contact or sample forms: name, work email, company, country, product interest, quantity and the message you write. We collect only what you choose to send.</li>
+        <li><strong>Anti-spam marker</strong> — our forms include a hidden honeypot field that automated bots fill. If it is filled, the submission is discarded without being read.</li>
+        <li><strong>Technical data</strong> — Google Analytics 4 collects anonymized usage statistics such as pages visited, approximate region, device type and referrer, so we can understand how the site is used.</li>
+      </ul>
+
+      <h2 style="font-size:1.4rem;margin:34px 0 18px;">How we use your data</h2>
+      <ul style="line-height:1.9;color:var(--ink-2);">
+        <li>To respond to your inquiry and carry out the technical review you requested.</li>
+        <li>To prepare quotations, samples and orders when a project moves forward.</li>
+        <li>To answer questions sent by email or WhatsApp.</li>
+        <li>To measure site usage in aggregate form (Google Analytics 4).</li>
+        <li>To protect the site against spam and abuse.</li>
+      </ul>
+      <p style="line-height:1.8;color:var(--ink-2);">
+        We do <strong>not</strong> sell your data, and we do not use inquiry data for marketing lists without your consent.
+      </p>
+
+      <h2 style="font-size:1.4rem;margin:34px 0 18px;">Who processes your data</h2>
+      <ul style="line-height:1.9;color:var(--ink-2);">
+        <li><strong>Formspree</strong> — our inquiry forms are processed by Formspree as our form processor. Formspree receives only the fields you submit and uses them to deliver the message to us.</li>
+        <li><strong>Cloudflare</strong> — hosts the site and delivers content via its global network.</li>
+        <li><strong>Google Analytics 4</strong> — processes aggregated usage statistics. Google Analytics data may be processed outside your country of residence.</li>
+      </ul>
+      <p style="line-height:1.8;color:var(--ink-2);">
+        We do not transfer personal data to any other third parties. If a third party becomes involved in processing your order (for example a freight forwarder), we only share the minimum details needed for that shipment.
+      </p>
+
+      <h2 style="font-size:1.4rem;margin:34px 0 18px;">Retention</h2>
+      <p style="line-height:1.8;color:var(--ink-2);">
+        Inquiry messages are kept for the time needed to complete the review and quotation process, and for legitimate business records. If you ask us to delete your inquiry data, we will do so unless we are required by law to keep it.
+      </p>
+
+      <h2 style="font-size:1.4rem;margin:34px 0 18px;">Your rights</h2>
+      <p style="line-height:1.8;color:var(--ink-2);">
+        Depending on your location, you may have the right to access, correct or delete the personal data you sent us, to object to or restrict processing, and to withdraw consent at any time.
+        To exercise these rights, email <a href={'mailto:' + SITE.email} style="color:var(--accent);font-weight:700;">{SITE.email}</a> with your request. We respond to verified requests within a reasonable time.
+      </p>
+
+      <h2 style="font-size:1.4rem;margin:34px 0 18px;">Cookies</h2>
+      <p style="line-height:1.8;color:var(--ink-2);">
+        We use cookies set by Google Analytics 4 to measure site usage. You can block or delete these cookies in your browser settings, or use Google's cookie controls. Blocking analytics cookies does not affect your ability to use the site or send an inquiry.
+      </p>
+
+      <h2 style="font-size:1.4rem;margin:34px 0 18px;">Security</h2>
+      <p style="line-height:1.8;color:var(--ink-2);">
+        The site is served over HTTPS. We collect only the minimum data needed and do not store payment or account credentials.
+      </p>
+
+      <h2 style="font-size:1.4rem;margin:34px 0 18px;">Changes to this policy</h2>
+      <p style="line-height:1.8;color:var(--ink-2);">
+        If this policy changes, the updated version will be published on this page with a revised date. Continued use of the site after changes means you accept the updated policy.
+      </p>
+
+      <h2 style="font-size:1.4rem;margin:34px 0 18px;">Contact</h2>
+      <p style="line-height:1.8;color:var(--ink-2);">
+        Questions about this policy can be sent to <a href={'mailto:' + SITE.email} style="color:var(--accent);font-weight:700;">{SITE.email}</a> or via our <a href="/contact/" style="color:var(--accent);font-weight:700;">contact page</a>. Last updated: 14 October 2026.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

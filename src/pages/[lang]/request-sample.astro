@@ -1,0 +1,168 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import { SITE } from '../../data/config';
+import { dicts, LANG_CODES, getT, langPath, type Lang } from '../../i18n';
+
+export function getStaticPaths() {
+  return LANG_CODES.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params;
+const t = getT(lang as Lang);
+const sp = (key: string) => t('sp.' + key);
+const ct = (key: string) => t('ct.' + key);
+const common = (key: string) => t('common.' + key);
+const langHref = (enPath: string) => langPath(lang as Lang, enPath);
+
+const sampleFields = [
+  { name: 'name', label: ct('f0.label'), type: 'text', required: true, placeholder: ct('f0.placeholder') },
+  { name: 'email', label: ct('f1.label'), type: 'email', required: true, placeholder: ct('f1.placeholder') },
+  { name: 'company', label: ct('f2.label'), type: 'text', required: true, placeholder: ct('f2.placeholder') },
+  { name: 'country', label: ct('f3.label'), type: 'text', required: true, placeholder: ct('f3.placeholder') },
+  { name: 'product', label: ct('f4.label'), type: 'select', required: false, options: ['sp.opt0', 'sp.opt1', 'sp.opt2', 'sp.opt3', 'sp.opt4', 'sp.opt5', 'sp.opt6'].map((k) => t(k)) },
+  { name: 'quantity', label: ct('f5.label'), type: 'text', required: false, placeholder: sp('f4.placeholder') },
+  { name: 'message', label: ct('f6.label'), type: 'textarea', required: true, placeholder: sp('f6.placeholder') },
+];
+const uses = ['sp.u0', 'sp.u1', 'sp.u2', 'sp.u3'].map((k) => t(k));
+---
+
+<BaseLayout
+  title={t('meta.sample.title')}
+  description={t('meta.sample.desc')}
+  path={langPath(lang as Lang, '/request-sample/')}
+  lang={lang}
+  enPath="/request-sample/"
+>
+  <PageHero
+    eyebrow={sp('heroEyebrow')}
+    title={sp('heroTitle')}
+    lead={sp('heroLead')}
+    img="/images/H8a38cb79479b45f39907a3d3034e8767X.webp"
+    imgAlt="Casting sample under evaluation for crusher wear parts"
+    ctaPrimary={{ label: sp('submitBtn'), href: '#sample-form' }}
+    ctaSecondary={{ label: common('whatsappUs'), href: 'https://wa.me/' + SITE.whatsappTel }}
+    trust={[sp('trust0'), sp('trust1'), sp('trust2')]}
+  />
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="grid grid--2" style="grid-template-columns: 1.1fr 0.9fr; gap: 40px; align-items: start;">
+        <div class="card" id="sample-form" style="padding: 34px 32px;">
+          <h2 style="font-size:1.5rem;">{sp('formTitle')}</h2>
+          <p style="font-size:0.95rem;color:var(--muted);margin:10px 0 24px;">{sp('formNote')}</p>
+
+          <form id="sample" action={SITE.formEndpoint} method="POST" novalidate data-thank-you-path={langPath(lang as Lang, '/thank-you/')}>
+            <div class="hp-field" aria-hidden="true">
+              <label>Leave this field empty</label>
+              <input type="text" name="_honey" tabindex="-1" autocomplete="off" />
+            </div>
+            <input type="hidden" name="_subject" value="Sample request from dingdar.com" />
+
+            <div class="grid grid--2" style="gap: 16px;">
+              {sampleFields.map((f) => (
+                f.type === 'select' ? (
+                  <div class="field" style="grid-column: 1 / -1;">
+                    <label for={f.name}>{f.label}</label>
+                    <select id={f.name} name={f.name}>
+                      <option value="">{ct('selectCategory')}</option>
+                      {f.options.map((o) => <option value={o}>{o}</option>)}
+                    </select>
+                  </div>
+                ) : f.type === 'textarea' ? (
+                  <div class="field" style="grid-column: 1 / -1;">
+                    <label for={f.name}>{f.label}</label>
+                    <textarea id={f.name} name={f.name} rows="6" placeholder={f.placeholder} required={f.required}></textarea>
+                  </div>
+                ) : (
+                  <div class="field">
+                    <label for={f.name}>{f.label}</label>
+                    <input id={f.name} name={f.name} type={f.type} placeholder={f.placeholder} required={f.required} />
+                  </div>
+                )
+              ))}
+            </div>
+
+            <div class="field" style="margin-top: 6px;">
+              <button type="submit" class="btn btn--primary btn--lg" style="width:100%;">{sp('submitBtn')}</button>
+              <p class="hint" id="form-status" role="status" aria-live="polite"></p>
+            </div>
+          </form>
+        </div>
+
+        <div>
+          <div class="card" style="padding: 30px 28px; margin-bottom: 24px;">
+            <h3 style="font-size:1.15rem;margin-bottom:16px;">{sp('usefulTitle')}</h3>
+            <ul>
+              {uses.map((x) => (
+                <li style="padding:8px 0;border-top:1px solid var(--bg-tint);display:flex;gap:10px;font-size:0.94rem;">
+                  <span style="color:var(--accent);font-weight:800;">✓</span>{x}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="card" style="padding: 30px 28px;">
+            <h3 style="font-size:1.15rem;margin-bottom:16px;">{sp('directTitle')}</h3>
+            <ul class="contact-list">
+              <li><span class="k">{common('whatsapp')}</span><a href={'https://wa.me/' + SITE.whatsappTel}>{SITE.whatsapp}</a></li>
+              <li><span class="k">{common('sales')}</span><a href={'mailto:' + SITE.email}>{SITE.email}</a></li>
+              <li><span class="k">{common('engineering')}</span><a href={'mailto:' + SITE.engineeringEmail}>{SITE.engineeringEmail}</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .contact-list li { display: flex; justify-content: space-between; gap: 16px; padding: 9px 0; border-top: 1px solid var(--bg-tint); font-size: 0.94rem; align-items: baseline; }
+  .contact-list .k { color: var(--muted); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; min-width: 96px; }
+  .contact-list a { color: var(--ink); font-weight: 600; }
+  .contact-list a:hover { color: var(--accent); }
+  @media (max-width: 900px) { .grid--2[style] { grid-template-columns: 1fr !important; } }
+</style>
+
+<script>
+  const form = document.getElementById('sample');
+  const status = document.getElementById('form-status');
+  const endpoint = form.getAttribute('action') || '';
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    status.textContent = '';
+    const data = new FormData(form);
+    if (data.get('_honey')) return;
+    const name = data.get('name')?.trim();
+    const email = data.get('email')?.trim();
+    const country = data.get('country')?.trim();
+    const message = data.get('message')?.trim();
+    if (!name || !email || !country || !message) {
+      status.textContent = 'Please complete all required fields.';
+      status.style.color = '#d9480f';
+      return;
+    }
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+      status.textContent = 'Please enter a valid email address.';
+      status.style.color = '#d9480f';
+      return;
+    }
+    if (!endpoint) {
+      status.innerHTML = 'The form endpoint is not configured yet. Please contact us directly: <a href="mailto:hugo@dingdar.com" style="color:#e8590c;font-weight:700;">hugo@dingdar.com</a> or <a href="https://wa.me/8619337861987" style="color:#e8590c;font-weight:700;">WhatsApp</a>.';
+      return;
+    }
+    try {
+      const res = await fetch(endpoint, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
+      if (res.ok) {
+        try { window.dataLayer?.push?.({ event: 'sample_requested' }); } catch {}
+        window.location.href = form.dataset.thankYouPath || '/thank-you/';
+      } else {
+        status.textContent = 'Something went wrong. Please try again or use WhatsApp / email.';
+        status.style.color = '#d9480f';
+      }
+    } catch {
+      status.textContent = 'Network error. Please email us at hugo@dingdar.com or message us on WhatsApp.';
+      status.style.color = '#d9480f';
+    }
+  });
+</script>

@@ -1,6 +1,36 @@
 ---
 import { SITE } from '../data/config';
+import { getT, langPath, type Lang, type AnyLang } from '../i18n';
 const year = new Date().getFullYear();
+
+interface Props {
+  lang?: AnyLang;
+  enPath?: string;
+}
+const { lang = 'en', enPath = '/' } = Astro.props;
+const t = lang === 'en' ? null : getT(lang as Lang);
+const l = (key: string) => (t ? t(key) : '');
+const hrefOf = (href: string) => (lang === 'en' ? href : langPath(lang as Lang, href));
+
+const productLinks = [
+  { href: '/products/jaw-crusher-wear-parts/', key: 'p.jaw-crusher-wear-parts.cardTitle' },
+  { href: '/products/cone-crusher-wear-parts/', key: 'p.cone-crusher-wear-parts.cardTitle' },
+  { href: '/products/impact-crusher-wear-parts/', key: 'p.impact-crusher-wear-parts.cardTitle' },
+  { href: '/products/hammer-crusher-wear-parts/', key: 'p.hammer-crusher-wear-parts.cardTitle' },
+  { href: '/products/bucket-teeth-adapters/', key: 'p.bucket-teeth-adapters.cardTitle' },
+  { href: '/products/custom-castings/', key: 'p.custom-castings.cardTitle' },
+  { href: '/about/#oem', key: 'footer.p6' },
+];
+const companyLinks = [
+  { href: '/about/', key: 'footer.aboutUs' },
+  { href: '/about/#compliance', key: 'footer.compliance' },
+  { href: '/resources/', key: 'footer.resources' },
+  { href: '/request-sample/', key: 'footer.requestSample' },
+  { href: '/processes/', key: 'footer.processes' },
+  { href: '/news/', key: 'footer.news' },
+  { href: '/faq/', key: 'footer.faq' },
+  { href: '/contact/', key: 'footer.contactLink' },
+];
 ---
 
 <footer class="footer">
@@ -18,32 +48,29 @@ const year = new Date().getFullYear();
         </p>
       </div>
       <div>
-        <h4>Products</h4>
+        <h4>{l('footer.products')}</h4>
         <ul class="links">
-          <li><a href="/products/jaw-crusher-wear-parts/">Jaw Crusher Wear Parts</a></li>
-          <li><a href="/products/cone-crusher-wear-parts/">Cone Crusher Wear Parts</a></li>
-          <li><a href="/products/impact-crusher-wear-parts/">Impact Crusher Wear Parts</a></li>
-          <li><a href="/products/hammer-crusher-wear-parts/">Hammer Crusher Wear Parts</a></li>
-          <li><a href="/products/bucket-teeth-adapters/">Bucket Teeth &amp; Adapters</a></li>
-          <li><a href="/products/custom-castings/">Custom Castings</a></li>
-          <li><a href="/about/#oem">OEM Casting Services</a></li>
+          {productLinks.map((x) => (
+            <li><a href={hrefOf(x.href)}>{l(x.key)}</a></li>
+          ))}
         </ul>
       </div>
       <div>
-        <h4>Company</h4>
+        <h4>{l('footer.company')}</h4>
         <ul class="links">
-          <li><a href="/about/">About Us</a></li>
-          <li><a href="/about/#compliance">Certifications &amp; Compliance</a></li>
-          <li><a href="/resources/">Resources &amp; Downloads</a></li>
-          <li><a href="/request-sample/">Request a Sample</a></li>
-          <li><a href="/processes/">Casting Processes</a></li>
-          <li><a href="/news/">News</a></li>
-          <li><a href="/faq/">FAQ</a></li>
-          <li><a href="/contact/">Contact</a></li>
+          {companyLinks.map((x) => (
+            <li><a href={hrefOf(x.href)}>{l(x.key)}</a></li>
+          ))}
         </ul>
       </div>
       <div>
-        <h4>Contact</h4>
+        <h4>{l('footer.legal')}</h4>
+        <ul class="links">
+          <li><a href={hrefOf('/privacy/')}>{l('footer.privacy')}</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>{l('footer.contactT')}</h4>
         <ul class="contact">
           <li>📍 {SITE.location}</li>
           <li>📧 <a href={'mailto:' + SITE.email}>{SITE.email}</a></li>

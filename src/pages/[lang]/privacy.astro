@@ -1,0 +1,45 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import { SITE } from '../../data/config';
+import { dicts, LANG_CODES, getT, langPath, type Lang } from '../../i18n';
+
+export function getStaticPaths() {
+  return LANG_CODES.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params;
+const t = getT(lang as Lang);
+const pv = (key: string) => t('pv.' + key);
+const common = (key: string) => t('common.' + key);
+const langHref = (enPath: string) => langPath(lang as Lang, enPath);
+const sections = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => ({ title: pv('s' + i + '.title'), body: pv('s' + i + '.body') }));
+---
+
+<BaseLayout
+  title={t('meta.privacy.title')}
+  description={t('meta.privacy.desc')}
+  path={langPath(lang as Lang, '/privacy/')}
+  lang={lang}
+  enPath="/privacy/"
+>
+  <PageHero
+    eyebrow={pv('heroEyebrow')}
+    title={pv('heroTitle')}
+    lead={pv('heroLead')}
+    img="/images/foundry-pouring.webp"
+    imgAlt="DINGDAR foundry production floor"
+    ctaPrimary={{ label: common('contactUs'), href: langHref('/contact/') }}
+  />
+
+  <section class="section">
+    <div class="container" style="max-width:860px;">
+      {sections.map((s) => (
+        <div style="margin-bottom:34px;">
+          <h2 style="font-size:1.4rem;margin-bottom:18px;">{s.title}</h2>
+          <p style="line-height:1.8;color:var(--ink-2); white-space:pre-wrap;">{s.body}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

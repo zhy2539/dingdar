@@ -1,0 +1,78 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import CtaBand from '../../../components/CtaBand.astro';
+import { NEWS, getNews } from '../../../data/news';
+import { dicts, LANG_CODES, getT, langPath, type Lang } from '../../../i18n';
+
+export function getStaticPaths() {
+  const out = [];
+  for (const lang of LANG_CODES) {
+    for (const n of NEWS) {
+      out.push({ params: { lang, slug: n.slug } });
+    }
+  }
+  return out;
+}
+
+const { lang, slug } = Astro.params;
+const news = getNews(slug!);
+
+if (!news) {
+  return Astro.redirect(langPath(lang as Lang, '/news/'));
+}
+
+const idx = NEWS.findIndex((n) => n.slug === slug);
+const t = getT(lang as Lang);
+const article = (suffix: string) => t('nw.a' + idx + '.' + suffix);
+const common = (key: string) => t('common.' + key);
+const langHref = (enPath: string) => langPath(lang as Lang, enPath);
+const title = article('title');
+const excerpt = article('excerpt');
+const body = [0, 1, 2, 3, 4].map((i) => article('b' + i)).filter((x) => x);
+const ctaTitle = t('nw.ctaTitle');
+const ctaText = t('nw.ctaText');
+---
+
+<BaseLayout
+  title={`${title} | DINGDAR`}
+  description={excerpt}
+  path={langPath(lang as Lang, '/news/' + slug + '/')}
+  lang={lang}
+  enPath={'/news/' + slug + '/'}
+  jsonLd={{
+    '@context': 'https://schema.org',
+    '@type': 'NewsArticle',
+    headline: title,
+    datePublished: news.date,
+    description: excerpt,
+    image: 'https://dingdar.com' + news.cover,
+    author: { '@type': 'Organization', name: 'DINGDAR Casting' },
+    publisher: { '@type': 'Organization', name: 'Henan Dingdar Machinery Equipment Manufacture Co., Ltd.' },
+  }}
+>
+  <section class="section" style="padding-top:64px;">
+    <div class="container" style="max-width:860px;">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href={langHref('/')}>{t('nav.0')}</a> / <a href={langHref('/news/')}>{t('nav.3')}</a> / <span>{title}</span>
+      </nav>
+      <span class="badge">{news.date}</span>
+      <h1 style="margin-top:18px;margin-bottom:26px;">{title}</h1>
+      <img src={news.cover} alt={title} width="1200" height="675" style="width:100%;border-radius:14px;box-shadow:var(--shadow-md);" />
+      <div class="article-body">
+        {body.map((p) => (<p>{p}</p>))}
+      </div>
+      <a href={langHref('/news/')} class="btn btn--ghost" style="margin-top:12px;">← {common('backToNews')}</a>
+    </div>
+  </section>
+
+  <CtaBand
+    title={ctaTitle}
+    text={ctaText}
+    cta={common('getQuote')}
+  />
+</BaseLayout>
+
+<style>
+  .article-body { margin-top: 32px; }
+  .article-body p { margin-bottom: 22px; font-size: 1.04rem; line-height: 1.8; color: var(--body); }
+</style>

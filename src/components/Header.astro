@@ -1,24 +1,47 @@
 ---
 import { NAV, SITE } from '../data/config';
+import { LANG_CODES, LANGS, getT, langPath, type Lang, type AnyLang } from '../i18n';
+
+interface Props {
+  lang?: AnyLang;
+  enPath?: string;
+}
+
+const { lang = 'en', enPath = '/' } = Astro.props;
 const path = Astro.url.pathname;
+const t = lang === 'en' ? null : getT(lang as Lang);
+const navLabel = (i: number) => (t ? t('nav.' + i) : NAV[i].label);
+const hrefOf = (href: string) => (lang === 'en' ? href : langPath(lang as Lang, href));
 ---
 
 <header class="site-header">
   <div class="container header-inner">
-    <a href="/" class="brand" aria-label="DINGDAR Casting home">
+    <a href={hrefOf('/')} class="brand" aria-label="DINGDAR Casting home">
       <img src="/images/logo.png" alt="DINGDAR logo" width="42" height="42" />
       <span class="brand-name">DINGDAR<span class="brand-sub">Castings</span></span>
     </a>
     <nav class="nav" aria-label="Main navigation">
       {
-        NAV.map((n) => (
-          <a href={n.href} class:list={{ active: path === n.href || (n.href !== '/' && path.startsWith(n.href)) }}>
-            {n.label}
+        NAV.map((n, i) => (
+          <a href={hrefOf(n.href)} class:list={{ active: path === hrefOf(n.href) || (hrefOf(n.href) !== '/' && path.startsWith(hrefOf(n.href))) }}>
+            {navLabel(i)}
           </a>
         ))
       }
     </nav>
     <div class="header-actions">
+      <div class="lang-switch" data-lang>
+        <button class="lang-btn" data-lang-btn aria-haspopup="true" aria-expanded="false">
+          {lang === 'en' ? 'English' : (LANGS.find((l) => l.code === lang)?.label || lang)}
+          <svg class="lang-caret" viewBox="0 0 12 12" width="10" height="10" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 4l4 4 4-4"/></svg>
+        </button>
+        <ul class="lang-menu" data-lang-menu>
+          <li><a href={langPath('en' as Lang, enPath)}>English</a></li>
+          {LANG_CODES.map((c) => (
+            <li><a href={langPath(c, enPath)}>{LANGS.find((l) => l.code === c)?.label || c}</a></li>
+          ))}
+        </ul>
+      </div>
       <button class="menu-toggle" aria-label="Open menu" data-menu-toggle>
         <span></span><span></span><span></span>
       </button>
@@ -26,8 +49,8 @@ const path = Astro.url.pathname;
   </div>
   <nav class="mobile-nav" data-mobile-nav>
     {
-      NAV.map((n) => (
-        <a href={n.href}>{n.label}</a>
+      NAV.map((n, i) => (
+        <a href={hrefOf(n.href)}>{navLabel(i)}</a>
       ))
     }
   </nav>
@@ -47,7 +70,16 @@ const path = Astro.url.pathname;
   .nav a:hover::after { transform: scaleX(1); }
   .nav a.active { color: var(--accent); }
   .nav a.active::after { transform: scaleX(1); }
-  .header-actions { display: flex; align-items: center; }
+  .header-actions { display: flex; align-items: center; gap: 12px; }
+  .lang-switch { position: relative; }
+  .lang-btn { display: inline-flex; align-items: center; gap: 6px; padding: 9px 14px; border: 1px solid var(--line); border-radius: 8px; background: #fff; color: var(--ink); font-size: 0.88rem; font-weight: 600; cursor: pointer; transition: border-color 0.15s, color 0.15s; }
+  .lang-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .lang-caret { transition: transform 0.15s; }
+  .lang-switch.open .lang-caret { transform: rotate(180deg); }
+  .lang-menu { display: none; position: absolute; top: calc(100% + 8px); right: 0; min-width: 168px; background: #fff; border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 16px 44px rgba(9,20,32,0.14); padding: 6px; margin: 0; list-style: none; z-index: 60; }
+  .lang-switch.open .lang-menu { display: block; }
+  .lang-menu a { display: block; padding: 10px 14px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; color: var(--ink-2); }
+  .lang-menu a:hover { background: var(--bg-tint); color: var(--accent); }
   .menu-toggle { display: none; background: none; border: none; cursor: pointer; width: 44px; height: 44px; border-radius: 8px; flex-direction: column; align-items: center; justify-content: center; gap: 5px; }
   .menu-toggle span { width: 22px; height: 2px; background: var(--ink); border-radius: 2px; }
   .mobile-nav { display: none; padding: 12px 24px 24px; border-top: 1px solid var(--line); background: #fff; flex-direction: column; gap: 4px; }
@@ -63,4 +95,19 @@ const path = Astro.url.pathname;
   const toggle = document.querySelector('[data-menu-toggle]');
   const nav = document.querySelector('[data-mobile-nav]');
   toggle?.addEventListener('click', () => nav?.classList.toggle('open'));
+
+  const langSwitch = document.querySelector('[data-lang]');
+  const langBtn = document.querySelector('[data-lang-btn]');
+  langBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    langSwitch?.classList.toggle('open');
+    langBtn?.setAttribute('aria-expanded', langSwitch?.classList.contains('open') ? 'true' : 'false');
+  });
+  document.addEventListener('click', (e) => {
+    if (langSwitch && !langSwitch.contains(e.target)) {
+      langSwitch.classList.remove('open');
+      langBtn?.setAttribute('aria-expanded', 'false');
+    }
+  });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { langSwitch?.classList.remove('open'); langBtn?.setAttribute('aria-expanded', 'false'); } });
 </script>

@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../data/config';
+import { dicts, LANG_CODES, getT, langPath, type Lang } from '../../i18n';
+
+export function getStaticPaths() {
+  return LANG_CODES.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params;
+const t = getT(lang as Lang);
+const ct = (key: string) => t('ct.' + key);
+const common = (key: string) => t('common.' + key);
+const langHref = (enPath: string) => langPath(lang as Lang, enPath);
+const items = ['ct.h0', 'ct.h1', 'ct.h2', 'ct.h3'].map((k) => t(k));
+---
+
+<BaseLayout
+  title={t('meta.thanks.title')}
+  description={t('meta.thanks.desc')}
+  noindex={true}
+  path={langPath(lang as Lang, '/thank-you/')}
+  lang={lang}
+  enPath="/thank-you/"
+>
+  <section class="section">
+    <div class="container" style="max-width:720px;text-align:center;">
+      <div class="badge" style="margin-bottom:18px;">{t('nw.heroEyebrow')}</div>
+      <h1>{t('meta.thanks.title')}</h1>
+      <p style="margin-top:18px;font-size:1.08rem;">{t('meta.thanks.desc')}</p>
+      <div class="card" style="padding:28px 30px;margin-top:32px;text-align:left;">
+        <h3 style="font-size:1.05rem;margin-bottom:12px;">{ct('helpsTitle')}</h3>
+        <ul>
+          {items.map((x) => (
+            <li style="padding:8px 0;border-top:1px solid var(--bg-tint);display:flex;gap:10px;font-size:0.95rem;">
+              <span style="color:var(--accent);font-weight:800;">✓</span>{x}
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div class="cta-row" style="display:flex;gap:14px;justify-content:center;margin-top:32px;flex-wrap:wrap;">
+        <a href={langHref('/')} class="btn btn--ghost">{t('nav.0')}</a>
+        <a href={'https://wa.me/' + SITE.whatsappTel} class="btn btn--primary">{common('whatsappUs')}</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

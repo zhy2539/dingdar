@@ -1,0 +1,157 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import { SITE } from '../../data/config';
+import { dicts, LANG_CODES, getT, langPath, type Lang } from '../../i18n';
+
+export function getStaticPaths() {
+  return LANG_CODES.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params;
+const t = getT(lang as Lang);
+const rs = (key: string) => t('rs.' + key);
+const ct = (key: string) => t('ct.' + key);
+const common = (key: string) => t('common.' + key);
+const langHref = (enPath: string) => langPath(lang as Lang, enPath);
+
+const dlFields = [
+  { name: 'name', label: ct('f0.label'), type: 'text', required: true, placeholder: ct('f0.placeholder') },
+  { name: 'email', label: ct('f1.label'), type: 'email', required: true, placeholder: ct('f1.placeholder') },
+  { name: 'company', label: ct('f2.label'), type: 'text', required: true, placeholder: ct('f2.placeholder') },
+  { name: 'country', label: ct('f3.label'), type: 'text', required: false, placeholder: ct('f3.placeholder') },
+];
+const inside = ['rs.in0', 'rs.in1', 'rs.in2', 'rs.in3', 'rs.in4'].map((k) => t(k));
+---
+
+<BaseLayout
+  title={t('meta.resources.title')}
+  description={t('meta.resources.desc')}
+  path={langPath(lang as Lang, '/resources/')}
+  lang={lang}
+  enPath="/resources/"
+>
+  <PageHero
+    eyebrow={rs('heroEyebrow')}
+    title={rs('heroTitle')}
+    lead={rs('heroLead')}
+    img="/images/H62bf48ffa42e4eba99efa99b67123d8bN.webp"
+    imgAlt="DINGDAR production and qualification information"
+    ctaPrimary={{ label: common('downloadProfile'), href: '#download-form' }}
+    ctaSecondary={{ label: common('requestSample'), href: langHref('/request-sample/') }}
+    trust={[rs('trust0'), rs('trust1'), rs('trust2')]}
+  />
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="grid grid--2" style="grid-template-columns: 1.1fr 0.9fr; gap: 40px; align-items: start;">
+        <div class="card" id="download-form" style="padding: 34px 32px;">
+          <h2 style="font-size:1.5rem;">{rs('formTitle')}</h2>
+          <p style="font-size:0.95rem;color:var(--muted);margin:10px 0 24px;">{rs('formNote')}</p>
+
+          <form id="dl" action={SITE.formEndpoint} method="POST" novalidate data-err-required={rs('errRequired')} data-err-email={rs('errEmail')}>
+            <div class="hp-field" aria-hidden="true">
+              <label>Leave this field empty</label>
+              <input type="text" name="_honey" tabindex="-1" autocomplete="off" />
+            </div>
+            <input type="hidden" name="_subject" value="Company profile download request from dingdar.com" />
+
+            <div class="grid grid--2" style="gap: 16px;">
+              {dlFields.map((f) => (
+                <div class="field">
+                  <label for={f.name}>{f.label}</label>
+                  <input id={f.name} name={f.name} type={f.type} placeholder={f.placeholder} required={f.required} />
+                </div>
+              ))}
+            </div>
+
+            <div class="field" style="margin-top: 6px;">
+              <button type="submit" class="btn btn--primary btn--lg" style="width:100%;">{rs('getDownloadLink')}</button>
+              <p class="hint" id="form-status" role="status" aria-live="polite"></p>
+            </div>
+          </form>
+
+          <div id="dl-success" style="display:none;margin-top:26px;padding:24px;border:1px solid #d8e8d8;background:#f2faf2;border-radius:12px;text-align:center;">
+            <h3 style="font-size:1.15rem;margin-bottom:10px;">{rs('sTitle')}</h3>
+            <p style="font-size:0.93rem;color:var(--muted);margin-bottom:16px;">{rs('sText')}</p>
+            <a href="/company-profile.pdf" class="btn btn--primary btn--lg" download>{rs('downloadBtn')}</a>
+          </div>
+        </div>
+
+        <div>
+          <div class="card" style="padding: 30px 28px; margin-bottom: 24px;">
+            <h3 style="font-size:1.15rem;margin-bottom:16px;">{rs('insideTitle')}</h3>
+            <ul>
+              {inside.map((x) => (
+                <li style="padding:8px 0;border-top:1px solid var(--bg-tint);display:flex;gap:10px;font-size:0.94rem;">
+                  <span style="color:var(--accent);font-weight:800;">✓</span>{x}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="card" style="padding: 30px 28px;">
+            <h3 style="font-size:1.15rem;margin-bottom:16px;">{rs('directTitle')}</h3>
+            <ul class="contact-list">
+              <li><span class="k">{common('whatsapp')}</span><a href={'https://wa.me/' + SITE.whatsappTel}>{SITE.whatsapp}</a></li>
+              <li><span class="k">{common('sales')}</span><a href={'mailto:' + SITE.email}>{SITE.email}</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .contact-list li { display: flex; justify-content: space-between; gap: 16px; padding: 9px 0; border-top: 1px solid var(--bg-tint); font-size: 0.94rem; align-items: baseline; }
+  .contact-list .k { color: var(--muted); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; min-width: 96px; }
+  .contact-list a { color: var(--ink); font-weight: 600; }
+  .contact-list a:hover { color: var(--accent); }
+  @media (max-width: 900px) { .grid--2[style] { grid-template-columns: 1fr !important; } }
+</style>
+
+<script>
+  const form = document.getElementById('dl');
+  const status = document.getElementById('form-status');
+  const success = document.getElementById('dl-success');
+  const endpoint = form.getAttribute('action') || '';
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    status.textContent = '';
+    const data = new FormData(form);
+    if (data.get('_honey')) return;
+    const name = data.get('name')?.trim();
+    const email = data.get('email')?.trim();
+    if (!name || !email) {
+      status.textContent = form.dataset.errRequired || 'Please complete your name and email.';
+      status.style.color = '#d9480f';
+      return;
+    }
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+      status.textContent = form.dataset.errEmail || 'Please enter a valid email address.';
+      status.style.color = '#d9480f';
+      return;
+    }
+    if (!endpoint) {
+      success.style.display = 'block';
+      return;
+    }
+    try {
+      const res = await fetch(endpoint, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
+      if (res.ok) {
+        try { window.dataLayer?.push?.({ event: 'profile_downloaded' }); } catch {}
+        form.style.display = 'none';
+        success.style.display = 'block';
+      } else {
+        status.textContent = 'Something went wrong. The download is still available below the form.';
+        status.style.color = '#d9480f';
+        success.style.display = 'block';
+      }
+    } catch {
+      status.textContent = 'Network issue — the download link is shown below regardless.';
+      status.style.color = '#d9480f';
+      success.style.display = 'block';
+    }
+  });
+</script>

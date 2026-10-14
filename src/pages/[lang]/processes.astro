@@ -1,0 +1,94 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import FaqList from '../../components/FaqList.astro';
+import { PROCESSES } from '../../data/config';
+import { dicts, LANG_CODES, getT, langPath, type Lang } from '../../i18n';
+
+export function getStaticPaths() {
+  return LANG_CODES.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params;
+const t = getT(lang as Lang);
+const pr = (key: string) => t('pr.' + key);
+const common = (key: string) => t('common.' + key);
+const langHref = (enPath: string) => langPath(lang as Lang, enPath);
+
+const compare = [0, 1, 2, 3].map((i) => ({
+  name: pr('row' + i + '.name'),
+  size: pr('row' + i + '.size'),
+  accuracy: pr('row' + i + '.accuracy'),
+  surface: pr('row' + i + '.surface'),
+  volume: pr('row' + i + '.volume'),
+  best: pr('row' + i + '.best'),
+}));
+const faqs = [0, 1, 2, 3].map((i) => ({ q: pr('fq' + i + '.q'), a: pr('fq' + i + '.a') }));
+---
+
+<BaseLayout
+  title={t('meta.processes.title')}
+  description={t('meta.processes.desc')}
+  path={langPath(lang as Lang, '/processes/')}
+  lang={lang}
+  enPath="/processes/"
+>
+  <PageHero
+    eyebrow={pr('heroEyebrow')}
+    title={pr('heroTitle')}
+    lead={pr('heroLead')}
+    img="/images/foundry-pouring.webp"
+    imgAlt="Molten metal pouring in the foundry"
+    ctaPrimary={{ label: common('discussPart'), href: langHref('/contact/') }}
+    ctaSecondary={{ label: common('viewProducts'), href: langHref('/products/') }}
+  />
+
+  <section class="section">
+    <div class="container">
+      <div class="sec-head center">
+        <span class="eyebrow">{pr('fourEyebrow')}</span>
+        <h2>{pr('fourH2')}</h2>
+        <p>{pr('fourP')}</p>
+      </div>
+      <div class="grid grid--4">
+        {PROCESSES.map((p, i) => (
+          <div class="card card--hover" style="padding:26px 24px;">
+            <h3 style="font-size:1.08rem;margin-bottom:10px;">{t('home.mp' + i + '.name')}</h3>
+            <p style="font-size:0.92rem;color:var(--muted);">{t('home.mp' + i + '.summary')}</p>
+          </div>
+        ))}
+      </div>
+      <div class="card" style="margin-top:40px;overflow-x:auto;">
+        <table class="tbl">
+          <thead>
+            <tr><th>{pr('mth0')}</th><th>{pr('mth1')}</th><th>{pr('mth2')}</th><th>{pr('mth3')}</th><th>{pr('mth4')}</th><th>{pr('mth5')}</th></tr>
+          </thead>
+          <tbody>
+            {compare.map((r) => (
+              <tr>
+                <td><b>{r.name}</b></td><td>{r.size}</td><td>{r.accuracy}</td><td>{r.surface}</td><td>{r.volume}</td><td>{r.best}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="sec-head">
+        <span class="eyebrow">{pr('faqEyebrow')}</span>
+        <h2>{pr('faqH2')}</h2>
+      </div>
+      <FaqList items={faqs} />
+    </div>
+  </section>
+
+  <CtaBand
+    title={pr('ctaTitle')}
+    text={pr('ctaText')}
+    cta={common('discussPart')}
+  />
+</BaseLayout>

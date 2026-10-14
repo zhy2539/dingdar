@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import FaqList from '../../components/FaqList.astro';
+import { dicts, LANG_CODES, getT, langPath, type Lang } from '../../i18n';
+
+export function getStaticPaths() {
+  return LANG_CODES.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params;
+const t = getT(lang as Lang);
+const fq = (key: string) => t('fq.' + key);
+const common = (key: string) => t('common.' + key);
+const langHref = (enPath: string) => langPath(lang as Lang, enPath);
+
+const faqs = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((i) => ({ q: fq('q' + i + '.q'), a: fq('q' + i + '.a') }));
+---
+
+<BaseLayout
+  title={t('meta.faq.title')}
+  description={t('meta.faq.desc')}
+  path={langPath(lang as Lang, '/faq/')}
+  lang={lang}
+  enPath="/faq/"
+>
+  <PageHero
+    eyebrow={fq('heroEyebrow')}
+    title={fq('heroTitle')}
+    lead={fq('heroLead')}
+    img="/images/foundry-pouring.webp"
+    imgAlt="Molten metal pouring in the DINGDAR foundry"
+    ctaPrimary={{ label: common('askQuestion'), href: langHref('/contact/') }}
+    ctaSecondary={{ label: common('browseProducts'), href: langHref('/products/') }}
+  />
+
+  <section class="section">
+    <div class="container">
+      <FaqList items={faqs} />
+    </div>
+  </section>
+
+  <CtaBand
+    title={fq('ctaTitle')}
+    text={fq('ctaText')}
+    cta={common('askQuestion')}
+  />
+</BaseLayout>

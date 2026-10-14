@@ -1,0 +1,240 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import FaqList from '../../components/FaqList.astro';
+import { CATEGORIES } from '../../data/products';
+import { STATS, MATERIALS, PROCESSES, QUALIFICATIONS, BUYER_CONCERNS, COMPLIANCE } from '../../data/config';
+import { dicts, LANG_CODES, getT, langPath, type Lang } from '../../i18n';
+
+export function getStaticPaths() {
+  return LANG_CODES.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params;
+const t = getT(lang as Lang);
+const home = (key: string) => t('home.' + key);
+const common = (key: string) => t('common.' + key);
+const langHref = (enPath: string) => langPath(lang as Lang, enPath);
+
+const faqs = [
+  { q: t('home.fq0.q'), a: t('home.fq0.a') },
+  { q: t('home.fq1.q'), a: t('home.fq1.a') },
+  { q: t('home.fq2.q'), a: t('home.fq2.a') },
+  { q: t('home.fq3.q'), a: t('home.fq3.a') },
+];
+
+const industries = [0, 1, 2, 3].map((i) => ({ title: home('ind' + i + '.title'), text: home('ind' + i + '.text') }));
+const steps = [0, 1, 2, 3].map((i) => ({ title: home('h' + i + '.title'), text: home('h' + i + '.text') }));
+---
+
+<BaseLayout
+  title={t('meta.home.title')}
+  description={t('meta.home.desc')}
+  path={langPath(lang as Lang, '/')}
+  lang={lang}
+  enPath="/"
+>
+  <PageHero
+    eyebrow={home('heroEyebrow')}
+    title={home('heroTitle')}
+    lead={home('heroLead')}
+    img="/images/H62bf48ffa42e4eba99efa99b67123d8bN.webp"
+    imgAlt="Open-pit mining operation with heavy crushing equipment"
+    ctaPrimary={{ label: common('getQuote'), href: langHref('/contact/') }}
+    ctaSecondary={{ label: common('requestSample'), href: langHref('/request-sample/') }}
+    trust={[home('trust0'), home('trust1'), home('trust2'), home('trust3')]}
+  />
+
+  <section class="section" style="padding-top: 0; padding-bottom: 0;">
+    <div class="container">
+      <div class="qual-bar">
+        {QUALIFICATIONS.map((q, i) => (
+          <div>
+            <div class="q-num">{q.value}</div>
+            <div class="q-lab">{home('qual' + i)}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="sec-head center">
+        <span class="eyebrow">{home('whatEyebrow')}</span>
+        <h2>{home('whatH2')}</h2>
+        <p>{home('whatP')}</p>
+      </div>
+      <div class="grid grid--3">
+        {CATEGORIES.map((c) => (
+          <a href={langHref('/products/' + c.slug + '/')} class="card card--hover prod-card">
+            <div class="thumb"><img src={c.heroImg} alt={t('p.' + c.slug + '.cardTitle')} loading="lazy" width="800" height="600" /></div>
+            <div class="body">
+              <h3>{t('p.' + c.slug + '.cardTitle')}</h3>
+              <p>{t('p.' + c.slug + '.cardDesc')}</p>
+              <span class="code" style="display:inline-block;margin-top:12px;">{common('explore')} →</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="sec-head center">
+        <span class="eyebrow">{home('concernsEyebrow')}</span>
+        <h2>{home('concernsH2')}</h2>
+        <p>{home('concernsP')}</p>
+      </div>
+      <div class="grid grid--3">
+        {BUYER_CONCERNS.map((c, i) => (
+          <div class="card concern-card">
+            <h3 class="q">{home('c' + i + '.title')}</h3>
+            <p class="a">{home('c' + i + '.a')}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tint">
+    <div class="container">
+      <div class="sec-head">
+        <span class="eyebrow">{home('compEyebrow')}</span>
+        <h2>{home('compH2')}</h2>
+        <p>{home('compP')}</p>
+      </div>
+      <div class="grid grid--3">
+        {COMPLIANCE.materials.slice(0, 4).map((m, i) => (
+          <div class="card" style="padding:22px 24px;">
+            <h3 style="font-size:1rem;margin-bottom:8px;">{home('cm' + i + '.name')}</h3>
+            <p style="font-size:0.9rem;color:var(--muted);">{home('cm' + i + '.detail')}</p>
+          </div>
+        ))}
+        <div class="card" style="padding:22px 24px;display:flex;flex-direction:column;justify-content:center;">
+          <h3 style="font-size:1rem;margin-bottom:8px;">{home('relTitle')}</h3>
+          <p style="font-size:0.9rem;color:var(--muted);">{home('relText')}</p>
+          <a href={langHref('/about/#compliance')} class="code" style="display:inline-block;margin-top:12px;color:var(--accent);font-weight:700;">{home('relLink')}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="sec-head center">
+        <span class="eyebrow">{home('whoEyebrow')}</span>
+        <h2>{home('whoH2')}</h2>
+        <p>{home('whoP')}</p>
+      </div>
+      <div class="grid grid--3">
+        {[0, 1, 2].map((i) => (
+          <div class="card" style="padding:24px 26px;">
+            <h3 style="font-size:1.05rem;margin-bottom:10px;">{home('w' + i + '.title')}</h3>
+            <p style="font-size:0.93rem;color:var(--muted);line-height:1.7;">{home('w' + i + '.text')}</p>
+          </div>
+        ))}
+      </div>
+      <p class="center" style="margin-top:26px;font-size:0.92rem;color:var(--muted);">
+        {home('markets')}
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="sec-head center">
+        <span class="eyebrow">{home('whyEyebrow')}</span>
+        <h2>{home('whyH2')}</h2>
+        <p>{home('whyP')}</p>
+      </div>
+      <div class="grid grid--3">
+        {[0, 1, 2].map((i) => (
+          <div class="card step">
+            <span class="n" style="counter-increment:none;">{i + 1}</span>
+            <h3>{home('wy' + i + '.title')}</h3>
+            <p>{home('wy' + i + '.text')}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="sec-head center">
+        <span class="eyebrow">{home('matsEyebrow')}</span>
+        <h2>{home('matsH2')}</h2>
+        <p>{home('matsP')}</p>
+      </div>
+      <div class="grid grid--4">
+        {PROCESSES.map((p, i) => (
+          <div class="card" style="padding:26px 24px;">
+            <h3 style="font-size:1.05rem;margin-bottom:10px;">{home('mp' + i + '.name')}</h3>
+            <p style="font-size:0.92rem;color:var(--muted);">{home('mp' + i + '.summary')}</p>
+          </div>
+        ))}
+      </div>
+      <div style="margin-top:36px;">
+        <h3 style="margin-bottom:18px;">{home('weCastTitle')}</h3>
+        <div class="grid grid--2">
+          {MATERIALS.map((m, i) => (
+            <div class="card" style="padding:22px 24px;">
+              <h3 style="font-size:1rem;color:var(--ink-2);">{home('mt' + i + '.name')} <span style="font-weight:500;color:var(--muted);font-size:0.9rem;">— {home('mt' + i + '.grades')}</span></h3>
+              <p style="font-size:0.92rem;color:var(--muted);margin-top:6px;">{home('mt' + i + '.use')}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="sec-head">
+        <span class="eyebrow">{home('indEyebrow')}</span>
+        <h2>{home('indH2')}</h2>
+      </div>
+      <div class="grid grid--4">
+        {industries.map((ind) => (
+          <div class="card card--hover" style="padding:26px 24px;">
+            <h3 style="font-size:1.05rem;margin-bottom:10px;">{ind.title}</h3>
+            <p style="font-size:0.92rem;color:var(--muted);">{ind.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="sec-head">
+        <span class="eyebrow">{home('howEyebrow')}</span>
+        <h2>{home('howH2')}</h2>
+      </div>
+      <div class="steps">
+        {steps.map((s) => (
+          <div class="step"><span class="n"></span><h3>{s.title}</h3><p>{s.text}</p></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="sec-head">
+        <span class="eyebrow">{home('faqEyebrow')}</span>
+        <h2>{home('faqH2')}</h2>
+      </div>
+      <FaqList items={faqs} />
+    </div>
+  </section>
+
+  <CtaBand
+    title={home('ctaTitle')}
+    text={home('ctaText')}
+    cta={common('getQuote')}
+  />
+</BaseLayout>

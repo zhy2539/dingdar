@@ -1,0 +1,84 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PageHero from '../../../components/PageHero.astro';
+import CtaBand from '../../../components/CtaBand.astro';
+import { NEWS } from '../../../data/news';
+import { dicts, LANG_CODES, getT, langPath, type Lang } from '../../../i18n';
+
+export function getStaticPaths() {
+  return LANG_CODES.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params;
+const t = getT(lang as Lang);
+const nw = (key: string) => t('nw.' + key);
+const common = (key: string) => t('common.' + key);
+const langHref = (enPath: string) => langPath(lang as Lang, enPath);
+const articleKey = (idx: number, suffix: string) => t('nw.a' + idx + '.' + suffix);
+---
+
+<BaseLayout
+  title={t('meta.news.title')}
+  description={t('meta.news.desc')}
+  path={langPath(lang as Lang, '/news/')}
+  lang={lang}
+  enPath="/news/"
+>
+  <PageHero
+    eyebrow={nw('heroEyebrow')}
+    title={nw('heroTitle')}
+    lead={nw('heroLead')}
+    img="/images/H62bf48ffa42e4eba99efa99b67123d8bN.webp"
+    imgAlt="Open-pit mining operation served by DINGDAR castings"
+    ctaPrimary={{ label: common('sendInquiry'), href: langHref('/contact/') }}
+    ctaSecondary={{ label: common('browseProducts'), href: langHref('/products/') }}
+  />
+
+  <section class="section">
+    <div class="container">
+      {NEWS.length === 0 ? (
+        <div class="card" style="padding:56px 40px;text-align:center;">
+          <h2 style="margin-bottom:12px;">Articles Coming Soon</h2>
+          <p style="color:var(--muted);max-width:520px;margin:0 auto;">Company news and technical updates will be published here. For immediate questions, send an inquiry through the contact form.</p>
+        </div>
+      ) : (
+        <div class="news-grid">
+          {NEWS.map((n, idx) => (
+            <a href={langHref('/news/' + n.slug + '/')} class="card card--hover news-card">
+              <div class="news-thumb"><img src={n.cover} alt={articleKey(idx, 'title')} loading="lazy" width="800" height="450" /></div>
+              <div class="news-body">
+                <span class="news-date">{n.date}</span>
+                <h2>{articleKey(idx, 'title')}</h2>
+                <p>{articleKey(idx, 'excerpt')}</p>
+                <span class="read-more">{nw('readMore')} →</span>
+              </div>
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+
+  <CtaBand
+    title={nw('ctaTitle')}
+    text={nw('ctaText')}
+    cta={common('getQuote')}
+  />
+</BaseLayout>
+
+<style>
+  .news-grid { display: grid; gap: 32px; max-width: 860px; }
+  .news-card { display: grid; grid-template-columns: 300px 1fr; overflow: hidden; }
+  .news-thumb { background: var(--bg-soft); min-height: 180px; }
+  .news-thumb img { width: 100%; height: 100%; object-fit: cover; }
+  .news-body { padding: 30px 32px; display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+  .news-date { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+  .news-body h2 { font-size: 1.3rem; }
+  .news-body p { font-size: 0.95rem; color: var(--muted); }
+  .read-more { font-size: 0.85rem; font-weight: 700; color: var(--ink); letter-spacing: 0.04em; margin-top: 6px; }
+  .news-card:hover .read-more { color: var(--accent); }
+  @media (max-width: 720px) {
+    .news-card { grid-template-columns: 1fr; }
+    .news-thumb { min-height: 0; aspect-ratio: 16/9; }
+  }
+</style>

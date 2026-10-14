@@ -29,7 +29,7 @@ export const CATEGORIES: Category[] = [
     shortName: 'Jaw Crusher Wear Parts',
     cardTitle: 'Jaw Crusher Wear Parts',
     cardDesc: 'Fixed and movable jaw plates, cheek plates and side liners for jaw crushers in mining and quarrying duty.',
-    heroImg: IMG('jaw-plates-main'),
+    heroImg: IMG('prod-jaw'),
     h1: 'Jaw Crusher Wear Parts',
     intro:
       'Fixed and movable jaw plates, cheek plates and side liners cast in high-manganese steel for primary crushing in mining, quarrying and aggregate plants. Produced to your machine model, part number, drawing or sample.',
@@ -71,7 +71,7 @@ export const CATEGORIES: Category[] = [
     shortName: 'Cone Crusher Wear Parts',
     cardTitle: 'Cone Crusher Wear Parts',
     cardDesc: 'Mantle liners, concave and bowl liners, and upper housing castings for cone crushers in mining and aggregate circuits.',
-    heroImg: IMG('H333fae4ffe3a485c8a6683bd95eeb619T'),
+    heroImg: IMG('prod-cone'),
     h1: 'Cone Crusher Wear Parts',
     intro:
       'Mantle liners, concave and bowl liners, gyratory concaves and upper housing castings for cone crushers — cast in manganese and alloy grades, produced to your model reference, drawing or sample.',
@@ -113,7 +113,7 @@ export const CATEGORIES: Category[] = [
     shortName: 'Impact Crusher Wear Parts',
     cardTitle: 'Impact Crusher Wear Parts',
     cardDesc: 'Blow bars, impact plates and liners for impact crushers, cast in high-chromium, alloy and manganese grades.',
-    heroImg: IMG('H8db8b8164ee74cca9376909af78dfebfS'),
+    heroImg: IMG('prod-impact'),
     h1: 'Impact Crusher Wear Parts',
     intro:
       'Blow bars, impact plates and further impact crusher wear references, produced by casting in high-chromium, alloy and manganese grades to your model, drawing or sample.',
@@ -150,7 +150,7 @@ export const CATEGORIES: Category[] = [
     shortName: 'Hammer Crusher Wear Parts',
     cardTitle: 'Hammer Crusher Wear Parts',
     cardDesc: 'Hammer heads and hammers for hammer crushers in mining, quarrying and cement duty, cast in manganese and alloy steel.',
-    heroImg: IMG('H519c31c22dea4b53a89acb8d6da1c9bdF'),
+    heroImg: IMG('prod-hammer'),
     h1: 'Hammer Crusher Wear Parts',
     intro:
       'Hammer heads and hammers produced by casting for hammer crushers in mining, quarrying and cement duty. OEM and custom production from drawings, samples or part numbers.',
@@ -187,7 +187,7 @@ export const CATEGORIES: Category[] = [
     shortName: 'Double Roll Crusher Parts',
     cardTitle: 'Double Roll Crusher Parts',
     cardDesc: 'Roller shells and toothed roll references for double roll crushers, produced by casting and machining.',
-    heroImg: IMG('Hab7baf905d044d99a2ad2c15a5d9e086s'),
+    heroImg: IMG('prod-roll'),
     h1: 'Double Roll Crusher Wear Parts',
     intro:
       'Roller shells and toothed roll references for double roll crushers, produced by casting and machining. OEM and custom production from drawings, samples or part numbers.',
@@ -223,7 +223,7 @@ export const CATEGORIES: Category[] = [
     shortName: 'Bucket Teeth & Adapters',
     cardTitle: 'Bucket Teeth & Adapters',
     cardDesc: 'Bucket teeth, adapters and cast wear parts for excavators and loaders, with references for major machine brands.',
-    heroImg: IMG('hero-desktop'),
+    heroImg: IMG('prod-teeth'),
     h1: 'Excavator Bucket Teeth & Adapters',
     intro:
       'Bucket teeth, adapters, side cutters and cast wear parts for excavators and loaders, with references covering major machine brands and models. Produced to reference or by drawing.',
@@ -261,7 +261,7 @@ export const CATEGORIES: Category[] = [
     shortName: 'Custom Castings',
     cardTitle: 'Custom Castings',
     cardDesc: 'Custom cast components produced to your drawing, sample or part reference, across materials and casting processes.',
-    heroImg: IMG('Hf09396274a884400bc5ad978660c1f3cT'),
+    heroImg: IMG('prod-custom'),
     h1: 'Custom Castings',
     intro:
       'Start a custom casting project with a drawing, sample, or an existing part to match. We define geometry, material, machining and inspection requirements with you, then produce from prototype to batch.',

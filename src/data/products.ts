@@ -12,6 +12,7 @@ export interface Category {
   cardTitle: string;
   cardDesc: string;
   heroImg: string;
+  bannerImg: string;
   h1: string;
   intro: string;
   parts: Part[];
@@ -30,6 +31,7 @@ export const CATEGORIES: Category[] = [
     cardTitle: 'Jaw Crusher Wear Parts',
     cardDesc: 'Fixed and movable jaw plates, cheek plates and side liners for jaw crushers in mining and quarrying duty.',
     heroImg: IMG('prod-jaw'),
+    bannerImg: IMG('H1667504f229a4ec69a6d66926679d9cbJ'),
     h1: 'Jaw Crusher Wear Parts',
     intro:
       'Fixed and movable jaw plates, cheek plates and side liners cast in high-manganese steel for primary crushing in mining, quarrying and aggregate plants. Produced to your machine model, part number, drawing or sample.',
@@ -72,6 +74,7 @@ export const CATEGORIES: Category[] = [
     cardTitle: 'Cone Crusher Wear Parts',
     cardDesc: 'Mantle liners, concave and bowl liners, and upper housing castings for cone crushers in mining and aggregate circuits.',
     heroImg: IMG('prod-cone'),
+    bannerImg: IMG('banner-cone'),
     h1: 'Cone Crusher Wear Parts',
     intro:
       'Mantle liners, concave and bowl liners, gyratory concaves and upper housing castings for cone crushers — cast in manganese and alloy grades, produced to your model reference, drawing or sample.',
@@ -114,6 +117,7 @@ export const CATEGORIES: Category[] = [
     cardTitle: 'Impact Crusher Wear Parts',
     cardDesc: 'Blow bars, impact plates and liners for impact crushers, cast in high-chromium, alloy and manganese grades.',
     heroImg: IMG('prod-impact'),
+    bannerImg: IMG('banner-impact'),
     h1: 'Impact Crusher Wear Parts',
     intro:
       'Blow bars, impact plates and further impact crusher wear references, produced by casting in high-chromium, alloy and manganese grades to your model, drawing or sample.',
@@ -151,6 +155,7 @@ export const CATEGORIES: Category[] = [
     cardTitle: 'Hammer Crusher Wear Parts',
     cardDesc: 'Hammer heads and hammers for hammer crushers in mining, quarrying and cement duty, cast in manganese and alloy steel.',
     heroImg: IMG('prod-hammer'),
+    bannerImg: IMG('banner-hammer'),
     h1: 'Hammer Crusher Wear Parts',
     intro:
       'Hammer heads and hammers produced by casting for hammer crushers in mining, quarrying and cement duty. OEM and custom production from drawings, samples or part numbers.',
@@ -188,6 +193,7 @@ export const CATEGORIES: Category[] = [
     cardTitle: 'Double Roll Crusher Parts',
     cardDesc: 'Roller shells and toothed roll references for double roll crushers, produced by casting and machining.',
     heroImg: IMG('prod-roll'),
+    bannerImg: IMG('banner-roll'),
     h1: 'Double Roll Crusher Wear Parts',
     intro:
       'Roller shells and toothed roll references for double roll crushers, produced by casting and machining. OEM and custom production from drawings, samples or part numbers.',
@@ -224,6 +230,7 @@ export const CATEGORIES: Category[] = [
     cardTitle: 'Bucket Teeth & Adapters',
     cardDesc: 'Bucket teeth, adapters and cast wear parts for excavators and loaders, with references for major machine brands.',
     heroImg: IMG('prod-teeth'),
+    bannerImg: IMG('banner-teeth'),
     h1: 'Excavator Bucket Teeth & Adapters',
     intro:
       'Bucket teeth, adapters, side cutters and cast wear parts for excavators and loaders, with references covering major machine brands and models. Produced to reference or by drawing.',
@@ -262,6 +269,7 @@ export const CATEGORIES: Category[] = [
     cardTitle: 'Custom Castings',
     cardDesc: 'Custom cast components produced to your drawing, sample or part reference, across materials and casting processes.',
     heroImg: IMG('prod-custom'),
+    bannerImg: IMG('Hecd6dc88f1334b1c88c834d8b47845b9X'),
     h1: 'Custom Castings',
     intro:
       'Start a custom casting project with a drawing, sample, or an existing part to match. We define geometry, material, machining and inspection requirements with you, then produce from prototype to batch.',

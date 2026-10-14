@@ -1,0 +1,88 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { CATEGORIES } from '../../data/products';
+import { MATERIALS } from '../../data/config';
+---
+
+<BaseLayout
+  title="Crusher Wear Parts & Casting Categories | DINGDAR"
+  description="Browse crusher wear parts by category — jaw plates, cone mantles and concaves, blow bars, hammer heads, bucket teeth and custom castings, produced to drawing or sample."
+  path="/products/"
+>
+  <PageHero
+    eyebrow="Product catalog"
+    title="Crusher Wear Parts, Bucket Teeth & Custom Castings"
+    lead="Find your part by crusher type or wear-part reference. Every category supports OEM and custom production from drawings, samples or part numbers — with material and inspection agreed before quoting."
+    img="/images/H62bf48ffa42e4eba99efa99b67123d8bN.webp"
+    imgAlt="Mining crusher wear parts application"
+    ctaPrimary={{ label: 'Request a Quote', href: '/contact/' }}
+    ctaSecondary={{ label: 'How to Order', href: '/faq/' }}
+  />
+
+  <section class="section">
+    <div class="container">
+      <div class="sec-head center">
+        <span class="eyebrow">Product categories</span>
+        <h2>Browse by Crusher Type and Reference</h2>
+        <p>Seven categories covering crushing circuits, excavator wear parts and custom projects. Select a category to see representative references.</p>
+      </div>
+      <div class="grid grid--3">
+        {CATEGORIES.map((c) => (
+          <a href={'/products/' + c.slug + '/'} class="card card--hover prod-card">
+            <div class="thumb"><img src={c.heroImg} alt={c.cardTitle} loading="lazy" width="800" height="600" /></div>
+            <div class="body">
+              <h3>{c.cardTitle}</h3>
+              <p>{c.cardDesc}</p>
+              <span class="code" style="display:inline-block;margin-top:12px;">Explore →</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="sec-head">
+        <span class="eyebrow">Materials</span>
+        <h2>Material Families We Cast</h2>
+        <p>The grade is matched to your working conditions during the technical review — not selected from a generic price list.</p>
+      </div>
+      <div class="card" style="overflow-x:auto;">
+        <table class="tbl">
+          <thead>
+            <tr><th>Material family</th><th>Typical grades</th><th>Typical applications</th></tr>
+          </thead>
+          <tbody>
+            {MATERIALS.map((m) => (
+              <tr><td>{m.name}</td><td>{m.grades}</td><td>{m.use}</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="sec-head">
+        <span class="eyebrow">OEM &amp; custom</span>
+        <h2>Not Sure Which Category Fits?</h2>
+        <p>If your part does not match a listed reference, start from what you have — a drawing, a sample, an equipment model or a part number. The review identifies the geometry, material and process route, and asks for only the missing details.</p>
+      </div>
+      <div class="grid grid--3">
+        <div class="card step"><span class="n" style="counter-increment:none;">1</span><h3>Share the Reference</h3><p>Drawing, 3D model, sample photo or part number.</p></div>
+        <div class="card step"><span class="n" style="counter-increment:none;">2</span><h3>Review the Requirements</h3><p>Material, tolerances, quantity and inspection scope are confirmed.</p></div>
+        <div class="card step"><span class="n" style="counter-increment:none;">3</span><h3>Approve the Next Step</h3><p>Proposal with process route, tooling, price and delivery.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Can't Find Your Part?"
+    text="Send the drawing, part number or sample photo and we will identify the right category and prepare a technical review — feedback within 12–24 hours."
+    cta="Discuss Your Part"
+  />
+</BaseLayout>

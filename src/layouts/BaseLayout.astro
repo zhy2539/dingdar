@@ -1,0 +1,113 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE } from '../data/config';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  noindex?: boolean;
+  jsonLd?: object | object[];
+  path?: string;
+}
+
+const { title, description, image, noindex, jsonLd, path } = Astro.props;
+const canonical = path ? `${SITE.domain}${path}` : Astro.url.origin + Astro.url.pathname;
+const ogImage = image ? `${SITE.domain}${image}` : `${SITE.domain}/images/og-default.webp`;
+
+const orgLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'DINGDAR Casting',
+  legalName: SITE.legalName,
+  url: SITE.domain,
+  email: SITE.email,
+  telephone: SITE.whatsappTel,
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Henan',
+    addressCountry: 'CN',
+  },
+  foundingDate: '1986',
+  description: SITE.description,
+};
+
+const ld = noindex ? jsonLd : [orgLd, ...(Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [])];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/png" href="/images/logo.png" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="DINGDAR Casting" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Merriweather:wght@400;700;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <script type="application/ld+json" set:html={JSON.stringify(ld)} />
+
+    {SITE.gaId && (
+      <>
+        <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${SITE.gaId}`} />
+        <script is:inline set:html={`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '${SITE.gaId}');`} />
+      </>
+    )}
+  </head>
+  <body>
+    <Header />
+    <main><slot /></main>
+    <Footer />
+
+    <a
+      href={'https://wa.me/' + SITE.whatsappTel}
+      class="wa-float"
+      target="_blank"
+      rel="noopener"
+      data-wa-float
+      aria-label="Chat with DINGDAR on WhatsApp"
+    >
+      <svg class="wa-ico" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true">
+        <path d="M16.04 2C8.53 2 2.4 8.13 2.4 15.64c0 2.4.63 4.74 1.83 6.8L2.32 30l7.76-1.83a13.6 13.6 0 0 0 5.95 1.37h.01c7.5 0 13.63-6.13 13.63-13.64C29.68 8.13 23.55 2 16.04 2Zm0 24.98c-2.2 0-4.36-.59-6.23-1.7l-.45-.26-4.6 1.08 1.22-4.48-.3-.47a11.3 11.3 0 0 1-1.74-6.02c0-6.24 5.08-11.32 11.34-11.32 3.03 0 5.88 1.18 8.02 3.32a11.3 11.3 0 0 1 3.32 8.04c0 6.24-5.1 11.31-11.57 11.31Zm6.22-8.48c-.34-.17-2.02-1-2.34-1.11-.31-.11-.54-.17-.77.17-.23.34-.88 1.1-1.08 1.33-.2.23-.4.26-.74.09-.34-.17-1.44-.53-2.74-1.69-1.01-.9-1.7-2.02-1.9-2.36-.2-.34-.02-.52.15-.69.15-.15.34-.4.5-.6.17-.2.23-.34.34-.57.11-.23.06-.43-.03-.6-.09-.17-.77-1.85-1.05-2.53-.28-.68-.56-.58-.77-.6h-.66c-.23 0-.6.09-.91.43-.31.34-1.2 1.17-1.2 2.85s1.23 3.3 1.4 3.53c.17.23 2.42 3.7 5.87 5.19.82.36 1.46.57 1.96.73.82.26 1.57.22 2.16.13.66-.1 2.02-.82 2.3-1.62.28-.8.28-1.48.2-1.62-.09-.14-.31-.23-.65-.4Z"/>
+      </svg>
+      <span class="wa-txt">WhatsApp Us</span>
+    </a>
+
+    <script is:inline>
+      document.addEventListener('click', function (e) {
+        var t = e.target && e.target.closest ? e.target.closest('[data-wa-float], a[href*="wa.me"]') : null;
+        if (t && window.dataLayer) {
+          window.dataLayer.push({ event: 'whatsapp_click' });
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,180 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import FaqList from '../../components/FaqList.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import { CATEGORIES, getCategory } from '../../data/products';
+import { SITE } from '../../data/config';
+
+export function getStaticPaths() {
+  return CATEGORIES.map((c) => ({ params: { slug: c.slug } }));
+}
+
+const { slug } = Astro.params;
+const cat = getCategory(slug!);
+if (!cat) throw new Error('Unknown category ' + slug);
+
+const path = '/products/' + cat.slug + '/';
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.domain + '/' },
+    { '@type': 'ListItem', position: 2, name: 'Products', item: SITE.domain + '/products/' },
+    { '@type': 'ListItem', position: 3, name: cat.cardTitle, item: SITE.domain + path },
+  ],
+};
+const productLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: cat.cardTitle,
+  description: cat.intro,
+  brand: { '@type': 'Brand', name: 'DINGDAR' },
+  category: 'Casting wear parts',
+};
+const customOptions = [
+  'Drawing-based requirements',
+  'Sample reference',
+  'Custom dimensions',
+  'Branding / marking',
+];
+const reviewSteps = ['Casting', 'Heat Treatment', 'Machining', 'Inspection & Finishing'];
+---
+
+<BaseLayout title={cat.title} description={cat.cardDesc} path={path} jsonLd={[breadcrumbLd, productLd]}>
+  <PageHero
+    eyebrow="Product category"
+    title={cat.h1}
+    lead={cat.intro}
+    img={cat.heroImg}
+    imgAlt={cat.cardTitle}
+    ctaPrimary={{ label: 'Request a Quote', href: '/contact/' }}
+    ctaSecondary={{ label: 'Browse Parts ↓', href: '#parts' }}
+  />
+
+  <section class="section section--soft anchor" id="parts">
+    <div class="container">
+      <div class="sec-head center">
+        <span class="eyebrow">Reference parts</span>
+        <h2>Find Your Part</h2>
+        <p>Representative references below. If your model or part number is not listed, send it and we will match it.</p>
+      </div>
+      <div class="grid grid--3">
+        {cat.parts.map((p) => <ProductCard code={p.code} name={p.name} img={p.img} />)}
+      </div>
+      <div class="card" style="margin-top:32px;padding:26px 28px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;">
+        <div>
+          <h3 style="font-size:1.1rem;">Can't Find Your Part?</h3>
+          <p style="font-size:0.94rem;color:var(--muted);margin-top:6px;">Send the drawing, sample or part number — we review it against our references and existing tooling.</p>
+        </div>
+        <a href="/contact/" class="btn btn--primary">Discuss Your Part</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="sec-head">
+        <span class="eyebrow">OEM &amp; custom casting</span>
+        <h2>Produced to Your Requirement</h2>
+        <p>Beyond standard references, the same casting and review process supports custom projects.</p>
+      </div>
+      <div class="grid grid--4">
+        {customOptions.map((o) => (
+          <div class="card" style="padding:22px 24px;text-align:center;">
+            <h3 style="font-size:1rem;">{o}</h3>
+          </div>
+        ))}
+      </div>
+      <div style="margin-top:36px;">
+        <h3 style="margin-bottom:18px;">Casting &amp; Manufacturing Review</h3>
+        <div class="grid grid--4">
+          {reviewSteps.map((s, i) => (
+            <div class="step"><span class="n"></span><h3>{s}</h3><p>Stage {i + 1} of the production review path.</p></div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="sec-head">
+        <span class="eyebrow">Applications</span>
+        <h2>Where This Category Is Used</h2>
+      </div>
+      <div class="grid grid--2">
+        {cat.applications.map((a) => (
+          <div class="card" style="padding:20px 24px;">
+            <h3 style="font-size:1rem;">{a}</h3>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="sec-head">
+        <span class="eyebrow">Technical specifications</span>
+        <h2>Specifications We Confirm Before Production</h2>
+        <p>Material, machining and inspection scope are agreed in review — so the part and the paperwork match your requirement.</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <tbody>
+            {cat.specs.map((s) => {
+              const i = s.indexOf(':');
+              return (
+                <tr>
+                  <td style="width:220px;font-weight:700;color:var(--ink);background:var(--bg-tint);">{s.slice(0, i)}</td>
+                  <td>{s.slice(i + 1).trim()}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:0.85rem;color:var(--muted);margin-top:12px;">Specific values depend on the part reference, drawing and working conditions — send the requirement and we confirm them in the technical review.</p>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="sec-head">
+        <span class="eyebrow">Selection guide</span>
+        <h2>How to Select the Right Part</h2>
+      </div>
+      <FaqList items={cat.selection} />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="sec-head">
+        <span class="eyebrow">Related categories</span>
+        <h2>Explore More Castings</h2>
+        <p>Other wear-part families produced by the same review and inspection process.</p>
+      </div>
+      <div class="grid grid--3">
+        {CATEGORIES.filter((c) => c.slug !== cat.slug).slice(0, 3).map((c) => (
+          <a href={'/products/' + c.slug + '/'} class="card card--hover prod-card">
+            <div class="thumb"><img src={c.heroImg} alt={c.cardTitle} loading="lazy" width="800" height="600" /></div>
+            <div class="body">
+              <h3>{c.cardTitle}</h3>
+              <p>{c.cardDesc}</p>
+              <span class="code" style="display:inline-block;margin-top:12px;">Explore →</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand
+    title={'Request a Quote for ' + cat.shortName}
+    text="Send the drawing, part number or equipment model and include quantity and delivery market if known. We reply with technical feedback within 12–24 hours."
+    cta="Request a Quote"
+  />
+</BaseLayout>

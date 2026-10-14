@@ -1,0 +1,29 @@
+# dependencies
+node_modules/
+
+# build output
+dist/
+
+# astro build cache
+.astro/
+
+# wrangler / cloudflare pages
+.wrangler/
+
+# environment & secrets
+.env
+.env.*
+!.env.example
+
+# logs
+*.log
+npm-debug.log*
+
+# OS
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# editor
+.vscode/
+.idea/

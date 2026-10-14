@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import FaqList from '../components/FaqList.astro';
+
+const faqs = [
+  { q: 'What should we send with the first inquiry?', a: 'The details that decide the process route are the most useful: a 2D drawing or 3D model, the material or grade, the application and working conditions, the expected quantity and the delivery market. Critical dimensions, tolerances and inspection requirements belong on the drawing. If a drawing is not ready, a part number, equipment model or sample photo is enough to start.' },
+  { q: 'Can you review a project that has no finished drawing yet?', a: 'Yes. Many projects start from a worn part, a sample photo, a part number or an equipment model. We use what is available to identify the geometry, material and a possible process route, and tell you which details are still missing before a quotation can be prepared.' },
+  { q: 'What are your MOQ, tooling and lead time?', a: 'All three follow the part. Geometry and size decide the pattern or tooling, material and inspection scope decide the production steps, and quantity decides how the costs are spread. Each is confirmed in the technical review before quoting.' },
+  { q: 'Can we discuss a sample before mass production?', a: 'Yes. Describe the validation points your team needs to confirm — dimensions, fit, hardness, surface condition or inspection requirements — and the sample or trial scope is planned against them.' },
+  { q: 'Which materials do you cast?', a: 'High-manganese steel (Mn13, Mn18 and variants), high-chromium cast iron (Cr15–Cr26 families), alloy steel and ductile iron. The grade is selected against your working conditions during review.' },
+  { q: 'Which casting processes do you offer?', a: 'Four in-house routes: green sand casting, shell moulding, lost foam casting and investment casting. The route is matched to part size, geometry, tolerances, finish and order volume.' },
+  { q: 'Do we need an NDA before sending drawings?', a: 'That is your decision. Project material is used only for the technical review and the quotation. Send only what the first assessment needs, and say in the message if written confidentiality terms have to be agreed before drawings are released.' },
+  { q: 'Can you produce to OEM or private-label requirements?', a: 'Yes. Drawing-based requirements, custom dimensions, branding and marking can be confirmed as part of the order, with inspection and acceptance scope fixed before production.' },
+  { q: 'What inspection records can ship with the order?', a: 'Material certificates, dimensional inspection reports, hardness records and visual inspection records are available as agreed. NDT or third-party inspection can also be arranged when specified.' },
+  { q: 'What happens after we send the form?', a: 'Each inquiry is read as a technical requirement rather than as a price request. If a dimension, material or application detail is unclear, it is asked back before a process route is proposed, and price and delivery are confirmed only once the technical review is complete. Technical feedback is provided within 12–24 hours.' },
+  { q: 'How do you handle claims?', a: 'Claims are settled against the inspection scope fixed when the order was placed — which is why that scope is agreed up front and written into the quotation.' },
+  { q: 'Do you support one-stop sourcing of teeth and crusher parts?', a: 'Yes. Distributors and traders commonly order bucket teeth, adapters and crusher wear parts in one order, and we plan multi-category orders as a single project.' },
+];
+---
+
+<BaseLayout
+  title="FAQ | Crusher Parts, MOQ, Lead Time, Samples | DINGDAR"
+  description="Answers on what to send with an inquiry, MOQ, tooling, lead time, samples, materials, casting processes, inspection records and claims for crusher wear parts and custom castings."
+  path="/faq/"
+>
+  <PageHero
+    eyebrow="FAQ"
+    title="Questions We Are Asked Before an Inquiry"
+    lead="If your requirement is not covered here, send the drawing or specification with the contact form and it is answered against the actual project."
+    img="/images/foundry-pouring.webp"
+    imgAlt="Molten metal pouring in the DINGDAR foundry"
+    ctaPrimary={{ label: 'Ask a Question', href: '/contact/' }}
+    ctaSecondary={{ label: 'Browse Products', href: '/products/' }}
+  />
+
+  <section class="section">
+    <div class="container">
+      <FaqList items={faqs} />
+    </div>
+  </section>
+
+  <CtaBand
+    title="Your Question Isn't Listed?"
+    text="Send the drawing or specification with the contact form. We answer against the actual project, with technical feedback within 12–24 hours."
+    cta="Ask a Question"
+  />
+</BaseLayout>

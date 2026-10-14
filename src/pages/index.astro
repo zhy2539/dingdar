@@ -1,0 +1,278 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import FaqList from '../components/FaqList.astro';
+import { CATEGORIES } from '../data/products';
+import { STATS, MATERIALS, PROCESSES, QUALIFICATIONS, BUYER_CONCERNS, COMPLIANCE } from '../data/config';
+
+const faqs = [
+  {
+    q: 'How do you handle an inquiry that starts without a drawing?',
+    a: 'Many projects start from a part number, equipment model, sample photo or a worn part. We use what is available to identify the geometry, material and a possible process route, then tell you which details are still missing before a quotation is prepared.',
+  },
+  {
+    q: 'How are MOQ, tooling and lead time determined?',
+    a: 'All three follow the part. Geometry and size decide the pattern or tooling, material and inspection scope decide the production steps, and quantity decides how the costs are spread. We confirm each of these in the technical review before quoting.',
+  },
+  {
+    q: 'Can you produce castings to OEM or private-label requirements?',
+    a: 'Yes. Drawing-based requirements, custom dimensions, branding and marking can be confirmed as part of the order, with inspection and acceptance scope fixed before production.',
+  },
+  {
+    q: 'What inspection records can ship with the order?',
+    a: 'Material certificates, dimensional inspection reports, hardness records and visual inspection records are available as agreed in the order. NDT or third-party inspection can also be arranged when specified.',
+  },
+];
+
+const industries = [
+  { title: 'Mining & Quarrying', text: 'Wear parts for jaw, cone, impact and hammer crushers used across hard rock and aggregate circuits.' },
+  { title: 'Sand & Aggregate Plants', text: 'Crushing and screening wear components with dependable supply for continuous plant operation.' },
+  { title: 'OEM Machine Builders', text: 'Batch and series casting for crusher and construction machinery builders, produced to drawing with stable material and delivery.' },
+  { title: 'Parts Distributors & Traders', text: 'One-stop sourcing of crusher parts, bucket teeth and custom components across multiple references.' },
+];
+---
+
+<BaseLayout
+  title="Crusher Wear Parts Manufacturer | DINGDAR Casting"
+  description="Crusher wear parts, bucket teeth and custom castings from a Chinese foundry since 1986 — jaw plates, mantles, blow bars and hammers, made to drawing or sample."
+  path="/"
+>
+  <PageHero
+    eyebrow="Casting manufacturer since 1986"
+    title="Crusher Wear Parts & Custom Castings for Mining and Construction"
+    lead="Jaw plates, cone mantles and concaves, blow bars, hammer heads, bucket teeth and drawing-based custom castings — produced by an integrated foundry with four in-house casting routes, heat treatment, machining and inspection under one roof."
+    img="/images/H62bf48ffa42e4eba99efa99b67123d8bN.webp"
+    imgAlt="Open-pit mining operation with heavy crushing equipment"
+    ctaPrimary={{ label: 'Get a Quote', href: '/contact/' }}
+    ctaSecondary={{ label: 'Request Sample', href: '/request-sample/' }}
+    trust={[
+      '40+ years casting since 1986',
+      '180,000 m² production plant',
+      'Feedback within 12–24 hours',
+      'Drawing, sample or part number accepted',
+    ]}
+  />
+
+  <!-- 资质速览条：满意即可，10 秒过及格线 -->
+  <section class="section" style="padding-top: 0; padding-bottom: 0;">
+    <div class="container">
+      <div class="qual-bar">
+        {QUALIFICATIONS.map((q) => (
+          <div>
+            <div class="q-num">{q.value}</div>
+            <div class="q-lab">{q.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="sec-head center">
+        <span class="eyebrow">What we make</span>
+        <h2>Castings Built Around Your Machine</h2>
+        <p>Browse by crusher type, wear-part reference or custom project. Every part can be produced to your drawing, sample or part number — with material, machining and inspection agreed before production.</p>
+      </div>
+      <div class="grid grid--3">
+        {CATEGORIES.map((c) => (
+          <a href={'/products/' + c.slug + '/'} class="card card--hover prod-card">
+            <div class="thumb"><img src={c.heroImg} alt={c.cardTitle} loading="lazy" width="800" height="600" /></div>
+            <div class="body">
+              <h3>{c.cardTitle}</h3>
+              <p>{c.cardDesc}</p>
+              <span class="code" style="display:inline-block;margin-top:12px;">Explore →</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 异议处理：信息不对称，主动说出买家担心并回答 -->
+  <section class="section section--soft">
+    <div class="container">
+      <div class="sec-head center">
+        <span class="eyebrow">Three concerns every buyer has</span>
+        <h2>We Answer Them Before You Ask</h2>
+        <p>Straight answers to the questions procurement teams check on a first visit.</p>
+      </div>
+      <div class="grid grid--3">
+        {BUYER_CONCERNS.map((c) => (
+          <div class="card concern-card">
+            <h3 class="q">{c.title}</h3>
+            <p class="a">{c.answer}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 工厂实力数据：信号理论，可量化能力证明 -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+      <div class="stats">
+        <div><div class="num">1986</div><div class="lab">Casting experience since</div></div>
+        <div><div class="num">180,000 m²</div><div class="lab">Production plant</div></div>
+        <div><div class="num">720+</div><div class="lab">Employees</div></div>
+        <div><div class="num">5,400+</div><div class="lab">Part types produced</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 合规与验证：信号理论，可验证证据 -->
+  <section class="section section--tint">
+    <div class="container">
+      <div class="sec-head">
+        <span class="eyebrow">Compliance & verification</span>
+        <h2>Inspection Evidence Agreed Before Production</h2>
+        <p>Material grades and release documents are confirmed in the order — not improvised at delivery.</p>
+      </div>
+      <div class="grid grid--3">
+        {COMPLIANCE.materials.slice(0, 4).map((m) => (
+          <div class="card" style="padding:22px 24px;">
+            <h3 style="font-size:1rem;margin-bottom:8px;">{m.name}</h3>
+            <p style="font-size:0.9rem;color:var(--muted);">{m.detail}</p>
+          </div>
+        ))}
+        <div class="card" style="padding:22px 24px;display:flex;flex-direction:column;justify-content:center;">
+          <h3 style="font-size:1rem;margin-bottom:8px;">Release evidence</h3>
+          <p style="font-size:0.9rem;color:var(--muted);">Material certificates, dimensional &amp; hardness records, visual inspection — plus third-party inspection when specified.</p>
+          <a href="/certifications/" class="code" style="display:inline-block;margin-top:12px;color:var(--accent);font-weight:700;">See compliance details →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="sec-head center">
+        <span class="eyebrow">Who we work with</span>
+        <h2>Built for Buyers Who Can't Afford Downtime</h2>
+        <p>Our customer base spans quarries, crusher equipment OEMs and parts distributors across key mining and construction markets.</p>
+      </div>
+      <div class="grid grid--3">
+        <div class="card" style="padding:24px 26px;">
+          <h3 style="font-size:1.05rem;margin-bottom:10px;">Quarry &amp; aggregate producers</h3>
+          <p style="font-size:0.93rem;color:var(--muted);line-height:1.7;">Limestone, granite and construction aggregate operations that consume the full wear-part range — jaws, mantles, concaves, blow bars, hammers and liners.</p>
+        </div>
+        <div class="card" style="padding:24px 26px;">
+          <h3 style="font-size:1.05rem;margin-bottom:10px;">Crusher equipment OEMs</h3>
+          <p style="font-size:0.93rem;color:var(--muted);line-height:1.7;">Non-tier-one crusher and mobile plant builders sourcing OEM / private-label castings with stable dimensions, material consistency and dependable lead times.</p>
+        </div>
+        <div class="card" style="padding:24px 26px;">
+          <h3 style="font-size:1.05rem;margin-bottom:10px;">Distributors &amp; traders</h3>
+          <p style="font-size:0.93rem;color:var(--muted);line-height:1.7;">Parts specialists ordering multiple models and categories in one shipment — bucket teeth and crusher wear parts together, with consistent supply.</p>
+        </div>
+      </div>
+      <p class="center" style="margin-top:26px;font-size:0.92rem;color:var(--muted);">
+        Markets served include Africa, Southeast Asia, the Middle East, South America, Russia and Australia — direct, OEM and distributor supply models.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="sec-head center">
+        <span class="eyebrow">Why work with us</span>
+        <h2>One Project, Not a Box of Parts</h2>
+        <p>Every inquiry is read as a technical requirement — geometry, material, process and inspection are reviewed together before price and delivery are confirmed.</p>
+      </div>
+      <div class="grid grid--3">
+        <div class="card step">
+          <span class="n" style="counter-increment:none;">1</span>
+          <h3>Drawing &amp; Sample Review</h3>
+          <p>Start with a drawing, 3D model, part number or sample. We identify the geometry, material family and process route, and ask for only the details that are actually missing.</p>
+        </div>
+        <div class="card step">
+          <span class="n" style="counter-increment:none;">2</span>
+          <h3>Material &amp; Process Selection</h3>
+          <p>High-manganese steel, high-chromium cast iron, alloy steel and ductile iron, produced across four in-house casting routes — selected against your working conditions, not a menu.</p>
+        </div>
+        <div class="card step">
+          <span class="n" style="counter-increment:none;">3</span>
+          <h3>Inspection &amp; Delivery</h3>
+          <p>Material verification, dimensional inspection, hardness checks and export packing are planned before production, so the release evidence matches what your procurement team needs.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="sec-head center">
+        <span class="eyebrow">Materials &amp; processes</span>
+        <h2>Four Casting Routes, Four Material Families</h2>
+        <p>Green sand, shell moulding, lost foam and investment casting cover parts from small precision components to large wear castings.</p>
+      </div>
+      <div class="grid grid--4">
+        {PROCESSES.map((p) => (
+          <div class="card" style="padding:26px 24px;">
+            <h3 style="font-size:1.05rem;margin-bottom:10px;">{p.name}</h3>
+            <p style="font-size:0.92rem;color:var(--muted);">{p.summary}</p>
+          </div>
+        ))}
+      </div>
+      <div style="margin-top:36px;">
+        <h3 style="margin-bottom:18px;">Materials we cast</h3>
+        <div class="grid grid--2">
+          {MATERIALS.map((m) => (
+            <div class="card" style="padding:22px 24px;">
+              <h3 style="font-size:1rem;color:var(--ink-2);">{m.name} <span style="font-weight:500;color:var(--muted);font-size:0.9rem;">— {m.grades}</span></h3>
+              <p style="font-size:0.92rem;color:var(--muted);margin-top:6px;">{m.use}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="sec-head">
+        <span class="eyebrow">Industries we serve</span>
+        <h2>Built for the People Who Run the Plant</h2>
+      </div>
+      <div class="grid grid--4">
+        {industries.map((ind) => (
+          <div class="card card--hover" style="padding:26px 24px;">
+            <h3 style="font-size:1.05rem;margin-bottom:10px;">{ind.title}</h3>
+            <p style="font-size:0.92rem;color:var(--muted);">{ind.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="sec-head">
+        <span class="eyebrow">How we work</span>
+        <h2>From Project Inputs to Finished Castings</h2>
+      </div>
+      <div class="steps">
+        <div class="step"><span class="n"></span><h3>Requirement Review</h3><p>Drawing, part number, application and inspection scope are defined with you.</p></div>
+        <div class="step"><span class="n"></span><h3>Casting &amp; Heat Treatment</h3><p>Process-matched production with traceability and in-process checks.</p></div>
+        <div class="step"><span class="n"></span><h3>Machining &amp; Finishing</h3><p>Machined surfaces, marking and finish completed to the agreed scope.</p></div>
+        <div class="step"><span class="n"></span><h3>Inspection &amp; Delivery</h3><p>Final release, export packing and required documents before shipment.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="sec-head">
+        <span class="eyebrow">Questions we hear</span>
+        <h2>Before You Send an Inquiry</h2>
+      </div>
+      <FaqList items={faqs} />
+    </div>
+  </section>
+
+  <CtaBand
+    title="Tell Us What You Need to Build"
+    text="Send a drawing, part number or equipment model — drawings are helpful but not required for the first conversation. We reply with technical feedback within 12–24 hours."
+    cta="Get a Quote"
+  />
+</BaseLayout>

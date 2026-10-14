@@ -1,0 +1,67 @@
+---
+import { SITE } from '../data/config';
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container">
+    <div class="cols">
+      <div class="brand">
+        <div class="brand-row">
+          <img src="/images/logo.png" alt="DINGDAR logo" width="40" height="40" />
+          <span class="brand-name">DINGDAR<span>Castings</span></span>
+        </div>
+        <p>
+          Casting manufacturer for mining, quarrying and heavy equipment since 1986.
+          Crusher wear parts, bucket teeth and custom castings — reviewed as one project,
+          from drawing to inspection and delivery.
+        </p>
+      </div>
+      <div>
+        <h4>Products</h4>
+        <ul class="links">
+          <li><a href="/products/jaw-crusher-wear-parts/">Jaw Crusher Wear Parts</a></li>
+          <li><a href="/products/cone-crusher-wear-parts/">Cone Crusher Wear Parts</a></li>
+          <li><a href="/products/impact-crusher-wear-parts/">Impact Crusher Wear Parts</a></li>
+          <li><a href="/products/hammer-crusher-wear-parts/">Hammer Crusher Wear Parts</a></li>
+          <li><a href="/products/bucket-teeth-adapters/">Bucket Teeth &amp; Adapters</a></li>
+          <li><a href="/products/custom-castings/">Custom Castings</a></li>
+          <li><a href="/oem-casting/">OEM Casting Services</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul class="links">
+          <li><a href="/about/">About Us</a></li>
+          <li><a href="/certifications/">Certifications &amp; Compliance</a></li>
+          <li><a href="/resources/">Resources &amp; Downloads</a></li>
+          <li><a href="/request-sample/">Request a Sample</a></li>
+          <li><a href="/processes/">Casting Processes</a></li>
+          <li><a href="/news/">News</a></li>
+          <li><a href="/faq/">FAQ</a></li>
+          <li><a href="/contact/">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul class="contact">
+          <li>📍 {SITE.location}</li>
+          <li>📧 <a href={'mailto:' + SITE.email}>{SITE.email}</a></li>
+          <li>💬 <a href={'https://wa.me/' + SITE.whatsappTel}>WhatsApp {SITE.whatsapp}</a></li>
+          <li>⚡ {SITE.responsePromise}</li>
+        </ul>
+      </div>
+    </div>
+    <div class="bottom">
+      <span>© {year} {SITE.legalName}. All rights reserved.</span>
+      <span>{SITE.domain}</span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer .brand-row { display: flex; align-items: center; gap: 10px; }
+  .footer .brand img { border-radius: 8px; }
+  .footer .brand-name { font-weight: 800; color: #fff; font-size: 1.2rem; display: flex; align-items: baseline; gap: 8px; }
+  .footer .brand-name span { font-size: 0.66rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); }
+</style>

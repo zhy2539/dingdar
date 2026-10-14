@@ -1,0 +1,126 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { CAPABILITY_STATS, STATS } from '../data/config';
+
+const routes = [
+  'Green sand casting',
+  'Shell moulding',
+  'Lost foam casting',
+  'Investment casting',
+];
+const facts = [
+  'Casting components, wear-resistant alloy castings and customized industrial components',
+  'Casting, heat treatment, machining and inspection under one roof',
+  'Engineering, manufacturing and project teams working on one requirement',
+];
+---
+
+<BaseLayout
+  title="About Us | Casting Manufacturer Since 1986 | DINGDAR"
+  description="Henan Dingdar Machinery Equipment Manufacture Co., Ltd. — a casting enterprise since 1986 with 180,000 m² of plant, four in-house casting routes and integrated machining and inspection."
+  path="/about/"
+>
+  <PageHero
+    eyebrow="About DINGDAR"
+    title="A Casting Enterprise Built Around the Process"
+    lead="Castings and the machinery behind them, reviewed as one project — since 1986, from component sourcing to complete casting projects for foundries, OEM manufacturers, industrial buyers and distributors."
+    img="/images/factory-mould-line.webp"
+    imgAlt="Foundry moulding production line"
+    ctaPrimary={{ label: 'Contact Us', href: '/contact/' }}
+  />
+
+  <section class="section" style="padding-top:0;">
+    <div class="container">
+      <div class="stats">
+        {STATS.map((s) => (
+          <div><div class="num">{s.value}</div><div class="lab">{s.label}</div></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid grid--2" style="align-items:center;">
+        <div>
+          <span class="eyebrow">Who we are</span>
+          <h2>Henan Dingdar Machinery Equipment Manufacture Co., Ltd.</h2>
+          <p style="margin-top:16px;">
+            We supply general castings, wear-resistant alloy castings and customized industrial components, together with foundry equipment and process support. From casting components to complete production solutions, our engineering, manufacturing and project teams work together so industrial buyers manage specifications, production and delivery more efficiently.
+          </p>
+          <ul style="margin-top:18px;">
+            {facts.map((f) => (
+              <li style="padding:8px 0;border-top:1px solid var(--bg-tint);display:flex;gap:10px;font-size:0.95rem;">
+                <span style="color:var(--accent);font-weight:800;">✓</span>{f}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="grid grid--2">
+          {CAPABILITY_STATS.map((s) => (
+            <div class="card" style="padding:28px 24px;text-align:center;">
+              <div style="font-size:1.9rem;font-weight:800;color:var(--ink);">{s.value}</div>
+              <div style="font-size:0.88rem;color:var(--muted);margin-top:6px;">{s.label}</div>
+            </div>
+          ))}
+          <div class="card" style="padding:28px 24px;text-align:center;">
+            <div style="font-size:1.9rem;font-weight:800;color:var(--ink);">4</div>
+            <div style="font-size:0.88rem;color:var(--muted);margin-top:6px;">In-house casting routes</div>
+          </div>
+          <div class="card" style="padding:28px 24px;text-align:center;">
+            <div style="font-size:1.9rem;font-weight:800;color:var(--ink);">12–24h</div>
+            <div style="font-size:0.88rem;color:var(--muted);margin-top:6px;">Technical feedback</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="sec-head center">
+        <span class="eyebrow">Production</span>
+        <h2>Four In-House Casting Routes</h2>
+      </div>
+      <div class="grid grid--4">
+        {routes.map((r) => (
+          <div class="card" style="padding:22px 24px;text-align:center;"><h3 style="font-size:1.02rem;">{r}</h3></div>
+        ))}
+      </div>
+      <div class="grid grid--3" style="margin-top:40px;">
+        <div class="card" style="overflow:hidden;">
+          <img src="/images/foundry-pouring.webp" alt="Casting pouring operation" loading="lazy" width="900" height="450" style="width:100%;height:220px;object-fit:cover;" />
+          <div style="padding:20px 22px;"><h3 style="font-size:1.02rem;">Casting</h3><p style="font-size:0.9rem;color:var(--muted);margin-top:6px;">Process-matched production across four routes.</p></div>
+        </div>
+        <div class="card" style="overflow:hidden;">
+          <img src="/images/factory-machined-parts.webp" alt="Machined casting parts" loading="lazy" width="900" height="450" style="width:100%;height:220px;object-fit:cover;" />
+          <div style="padding:20px 22px;"><h3 style="font-size:1.02rem;">Machining &amp; Heat Treatment</h3><p style="font-size:0.9rem;color:var(--muted);margin-top:6px;">Value-added finishing to the agreed scope.</p></div>
+        </div>
+        <div class="card" style="overflow:hidden;">
+          <img src="/images/quality-inspection.webp" alt="Quality inspection" loading="lazy" width="900" height="450" style="width:100%;height:220px;object-fit:cover;" />
+          <div style="padding:20px 22px;"><h3 style="font-size:1.02rem;">Inspection &amp; Delivery</h3><p style="font-size:0.9rem;color:var(--muted);margin-top:6px;">Release evidence and export packing planned before production.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="sec-head">
+        <span class="eyebrow">Compliance note</span>
+        <h2>Straightforward Sourcing</h2>
+        <p>
+          We are a manufacturing enterprise based in Henan, China. Company background figures on this page are provided by the company; certificates, customer cases and further credentials can be shared on request as part of the sourcing review.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Work With a Casting Enterprise, Not a Price List"
+    text="Send your requirement — drawing, sample or equipment model — and the project team will respond with technical feedback within 12–24 hours."
+    cta="Contact Us"
+  />
+</BaseLayout>

@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Page Not Found | DINGDAR"
+  description="The page you are looking for could not be found."
+  noindex={true}
+>
+  <section class="section">
+    <div class="container" style="max-width:640px;text-align:center;">
+      <div style="font-size:4.5rem;font-weight:800;color:var(--accent);line-height:1;">404</div>
+      <h1 style="margin-top:10px;">Page Not Found</h1>
+      <p style="margin-top:14px;font-size:1.05rem;">
+        The page you requested does not exist or has moved. Try the homepage or browse our product catalog.
+      </p>
+      <div class="cta-row" style="display:flex;gap:14px;justify-content:center;margin-top:30px;flex-wrap:wrap;">
+        <a href="/" class="btn btn--primary">Back to Home</a>
+        <a href="/products/" class="btn btn--ghost">Browse Products</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

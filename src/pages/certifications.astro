@@ -1,0 +1,132 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { COMPLIANCE, SITE } from '../data/config';
+
+const path = '/certifications/';
+const ld = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'DINGDAR Casting',
+  url: SITE.domain + path,
+  description: 'Compliance, material standards and inspection evidence for crusher wear parts and custom castings.',
+};
+---
+
+<BaseLayout
+  title="Certifications & Compliance | DINGDAR Casting"
+  description="Material standards, inspection records and compliance evidence for crusher wear parts and custom castings — with third-party inspection available."
+  path={path}
+  jsonLd={ld}
+>
+  <PageHero
+    eyebrow="Compliance & verification"
+    title="Evidence You Can Put in Front of Procurement"
+    lead="Material grades, inspection records and release documents are agreed before production — so the evidence your compliance team needs ships with the order, not after a chase."
+    img="/images/Hf09396274a884400bc5ad978660c1f3cT.webp"
+    imgAlt="Cast components produced under controlled inspection at DINGDAR foundry"
+    ctaPrimary={{ label: 'Ask About Your Standard', href: '/contact/' }}
+    ctaSecondary={{ label: 'Request Sample', href: '/request-sample/' }}
+    trust={[
+      'Material certificates',
+      'Dimensional & hardness records',
+      'Third-party inspection available',
+      'Docs agreed before production',
+    ]}
+  />
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="sec-head center">
+        <span class="eyebrow">Material standards</span>
+        <h2>Grades We Cast and What They Mean for Your Part</h2>
+        <p>Material families are selected against your working conditions during review — feed size, impact, abrasion and required hardness.</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Material family</th><th>Grades / series</th><th>Typical use</th><th>Common standard series</th></tr>
+          </thead>
+          <tbody>
+            {COMPLIANCE.materials.map((m) => (
+              <tr>
+                <td style="font-weight:700;color:var(--ink);background:var(--bg-tint);">{m.name}</td>
+                <td>{m.grades}</td>
+                <td>{m.detail}</td>
+                <td>{m.standard}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <p style="font-size:0.84rem;color:var(--muted);margin-top:10px;">
+          Standard series are shown as reference families; the exact standard, grade and acceptance criteria for your part are confirmed during the technical review.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="sec-head">
+        <span class="eyebrow">Inspection & release evidence</span>
+        <h2>What Ships With Your Order</h2>
+        <p>Release evidence is agreed in the order — here is the scope we commonly provide.</p>
+      </div>
+      <div class="grid grid--3">
+        {COMPLIANCE.inspection.map((x) => (
+          <div class="card" style="padding:22px 24px;">
+            <h3 style="font-size:1rem;color:var(--accent);">✓ {x}</h3>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tint">
+    <div class="container">
+      <div class="card" style="padding:34px 34px;max-width:860px;margin:0 auto;">
+        <h2 style="font-size:1.35rem;margin-bottom:14px;">A note on certificates</h2>
+        <p style="font-size:0.97rem;line-height:1.75;color:var(--ink-2);">
+          {COMPLIANCE.note} If your project requires ISO, material standards (such as ASTM, DIN or GB equivalents) or a specific inspection body, tell us during the review and we confirm what can be documented for that order.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="sec-head">
+        <span class="eyebrow">Verifiable company facts</span>
+        <h2>The Company Behind the Castings Can Be Verified</h2>
+        <p>Before samples or mass production, confirm who you are dealing with through public channels and direct contact.</p>
+      </div>
+      <div class="grid grid--4" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));">
+        {COMPLIANCE.verify.map((v) => (
+          <div class="card" style="padding:22px 24px;">
+            <span class="eyebrow" style="font-size:0.72rem;letter-spacing:0.08em;">{v.k}</span>
+            <p style="font-size:0.98rem;margin-top:10px;line-height:1.6;">{v.v}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="card" style="padding:26px 28px;margin-top:22px;max-width:860px;">
+        <h3 style="font-size:1.05rem;margin-bottom:12px;">Verify it yourself</h3>
+        <ul style="list-style:none;padding:0;margin:0;">
+          {COMPLIANCE.verifyLinks.map((l) => (
+            <li style="padding:10px 0;border-top:1px solid var(--bg-tint);">
+              <a href={l.url} target="_blank" rel="noopener" style="font-weight:700;color:var(--accent);">{l.label} →</a>
+              <p style="font-size:0.86rem;color:var(--muted);margin-top:3px;">{l.note}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Tell Us the Standard Your Project Needs"
+    text="Send the part reference, drawing or equipment model and the required material or inspection standard — we confirm scope and documentation during the technical review."
+    cta="Discuss Your Requirements"
+  />
+</BaseLayout>

@@ -1,0 +1,60 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { NEWS, getNews } from '../../data/news';
+
+export function getStaticPaths() {
+  return NEWS.map((n) => ({ params: { slug: n.slug } }));
+}
+
+const { slug } = Astro.params;
+const news = getNews(slug!);
+
+if (!news) {
+  return Astro.redirect('/news/');
+}
+
+const { title, date, excerpt, cover, coverAlt, body } = news;
+---
+
+<BaseLayout
+  title={`${title} | DINGDAR`}
+  description={excerpt}
+  path={`/news/${slug}/`}
+  jsonLd={{
+    '@context': 'https://schema.org',
+    '@type': 'NewsArticle',
+    headline: title,
+    datePublished: date,
+    description: excerpt,
+    image: 'https://dingdar.com' + cover,
+    author: { '@type': 'Organization', name: 'DINGDAR Casting' },
+    publisher: { '@type': 'Organization', name: 'Henan Dingdar Machinery Equipment Manufacture Co., Ltd.' },
+  }}
+>
+  <section class="section" style="padding-top:64px;">
+    <div class="container" style="max-width:860px;">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a> / <a href="/news/">News</a> / <span>{title}</span>
+      </nav>
+      <span class="badge">{date}</span>
+      <h1 style="margin-top:18px;margin-bottom:26px;">{title}</h1>
+      <img src={cover} alt={coverAlt} width="1200" height="675" style="width:100%;border-radius:14px;box-shadow:var(--shadow-md);" />
+      <div class="article-body">
+        {body.map((p) => (<p>{p}</p>))}
+      </div>
+      <a href="/news/" class="btn btn--ghost" style="margin-top:12px;">← Back to News</a>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Start Your Casting Project"
+    text="Send a drawing, part number or equipment model — we reply with technical feedback within 12–24 hours."
+    cta="Get a Quote"
+  />
+</BaseLayout>
+
+<style>
+  .article-body { margin-top: 32px; }
+  .article-body p { margin-bottom: 22px; font-size: 1.04rem; line-height: 1.8; color: var(--body); }
+</style>

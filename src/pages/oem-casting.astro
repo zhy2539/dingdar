@@ -1,0 +1,120 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { OEM_STEPS, OEM_CUSTOMIZABLE, SITE } from '../data/config';
+
+const path = '/oem-casting/';
+const serviceLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'OEM Casting Services',
+  serviceType: 'Custom casting manufacturing',
+  provider: { '@type': 'Organization', name: 'DINGDAR Casting', url: SITE.domain },
+  areaServed: 'Worldwide',
+  description: 'Drawing-based custom casting production with material, machining, inspection and delivery confirmed during technical review.',
+};
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.domain + '/' },
+    { '@type': 'ListItem', position: 2, name: 'OEM Casting', item: SITE.domain + path },
+  ],
+};
+
+const moqRows = [
+  { scale: 'Prototype / sample', typical: 'Single parts or small runs', confirmed: 'Tooling and quantity reviewed per project' },
+  { scale: 'Small batch', typical: 'Trial quantities after sample approval', confirmed: 'Price per piece reviewed with tooling amortization' },
+  { scale: 'Series / repeat orders', typical: 'Scheduled deliveries over the year', confirmed: 'Frame agreements with stable material and lead time' },
+];
+---
+
+<BaseLayout
+  title="OEM Custom Casting Services | DINGDAR"
+  description="Drawing-based custom castings from an integrated foundry: material, machining, inspection, MOQ and lead time confirmed during technical review."
+  path={path}
+  jsonLd={[breadcrumbLd, serviceLd]}
+>
+  <PageHero
+    eyebrow="OEM & custom casting"
+    title="From Your Drawing to Released Castings"
+    lead="A drawing, sample or part number starts the review. Geometry, material grade, machining, inspection scope, MOQ and delivery are confirmed in writing before production — so OEM and private-label projects ship with the evidence your team needs."
+    img="/images/Hcf4f8099dbdf4dd5a04538f5c602cdfdu.webp"
+    imgAlt="Custom casting produced to drawing at DINGDAR foundry"
+    ctaPrimary={{ label: 'Start a Project Review', href: '/contact/' }}
+    ctaSecondary={{ label: 'Request Sample', href: '/request-sample/' }}
+    trust={[
+      'Drawing / sample / part number accepted',
+      'Material & inspection agreed first',
+      'OEM & private label supported',
+      'Feedback within 12–24 hours',
+    ]}
+  />
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="sec-head center">
+        <span class="eyebrow">How it works</span>
+        <h2>The Six-Step Review Path</h2>
+        <p>Each step is confirmed with you — nothing moves to production on assumptions.</p>
+      </div>
+      <div class="steps">
+        {OEM_STEPS.map((s) => (
+          <div class="step">
+            <span class="n">{s.step}</span>
+            <h3>{s.name}</h3>
+            <p style="font-size:0.85rem;color:var(--accent);font-weight:600;">{s.time}</p>
+            <p style="font-size:0.9rem;color:var(--muted);margin-top:4px;">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="sec-head">
+        <span class="eyebrow">Quantity & timing</span>
+        <h2>MOQ and Lead Time, Reviewed Not Guessed</h2>
+        <p>Quantity, tooling and delivery follow the part — confirmed during the technical review, not promised in advance.</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Order scale</th><th>Typical</th><th>Confirmed during review</th></tr>
+          </thead>
+          <tbody>
+            {moqRows.map((r) => (
+              <tr><td>{r.scale}</td><td>{r.typical}</td><td>{r.confirmed}</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:0.85rem;color:var(--muted);margin-top:12px;">Specific MOQ, tooling cost and lead time depend on geometry, material and quantity — send the part reference and we confirm these in writing.</p>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="sec-head">
+        <span class="eyebrow">What you can specify</span>
+        <h2>Customizable Items</h2>
+      </div>
+      <div class="grid grid--3">
+        {OEM_CUSTOMIZABLE.map((x) => (
+          <div class="card" style="padding:22px 24px;text-align:center;">
+            <h3 style="font-size:1rem;">{x}</h3>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Send the Drawing, Sample or Part Number"
+    text="We confirm geometry, material, machining, inspection, MOQ and lead time in a written technical review — typically within 12–24 hours of receiving your requirement."
+    cta="Start Your Review"
+    href="/contact/"
+  />
+</BaseLayout>

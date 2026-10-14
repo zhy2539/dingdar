@@ -1,0 +1,85 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import FaqList from '../components/FaqList.astro';
+import { PROCESSES } from '../data/config';
+
+const compare = [
+  { name: 'Green Sand Casting', size: 'Small to very large', accuracy: 'Standard', surface: 'Standard', volume: 'Medium to high', best: 'Large wear parts, structural castings' },
+  { name: 'Shell Moulding', size: 'Small to medium', accuracy: 'Better', surface: 'Better', volume: 'Series', best: 'Repeatable parts with consistent finish' },
+  { name: 'Lost Foam Casting', size: 'Small to medium', accuracy: 'Good', surface: 'Good', volume: 'Low to mid', best: 'Complex geometry, near-net shape' },
+  { name: 'Investment Casting', size: 'Small', accuracy: 'Highest', surface: 'Highest', volume: 'Low to mid', best: 'Precision components, fine detail' },
+];
+
+const faqs = [
+  { q: 'How do I choose a casting process for my part?', a: 'Part size, geometry complexity, dimensional tolerances, surface finish and order volume decide the route. Send the drawing or sample with your application, and the review proposes the process that fits — you do not need a fixed process before the first conversation.' },
+  { q: 'Can you combine processes in one project?', a: 'Yes. Different components in the same assembly can use different routes, and we plan them together so material, machining and inspection remain consistent.' },
+  { q: 'What decides tooling cost?', a: 'Pattern or tooling cost follows geometry and size. It is confirmed with the process proposal, before pricing, so there are no surprises.' },
+  { q: 'Do you support prototype to batch?', a: 'Yes. Projects can start from a sample or trial batch and scale once the geometry, material and inspection points are validated.' },
+];
+---
+
+<BaseLayout
+  title="Casting Processes & Selection Guide | DINGDAR"
+  description="Compare green sand, shell moulding, lost foam and investment casting by part size, accuracy, surface finish and volume — then send your part for a process-matched review."
+  path="/processes/"
+>
+  <PageHero
+    eyebrow="Capability"
+    title="How to Choose the Right Casting Process"
+    lead="Four in-house casting routes cover the range from large wear castings to small precision components. The right route is matched to your part geometry, material, tolerances and order volume during review."
+    img="/images/foundry-pouring.webp"
+    imgAlt="Molten metal pouring in the foundry"
+    ctaPrimary={{ label: 'Discuss Your Part', href: '/contact/' }}
+    ctaSecondary={{ label: 'View Products', href: '/products/' }}
+  />
+
+  <section class="section">
+    <div class="container">
+      <div class="sec-head center">
+        <span class="eyebrow">Four routes</span>
+        <h2>Compare Casting Processes</h2>
+        <p>Indicative comparison — the actual selection is confirmed against your drawing and working conditions.</p>
+      </div>
+      <div class="grid grid--4">
+        {PROCESSES.map((p) => (
+          <div class="card card--hover" style="padding:26px 24px;">
+            <h3 style="font-size:1.08rem;margin-bottom:10px;">{p.name}</h3>
+            <p style="font-size:0.92rem;color:var(--muted);">{p.summary}</p>
+          </div>
+        ))}
+      </div>
+      <div class="card" style="margin-top:40px;overflow-x:auto;">
+        <table class="tbl">
+          <thead>
+            <tr><th>Process</th><th>Part size</th><th>Dimensional accuracy</th><th>Surface finish</th><th>Typical volume</th><th>Best suited for</th></tr>
+          </thead>
+          <tbody>
+            {compare.map((r) => (
+              <tr>
+                <td><b>{r.name}</b></td><td>{r.size}</td><td>{r.accuracy}</td><td>{r.surface}</td><td>{r.volume}</td><td>{r.best}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="sec-head">
+        <span class="eyebrow">Selection FAQ</span>
+        <h2>Casting Process Selection FAQ</h2>
+      </div>
+      <FaqList items={faqs} />
+    </div>
+  </section>
+
+  <CtaBand
+    title="Still Deciding? Send What You Already Have"
+    text="A part number, equipment model, drawing or sample photo is enough to start the review. We propose the material families and process routes that fit your application."
+    cta="Discuss Your Part"
+  />
+</BaseLayout>

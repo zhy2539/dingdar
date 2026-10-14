@@ -1,0 +1,22 @@
+---
+interface Props {
+  title: string;
+  text: string;
+  cta: string;
+  href?: string;
+  btn?: 'primary' | 'light';
+}
+const { title, text, cta, href = '/contact/', btn = 'primary' } = Astro.props;
+---
+
+<section class="section">
+  <div class="container">
+    <div class="cta-band">
+      <div>
+        <h2>{title}</h2>
+        <p>{text}</p>
+      </div>
+      <a href={href} class:list={['btn', btn === 'primary' ? 'btn--primary' : 'btn--light', 'btn--lg']}>{cta}</a>
+    </div>
+  </div>
+</section>

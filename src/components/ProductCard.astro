@@ -1,0 +1,19 @@
+---
+interface Props {
+  code: string;
+  name: string;
+  img: string;
+}
+const { code, name, img } = Astro.props;
+---
+
+<div class="card card--hover prod-card">
+  <div class="thumb">
+    <img src={img} alt={name + ' ' + code} loading="lazy" width="800" height="600" />
+  </div>
+  <div class="body">
+    <span class="code">{code}</span>
+    <h3>{name}</h3>
+    <p>Produced to drawing, sample or part number.</p>
+  </div>
+</div>

@@ -1,0 +1,171 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import { SITE } from '../data/config';
+
+const path = '/request-sample/';
+const sampleFields = [
+  { name: 'name', label: 'Your Name *', type: 'text', required: true, placeholder: 'Full name' },
+  { name: 'email', label: 'Work Email *', type: 'email', required: true, placeholder: 'name@company.com' },
+  { name: 'company', label: 'Company *', type: 'text', required: true, placeholder: 'Company name' },
+  { name: 'country', label: 'Country *', type: 'text', required: true, placeholder: 'Country / region' },
+  { name: 'product', label: 'Product Interest', type: 'select', required: false, options: [
+    'Jaw crusher wear parts',
+    'Cone crusher wear parts',
+    'Impact crusher wear parts',
+    'Hammer crusher wear parts',
+    'Double roll crusher parts',
+    'Bucket teeth & adapters',
+    'Custom castings / sample to match',
+  ] },
+  { name: 'quantity', label: 'Quantity / Part Reference', type: 'text', required: false, placeholder: 'e.g. 1 set of JCP-007, model & part number' },
+  { name: 'message', label: 'Application & Expected Use *', type: 'textarea', required: true, placeholder: 'Machine model, part number, material or working conditions — and what you plan to evaluate with the sample.' },
+];
+---
+
+<BaseLayout
+  title="Request a Sample | DINGDAR Casting"
+  description="Request a sample of crusher wear parts or custom castings. Evaluation purpose and sample policy are confirmed during technical review."
+  path={path}
+>
+  <PageHero
+    eyebrow="Request a sample"
+    title="Start With a Sample, Not a Gamble"
+    lead="Tell us the part, machine model and what you plan to evaluate — we confirm material, dimensions and the sample policy during the technical review before anything is produced."
+    img="/images/H8a38cb79479b45f39907a3d3034e8767X.webp"
+    imgAlt="Casting sample under evaluation for crusher wear parts"
+    ctaPrimary={{ label: 'Request Sample', href: '#sample-form' }}
+    ctaSecondary={{ label: 'WhatsApp Us', href: 'https://wa.me/' + SITE.whatsappTel }}
+    trust={[
+      'Sample to match a part number',
+      'Material & inspection confirmed first',
+      'Feedback within 12–24 hours',
+    ]}
+  />
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="grid grid--2" style="grid-template-columns: 1.1fr 0.9fr; gap: 40px; align-items: start;">
+        <div class="card" id="sample-form" style="padding: 34px 32px;">
+          <h2 style="font-size:1.5rem;">Request a Sample</h2>
+          <p style="font-size:0.95rem;color:var(--muted);margin:10px 0 24px;">Fields marked * are required. We confirm sample availability, preparation time and policy in the technical review.</p>
+
+          <form id="sample" action={SITE.formEndpoint} method="POST" novalidate>
+            <div class="hp-field" aria-hidden="true">
+              <label>Leave this field empty</label>
+              <input type="text" name="_honey" tabindex="-1" autocomplete="off" />
+            </div>
+            <input type="hidden" name="_subject" value="Sample request from dingdar.com" />
+
+            <div class="grid grid--2" style="gap: 16px;">
+              {sampleFields.map((f) => (
+                f.type === 'select' ? (
+                  <div class="field" style="grid-column: 1 / -1;">
+                    <label for={f.name}>{f.label}</label>
+                    <select id={f.name} name={f.name}>
+                      <option value="">Select a category</option>
+                      {f.options.map((o) => <option value={o}>{o}</option>)}
+                    </select>
+                  </div>
+                ) : f.type === 'textarea' ? (
+                  <div class="field" style="grid-column: 1 / -1;">
+                    <label for={f.name}>{f.label}</label>
+                    <textarea id={f.name} name={f.name} rows="6" placeholder={f.placeholder} required={f.required}></textarea>
+                  </div>
+                ) : (
+                  <div class="field">
+                    <label for={f.name}>{f.label}</label>
+                    <input id={f.name} name={f.name} type={f.type} placeholder={f.placeholder} required={f.required} />
+                  </div>
+                )
+              ))}
+            </div>
+
+            <div class="field" style="margin-top: 6px;">
+              <button type="submit" class="btn btn--primary btn--lg" style="width:100%;">Request Sample</button>
+              <p class="hint" id="form-status" role="status" aria-live="polite"></p>
+            </div>
+          </form>
+        </div>
+
+        <div>
+          <div class="card" style="padding: 30px 28px; margin-bottom: 24px;">
+            <h3 style="font-size:1.15rem;margin-bottom:16px;">What makes a sample useful</h3>
+            <ul>
+              {[
+                'Part number or machine model',
+                'Drawing or photos of the worn part',
+                'Material or hardness you expect',
+                'What you will evaluate with the sample',
+              ].map((x) => (
+                <li style="padding:8px 0;border-top:1px solid var(--bg-tint);display:flex;gap:10px;font-size:0.94rem;">
+                  <span style="color:var(--accent);font-weight:800;">✓</span>{x}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="card" style="padding: 30px 28px;">
+            <h3 style="font-size:1.15rem;margin-bottom:16px;">Prefer to talk directly?</h3>
+            <ul class="contact-list">
+              <li><span class="k">WhatsApp</span><a href={'https://wa.me/' + SITE.whatsappTel}>{SITE.whatsapp}</a></li>
+              <li><span class="k">Sales</span><a href={'mailto:' + SITE.email}>{SITE.email}</a></li>
+              <li><span class="k">Engineering</span><a href={'mailto:' + SITE.engineeringEmail}>{SITE.engineeringEmail}</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .contact-list li { display: flex; justify-content: space-between; gap: 16px; padding: 9px 0; border-top: 1px solid var(--bg-tint); font-size: 0.94rem; align-items: baseline; }
+  .contact-list .k { color: var(--muted); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; min-width: 96px; }
+  .contact-list a { color: var(--ink); font-weight: 600; }
+  .contact-list a:hover { color: var(--accent); }
+  @media (max-width: 900px) { .grid--2[style] { grid-template-columns: 1fr !important; } }
+</style>
+
+<script>
+  const form = document.getElementById('sample');
+  const status = document.getElementById('form-status');
+  const endpoint = form.getAttribute('action') || '';
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    status.textContent = '';
+    const data = new FormData(form);
+    if (data.get('_honey')) return;
+    const name = data.get('name')?.trim();
+    const email = data.get('email')?.trim();
+    const country = data.get('country')?.trim();
+    const message = data.get('message')?.trim();
+    if (!name || !email || !country || !message) {
+      status.textContent = 'Please complete all required fields.';
+      status.style.color = '#d9480f';
+      return;
+    }
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+      status.textContent = 'Please enter a valid email address.';
+      status.style.color = '#d9480f';
+      return;
+    }
+    if (!endpoint) {
+      status.innerHTML = 'The form endpoint is not configured yet. Please contact us directly: <a href="mailto:sales@hndingdar.com" style="color:#e8590c;font-weight:700;">sales@hndingdar.com</a> or <a href="https://wa.me/8619337861987" style="color:#e8590c;font-weight:700;">WhatsApp</a>.';
+      return;
+    }
+    try {
+      const res = await fetch(endpoint, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
+      if (res.ok) {
+        try { window.dataLayer?.push?.({ event: 'sample_requested' }); } catch {}
+        window.location.href = '/thank-you/';
+      } else {
+        status.textContent = 'Something went wrong. Please try again or use WhatsApp / email.';
+        status.style.color = '#d9480f';
+      }
+    } catch {
+      status.textContent = 'Network error. Please email us at sales@hndingdar.com or message us on WhatsApp.';
+      status.style.color = '#d9480f';
+    }
+  });
+</script>

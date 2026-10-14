@@ -1,0 +1,178 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import { SITE } from '../data/config';
+
+const fields = [
+  { name: 'name', label: 'Your Name *', type: 'text', required: true, placeholder: 'Full name' },
+  { name: 'email', label: 'Work Email *', type: 'email', required: true, placeholder: 'name@company.com' },
+  { name: 'company', label: 'Company *', type: 'text', required: true, placeholder: 'Company name' },
+  { name: 'country', label: 'Country *', type: 'text', required: true, placeholder: 'Country / region' },
+  { name: 'product', label: 'Product Interest', type: 'select', required: false, options: [
+    'Jaw crusher wear parts',
+    'Cone crusher wear parts',
+    'Impact crusher wear parts',
+    'Hammer crusher wear parts',
+    'Double roll crusher parts',
+    'Bucket teeth & adapters',
+    'Custom castings',
+    'Other / not sure yet',
+  ] },
+  { name: 'quantity', label: 'Quantity / Annual Volume', type: 'text', required: false, placeholder: 'e.g. 200 pcs per year' },
+  { name: 'message', label: 'Message *', type: 'textarea', required: true, placeholder: 'Part number, drawing, equipment model, material or working conditions — whatever you have.' },
+];
+---
+
+<BaseLayout
+  title="Contact Us | Request a Quote for Castings | DINGDAR"
+  description="Send your drawing, part number or equipment model for a technical review and quotation. Feedback within 12–24 hours. WhatsApp and email channels available."
+  path="/contact/"
+>
+  <PageHero
+    eyebrow="Contact"
+    title="Connect With Our Project Team"
+    lead="Send your drawing, equipment model or sourcing requirement. Drawings are helpful but not required for the first conversation — we organize the technical information needed for a useful review and quotation."
+    img="/images/H62bf48ffa42e4eba99efa99b67123d8bN.webp"
+    imgAlt="Mining and quarrying operation served by DINGDAR castings"
+    ctaPrimary={{ label: 'Send Inquiry', href: '#inquiry-form' }}
+    ctaSecondary={{ label: 'WhatsApp Us', href: 'https://wa.me/' + SITE.whatsappTel }}
+  />
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="grid grid--2" style="grid-template-columns: 1.1fr 0.9fr; gap: 40px; align-items: start;">
+        <div class="card" id="inquiry-form" style="padding: 34px 32px;">
+          <h2 style="font-size:1.5rem;">Request a Quote</h2>
+          <p style="font-size:0.95rem;color:var(--muted);margin:10px 0 24px;">Fields marked * are required. We reply with technical feedback within 12–24 hours.</p>
+
+          <form id="inquiry" action={SITE.formEndpoint} method="POST" novalidate>
+            <div class="hp-field" aria-hidden="true">
+              <label>Leave this field empty</label>
+              <input type="text" name="_honey" tabindex="-1" autocomplete="off" />
+            </div>
+            <input type="hidden" name="_subject" value="New inquiry from dingdar.com" />
+
+            <div class="grid grid--2" style="gap: 16px;">
+              {fields.map((f) => (
+                f.type === 'select' ? (
+                  <div class="field" style="grid-column: 1 / -1;">
+                    <label for={f.name}>{f.label}</label>
+                    <select id={f.name} name={f.name}>
+                      <option value="">Select a category</option>
+                      {f.options.map((o) => <option value={o}>{o}</option>)}
+                    </select>
+                  </div>
+                ) : f.type === 'textarea' ? (
+                  <div class="field" style="grid-column: 1 / -1;">
+                    <label for={f.name}>{f.label}</label>
+                    <textarea id={f.name} name={f.name} rows="6" placeholder={f.placeholder} required={f.required}></textarea>
+                  </div>
+                ) : (
+                  <div class="field">
+                    <label for={f.name}>{f.label}</label>
+                    <input id={f.name} name={f.name} type={f.type} placeholder={f.placeholder} required={f.required} />
+                  </div>
+                )
+              ))}
+            </div>
+
+            <div class="field" style="margin-top: 6px;">
+              <button type="submit" class="btn btn--primary btn--lg" style="width:100%;">Send Inquiry</button>
+              <p class="hint" id="form-status" role="status" aria-live="polite"></p>
+            </div>
+          </form>
+        </div>
+
+        <div>
+          <div class="card" style="padding: 30px 28px; margin-bottom: 24px;">
+            <h3 style="font-size:1.15rem;margin-bottom:16px;">What helps us quote faster</h3>
+            <ul>
+              {[
+                'Drawing or part number',
+                'Material or hardness requirement',
+                'Equipment model and application',
+                'Required quantity and delivery market',
+              ].map((x) => (
+                <li style="padding:8px 0;border-top:1px solid var(--bg-tint);display:flex;gap:10px;font-size:0.94rem;">
+                  <span style="color:var(--accent);font-weight:800;">✓</span>{x}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="card" style="padding: 30px 28px; margin-bottom: 24px;">
+            <h3 style="font-size:1.15rem;margin-bottom:16px;">Prefer to contact us directly?</h3>
+            <ul class="contact-list">
+              <li><span class="k">WhatsApp</span><a href={'https://wa.me/' + SITE.whatsappTel}>{SITE.whatsapp}</a></li>
+              <li><span class="k">Sales</span><a href={'mailto:' + SITE.email}>{SITE.email}</a></li>
+              <li><span class="k">Engineering</span><a href={'mailto:' + SITE.engineeringEmail}>{SITE.engineeringEmail}</a></li>
+              <li><span class="k">Quality</span><a href={'mailto:' + SITE.qualityEmail}>{SITE.qualityEmail}</a></li>
+              <li><span class="k">Location</span><span>{SITE.location}, China</span></li>
+            </ul>
+          </div>
+
+          <div class="cta-band" style="padding: 28px 30px;">
+            <div>
+              <h2 style="font-size:1.2rem;">Response promise</h2>
+              <p style="font-size:0.92rem;">Technical feedback within 12–24 hours. Each inquiry is read as a technical requirement, not a price request.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .contact-list li { display: flex; justify-content: space-between; gap: 16px; padding: 9px 0; border-top: 1px solid var(--bg-tint); font-size: 0.94rem; align-items: baseline; }
+  .contact-list .k { color: var(--muted); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; min-width: 96px; }
+  .contact-list a { color: var(--ink); font-weight: 600; }
+  .contact-list a:hover { color: var(--accent); }
+  @media (max-width: 900px) { .grid--2[style] { grid-template-columns: 1fr !important; } }
+</style>
+
+<script>
+  const form = document.getElementById('inquiry');
+  const status = document.getElementById('form-status');
+  // 端点从 form 的 action 属性读取（config.ts 中配置），避免服务端注入
+  const endpoint = form.getAttribute('action') || '';
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    status.textContent = '';
+    const data = new FormData(form);
+    if (data.get('_honey')) return;
+    const name = data.get('name')?.trim();
+    const email = data.get('email')?.trim();
+    const company = data.get('company')?.trim();
+    const country = data.get('country')?.trim();
+    const message = data.get('message')?.trim();
+    if (!name || !email || !company || !country || !message) {
+      status.textContent = 'Please complete all required fields.';
+      status.style.color = '#d9480f';
+      return;
+    }
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+      status.textContent = 'Please enter a valid email address.';
+      status.style.color = '#d9480f';
+      return;
+    }
+    if (!endpoint) {
+      // 端点未配置：给出直达联系方式，避免静默丢单
+      status.innerHTML = 'The form endpoint is not configured yet. Please contact us directly: <a href="mailto:sales@hndingdar.com" style="color:#e8590c;font-weight:700;">sales@hndingdar.com</a> or <a href="https://wa.me/8619337861987" style="color:#e8590c;font-weight:700;">WhatsApp</a>.';
+      return;
+    }
+    try {
+      const res = await fetch(endpoint, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
+      if (res.ok) {
+        try { window.dataLayer?.push?.({ event: 'inquiry_submitted' }); } catch {}
+        window.location.href = '/thank-you/';
+      } else {
+        status.textContent = 'Something went wrong. Please try again or use WhatsApp / email.';
+        status.style.color = '#d9480f';
+      }
+    } catch {
+      status.textContent = 'Network error. Please email us at sales@hndingdar.com or message us on WhatsApp.';
+      status.style.color = '#d9480f';
+    }
+  });
+</script>

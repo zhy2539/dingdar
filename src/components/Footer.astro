@@ -9,26 +9,30 @@ interface Props {
 }
 const { lang = 'en', enPath = '/' } = Astro.props;
 const t = lang === 'en' ? null : getT(lang as Lang);
-const l = (key: string) => (t ? t(key) : '');
+const EN_FOOTER: Record<string, string> = {
+  'footer.quickLinks': 'Quick Links',
+  'footer.aboutUs': 'About Us',
+  'footer.products': 'Products',
+  'footer.processes': 'Processes',
+  'footer.news': 'News',
+  'footer.faq': 'FAQ',
+  'footer.resources': 'Resources & Downloads',
+  'footer.requestSample': 'Request a Sample',
+  'footer.contactLink': 'Contact Us',
+  'footer.contactT': 'Get in Touch',
+  'footer.privacy': 'Privacy Policy',
+};
+const l = (key: string) => (t ? t(key) : (EN_FOOTER[key] ?? key));
 const hrefOf = (href: string) => (lang === 'en' ? href : langPath(lang as Lang, href));
 
-const productLinks = [
-  { href: '/products/jaw-crusher-wear-parts/', key: 'p.jaw-crusher-wear-parts.cardTitle' },
-  { href: '/products/cone-crusher-wear-parts/', key: 'p.cone-crusher-wear-parts.cardTitle' },
-  { href: '/products/impact-crusher-wear-parts/', key: 'p.impact-crusher-wear-parts.cardTitle' },
-  { href: '/products/hammer-crusher-wear-parts/', key: 'p.hammer-crusher-wear-parts.cardTitle' },
-  { href: '/products/bucket-teeth-adapters/', key: 'p.bucket-teeth-adapters.cardTitle' },
-  { href: '/products/custom-castings/', key: 'p.custom-castings.cardTitle' },
-  { href: '/about/#oem', key: 'footer.p6' },
-];
-const companyLinks = [
+const quickLinks = [
   { href: '/about/', key: 'footer.aboutUs' },
-  { href: '/about/#compliance', key: 'footer.compliance' },
-  { href: '/resources/', key: 'footer.resources' },
-  { href: '/request-sample/', key: 'footer.requestSample' },
+  { href: '/products/', key: 'footer.products' },
   { href: '/processes/', key: 'footer.processes' },
   { href: '/news/', key: 'footer.news' },
   { href: '/faq/', key: 'footer.faq' },
+  { href: '/resources/', key: 'footer.resources' },
+  { href: '/request-sample/', key: 'footer.requestSample' },
   { href: '/contact/', key: 'footer.contactLink' },
 ];
 ---
@@ -46,27 +50,24 @@ const companyLinks = [
           Crusher wear parts, bucket teeth and custom castings — reviewed as one project,
           from drawing to inspection and delivery.
         </p>
+        <p class="contact-us">
+          {l('footer.contactLink')}: <a href={'mailto:' + SITE.email}>{SITE.email}</a>
+        </p>
+        <div class="social">
+          <a href={'https://wa.me/' + SITE.whatsappTel} aria-label="WhatsApp" title="WhatsApp" rel="noopener">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.74-.86-2-.96-.27-.1-.46-.15-.66.15-.19.3-.76.95-.93 1.15-.17.19-.34.21-.64.07-.3-.15-1.26-.47-2.4-1.48-.89-.79-1.49-1.76-1.66-2.06-.17-.3-.02-.46.13-.6.14-.14.3-.35.45-.53.15-.19.2-.33.3-.55.1-.22.05-.41-.02-.56-.08-.15-.66-1.6-.9-2.19-.24-.57-.48-.5-.66-.5h-.56c-.19 0-.51.07-.78.37-.26.3-1.01.99-1.01 2.41 0 1.42 1.03 2.79 1.18 2.98.15.19 2.03 3.1 4.92 4.35.69.3 1.22.48 1.64.61.69.22 1.31.19 1.81.12.55-.09 1.69-.69 1.93-1.36.24-.67.24-1.24.17-1.36-.07-.12-.27-.19-.57-.34zM12.05 21.5h-.04c-1.64 0-3.25-.44-4.65-1.27l-.33-.2-3.46.9.93-3.37-.22-.34A9.43 9.43 0 0 1 2.6 12c0-5.18 4.22-9.4 9.42-9.4 2.51 0 4.88.98 6.66 2.76a9.35 9.35 0 0 1 2.76 6.67c0 5.18-4.22 9.4-9.39 9.4zm7.9-17.3A11.36 11.36 0 0 0 12.05 0C5.5 0 .15 5.35.15 11.9c0 2.1.55 4.14 1.59 5.95L0 24l6.3-1.65a11.88 11.88 0 0 0 5.75 1.46h.01c6.55 0 11.89-5.35 11.89-11.9 0-3.18-1.24-6.17-3.5-8.42z"/></svg>
+          </a>
+          <a href={'mailto:' + SITE.email} aria-label="Email" title="Email">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm0 3 8 5.5L20 8"/></svg>
+          </a>
+        </div>
       </div>
       <div>
-        <h4>{l('footer.products')}</h4>
+        <h4>{l('footer.quickLinks')}</h4>
         <ul class="links">
-          {productLinks.map((x) => (
+          {quickLinks.map((x) => (
             <li><a href={hrefOf(x.href)}>{l(x.key)}</a></li>
           ))}
-        </ul>
-      </div>
-      <div>
-        <h4>{l('footer.company')}</h4>
-        <ul class="links">
-          {companyLinks.map((x) => (
-            <li><a href={hrefOf(x.href)}>{l(x.key)}</a></li>
-          ))}
-        </ul>
-      </div>
-      <div>
-        <h4>{l('footer.legal')}</h4>
-        <ul class="links">
-          <li><a href={hrefOf('/privacy/')}>{l('footer.privacy')}</a></li>
         </ul>
       </div>
       <div>
@@ -81,7 +82,7 @@ const companyLinks = [
     </div>
     <div class="bottom">
       <span>© {year} {SITE.legalName}. All rights reserved.</span>
-      <span>{SITE.domain}</span>
+      <span class="bottom-links"><a href={hrefOf('/privacy/')}>{l('footer.privacy')}</a><span class="dot">·</span>{SITE.domain}</span>
     </div>
   </div>
 </footer>
@@ -91,4 +92,15 @@ const companyLinks = [
   .footer .brand img { border-radius: 8px; }
   .footer .brand-name { font-weight: 800; color: #fff; font-size: 1.2rem; display: flex; align-items: baseline; gap: 8px; }
   .footer .brand-name span { font-size: 0.66rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); }
+  .footer .contact-us { margin-top: 18px; }
+  .footer .social { display: flex; gap: 10px; margin-top: 16px; }
+  .footer .social a {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 38px; height: 38px; border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.22); color: #c9d6e2;
+    transition: border-color 0.15s, color 0.15s;
+  }
+  .footer .social a:hover { border-color: var(--accent); color: var(--accent); }
+  .footer .bottom-links { display: inline-flex; align-items: center; gap: 8px; }
+  .footer .dot { color: rgba(255,255,255,0.3); }
 </style>

@@ -1,7 +1,7 @@
 // 站点全局配置：公司信息、联系方式、导航、统计
 export const SITE = {
   name: 'DINGDAR',
-  legalName: 'Henan Dingdar Machinery Equipment Manufacture Co., Ltd.',
+  legalName: 'Henan Dingdar Machinery Equipment Manufacture Co., Ltd',
   // 站点正式域名；已绑定 dingdar.com（2026-10-14），DNS/自定义域生效后以正式域访问。
   domain: 'https://dingdar.com',
   tagline: 'Casting manufacturer for mining, quarrying and heavy equipment',

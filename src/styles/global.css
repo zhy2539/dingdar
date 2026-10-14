@@ -279,13 +279,13 @@ h3 { font-size: 1.18rem; }
 .step h3 { font-size: 1.05rem; margin-bottom: 8px; }
 .step p { font-size: 0.92rem; color: var(--muted); }
 
-/* 页脚 */
+/* 页脚（参考三列：品牌 + Quick Links + Get in Touch） */
 .footer { background: var(--navy); color: #9fb0c2; padding: 64px 0 28px; margin-top: 0; }
-.footer h4 { color: #fff; font-size: 0.95rem; margin-bottom: 18px; }
+.footer h4 { color: #fff; font-size: 0.95rem; letter-spacing: 0.04em; margin-bottom: 18px; }
 .footer a { color: #9fb0c2; transition: color 0.15s; }
 .footer a:hover { color: #fff; }
-.footer .cols { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.4fr; gap: 40px; }
-.footer .brand p { margin-top: 14px; font-size: 0.9rem; max-width: 300px; }
+.footer .cols { display: grid; grid-template-columns: 1.7fr 1.1fr 1.2fr; gap: 48px; }
+.footer .brand p { margin-top: 14px; font-size: 0.9rem; max-width: 300px; line-height: 1.65; }
 .footer .links li { margin-bottom: 10px; font-size: 0.92rem; }
 .footer .contact li { margin-bottom: 10px; font-size: 0.92rem; }
 .footer .bottom { border-top: 1px solid rgba(255,255,255,0.1); margin-top: 44px; padding-top: 22px; font-size: 0.83rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }

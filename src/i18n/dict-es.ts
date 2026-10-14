@@ -36,6 +36,7 @@ export const es: Record<string, string> = {
   'nav.6': 'FAQ',
 
   // footer
+  'footer.quickLinks': 'Enlaces rápidos',
   'footer.products': 'Productos',
   'footer.company': 'Empresa',
   'footer.legal': 'Legal',

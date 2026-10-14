@@ -1,0 +1,58 @@
+---
+interface Tab { title: string; text: string; img: string; imgAlt: string; link: string; linkLabel: string }
+interface Props { eyebrow: string; title: string; tabs: Tab[] }
+const { eyebrow, title, tabs } = Astro.props;
+---
+
+<section class="industry-tabs">
+  <div class="container">
+    <div class="sec-head center">
+      <span class="eyebrow">{eyebrow}</span>
+      <h2>{title}</h2>
+    </div>
+  </div>
+  <div class="industry-tabs__stage">
+    {tabs.map((tab, i) => (
+      <div class={"industry-tabs__bg" + (i === 0 ? ' is-active' : '')} aria-hidden="true">
+        <img src={tab.img} alt="" loading="lazy" width="1600" height="900" />
+      </div>
+    ))}
+    <div class="industry-tabs__shade" aria-hidden="true"></div>
+    <div class="container industry-tabs__body">
+      <div class="industry-tabs__tabs" role="tablist" aria-label="Industries">
+        {tabs.map((tab, i) => (
+          <button type="button" role="tab" class={"industry-tabs__tab" + (i === 0 ? ' is-active' : '')} data-tab={i} aria-selected={i === 0}>
+            {tab.title}
+          </button>
+        ))}
+      </div>
+      {tabs.map((tab, i) => (
+        <div class={"industry-tabs__panel" + (i === 0 ? ' is-active' : '')} data-panel={i} role="tabpanel">
+          <h3>{tab.title}</h3>
+          <p>{tab.text}</p>
+          <a href={tab.link} class="btn btn--primary btn--lg">{tab.linkLabel}</a>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  const root = document.querySelector('.industry-tabs');
+  if (root) {
+    const tabs = root.querySelectorAll<HTMLButtonElement>('.industry-tabs__tab');
+    const panels = root.querySelectorAll<HTMLElement>('.industry-tabs__panel');
+    const bgs = root.querySelectorAll<HTMLElement>('.industry-tabs__bg');
+    const activate = (i: number) => {
+      tabs.forEach((t, j) => {
+        t.classList.toggle('is-active', j === i);
+        t.setAttribute('aria-selected', String(j === i));
+      });
+      panels.forEach((p, j) => p.classList.toggle('is-active', j === i));
+      bgs.forEach((b, j) => b.classList.toggle('is-active', j === i));
+    };
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => activate(parseInt(tab.dataset.tab || '0', 10)));
+    });
+  }
+</script>

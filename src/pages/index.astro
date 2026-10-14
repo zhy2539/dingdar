@@ -1,6 +1,9 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
+import FactBar from '../components/FactBar.astro';
+import AboutBand from '../components/AboutBand.astro';
+import IndustryTabs from '../components/IndustryTabs.astro';
 import CtaBand from '../components/CtaBand.astro';
 import FaqList from '../components/FaqList.astro';
 import { CATEGORIES } from '../data/products';
@@ -26,10 +29,10 @@ const faqs = [
 ];
 
 const industries = [
-  { title: 'Mining & Quarrying', text: 'Wear parts for jaw, cone, impact and hammer crushers used across hard rock and aggregate circuits.' },
-  { title: 'Sand & Aggregate Plants', text: 'Crushing and screening wear components with dependable supply for continuous plant operation.' },
-  { title: 'OEM Machine Builders', text: 'Batch and series casting for crusher and construction machinery builders, produced to drawing with stable material and delivery.' },
-  { title: 'Parts Distributors & Traders', text: 'One-stop sourcing of crusher parts, bucket teeth and custom components across multiple references.' },
+  { title: 'Mining & Quarrying', text: 'Wear parts for jaw, cone, impact and hammer crushers used across hard rock and aggregate circuits.', img: '/images/H8bb76d8bdb4e44db9b044002488080b3J.webp', imgAlt: 'Open-pit mining operation loading crushed rock' },
+  { title: 'Sand & Aggregate Plants', text: 'Crushing and screening wear components with dependable supply for continuous plant operation.', img: '/images/H3b8c84a71c2c4e4abf3df732901b8638g.webp', imgAlt: 'Aerial view of a sand and aggregate processing plant' },
+  { title: 'OEM Machine Builders', text: 'Batch and series casting for crusher and construction machinery builders, produced to drawing with stable material and delivery.', img: '/images/factory-mould-line.webp', imgAlt: 'Casting moulds and production line inside the foundry' },
+  { title: 'Parts Distributors & Traders', text: 'One-stop sourcing of crusher parts, bucket teeth and custom components across multiple references.', img: '/images/factory-finished-stock.webp', imgAlt: 'Finished castings and parts stocked in the warehouse' },
 ];
 ---
 
@@ -48,19 +51,8 @@ const industries = [
     ctaSecondary={{ label: 'Request Sample', href: '/request-sample/' }}
   />
 
-  <!-- 资质速览条：满意即可，10 秒过及格线 -->
-  <section class="section" style="padding-top: 0; padding-bottom: 0;">
-    <div class="container">
-      <div class="qual-bar">
-        {QUALIFICATIONS.map((q) => (
-          <div>
-            <div class="q-num">{q.value}</div>
-            <div class="q-lab">{q.label}</div>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
+  <!-- 数据版块：数字随滚动递增（深色） -->
+  <FactBar items={QUALIFICATIONS} />
 
   <section class="section">
     <div class="container">
@@ -83,6 +75,23 @@ const industries = [
       </div>
     </div>
   </section>
+
+  <!-- 企业实力：一体化工厂图文区（深色） -->
+  <AboutBand
+    eyebrow="One integrated foundry"
+    title="One Plant, From Pattern to Inspection"
+    text="Casting, heat treatment, machining and inspection run under one roof — so material, dimensions and release evidence stay under our control from the first melt to the export crate."
+    points={[
+      'Four in-house casting routes: green sand, shell moulding, lost foam and investment casting',
+      'In-house heat treatment, machining and inspection with traceable records',
+      'Since 1986 — 720+ employees and 52 R&D engineers',
+      '180,000 m² production plant',
+    ]}
+    ctaLabel="More about DINGDAR"
+    ctaHref="/about/"
+    img="/images/factory-pouring.webp"
+    imgAlt="Molten metal pouring at the DINGDAR foundry"
+  />
 
   <!-- 异议处理：信息不对称，主动说出买家担心并回答 -->
   <section class="section section--soft">
@@ -210,22 +219,19 @@ const industries = [
     </div>
   </section>
 
-  <section class="section">
-    <div class="container">
-      <div class="sec-head">
-        <span class="eyebrow">Industries we serve</span>
-        <h2>Built for the People Who Run the Plant</h2>
-      </div>
-      <div class="grid grid--4">
-        {industries.map((ind) => (
-          <div class="card card--hover" style="padding:26px 24px;">
-            <h3 style="font-size:1.05rem;margin-bottom:10px;">{ind.title}</h3>
-            <p style="font-size:0.92rem;color:var(--muted);">{ind.text}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
+  <!-- 行业应用：tab 切换背景大图（深色） -->
+  <IndustryTabs
+    eyebrow="Industries we serve"
+    title="Built for the People Who Run the Plant"
+    tabs={industries.map((ind) => ({
+      title: ind.title,
+      text: ind.text,
+      img: ind.img,
+      imgAlt: ind.imgAlt,
+      link: '/products/',
+      linkLabel: 'Explore products',
+    }))}
+  />
 
   <section class="section section--soft">
     <div class="container">

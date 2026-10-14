@@ -1,6 +1,9 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/PageHero.astro';
+import FactBar from '../../components/FactBar.astro';
+import AboutBand from '../../components/AboutBand.astro';
+import IndustryTabs from '../../components/IndustryTabs.astro';
 import CtaBand from '../../components/CtaBand.astro';
 import FaqList from '../../components/FaqList.astro';
 import { CATEGORIES } from '../../data/products';
@@ -25,6 +28,12 @@ const faqs = [
 ];
 
 const industries = [0, 1, 2, 3].map((i) => ({ title: home('ind' + i + '.title'), text: home('ind' + i + '.text') }));
+const industryImgs = [
+  { img: '/images/H8bb76d8bdb4e44db9b044002488080b3J.webp', imgAlt: 'Open-pit mining operation loading crushed rock' },
+  { img: '/images/H3b8c84a71c2c4e4abf3df732901b8638g.webp', imgAlt: 'Aerial view of a sand and aggregate processing plant' },
+  { img: '/images/factory-mould-line.webp', imgAlt: 'Casting moulds and production line inside the foundry' },
+  { img: '/images/factory-finished-stock.webp', imgAlt: 'Finished castings and parts stocked in the warehouse' },
+];
 const steps = [0, 1, 2, 3].map((i) => ({ title: home('h' + i + '.title'), text: home('h' + i + '.text') }));
 ---
 
@@ -45,18 +54,8 @@ const steps = [0, 1, 2, 3].map((i) => ({ title: home('h' + i + '.title'), text: 
     ctaSecondary={{ label: common('requestSample'), href: langHref('/request-sample/') }}
   />
 
-  <section class="section" style="padding-top: 0; padding-bottom: 0;">
-    <div class="container">
-      <div class="qual-bar">
-        {QUALIFICATIONS.map((q, i) => (
-          <div>
-            <div class="q-num">{q.value}</div>
-            <div class="q-lab">{home('qual' + i)}</div>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
+  <!-- 数据版块：数字随滚动递增（深色） -->
+  <FactBar items={QUALIFICATIONS.map((q, i) => ({ value: q.value, label: home('qual' + i) }))} />
 
   <section class="section">
     <div class="container">
@@ -79,6 +78,18 @@ const steps = [0, 1, 2, 3].map((i) => ({ title: home('h' + i + '.title'), text: 
       </div>
     </div>
   </section>
+
+  <!-- 企业实力：一体化工厂图文区（深色） -->
+  <AboutBand
+    eyebrow={home('aboutEyebrow')}
+    title={home('aboutH2')}
+    text={home('aboutP1')}
+    points={[0, 1, 2, 3].map((i) => home('aboutPoint' + i))}
+    ctaLabel={home('aboutCta')}
+    ctaHref={langHref('/about/')}
+    img="/images/factory-pouring.webp"
+    imgAlt="Molten metal pouring at the DINGDAR foundry"
+  />
 
   <section class="section section--soft">
     <div class="container">
@@ -190,22 +201,19 @@ const steps = [0, 1, 2, 3].map((i) => ({ title: home('h' + i + '.title'), text: 
     </div>
   </section>
 
-  <section class="section">
-    <div class="container">
-      <div class="sec-head">
-        <span class="eyebrow">{home('indEyebrow')}</span>
-        <h2>{home('indH2')}</h2>
-      </div>
-      <div class="grid grid--4">
-        {industries.map((ind) => (
-          <div class="card card--hover" style="padding:26px 24px;">
-            <h3 style="font-size:1.05rem;margin-bottom:10px;">{ind.title}</h3>
-            <p style="font-size:0.92rem;color:var(--muted);">{ind.text}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
+  <!-- 行业应用：tab 切换背景大图（深色） -->
+  <IndustryTabs
+    eyebrow={home('indEyebrow')}
+    title={home('indH2')}
+    tabs={industries.map((ind, i) => ({
+      title: ind.title,
+      text: ind.text,
+      img: industryImgs[i].img,
+      imgAlt: industryImgs[i].imgAlt,
+      link: langHref('/products/'),
+      linkLabel: common('explore'),
+    }))}
+  />
 
   <section class="section section--soft">
     <div class="container">

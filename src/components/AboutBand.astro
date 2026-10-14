@@ -1,0 +1,31 @@
+---
+interface Props {
+  eyebrow: string;
+  title: string;
+  text: string;
+  points: string[];
+  ctaLabel: string;
+  ctaHref: string;
+  img: string;
+  imgAlt: string;
+}
+const { eyebrow, title, text, points, ctaLabel, ctaHref, img, imgAlt } = Astro.props;
+---
+
+<section class="about-band">
+  <div class="container about-band__inner">
+    <div class="about-band__media">
+      <img src={img} alt={imgAlt} loading="lazy" width="1200" height="900" />
+      <span class="about-band__badge" aria-hidden="true"></span>
+    </div>
+    <div class="about-band__body">
+      <span class="eyebrow">{eyebrow}</span>
+      <h2>{title}</h2>
+      <p class="about-band__text">{text}</p>
+      <ul class="about-band__points">
+        {points.map((p) => (<li>{p}</li>))}
+      </ul>
+      <a href={ctaHref} class="btn btn--primary">{ctaLabel}</a>
+    </div>
+  </div>
+</section>

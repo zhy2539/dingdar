@@ -23,7 +23,7 @@ const canonical = lang === 'en' ? (path ? `${SITE.domain}${path}` : Astro.url.or
 const ogImage = image ? `${SITE.domain}${image}` : `${SITE.domain}/images/og-default.webp`;
 const htmlLang = HTML_LANGS[lang];
 const ogLocale = OG_LOCALES[lang];
-const hreflang = lang === 'en' ? null : hreflangUrls(enPath);
+const hreflang = hreflangUrls(enPath);
 
 const orgLd = {
   '@context': 'https://schema.org',

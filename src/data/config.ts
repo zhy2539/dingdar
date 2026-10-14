@@ -92,8 +92,6 @@ export const PROCESSES = [
 export const NAV = [
   { href: '/', label: 'Home' },
   { href: '/products/', label: 'Products' },
-  { href: '/oem-casting/', label: 'OEM Casting' },
-  { href: '/certifications/', label: 'Certifications' },
   { href: '/resources/', label: 'Resources' },
   { href: '/news/', label: 'News' },
   { href: '/about/', label: 'About' },

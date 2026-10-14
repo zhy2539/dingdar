@@ -26,7 +26,13 @@ const { eyebrow, title, lead, img, imgAlt, ctaPrimary, ctaSecondary, trust } = A
     <h1>{title}</h1>
     <p class="lead">{lead}</p>
     <div class="cta-row">
-      {ctaPrimary && <a href={ctaPrimary.href} class="btn btn--primary btn--lg">{ctaPrimary.label}</a>}
+      {ctaPrimary && (
+        ctaPrimary.href === '/contact/' ? (
+          <a href="/contact/" class="btn btn--primary btn--lg" data-modal-open>{ctaPrimary.label}</a>
+        ) : (
+          <a href={ctaPrimary.href} class="btn btn--primary btn--lg">{ctaPrimary.label}</a>
+        )
+      )}
       {ctaSecondary && <a href={ctaSecondary.href} class="btn btn--hero-ghost btn--lg">{ctaSecondary.label}</a>}
     </div>
     {trust && (

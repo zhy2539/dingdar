@@ -16,7 +16,13 @@ const { title, text, cta, href = '/contact/', btn = 'primary' } = Astro.props;
         <h2>{title}</h2>
         <p>{text}</p>
       </div>
-      <a href={href} class:list={['btn', btn === 'primary' ? 'btn--primary' : 'btn--light', 'btn--lg']}>{cta}</a>
+      {
+        href === '/contact/' ? (
+          <a href="/contact/" class:list={['btn', btn === 'primary' ? 'btn--primary' : 'btn--light', 'btn--lg']} data-modal-open>{cta}</a>
+        ) : (
+          <a href={href} class:list={['btn', btn === 'primary' ? 'btn--primary' : 'btn--light', 'btn--lg']}>{cta}</a>
+        )
+      }
     </div>
   </div>
 </section>

@@ -7,6 +7,10 @@ export default defineConfig({
   site: 'https://dingdar.com',
   compressHTML: true,
   trailingSlash: 'ignore',
+  redirects: {
+    '/oem-casting': '/about/#oem',
+    '/certifications': '/about/#compliance',
+  },
   integrations: [
     sitemap({
       filter: (page) => !page.includes('/thank-you/'),

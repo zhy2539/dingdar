@@ -317,10 +317,10 @@ h3 { font-size: 1.18rem; }
    首页新版块：数据条 / 企业实力 / 行业 Tabs（对齐参考站节奏）
    ============================================================ */
 .fact-bar { background: linear-gradient(120deg, var(--navy) 0%, #1d3a58 100%); color: #fff; padding: 72px 0; }
-.fact-bar__inner { display: grid; grid-template-columns: repeat(5, 1fr); gap: 24px; }
+.fact-bar__inner { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
 .fact { text-align: center; padding: 8px 12px; border-left: 1px solid rgba(255, 255, 255, 0.12); }
 .fact:first-child { border-left: none; }
-.fact-num { font-family: var(--font-head); font-size: 2.5rem; font-weight: 700; color: #fff; line-height: 1.1; }
+.fact-num { font-family: var(--font-head); font-size: clamp(1.7rem, 2.6vw, 2.3rem); font-weight: 700; color: #fff; line-height: 1.1; white-space: nowrap; }
 .fact-lab { font-size: 0.88rem; color: rgba(255, 255, 255, 0.72); margin-top: 10px; line-height: 1.5; }
 
 .about-band { background: linear-gradient(135deg, #0f1f30 0%, #16324f 100%); color: #dbe4ee; padding: 96px 0; }

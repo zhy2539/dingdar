@@ -96,6 +96,7 @@ export const NAV = [
   { href: '/news/', label: 'News' },
   { href: '/about/', label: 'About' },
   { href: '/faq/', label: 'FAQ' },
+  { href: '/contact/', label: 'Contact' },
 ];
 
 // 首页资质速览条（满意即可：10 秒过及格线）

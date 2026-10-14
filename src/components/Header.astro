@@ -19,7 +19,6 @@ const path = Astro.url.pathname;
       }
     </nav>
     <div class="header-actions">
-      <a href="/contact/" class="btn btn--primary btn--sm">Get a Quote</a>
       <button class="menu-toggle" aria-label="Open menu" data-menu-toggle>
         <span></span><span></span><span></span>
       </button>
@@ -31,31 +30,32 @@ const path = Astro.url.pathname;
         <a href={n.href}>{n.label}</a>
       ))
     }
-    <a href="/contact/" class="btn btn--primary">Get a Quote</a>
   </nav>
 </header>
 
 <style>
-  .site-header { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,0.92); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
-  .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 72px; }
-  .brand { display: flex; align-items: center; gap: 10px; }
-  .brand img { width: 42px; height: 42px; border-radius: 8px; }
-  .brand-name { font-weight: 800; font-size: 1.22rem; letter-spacing: 0.02em; color: var(--ink); display: flex; align-items: baseline; gap: 8px; }
-  .brand-sub { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); }
-  .nav { display: flex; gap: 4px; }
-  .nav a { padding: 9px 14px; border-radius: 8px; font-size: 0.94rem; font-weight: 600; color: var(--ink-2); transition: all 0.15s; }
-  .nav a:hover { color: var(--accent); background: var(--accent-soft); }
-  .nav a.active { color: var(--accent); background: var(--accent-soft); }
-  .header-actions { display: flex; align-items: center; gap: 14px; }
-  .menu-toggle { display: none; background: none; border: none; cursor: pointer; width: 40px; height: 40px; border-radius: 8px; flex-direction: column; align-items: center; justify-content: center; gap: 5px; }
+  .site-header { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,0.94); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+  .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 32px; height: 88px; }
+  .brand { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+  .brand img { width: 46px; height: 46px; border-radius: 8px; }
+  .brand-name { font-weight: 800; font-size: 1.38rem; letter-spacing: 0.02em; color: var(--ink); display: flex; align-items: baseline; gap: 8px; }
+  .brand-sub { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); }
+  .nav { display: flex; gap: 10px; margin-left: auto; }
+  .nav a { position: relative; padding: 12px 16px; font-size: 1.04rem; font-weight: 600; letter-spacing: 0.01em; color: var(--ink-2); transition: color 0.18s; }
+  .nav a::after { content: ''; position: absolute; left: 16px; right: 16px; bottom: 4px; height: 2px; border-radius: 2px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform 0.18s ease; }
+  .nav a:hover { color: var(--accent); }
+  .nav a:hover::after { transform: scaleX(1); }
+  .nav a.active { color: var(--accent); }
+  .nav a.active::after { transform: scaleX(1); }
+  .header-actions { display: flex; align-items: center; }
+  .menu-toggle { display: none; background: none; border: none; cursor: pointer; width: 44px; height: 44px; border-radius: 8px; flex-direction: column; align-items: center; justify-content: center; gap: 5px; }
   .menu-toggle span { width: 22px; height: 2px; background: var(--ink); border-radius: 2px; }
   .mobile-nav { display: none; padding: 12px 24px 24px; border-top: 1px solid var(--line); background: #fff; flex-direction: column; gap: 4px; }
-  .mobile-nav a { padding: 12px 8px; font-weight: 600; color: var(--ink); border-bottom: 1px solid var(--bg-tint); }
+  .mobile-nav a { padding: 14px 8px; font-size: 1.02rem; font-weight: 600; color: var(--ink); border-bottom: 1px solid var(--bg-tint); }
   .mobile-nav.open { display: flex; }
   @media (max-width: 1000px) {
     .nav { display: none; }
     .menu-toggle { display: flex; }
-    .header-actions .btn { display: none; }
   }
 </style>
 

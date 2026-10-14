@@ -92,11 +92,11 @@ export const PROCESSES = [
 export const NAV = [
   { href: '/', label: 'Home' },
   { href: '/products/', label: 'Products' },
-  { href: '/resources/', label: 'Resources' },
+  { href: '/processes/', label: 'Processes' },
   { href: '/news/', label: 'News' },
   { href: '/about/', label: 'About' },
-  { href: '/faq/', label: 'FAQ' },
   { href: '/contact/', label: 'Contact' },
+  { href: '/faq/', label: 'FAQ' },
 ];
 
 // 首页资质速览条（满意即可：10 秒过及格线）

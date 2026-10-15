@@ -593,6 +593,7 @@ export const es: Record<string, string> = {
   'ab.l0.note': 'Registro público de Qichacha — busca el nombre de la empresa o el código de crédito',
   'ab.l1.label': 'Sistema Nacional de Publicidad de Información Crediticia de Empresas',
   'ab.l1.note': 'Registro oficial (gsxt.gov.cn) — busca por nombre de empresa o código de crédito',
+  'ab.refLabel': 'Referencias independientes: ',
   'ab.ctaTitle': 'Trabaja con una empresa de fundición, no con una lista de precios',
   'ab.ctaText': 'Envía tu requisito — plano, muestra o modelo de equipo — y el equipo de proyecto responderá con respuesta técnica en 12–24 horas.',
 
@@ -636,6 +637,9 @@ export const es: Record<string, string> = {
   'pr.row3.best': 'Componentes de precisión, detalle fino',
   'pr.faqEyebrow': 'FAQ de selección',
   'pr.faqH2': 'FAQ de selección de proceso de fundición',
+  'pr.refEyebrow': 'Estándares y referencias',
+  'pr.refTitle': 'Referencias independientes para decisiones de proceso y material',
+  'pr.refLead': 'Los grados de material y las guías de proceso de este sitio hacen referencia a estándares disponibles públicamente. Empieza aquí para lectura independiente:',
   'pr.fq0.q': '¿Cómo elijo un proceso de fundición para mi pieza?',
   'pr.fq0.a':
     'El tamaño de la pieza, la complejidad geométrica, las tolerancias dimensionales, el acabado superficial y el volumen de pedido deciden la ruta. Envía el plano o la muestra con tu aplicación, y la revisión propone el proceso que encaja — no necesitas fijar un proceso antes de la primera conversación.',

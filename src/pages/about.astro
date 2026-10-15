@@ -167,6 +167,12 @@ const moqRows = [
         <p style="font-size:0.84rem;color:var(--muted);margin-top:10px;">
           Standard series are shown as reference families; the exact standard, grade and acceptance criteria for your part are confirmed during the technical review.
         </p>
+        <p style="font-size:0.9rem;margin-top:14px;">
+          <span style="font-weight:700;color:var(--ink);">Independent references: </span>
+          {COMPLIANCE.refs.map((r, i) => (
+            <span>{i > 0 && ' · '}<a href={r.url} target="_blank" rel="noopener nofollow" style="color:var(--accent);font-weight:600;">{r.name}</a></span>
+          ))}
+        </p>
       </div>
 
       <div class="sec-head" style="margin-top:44px;">

@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/PageHero.astro';
 import CtaBand from '../../components/CtaBand.astro';
 import FaqList from '../../components/FaqList.astro';
-import { PROCESSES } from '../../data/config';
+import { PROCESSES, COMPLIANCE } from '../../data/config';
 import { dicts, LANG_CODES, getT, langPath, type Lang } from '../../i18n';
 
 export function getStaticPaths() {
@@ -83,6 +83,24 @@ const faqs = [0, 1, 2, 3].map((i) => ({ q: pr('fq' + i + '.q'), a: pr('fq' + i +
         <h2>{pr('faqH2')}</h2>
       </div>
       <FaqList items={faqs} />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="sec-head">
+        <span class="eyebrow">{pr('refEyebrow')}</span>
+        <h2>{pr('refTitle')}</h2>
+        <p>{pr('refLead')}</p>
+      </div>
+      <div class="grid grid--4" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));">
+        {COMPLIANCE.refs.map((r) => (
+          <a href={r.url} target="_blank" rel="noopener nofollow" class="card card--hover" style="padding:24px 22px;text-decoration:none;">
+            <h3 style="font-size:1.02rem;color:var(--accent);">→ {r.name}</h3>
+            <p style="font-size:0.9rem;color:var(--muted);margin-top:8px;">{r.note}</p>
+          </a>
+        ))}
+      </div>
     </div>
   </section>
 

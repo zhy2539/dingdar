@@ -593,6 +593,7 @@ export const fr: Record<string, string> = {
   'ab.l0.note': 'Registre public Qichacha — recherchez le nom de l\'entreprise ou le code de crédit',
   'ab.l1.label': 'Système national de publicité des informations de crédit des entreprises',
   'ab.l1.note': 'Registre officiel (gsxt.gov.cn) — recherche par nom ou code de crédit',
+  'ab.refLabel': 'Références indépendantes : ',
   'ab.ctaTitle': 'Travaillez avec une entreprise de fonderie, pas une grille de prix',
   'ab.ctaText': 'Envoyez votre exigence — plan, échantillon ou modèle d\'équipement — et l\'équipe projet répondra avec une réponse technique sous 12–24 heures.',
 
@@ -636,6 +637,9 @@ export const fr: Record<string, string> = {
   'pr.row3.best': 'Composants de précision, fin détail',
   'pr.faqEyebrow': 'FAQ de sélection',
   'pr.faqH2': 'FAQ de sélection du procédé de fonderie',
+  'pr.refEyebrow': 'Normes et références',
+  'pr.refTitle': 'Références indépendantes pour les décisions de processus et de matériaux',
+  'pr.refLead': 'Les nuances de matériaux et les guides de processus de ce site font référence à des normes accessibles au public. Commencez ici pour une lecture indépendante :',
   'pr.fq0.q': 'Comment choisir un procédé de fonderie pour ma pièce ?',
   'pr.fq0.a':
     'Taille de pièce, complexité géométrique, tolérances dimensionnelles, état de surface et volume commandent la voie. Envoyez le plan ou l\'échantillon avec votre application, et la revue propose le procédé adapté — vous n\'avez pas à fixer de procédé avant la première conversation.',

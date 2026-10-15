@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import CtaBand from '../components/CtaBand.astro';
 import FaqList from '../components/FaqList.astro';
-import { PROCESSES } from '../data/config';
+import { PROCESSES, COMPLIANCE } from '../data/config';
 
 const compare = [
   { name: 'Green Sand Casting', size: 'Small to very large', accuracy: 'Standard', surface: 'Standard', volume: 'Medium to high', best: 'Large wear parts, structural castings' },
@@ -74,6 +74,24 @@ const faqs = [
         <h2>Casting Process Selection FAQ</h2>
       </div>
       <FaqList items={faqs} />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="sec-head">
+        <span class="eyebrow">Standards &amp; references</span>
+        <h2>Independent References for Process and Material Decisions</h2>
+        <p>Material grades and process guidance on this site reference publicly available standards. Start here for independent reading:</p>
+      </div>
+      <div class="grid grid--4" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));">
+        {COMPLIANCE.refs.map((r) => (
+          <a href={r.url} target="_blank" rel="noopener nofollow" class="card card--hover" style="padding:24px 22px;text-decoration:none;">
+            <h3 style="font-size:1.02rem;color:var(--accent);">→ {r.name}</h3>
+            <p style="font-size:0.9rem;color:var(--muted);margin-top:8px;">{r.note}</p>
+          </a>
+        ))}
+      </div>
     </div>
   </section>
 

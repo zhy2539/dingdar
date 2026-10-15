@@ -164,6 +164,12 @@ const capCards = CAPABILITY_STATS.map((s, i) => ({ value: s.value, label: ab('ca
           </tbody>
         </table>
         <p style="font-size:0.84rem;color:var(--muted);margin-top:10px;">{ab('matNote')}</p>
+        <p style="font-size:0.9rem;margin-top:14px;">
+          <span style="font-weight:700;color:var(--ink);">{ab('refLabel')} </span>
+          {COMPLIANCE.refs.map((r, i) => (
+            <span>{i > 0 && ' · '}<a href={r.url} target="_blank" rel="noopener nofollow" style="color:var(--accent);font-weight:600;">{r.name}</a></span>
+          ))}
+        </p>
       </div>
 
       <div class="sec-head" style="margin-top:44px;">

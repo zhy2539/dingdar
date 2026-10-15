@@ -587,6 +587,7 @@ export const pt: Record<string, string> = {
   'ab.l0.note': 'Registro público Qichacha — busque pelo nome da empresa ou código de crédito',
   'ab.l1.label': 'Sistema Nacional de Publicidade de Informações de Crédito de Empresas',
   'ab.l1.note': 'Registro oficial (gsxt.gov.cn) — busca por nome ou código de crédito',
+  'ab.refLabel': 'Referências independentes: ',
   'ab.ctaTitle': 'Trabalhe com uma empresa de fundição, não com uma grade de preços',
   'ab.ctaText': 'Envie sua exigência — desenho, amostra ou modelo de equipamento — e a equipe de projeto responderá com uma resposta técnica em 12–24 horas.',
 
@@ -630,6 +631,9 @@ export const pt: Record<string, string> = {
   'pr.row3.best': 'Componentes de precisão, detalhes finos',
   'pr.faqEyebrow': 'FAQ de seleção',
   'pr.faqH2': 'FAQ de seleção de processo de fundição',
+  'pr.refEyebrow': 'Padrões e referências',
+  'pr.refTitle': 'Referências independentes para decisões de processo e material',
+  'pr.refLead': 'Os graus de material e os guias de processo neste site referenciam padrões disponíveis publicamente. Comece aqui para leitura independente:',
   'pr.fq0.q': 'Como escolher um processo de fundição para minha peça?',
   'pr.fq0.a':
     'Tamanho da peça, complexidade geométrica, tolerâncias dimensionais, acabamento superficial e volume determinam a rota. Envie o desenho ou amostra com sua aplicação, e a revisão propõe o processo adequado — você não precisa fixar um processo antes da primeira conversa.',

@@ -154,6 +154,12 @@ export const COMPLIANCE = {
     { label: 'Check registration in the public registry', url: 'https://m.qcc.com/firm/7b73b25159683b57cc46a23e613071a8.html', note: 'Qichacha public record — search the company name or credit code' },
     { label: 'National Enterprise Credit Information Publicity System', url: 'https://www.gsxt.gov.cn', note: 'Official registry (gsxt.gov.cn) — search by company name or credit code' },
   ],
+  refs: [
+    { name: 'ASTM International', url: 'https://www.astm.org', note: 'Material standards, including the high-manganese steel series (ASTM A128)' },
+    { name: 'ISO', url: 'https://www.iso.org', note: 'International standards, including quality management systems (ISO 9001)' },
+    { name: 'American Foundry Society', url: 'https://www.afsinc.org', note: 'Casting process and metallurgy resources' },
+    { name: 'MatWeb', url: 'https://www.matweb.com', note: 'Free material property database' },
+  ],
   note: 'Certificates, test reports and compliance documents are provided with the order as agreed. Current certification scope is confirmed during the technical review — tell us the standard your project requires.',
 };
 

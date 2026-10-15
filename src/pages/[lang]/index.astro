@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/PageHero.astro';
-import FactBar from '../../components/FactBar.astro';
 import AboutBand from '../../components/AboutBand.astro';
 import IndustryTabs from '../../components/IndustryTabs.astro';
 import CtaBand from '../../components/CtaBand.astro';
@@ -53,10 +52,10 @@ const steps = [0, 1, 2, 3].map((i) => ({ title: home('h' + i + '.title'), text: 
     imgAlt="DINGDAR foundry team with a large cast gear ring"
     ctaPrimary={{ label: common('getQuote'), href: langHref('/contact/') }}
     ctaSecondary={{ label: common('requestSample'), href: langHref('/request-sample/') }}
+    stats={QUALIFICATIONS.map((q, i) => ({ value: q.value, label: home('qual' + i) }))}
   />
 
-  <!-- 数据版块：数字随滚动递增（深色） -->
-  <FactBar items={QUALIFICATIONS.map((q, i) => ({ value: q.value, label: home('qual' + i) }))} />
+  <!-- 首页首屏数据已并入 hero 底部（hero-stats），无需单独版块 -->
 
   <section class="section">
     <div class="container">

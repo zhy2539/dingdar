@@ -7,34 +7,34 @@ interface Props {
 }
 
 const {
-  eyebrow = 'Trusted Compatibility & OEM Support',
-  title = 'Compatible with Leading Equipment & Crusher Brands',
-  subtitle = 'Precision wear parts, bucket teeth and custom castings engineered for industry-standard machinery and crushing circuits worldwide.',
-  disclaimer = '* All manufacturer logos, brand names and model designations are used for reference and compatibility purposes only.',
+  eyebrow = 'OEM & Aftermarket Compatibility',
+  title = 'Engineered for Leading Machinery & Crushing Brands',
+  subtitle = 'High-precision replacement wear parts, manganese castings, and bucket teeth engineered to match industry OEM specifications.',
+  disclaimer = '* All brand names, logos, and model references are used solely for identification and compatibility matching. Dingdar produces high-grade aftermarket & OEM replacement parts.',
 } = Astro.props;
 
 const BRANDS = [
-  { name: 'CATERPILLAR', zh: '卡特彼勒', logo: '/images/logos/caterpillar.webp', cat: 'Excavator & Mining' },
-  { name: 'KOMATSU', zh: '小松', logo: '/images/logos/komatsu.webp', cat: 'Excavators & Loaders' },
-  { name: 'LIEBHERR', zh: '利勃海尔', logo: '/images/logos/liebherr.webp', cat: 'Heavy Machinery' },
-  { name: 'DOOSAN', zh: '斗山重工', logo: '/images/logos/doosan.webp', cat: 'Excavator Parts' },
-  { name: 'SANY', zh: '三一重工', logo: '/images/logos/sany.webp', cat: 'Excavator & Mining' },
-  { name: 'XCMG', zh: '徐工集团', logo: '/images/logos/xcmg.webp', cat: 'Loaders & Fleet' },
-  { name: 'LIUGONG', zh: '柳工', logo: '/images/logos/liugong.webp', cat: 'Wheel Loaders' },
-  { name: 'SDLG', zh: '山东临工', logo: '/images/logos/sdlg.webp', cat: 'Loaders & Excavators' },
-  { name: 'LONKING', zh: '龙工', logo: '/images/logos/lonking.webp', cat: 'Earthmoving Fleet' },
-  { name: 'XGMA', zh: '厦工', logo: '/images/logos/xgma.webp', cat: 'Loaders & Plant' },
-  { name: 'YUTONG', zh: '宇通重工', logo: '/images/logos/yutong.webp', cat: 'Heavy Plant' },
-  { name: 'SBM', zh: '世邦集团', logo: '/images/logos/sbm.webp', cat: 'Crusher & Grinding' },
-  { name: 'LIMING', zh: '黎明重工', logo: '/images/logos/liming.webp', cat: 'Crushing & Screening' },
-  { name: 'SHANBAO', zh: '山宝', logo: '/images/logos/shanbao.webp', cat: 'Jaw & Cone Crushers' },
-  { name: 'CITIC HEAVY', zh: '中信重工', logo: '/images/logos/citic-heavy.webp', cat: 'Heavy Casting & Mills' },
-  { name: 'CREC', zh: '中国中铁', logo: '/images/logos/crec.webp', cat: 'Infrastructure Fleet' },
-  { name: 'HUAZN', zh: '华重', logo: '/images/logos/huazn.webp', cat: 'Mining Machinery' },
-  { name: 'YTO', zh: '中国一拖', logo: '/images/logos/yto.webp', cat: 'Heavy Fleet' },
-  { name: 'SAIC HONGYAN', zh: '上汽红岩', logo: '/images/logos/saic-hongyan.webp', cat: 'Commercial Vehicles' },
-  { name: 'SHACMAN', zh: '陕汽商用车', logo: '/images/logos/shacman.webp', cat: 'Commercial Fleet' },
-  { name: 'BYD', zh: '比亚迪汽车', logo: '/images/logos/byd.webp', cat: 'Industrial & Auto' },
+  { name: 'CATERPILLAR', zh: '卡特彼勒', logo: '/images/logos/caterpillar.webp', type: 'Mining & Excavation' },
+  { name: 'KOMATSU', zh: '小松', logo: '/images/logos/komatsu.webp', type: 'Excavators & Fleet' },
+  { name: 'LIEBHERR', zh: '利勃海尔', logo: '/images/logos/liebherr.webp', type: 'Heavy Equipment' },
+  { name: 'DOOSAN', zh: '斗山重工', logo: '/images/logos/doosan.webp', type: 'Excavator Systems' },
+  { name: 'SANY', zh: '三一重工', logo: '/images/logos/sany.webp', type: 'Excavator & Mining' },
+  { name: 'XCMG', zh: '徐工集团', logo: '/images/logos/xcmg.webp', type: 'Loaders & Fleet' },
+  { name: 'LIUGONG', zh: '柳工', logo: '/images/logos/liugong.webp', type: 'Wheel Loaders' },
+  { name: 'SDLG', zh: '山东临工', logo: '/images/logos/sdlg.webp', type: 'Loaders & Diggers' },
+  { name: 'LONKING', zh: '龙工', logo: '/images/logos/lonking.webp', type: 'Earthmoving Fleet' },
+  { name: 'XGMA', zh: '厦工', logo: '/images/logos/xgma.webp', type: 'Plant & Loaders' },
+  { name: 'YUTONG', zh: '宇通重工', logo: '/images/logos/yutong.webp', type: 'Heavy Plant' },
+  { name: 'SBM', zh: '世邦集团', logo: '/images/logos/sbm.webp', type: 'Crushers & Grinding' },
+  { name: 'LIMING', zh: '黎明重工', logo: '/images/logos/liming.webp', type: 'Crushing Circuits' },
+  { name: 'SHANBAO', zh: '山宝', logo: '/images/logos/shanbao.webp', type: 'Jaw & Cone Crushers' },
+  { name: 'CITIC HEAVY', zh: '中信重工', logo: '/images/logos/citic-heavy.webp', type: 'Heavy Castings & Mills' },
+  { name: 'CREC', zh: '中国中铁', logo: '/images/logos/crec.webp', type: 'Infrastructure Fleet' },
+  { name: 'HUAZN', zh: '华重', logo: '/images/logos/huazn.webp', type: 'Mining Equipment' },
+  { name: 'YTO', zh: '中国一拖', logo: '/images/logos/yto.webp', type: 'Tractors & Plant' },
+  { name: 'SAIC HONGYAN', zh: '上汽红岩', logo: '/images/logos/saic-hongyan.webp', type: 'Heavy Trucks' },
+  { name: 'SHACMAN', zh: '陕汽商用车', logo: '/images/logos/shacman.webp', type: 'Commercial Fleet' },
+  { name: 'BYD', zh: '比亚迪汽车', logo: '/images/logos/byd.webp', type: 'Industrial & Auto' },
 ];
 ---
 
@@ -49,17 +49,28 @@ const BRANDS = [
     <div class="brand-grid">
       {BRANDS.map((b) => (
         <div class="brand-card">
-          <div class="logo-box">
-            <img src={b.logo} alt={`${b.name} ${b.zh} logo`} loading="lazy" width="160" height="75" />
+          <div class="logo-wrapper">
+            <img 
+              src={b.logo} 
+              alt={`${b.name} compatible parts`} 
+              loading="lazy" 
+              width="240" 
+              height="110" 
+            />
           </div>
-          <span class="brand-tag">{b.cat}</span>
+          <div class="brand-info">
+            <span class="brand-name">{b.name}</span>
+            <span class="brand-tag">{b.type}</span>
+          </div>
         </div>
       ))}
     </div>
 
-    <p class="brand-disclaimer center">
-      {disclaimer}
-    </p>
+    <div class="disclaimer-wrap center">
+      <p class="brand-disclaimer">
+        {disclaimer}
+      </p>
+    </div>
   </div>
 </section>
 
@@ -68,94 +79,117 @@ const BRANDS = [
     background: #f8fafc;
     border-top: 1px solid #e2e8f0;
     border-bottom: 1px solid #e2e8f0;
-    padding: 64px 0;
+    padding: 72px 0;
   }
   .brand-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 14px;
-    margin-top: 36px;
+    gap: 16px;
+    margin-top: 40px;
   }
   @media (max-width: 1200px) {
     .brand-grid {
       grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+    }
+  }
+  @media (max-width: 960px) {
+    .brand-grid {
+      grid-template-columns: repeat(4, 1fr);
       gap: 12px;
     }
   }
-  @media (max-width: 900px) {
+  @media (max-width: 640px) {
     .brand-grid {
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 10px;
     }
   }
-  @media (max-width: 600px) {
+  @media (max-width: 420px) {
     .brand-grid {
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 8px;
     }
   }
-  @media (max-width: 400px) {
-    .brand-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
+
   .brand-card {
     background: #ffffff;
     border: 1px solid #e2e8f0;
-    border-radius: 8px;
+    border-radius: 10px;
     padding: 12px 10px 10px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     align-items: center;
-    text-align: center;
-    min-height: 96px;
-    transition: all 0.25s ease;
-    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);
+    justify-content: space-between;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+    min-height: 112px;
   }
   .brand-card:hover {
     border-color: #cbd5e1;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(15, 23, 42, 0.08);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px -3px rgba(15, 23, 42, 0.08), 0 4px 6px -2px rgba(15, 23, 42, 0.02);
   }
-  .logo-box {
+
+  .logo-wrapper {
     width: 100%;
-    height: 52px;
+    height: 54px;
     display: flex;
     align-items: center;
     justify-content: center;
+    background: #ffffff;
+    border-radius: 6px;
     overflow: hidden;
   }
-  .logo-box img {
+  .logo-wrapper img {
     max-width: 100%;
     max-height: 100%;
     width: auto;
     height: auto;
     object-fit: contain;
-    filter: grayscale(12%);
-    opacity: 0.95;
-    transition: filter 0.2s ease, opacity 0.2s ease;
+    transition: transform 0.2s ease;
   }
-  .brand-card:hover .logo-box img {
-    filter: grayscale(0%);
-    opacity: 1;
+  .brand-card:hover .logo-wrapper img {
+    transform: scale(1.04);
   }
-  .brand-tag {
-    font-size: 0.65rem;
-    color: #64748b;
-    background: #f1f5f9;
-    padding: 2px 6px;
-    border-radius: 4px;
+
+  .brand-info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin-top: 6px;
+    padding-top: 6px;
+    border-top: 1px solid #f1f5f9;
+  }
+  .brand-name {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #334155;
+    letter-spacing: 0.02em;
     white-space: nowrap;
-    max-width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
+    max-width: 100%;
+  }
+  .brand-tag {
+    font-size: 0.62rem;
+    color: #64748b;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    margin-top: 1px;
+  }
+
+  .disclaimer-wrap {
+    margin-top: 28px;
   }
   .brand-disclaimer {
-    margin-top: 24px;
-    font-size: 0.78rem;
+    font-size: 0.76rem;
     color: #94a3b8;
+    max-width: 820px;
+    margin: 0 auto;
     line-height: 1.5;
   }
 </style>

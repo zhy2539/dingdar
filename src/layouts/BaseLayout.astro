@@ -103,7 +103,14 @@ const ld = noindex ? jsonLd : [orgLd, ...(Array.isArray(jsonLd) ? jsonLd : jsonL
     </noscript>
 
     {preloadImages.map((p) => (
-      <link rel="preload" as="image" href={p} fetchpriority="high" />
+      p.endsWith('.webp') ? (
+        <>
+          <link rel="preload" as="image" href={p.replace('.webp', '-mobile.webp')} media="(max-width: 768px)" fetchpriority="high" />
+          <link rel="preload" as="image" href={p} media="(min-width: 769px)" fetchpriority="high" />
+        </>
+      ) : (
+        <link rel="preload" as="image" href={p} fetchpriority="high" />
+      )
     ))}
 
     <script type="application/ld+json" set:html={JSON.stringify(ld)} />

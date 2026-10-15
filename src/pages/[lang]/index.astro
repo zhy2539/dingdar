@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/PageHero.astro';
 import AboutBand from '../../components/AboutBand.astro';
 import IndustryTabs from '../../components/IndustryTabs.astro';
+import BrandTrustBand from '../../components/BrandTrustBand.astro';
 import CtaBand from '../../components/CtaBand.astro';
 import FaqList from '../../components/FaqList.astro';
 import { CATEGORIES } from '../../data/products';
@@ -153,6 +154,9 @@ const steps = [0, 1, 2, 3].map((i) => ({ title: home('h' + i + '.title'), text: 
       </p>
     </div>
   </section>
+
+  <!-- 品牌信任与设备兼容矩阵 -->
+  <BrandTrustBand />
 
   <section class="section">
     <div class="container">

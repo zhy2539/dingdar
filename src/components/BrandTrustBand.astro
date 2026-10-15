@@ -1,0 +1,142 @@
+---
+interface Props {
+  eyebrow?: string;
+  title?: string;
+  subtitle?: string;
+  disclaimer?: string;
+}
+
+const {
+  eyebrow = 'Trusted Compatibility & OEM Support',
+  title = 'Compatible with Leading Equipment & Crusher Brands',
+  subtitle = 'Precision wear parts, bucket teeth and custom castings engineered for industry-standard machinery and crushing circuits worldwide.',
+  disclaimer = '* All brand names, trademarks, and model references are property of their respective owners and used solely for identification and compatibility reference.',
+} = Astro.props;
+
+const BRANDS = [
+  { name: 'CATERPILLAR', zh: '卡特彼勒', cat: 'Excavator & Mining', accent: '#f59e0b' },
+  { name: 'KOMATSU', zh: '小松', cat: 'Excavators & Loaders', accent: '#2563eb' },
+  { name: 'LIEBHERR', zh: '利勃海尔', cat: 'Heavy Machinery', accent: '#1e293b' },
+  { name: 'DOOSAN', zh: '斗山重工', cat: 'Excavator Parts', accent: '#0284c7' },
+  { name: 'SANY', zh: '三一重工', cat: 'Excavator & Mining', accent: '#dc2626' },
+  { name: 'XCMG', zh: '徐工集团', cat: 'Loaders & Heavy Fleet', accent: '#0284c7' },
+  { name: 'LIUGONG', zh: '柳工', cat: 'Wheel Loaders & Diggers', accent: '#2563eb' },
+  { name: 'SDLG', zh: '山东临工', cat: 'Loaders & Excavators', accent: '#dc2626' },
+  { name: 'LONKING', zh: '龙工', cat: 'Earthmoving Fleet', accent: '#ea580c' },
+  { name: 'XGMA', zh: '厦工', cat: 'Loaders & Plant', accent: '#2563eb' },
+  { name: 'YUTONG', zh: '宇通重工', cat: 'Mining & Heavy Plant', accent: '#0284c7' },
+  { name: 'SBM', zh: '世邦集团', cat: 'Crusher & Grinding', accent: '#1d4ed8' },
+  { name: 'LIMING', zh: '黎明重工', cat: 'Crushing & Screening', accent: '#dc2626' },
+  { name: 'SHANBAO', zh: '山宝', cat: 'Jaw & Cone Crushers', accent: '#dc2626' },
+  { name: 'CITIC HEAVY', zh: '中信重工', cat: 'Heavy Casting & Mills', accent: '#991b1b' },
+  { name: 'CREC', zh: '中国中铁', cat: 'Infrastructure Fleet', accent: '#0284c7' },
+  { name: 'HUAZN', zh: '华重', cat: 'Mining Machinery', accent: '#2563eb' },
+  { name: 'YTO', zh: '中国一拖', cat: 'Heavy Tractors & Fleet', accent: '#dc2626' },
+];
+---
+
+<section class="section brand-trust-section">
+  <div class="container">
+    <div class="sec-head center">
+      <span class="eyebrow">{eyebrow}</span>
+      <h2>{title}</h2>
+      <p>{subtitle}</p>
+    </div>
+
+    <div class="brand-grid">
+      {BRANDS.map((b) => (
+        <div class="brand-card">
+          <div class="brand-main">
+            <span class="brand-name">{b.name}</span>
+            <span class="brand-zh">{b.zh}</span>
+          </div>
+          <span class="brand-tag">{b.cat}</span>
+        </div>
+      ))}
+    </div>
+
+    <p class="brand-disclaimer center">
+      {disclaimer}
+    </p>
+  </div>
+</section>
+
+<style>
+  .brand-trust-section {
+    background: #fbfcfe;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 64px 0;
+  }
+  .brand-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 14px;
+    margin-top: 36px;
+  }
+  @media (max-width: 1024px) {
+    .brand-grid {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+  }
+  @media (max-width: 640px) {
+    .brand-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+  }
+  .brand-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 16px 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    min-height: 84px;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+  }
+  .brand-card:hover {
+    border-color: #cbd5e1;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(15, 23, 42, 0.08);
+  }
+  .brand-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+  }
+  .brand-name {
+    font-family: 'Inter', -apple-system, sans-serif;
+    font-size: 0.96rem;
+    font-weight: 800;
+    letter-spacing: 0.03em;
+    color: #1e293b;
+    line-height: 1.2;
+  }
+  .brand-zh {
+    font-size: 0.72rem;
+    color: #64748b;
+    font-weight: 500;
+  }
+  .brand-tag {
+    font-size: 0.68rem;
+    color: #94a3b8;
+    background: #f1f5f9;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-top: 8px;
+    white-space: nowrap;
+  }
+  .brand-disclaimer {
+    margin-top: 24px;
+    font-size: 0.78rem;
+    color: #94a3b8;
+    line-height: 1.5;
+  }
+</style>

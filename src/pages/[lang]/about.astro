@@ -2,7 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/PageHero.astro';
 import CtaBand from '../../components/CtaBand.astro';
-import { CAPABILITY_STATS, STATS, COMPLIANCE, OEM_STEPS, OEM_CUSTOMIZABLE } from '../../data/config';
+import { CAPABILITY_STATS, COMPLIANCE, OEM_STEPS, OEM_CUSTOMIZABLE } from '../../data/config';
 import { dicts, LANG_CODES, getT, langPath, type Lang } from '../../i18n';
 
 export function getStaticPaths() {
@@ -36,16 +36,6 @@ const capCards = CAPABILITY_STATS.map((s, i) => ({ value: s.value, label: ab('ca
     imgAlt="Molten metal pouring in the DINGDAR foundry"
     ctaPrimary={{ label: common('contactUs'), href: langHref('/contact/') }}
   />
-
-  <section class="section" style="padding-top:0;">
-    <div class="container">
-      <div class="stats">
-        {STATS.map((s, i) => (
-          <div><div class="num">{s.value}</div><div class="lab">{t('home.qual' + i)}</div></div>
-        ))}
-      </div>
-    </div>
-  </section>
 
   <section class="section">
     <div class="container">

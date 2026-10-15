@@ -15,7 +15,7 @@ const { eyebrow, title, lead, img, imgAlt, ctaPrimary, ctaSecondary, trust } = A
 <section class="hero">
   <div class="hero-bg">
     {img ? (
-      <img src={img} alt={imgAlt || title} />
+      <img src={img} alt={imgAlt || title} loading="eager" fetchpriority="high" decoding="async" />
     ) : (
       <div class="hero-bg-fallback" aria-hidden="true"></div>
     )}

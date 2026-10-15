@@ -43,6 +43,7 @@ const steps = [0, 1, 2, 3].map((i) => ({ title: home('h' + i + '.title'), text: 
   path={langPath(lang as Lang, '/')}
   lang={lang}
   enPath="/"
+  preloadImages={['/images/H62bf48ffa42e4eba99efa99b67123d8bN.webp']}
 >
   <PageHero
     eyebrow={home('heroEyebrow')}
@@ -87,7 +88,7 @@ const steps = [0, 1, 2, 3].map((i) => ({ title: home('h' + i + '.title'), text: 
     points={[0, 1, 2, 3].map((i) => home('aboutPoint' + i))}
     ctaLabel={home('aboutCta')}
     ctaHref={langHref('/about/')}
-    img="/images/factory-pouring.webp"
+    img="/images/foundry-pouring.webp"
     imgAlt="Molten metal pouring at the DINGDAR foundry"
   />
 

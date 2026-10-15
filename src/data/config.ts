@@ -14,6 +14,9 @@ export const SITE = {
   qualityEmail: 'hugo@dingdar.com',
   whatsapp: '+86 19337861987',
   whatsappTel: '+8619337861987',
+  // WhatsApp 点击预填文本：客户点开 wa.me 链接时消息框自带该问候，业务员可据此识别询盘来自网站。
+  // 如需按页面/产品区分来源，可在此按场景扩展（当前统一文本，GA4 已可区分来源页面）。
+  waText: 'Hello DINGDAR, I found your website and would like to ask about your cast wear parts. Please share more details.',
   responsePromise: 'Technical feedback within 12–24 hours',
   // 询盘表单端点：留空时页面展示直达联系方式（邮件/WhatsApp）。
   // 上线前填入 Formspree 端点（如 https://formspree.io/f/xxxx）或自有 Worker 端点。

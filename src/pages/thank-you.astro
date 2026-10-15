@@ -34,7 +34,7 @@ import { SITE } from '../data/config';
       </div>
       <div class="cta-row" style="display:flex;gap:14px;justify-content:center;margin-top:32px;flex-wrap:wrap;">
         <a href="/" class="btn btn--ghost">Back to Home</a>
-        <a href={'https://wa.me/' + SITE.whatsappTel} class="btn btn--primary">Message Us on WhatsApp</a>
+        <a href={'https://wa.me/' + SITE.whatsappTel + '?text=' + encodeURIComponent(SITE.waText)} class="btn btn--primary">Message Us on WhatsApp</a>
       </div>
     </div>
   </section>

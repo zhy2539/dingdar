@@ -112,7 +112,7 @@ gtag('config', '${SITE.gaId}');`} />
     <ModalContact lang={lang} />
 
     <a
-      href={'https://wa.me/' + SITE.whatsappTel}
+      href={'https://wa.me/' + SITE.whatsappTel + '?text=' + encodeURIComponent(SITE.waText)}
       class="wa-float"
       target="_blank"
       rel="noopener"

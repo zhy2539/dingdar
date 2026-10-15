@@ -40,7 +40,7 @@ const items = ['ct.h0', 'ct.h1', 'ct.h2', 'ct.h3'].map((k) => t(k));
       </div>
       <div class="cta-row" style="display:flex;gap:14px;justify-content:center;margin-top:32px;flex-wrap:wrap;">
         <a href={langHref('/')} class="btn btn--ghost">{t('nav.0')}</a>
-        <a href={'https://wa.me/' + SITE.whatsappTel} class="btn btn--primary">{common('whatsappUs')}</a>
+        <a href={'https://wa.me/' + SITE.whatsappTel + '?text=' + encodeURIComponent(SITE.waText)} class="btn btn--primary">{common('whatsappUs')}</a>
       </div>
     </div>
   </section>

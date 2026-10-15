@@ -295,7 +295,7 @@ const dlFields = [
           <div class="card" style="padding:30px 28px;">
             <h3 style="font-size:1.15rem;margin-bottom:16px;">Prefer to talk first?</h3>
             <ul class="contact-list">
-              <li><span class="k">WhatsApp</span><a href={'https://wa.me/' + SITE.whatsappTel}>{SITE.whatsapp}</a></li>
+              <li><span class="k">WhatsApp</span><a href={'https://wa.me/' + SITE.whatsappTel + '?text=' + encodeURIComponent(SITE.waText)}>{SITE.whatsapp}</a></li>
               <li><span class="k">Sales</span><a href={'mailto:' + SITE.email}>{SITE.email}</a></li>
             </ul>
           </div>

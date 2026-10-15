@@ -35,7 +35,7 @@ const fields = [
     img="/images/factory-finished-stock.webp"
     imgAlt="Finished castings and parts stocked for export"
     ctaPrimary={{ label: 'Send Inquiry', href: '#inquiry-form' }}
-    ctaSecondary={{ label: 'WhatsApp Us', href: 'https://wa.me/' + SITE.whatsappTel }}
+    ctaSecondary={{ label: 'WhatsApp Us', href: 'https://wa.me/' + SITE.whatsappTel + '?text=' + encodeURIComponent(SITE.waText) }}
   />
 
   <section class="section section--soft">
@@ -103,7 +103,7 @@ const fields = [
           <div class="card" style="padding: 30px 28px; margin-bottom: 24px;">
             <h3 style="font-size:1.15rem;margin-bottom:16px;">Prefer to contact us directly?</h3>
             <ul class="contact-list">
-              <li><span class="k">WhatsApp</span><a href={'https://wa.me/' + SITE.whatsappTel}>{SITE.whatsapp}</a></li>
+              <li><span class="k">WhatsApp</span><a href={'https://wa.me/' + SITE.whatsappTel + '?text=' + encodeURIComponent(SITE.waText)}>{SITE.whatsapp}</a></li>
               <li><span class="k">Sales</span><a href={'mailto:' + SITE.email}>{SITE.email}</a></li>
               <li><span class="k">Engineering</span><a href={'mailto:' + SITE.engineeringEmail}>{SITE.engineeringEmail}</a></li>
               <li><span class="k">Quality</span><a href={'mailto:' + SITE.qualityEmail}>{SITE.qualityEmail}</a></li>
@@ -158,7 +158,7 @@ const fields = [
     }
     if (!endpoint) {
       // 端点未配置：给出直达联系方式，避免静默丢单
-      status.innerHTML = 'The form endpoint is not configured yet. Please contact us directly: <a href="mailto:hugo@dingdar.com" style="color:#e8590c;font-weight:700;">hugo@dingdar.com</a> or <a href="https://wa.me/8619337861987" style="color:#e8590c;font-weight:700;">WhatsApp</a>.';
+      status.innerHTML = 'The form endpoint is not configured yet. Please contact us directly: <a href="mailto:hugo@dingdar.com" style="color:#e8590c;font-weight:700;">hugo@dingdar.com</a> or <a href="https://wa.me/8619337861987?text=Hello%20DINGDAR%2C%20I%20found%20your%20website%20and%20would%20like%20to%20ask%20about%20your%20cast%20wear%20parts.%20Please%20share%20more%20details." style="color:#e8590c;font-weight:700;">WhatsApp</a>.';
       return;
     }
     try {

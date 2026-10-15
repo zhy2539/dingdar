@@ -3,6 +3,7 @@ interface Props {
   eyebrow: string;
   title: string;
   lead: string;
+  lead2?: string;
   img?: string;
   imgAlt?: string;
   ctaPrimary?: { label: string; href: string };
@@ -10,7 +11,7 @@ interface Props {
   trust?: string[];
   stats?: { value: string; label: string }[];
 }
-const { eyebrow, title, lead, img, imgAlt, ctaPrimary, ctaSecondary, trust, stats } = Astro.props;
+const { eyebrow, title, lead, lead2, img, imgAlt, ctaPrimary, ctaSecondary, trust, stats } = Astro.props;
 ---
 
 <section class={'hero' + (stats && stats.length ? ' hero--stats' : '')}>
@@ -26,6 +27,7 @@ const { eyebrow, title, lead, img, imgAlt, ctaPrimary, ctaSecondary, trust, stat
     <span class="eyebrow">{eyebrow}</span>
     <h1>{title}</h1>
     <p class="lead">{lead}</p>
+    {lead2 && <p class="lead lead--sub">{lead2}</p>}
     <div class="cta-row">
       {ctaPrimary && (
         ctaPrimary.href.endsWith('/contact/') ? (
@@ -102,6 +104,13 @@ const { eyebrow, title, lead, img, imgAlt, ctaPrimary, ctaSecondary, trust, stat
     line-height: 1.75;
     color: rgba(255, 255, 255, 0.94);
     text-shadow: 0 1px 10px rgba(6, 14, 22, 0.4);
+  }
+  .hero .lead--sub {
+    margin: 10px auto 0;
+    max-width: 720px;
+    font-size: 1.02rem;
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.82);
   }
   .hero .cta-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; margin-top: 44px; }
   .hero .trust-line {

@@ -74,6 +74,71 @@ export const NEWS: NewsItem[] = [
       'Because the process choice drives tooling, cost and lead time, we confirm the route during the technical review against the drawing and working conditions — then quote on that confirmed basis. Send the part number, drawing or sample, and the review will tell you which route fits and why.',
     ],
   },
+  {
+    slug: 'how-to-identify-the-correct-jaw-plate-for-your-crusher',
+    title: 'How to Identify the Correct Jaw Plate for Your Crusher',
+    date: '2026-10-15',
+    excerpt:
+      'Ordering the wrong jaw plate costs downtime and money. A practical checklist for identifying the correct plate from part numbers, drawings, measurements and worn-part photos before you send a request.',
+    cover: '/images/prod-jaw.webp',
+    coverAlt: 'High-manganese steel jaw plates for a jaw crusher',
+    body: [
+      'A jaw plate looks like a simple casting, but the differences between plates are easy to underestimate: crusher brand and model, chamber profile, tooth shape, bolt-hole pattern and revision level all change the part. An inquiry that starts with the correct identification usually saves two or three rounds of clarification — and avoids casting the wrong part at all.',
+      'Start with the part number and the machine. The fastest identifier is the part number cast or stamped on the plate, or the crusher model from the nameplate — brand, series and feed opening. If the part number is worn away, the machine model alone is usually enough for a foundry to narrow the plate family, because each crusher series has a defined set of jaw plates.',
+      'Then confirm the geometry. Note the chamber type (standard, coarse or fine), the tooth profile (wave, straight or custom), the position and spacing of the bolt holes, the thickness, and whether the plate is the fixed or movable jaw — they are not interchangeable. Take the key dimensions with a tape measure, and record the weight if the plate can be weighed; both are quick checks that catch a mistaken part number.',
+      'Photograph the worn plate properly. A set of photos — the wear face, the back face, the mounting face and the worn profile — tells a foundry more than a description. The worn profile also hints at the material issue: a smooth, polished wear face with little work-hardening, a broken or peened edge, or a plate that cracked through the bolt holes all point to different material and design reviews.',
+      'Send the part number, machine model, key measurements and photos together, and the technical review confirms the identity, material and hardness before any quotation. If you are unsure whether two plates are the same, the review exists to catch that before production — not after.',
+    ],
+  },
+  {
+    slug: 'what-information-is-needed-for-a-custom-crusher-wear-parts-quote',
+    title: 'What Information Is Needed for a Custom Crusher Wear Parts Quote?',
+    date: '2026-10-15',
+    excerpt:
+      'A foundry can quote faster and more accurately when it has the right starting information. The five things to prepare before requesting a custom crusher wear parts quotation.',
+    cover: '/images/factory-casting-workshop.webp',
+    coverAlt: 'Casting production in the DINGDAR workshop',
+    body: [
+      'The speed and accuracy of a casting quotation depend almost entirely on the starting information. With a complete set, a foundry can confirm tooling, material, MOQ, lead time and inspection scope in writing within a week; without it, the quote comes back full of assumptions or the review needs several rounds. Preparing the five items below removes most of that friction.',
+      'First, the part reference — the single most important item. A part number, drawing, 3D model or sample is what the foundry needs to identify geometry and start the review. If you have only a photo of the worn part, send it anyway: it is enough to begin, and the missing details get confirmed during the review.',
+      'Second, the application. The crusher model, typical feed size, rock type and whether the part runs in primary or secondary duty decide the material recommendation. Two identical part numbers running in different pits can need different grades, so the application is not optional detail — it is the basis of the material choice.',
+      'Third, quantity and plan. Order volume, whether it is a first order or a repeat, and the delivery market determine tooling amortization, MOQ and lead time. Annual or frame quantities can be spread across the year rather than shipped at once, which usually lowers the per-piece cost.',
+      'Fourth, acceptance and documentation. If your project requires a specific material standard, hardness range, NDT or third-party inspection, state it before the quotation: acceptance criteria are agreed in writing before production, and adding them afterwards costs time and money.',
+      'Fifth, contact details and destination country — small, but they let the foundry confirm logistics and documents in the same reply. Send all five together through the contact form, by email to hugo@dingdar.com or on WhatsApp, and the project team responds with technical feedback within 12–24 hours.',
+    ],
+  },
+  {
+    slug: 'what-inspection-records-should-buyers-request-for-crusher-wear-parts',
+    title: 'What Inspection Records Should Buyers Request for Crusher Wear Parts?',
+    date: '2026-10-15',
+    excerpt:
+      'Material certificates, dimensional reports, hardness records, NDT — which inspection evidence matters for crusher wear parts, and how to specify it so it ships with your order.',
+    cover: '/images/quality-inspection.webp',
+    coverAlt: 'Quality inspection of cast parts at the DINGDAR foundry',
+    body: [
+      'Inspection records are what turn a quotation into a verifiable order. Buyers who specify the records they need before production receive evidence with the shipment; buyers who ask afterwards usually wait. For crusher wear parts, the meaningful records fall into a short list, and each one serves a different purpose.',
+      'Material certificates (heat or melt analysis) are the core record: they confirm the grade that was actually poured, against the standard agreed for the order — for manganese steel, for example, the chemistry of the Mn13 or Mn18 family per an ASTM, DIN or GB equivalent. This is the record that proves the material matches the drawing.',
+      'Dimensional inspection reports confirm the part against the drawing: the critical dimensions, the bolt-hole positions and the tolerances. Hardness records show the delivered hardness range, which matters for wear parts where hardness is the accepted indicator of performance. Visual inspection records cover surface quality, marking and obvious defects.',
+      'NDT — ultrasonic, magnetic particle or dye penetrant testing — is specified where internal soundness matters most, such as structural castings or parts that will take heavy impact. Third-party inspection by an agreed body can be added when your project or your customer requires independent verification. Each of these has a cost, so the scope should match the part, not be added uniformly.',
+      'The way to get the right records is to specify them in the review: material standard, hardness range, dimensional checks, NDT or third-party inspection, and the documentation language. DINGDAR agrees the inspection and acceptance scope before production and ships the agreed records with the order — so the buyer\'s inspection step is short and the evidence trail is complete.',
+    ],
+  },
+  {
+    slug: 'what-factors-affect-the-service-life-of-crusher-wear-parts',
+    title: 'What Factors Affect the Service Life of Crusher Wear Parts?',
+    date: '2026-10-15',
+    excerpt:
+      'The same part can last twice as long in one plant and fail early in another. The four groups of factors that determine crusher wear part life — and how to act on each.',
+    cover: '/images/H8bb76d8bdb4e44db9b044002488080b3J.webp',
+    coverAlt: 'Open-pit mining operation loading crushed rock',
+    body: [
+      'Service life is the number buyers care about most, and the honest starting point is that the part is only half the story. The same jaw plate or blow bar can last twice as long in one plant and fail early in another because of factors outside the casting itself. Understanding the four groups below explains most of the difference.',
+      'Working conditions come first. Rock hardness and abrasiveness, feed size, moisture and clay content set the wear rate before anything else. Highly abrasive feed wears a plate quickly no matter the grade; wet, sticky feed changes the wear pattern entirely. When life numbers are compared between plants, the feed conditions have to be part of the comparison.',
+      'Crusher settings come second. Closed-side setting, speed or eccentric throw, and the uniformity of the feed all change how the part is loaded. Too large a reduction ratio, an uneven feed or a plate running with the wrong setting accelerates wear and can produce failure patterns that look like a material fault but are actually a machine-setting fault.',
+      'Material and heat treatment come third — the part of the equation the foundry controls. High-manganese steel work-hardens under impact, so it suits high-impact duty; where impact energy is low, an alloy or composite with higher initial hardness lasts longer. Matching the grade to the actual impact energy of the machine is what turns a good grade into the right grade.',
+      'Installation and operation come fourth. Bolt preload, seating and whether plates are turned or swapped according to wear all affect useful life; a plate that moves in its seat cracks early regardless of material. Recording life in hours, the failure pattern and the setting data, and sending that history with the next inquiry, lets the foundry adjust material or design instead of guessing — which is how life gets extended rather than replaced.',
+    ],
+  },
 ];
 
 export const getNews = (slug: string) => NEWS.find((n) => n.slug === slug);

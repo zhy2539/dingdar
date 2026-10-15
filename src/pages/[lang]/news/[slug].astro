@@ -28,13 +28,13 @@ const common = (key: string) => t('common.' + key);
 const langHref = (enPath: string) => langPath(lang as Lang, enPath);
 const title = article('title');
 const excerpt = article('excerpt');
-const body = [0, 1, 2, 3, 4].map((i) => article('b' + i)).filter((x) => x);
+const body = [0, 1, 2, 3, 4, 5].map((i) => article('b' + i)).filter((x) => x);
 const ctaTitle = t('nw.ctaTitle');
 const ctaText = t('nw.ctaText');
 ---
 
 <BaseLayout
-  title={`${title} | DINGDAR`}
+  title={`${title}`}
   description={excerpt}
   path={langPath(lang as Lang, '/news/' + slug + '/')}
   lang={lang}

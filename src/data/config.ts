@@ -32,7 +32,6 @@ export const STATS = [
 export const CAPABILITY_STATS = [
   { value: '52', label: 'Engineers & R&D staff' },
   { value: '12,000 m²', label: 'Office & R&D building' },
-  { value: '4', label: 'In-house casting routes' },
 ];
 
 export const MATERIALS = [

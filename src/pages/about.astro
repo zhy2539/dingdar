@@ -348,7 +348,7 @@ const dlFields = [
     try {
       const res = await fetch(endpoint, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
       if (res.ok) {
-        try { window.dataLayer?.push?.({ event: 'profile_downloaded' }); } catch {}
+        try { gtag('event', 'profile_downloaded'); } catch {}
         form.style.display = 'none';
         success.style.display = 'block';
       } else {

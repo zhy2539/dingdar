@@ -128,8 +128,8 @@ gtag('config', '${SITE.gaId}');`} />
     <script is:inline>
       document.addEventListener('click', function (e) {
         var t = e.target && e.target.closest ? e.target.closest('[data-wa-float], a[href*="wa.me"]') : null;
-        if (t && window.dataLayer) {
-          window.dataLayer.push({ event: 'whatsapp_click' });
+        if (t) {
+          try { gtag('event', 'whatsapp_click'); } catch (_) {}
         }
       });
     </script>

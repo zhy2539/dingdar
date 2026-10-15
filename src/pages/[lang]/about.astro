@@ -340,7 +340,7 @@ const inside = ['rs.in0', 'rs.in1', 'rs.in2', 'rs.in3', 'rs.in4'].map((k) => t(k
     try {
       const res = await fetch(endpoint, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
       if (res.ok) {
-        try { window.dataLayer?.push?.({ event: 'profile_downloaded' }); } catch {}
+        try { gtag('event', 'profile_downloaded'); } catch {}
         form.style.display = 'none';
         success.style.display = 'block';
       } else {

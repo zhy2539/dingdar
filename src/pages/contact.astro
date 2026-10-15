@@ -164,7 +164,7 @@ const fields = [
     try {
       const res = await fetch(endpoint, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
       if (res.ok) {
-        try { window.dataLayer?.push?.({ event: 'inquiry_submitted' }); } catch {}
+        try { gtag('event', 'inquiry_submitted'); } catch {}
         window.location.href = '/thank-you/';
       } else {
         status.textContent = 'Something went wrong. Please try again or use WhatsApp / email.';

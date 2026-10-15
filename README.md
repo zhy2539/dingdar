@@ -56,20 +56,24 @@ npm run build               # 构建（产物 site\dist\）
 python ..\_assets\verify_v2.py   # SEO 静态验收（在项目根目录执行）
 ```
 
-部署（需要 Cloudflare API Token 环境变量，见 §6）：
+部署（**已接入 GitHub 自动部署，push 即上线**，2026-10-15 配置）：
+
+```
+git add -A
+git commit -m "说明"
+git push          # 推到 GitHub main → Cloudflare Pages 自动构建部署 → 上线
+```
+
+> Cloudflare Pages 项目 `dingdar` 已连接 GitHub 仓库 `zhy2539/dingdar`（Production branch `main`，Build command `npm run build`，Output directory `dist`，Automatic deployments 开启）。**日常上线只走 git push，无需再手动 wrangler。**
+
+wrangler 手动部署仅作紧急备选（需要 Cloudflare API Token 环境变量，见 §6）：
 
 ```
 $env:CLOUDFLARE_API_TOKEN = "<你的 token>"
 npx wrangler pages deploy dist --project-name=dingdar --branch=main --commit-dirty=true
 ```
 
-Git 提交推送（改完代码后）：
-
-```
-git add -A
-git commit -m "说明"
-git push
-```
+> ⚠️ 接入 Git 后**勿再混用 wrangler 手动部署**（两者会互相覆盖，造成部署历史混乱）。只有 Git 链路故障时才临时用 wrangler 救急。
 
 ## 5. 页面与站点结构（当前状态）
 
@@ -95,7 +99,7 @@ git push
 | Formspree            | 通知邮箱保持 gmail（用户曾要求改 zhy2539@126.com，自动化操作失败后已叫停 ——**勿重试改邮箱**，如需要由用户在 Formspree 后台手动改）                                                                                 |
 | 邮箱 / 触点              | 全站统一 `hugo@dingdar.com`（sales/engineering/quality 三个触点均指向该邮箱，改邮箱只改 `site\src\data\config.ts`）；WhatsApp +86 19337861987（链接必须带 +：`https://wa.me/+8619337861987`）                                  |
 | GA4 事件               | whatsapp_click / inquiry_submitted / sample_requested / profile_downloaded（已在代码埋点，可在 GA4 后台标为关键事件）                                                                    |
-| 可用部署方式               | ① 上述 wrangler 命令（需 Token）；② 用户浏览器登录 Cloudflare 后台 UI 操作（DNS 操作只能走 UI，Token 无 DNS 权限，会 403）                                                                            |
+| 可用部署方式               | ① **Git 自动部署（推荐）**：`git push` 到 GitHub main，Cloudflare Pages 自动构建上线，无需任何 Token；② wrangler 手动（备选，需 Token，接入 Git 后勿混用）；③ 用户浏览器登录 Cloudflare 后台 UI 操作（DNS 操作只能走 UI，Token 无 DNS 权限，会 403）                                                                            |
 
 ## 7. 合规红线（最重要，任何 Agent 必须遵守）
 
@@ -121,7 +125,7 @@ git push
 
 * 近期提交（倒序）：`e3b3093` 合并 resources 到 About（新增 Supplier Resources 区块 + 删除独立页 + _redirects 301）→ `3a67669` About 数据卡不换行 → `34df0c2` 站内权威外链（ASTM/ISO/AFS/MatWeb + 文章内链）→ `45cf380` 移动端 Header 修复 → `046de93` About 移除数据统计面板 → …（完整历史在 `git log`）
 
-* 推送流程：每次部署上线后 `git add -A && git commit -m "说明" && git push`，保持远程与本地同步
+* 推送流程：`git push` 同时完成「同步 GitHub 私有仓库」+「触发 Cloudflare 自动部署上线」（2026-10-15 起）。部署完成后远程与本地保持同步
 
 * `.gitignore` 已排除 node_modules / dist / .astro / .wrangler / .env 等（敏感信息不会上传）
 
@@ -135,6 +139,7 @@ git push
 * [x] 随机不存在路径 / 图片返回 404（无 Soft 404）
 * [x] SEO 静态验收 0 问题（126 页构建通过；多语 title 按 70 字符口径验收）
 * [x] GitHub 私有仓库备份（全部历史提交已推送）
+* [x] **Cloudflare Pages 已连接 GitHub（zhy2539/dingdar）**：Production branch `main` / Build `npm run build` / Output `dist` / 自动部署开启；`git push` 即自动构建上线（已实测一次自动部署成功）
 
 ## 10. 交接给新 Agent 的必读顺序
 

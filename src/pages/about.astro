@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import CtaBand from '../components/CtaBand.astro';
-import { CAPABILITY_STATS, COMPLIANCE, OEM_STEPS, OEM_CUSTOMIZABLE } from '../data/config';
+import { CAPABILITY_STATS, COMPLIANCE, OEM_STEPS, OEM_CUSTOMIZABLE, SITE } from '../data/config';
 
 const routes = [
   'Green sand casting',
@@ -19,6 +19,12 @@ const moqRows = [
   { scale: 'Prototype / sample', typical: 'Single parts or small runs', confirmed: 'Tooling and quantity reviewed per project' },
   { scale: 'Small batch', typical: 'Trial quantities after sample approval', confirmed: 'Price per piece reviewed with tooling amortization' },
   { scale: 'Series / repeat orders', typical: 'Scheduled deliveries over the year', confirmed: 'Frame agreements with stable material and lead time' },
+];
+const dlFields = [
+  { name: 'name', label: 'Your Name *', type: 'text', required: true, placeholder: 'Full name' },
+  { name: 'email', label: 'Work Email *', type: 'email', required: true, placeholder: 'name@company.com' },
+  { name: 'company', label: 'Company *', type: 'text', required: true, placeholder: 'Company name' },
+  { name: 'country', label: 'Country', type: 'text', required: false, placeholder: 'Country / region' },
 ];
 ---
 
@@ -227,9 +233,133 @@ const moqRows = [
     </div>
   </section>
 
+  <section class="section section--soft" id="company-profile">
+    <div class="container">
+      <div class="sec-head center">
+        <span class="eyebrow">Supplier resources</span>
+        <h2>Company Profile for Your Qualification File</h2>
+        <p>One PDF with the facts your procurement team asks for: production capacity, product categories, materials, casting processes, inspection scope and contact channels.</p>
+      </div>
+      <div class="grid grid--2" style="grid-template-columns:1.1fr 0.9fr;gap:40px;align-items:start;">
+        <div class="card" id="download-form" style="padding:34px 32px;">
+          <h3 style="font-size:1.5rem;">Download the Company Profile</h3>
+          <p style="font-size:0.95rem;color:var(--muted);margin:10px 0 24px;">Leave your details and the download link appears immediately. We may follow up with project-specific information when you are ready.</p>
+
+          <form id="dl" action={SITE.formEndpoint} method="POST" novalidate>
+            <div class="hp-field" aria-hidden="true">
+              <label>Leave this field empty</label>
+              <input type="text" name="_honey" tabindex="-1" autocomplete="off" />
+            </div>
+            <input type="hidden" name="_subject" value="Company profile download request from dingdar.com" />
+
+            <div class="grid grid--2" style="gap:16px;">
+              {dlFields.map((f) => (
+                <div class="field">
+                  <label for={f.name}>{f.label}</label>
+                  <input id={f.name} name={f.name} type={f.type} placeholder={f.placeholder} required={f.required} />
+                </div>
+              ))}
+            </div>
+
+            <div class="field" style="margin-top:6px;">
+              <button type="submit" class="btn btn--primary btn--lg" style="width:100%;">Get the Download Link</button>
+              <p class="hint" id="form-status" role="status" aria-live="polite"></p>
+            </div>
+          </form>
+
+          <div id="dl-success" style="display:none;margin-top:26px;padding:24px;border:1px solid #d8e8d8;background:#f2faf2;border-radius:12px;text-align:center;">
+            <h3 style="font-size:1.15rem;margin-bottom:10px;">Thank you — your download is ready</h3>
+            <p style="font-size:0.93rem;color:var(--muted);margin-bottom:16px;">The company profile PDF is below. Need specific castings reviewed next? We reply to technical inquiries within 12–24 hours.</p>
+            <a href="/company-profile.pdf" class="btn btn--primary btn--lg" download>Download Company Profile (PDF)</a>
+          </div>
+        </div>
+
+        <div>
+          <div class="card" style="padding:30px 28px;margin-bottom:24px;">
+            <h3 style="font-size:1.15rem;margin-bottom:16px;">Inside the profile</h3>
+            <ul>
+              {[
+                'Company overview & capacity (1986, 180,000 m², 720+ staff)',
+                'Product categories & coverage',
+                'Materials: Mn13/Mn18, Cr15–Cr26, alloy steel, ductile iron',
+                'Casting processes & inspection scope',
+                'OEM review path & contact channels',
+              ].map((x) => (
+                <li style="padding:8px 0;border-top:1px solid var(--bg-tint);display:flex;gap:10px;font-size:0.94rem;">
+                  <span style="color:var(--accent);font-weight:800;">✓</span>{x}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="card" style="padding:30px 28px;">
+            <h3 style="font-size:1.15rem;margin-bottom:16px;">Prefer to talk first?</h3>
+            <ul class="contact-list">
+              <li><span class="k">WhatsApp</span><a href={'https://wa.me/' + SITE.whatsappTel}>{SITE.whatsapp}</a></li>
+              <li><span class="k">Sales</span><a href={'mailto:' + SITE.email}>{SITE.email}</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <CtaBand
     title="Work With a Casting Enterprise, Not a Price List"
     text="Send your requirement — drawing, sample or equipment model — and the project team will respond with technical feedback within 12–24 hours."
     cta="Contact Us"
   />
 </BaseLayout>
+
+<style>
+  .contact-list li { display: flex; justify-content: space-between; gap: 16px; padding: 9px 0; border-top: 1px solid var(--bg-tint); font-size: 0.94rem; align-items: baseline; }
+  .contact-list .k { color: var(--muted); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; min-width: 96px; }
+  .contact-list a { color: var(--ink); font-weight: 600; }
+  .contact-list a:hover { color: var(--accent); }
+  @media (max-width: 900px) { .grid--2[style] { grid-template-columns: 1fr !important; } }
+</style>
+
+<script>
+  const form = document.getElementById('dl');
+  const status = document.getElementById('form-status');
+  const success = document.getElementById('dl-success');
+  const endpoint = form.getAttribute('action') || '';
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    status.textContent = '';
+    const data = new FormData(form);
+    if (data.get('_honey')) return;
+    const name = data.get('name')?.trim();
+    const email = data.get('email')?.trim();
+    if (!name || !email) {
+      status.textContent = 'Please complete your name and email.';
+      status.style.color = '#d9480f';
+      return;
+    }
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+      status.textContent = 'Please enter a valid email address.';
+      status.style.color = '#d9480f';
+      return;
+    }
+    if (!endpoint) {
+      success.style.display = 'block';
+      return;
+    }
+    try {
+      const res = await fetch(endpoint, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
+      if (res.ok) {
+        try { window.dataLayer?.push?.({ event: 'profile_downloaded' }); } catch {}
+        form.style.display = 'none';
+        success.style.display = 'block';
+      } else {
+        status.textContent = 'Something went wrong. The download is still available below the form.';
+        status.style.color = '#d9480f';
+        success.style.display = 'block';
+      }
+    } catch {
+      status.textContent = 'Network issue — the download link is shown below regardless.';
+      status.style.color = '#d9480f';
+      success.style.display = 'block';
+    }
+  });
+</script>

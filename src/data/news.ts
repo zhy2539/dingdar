@@ -92,7 +92,7 @@ export const NEWS: NewsItem[] = [
   },
   {
     slug: 'what-information-is-needed-for-a-custom-crusher-wear-parts-quote',
-    title: 'What Information Is Needed for a Custom Crusher Wear Parts Quote?',
+    title: 'Information Needed for a Custom Crusher Wear Parts Quote',
     date: '2026-10-15',
     excerpt:
       'A foundry can quote faster and more accurately when it has the right starting information. The five things to prepare before requesting a custom crusher wear parts quotation.',
@@ -109,7 +109,7 @@ export const NEWS: NewsItem[] = [
   },
   {
     slug: 'what-inspection-records-should-buyers-request-for-crusher-wear-parts',
-    title: 'What Inspection Records Should Buyers Request for Crusher Wear Parts?',
+    title: 'Inspection Records to Request for Crusher Wear Parts',
     date: '2026-10-15',
     excerpt:
       'Material certificates, dimensional reports, hardness records, NDT — which inspection evidence matters for crusher wear parts, and how to specify it so it ships with your order.',

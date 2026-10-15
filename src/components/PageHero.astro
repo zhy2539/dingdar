@@ -137,7 +137,7 @@ const { eyebrow, title, lead, img, imgAlt, ctaPrimary, ctaSecondary, trust, stat
 
   /* 带实力数据条的 hero：内容垂直居中 + 底部数据条（首屏完整展示） */
   .hero--stats {
-    min-height: calc(100svh - 89px + 120px);
+    min-height: calc(100svh - 89px);
     flex-direction: column;
     justify-content: flex-start;
   }
@@ -146,7 +146,7 @@ const { eyebrow, title, lead, img, imgAlt, ctaPrimary, ctaSecondary, trust, stat
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 108px 24px 44px;
+    padding: 96px 24px 36px;
   }
   .hero--stats .hero-inner h1 { margin-bottom: 20px; }
   .hero--stats .hero-inner .cta-row { margin-top: 32px; }
@@ -162,36 +162,36 @@ const { eyebrow, title, lead, img, imgAlt, ctaPrimary, ctaSecondary, trust, stat
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 14px;
-    padding: 18px 24px 20px;
+    padding: 32px 24px 36px;
   }
   .hero-stat { text-align: center; }
   .hero-stat-num {
-    font-size: 1.95rem;
+    font-size: 2.45rem;
     font-weight: 800;
     color: #fff;
-    line-height: 1.12;
+    line-height: 1.1;
     white-space: nowrap;
     text-shadow: 0 1px 8px rgba(6, 14, 22, 0.5);
   }
   .hero-stat-lab {
-    font-size: 0.88rem;
+    font-size: 0.94rem;
     color: rgba(255, 255, 255, 0.84);
-    margin-top: 6px;
+    margin-top: 8px;
     line-height: 1.35;
   }
 
   @media (max-width: 1000px) {
     .hero { min-height: 480px; }
     .hero-inner { padding: 110px 24px; }
-    .hero--stats { min-height: calc(100svh - 89px + 120px); }
+    .hero--stats { min-height: calc(100svh - 89px); }
     .hero--stats .hero-inner { padding: 110px 24px 40px; }
-    .hero-stats__inner { grid-template-columns: repeat(3, 1fr); gap: 18px 10px; padding: 20px 16px 22px; }
-    .hero-stat-num { font-size: 1.6rem; }
+    .hero-stats__inner { grid-template-columns: repeat(3, 1fr); gap: 18px 10px; padding: 28px 16px 32px; }
+    .hero-stat-num { font-size: 2rem; }
   }
   @media (max-width: 640px) {
     .hero { min-height: 420px; }
     .hero-inner { padding: 90px 20px; }
-    .hero--stats { min-height: calc(100svh - 89px + 120px); }
+    .hero--stats { min-height: calc(100svh - 89px); }
     .hero--stats .hero-inner { padding: 36px 20px 16px; }
     .hero--stats .hero-inner .eyebrow { margin-bottom: 12px; padding: 5px 12px; font-size: 0.8rem; }
     .hero--stats .hero-inner h1 { font-size: 1.45rem; line-height: 1.25; margin-bottom: 12px; }
@@ -199,8 +199,8 @@ const { eyebrow, title, lead, img, imgAlt, ctaPrimary, ctaSecondary, trust, stat
     .hero--stats .hero-inner .cta-row { gap: 10px; margin-top: 16px; flex-wrap: nowrap !important; }
     .hero--stats .hero-inner .btn { padding: 10px 16px; font-size: 0.88rem; }
     .hero .lead { font-size: 1.02rem; }
-    .hero-stats__inner { grid-template-columns: repeat(3, 1fr); gap: 10px 6px; padding: 12px 10px 14px; }
-    .hero-stat-num { font-size: 1.15rem; }
-    .hero-stat-lab { font-size: 0.7rem; margin-top: 4px; }
+    .hero-stats__inner { grid-template-columns: repeat(3, 1fr); gap: 10px 6px; padding: 18px 10px 20px; }
+    .hero-stat-num { font-size: 1.45rem; }
+    .hero-stat-lab { font-size: 0.78rem; margin-top: 6px; }
   }
 </style>

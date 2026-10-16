@@ -31,10 +31,10 @@ export const PROCESS_DETAILS: ProcessDetail[] = [
   {
     slug: 'green-sand',
     name: 'Green Sand Casting',
-    image: '/images/foundry-pouring.webp',
-    imageAlt: 'Molten metal being poured in a foundry casting operation',
+    image: '/images/process-green-sand.webp',
+    imageAlt: 'Foundry worker handling molten metal in an industrial casting setting',
     title: 'Green Sand Casting for Large Wear Parts and Structural Castings',
-    description: 'Green sand casting for medium and large wear parts, structural castings and custom components. Review material, geometry, tooling and inspection with DINGDAR.',
+    description: 'Green sand casting for large wear parts and structural components. Review material, geometry, tooling and inspection with DINGDAR.',
     lead: 'A flexible, cost-conscious route for medium to very large castings, including crusher wear parts, frames, housings and custom industrial castings.',
     overview: 'Green sand casting uses compacted moulding sand around a pattern to form the cavity for the casting. It remains the practical workhorse for large and heavy components because the method supports a broad size range, a wide material family and relatively fast pattern preparation. The final route is selected against the drawing, part weight, geometry, material and working conditions rather than by size alone.',
     steps: [

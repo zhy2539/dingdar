@@ -20,6 +20,9 @@ interface Props {
 }
 
 const { title, description, image, noindex, jsonLd, path, lang = 'en', enPath = path || '/', preloadImages = [] } = Astro.props;
+const seoDescription = description.length > 155
+  ? description.slice(0, 152).replace(/\s+\S*$/, '') + '...'
+  : description;
 const canonical = lang === 'en' ? (path ? `${SITE.domain}${path}` : Astro.url.origin + Astro.url.pathname) : `${SITE.domain}${langPath(lang as AnyLang, enPath)}`;
 const ogImage = image ? `${SITE.domain}${image}` : `${SITE.domain}/images/og-default.webp`;
 const htmlLang = HTML_LANGS[lang];
@@ -43,7 +46,34 @@ const orgLd = {
   description: SITE.description,
 };
 
-const ld = noindex ? jsonLd : [orgLd, ...(Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [])];
+const jsonLdItems = (Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : []) as object[];
+const hasBreadcrumbLd = jsonLdItems.some((item) => {
+  if (!item || typeof item !== 'object') return false;
+  return (item as Record<string, unknown>)['@type'] === 'BreadcrumbList';
+});
+const breadcrumbPath = path || Astro.url.pathname;
+const breadcrumbSegments = breadcrumbPath.split('/').filter(Boolean);
+const breadcrumbNames: Record<string, string> = {
+  es: 'Español', fr: 'Français', ru: 'Русский', pt: 'Português',
+  products: 'Products', processes: 'Processes', news: 'News', about: 'About',
+  contact: 'Contact', faq: 'FAQ', privacy: 'Privacy', 'request-sample': 'Request Sample',
+  'green-sand': 'Green Sand Casting', 'shell-moulding': 'Shell Moulding',
+  'lost-foam': 'Lost Foam Casting', investment: 'Investment Casting',
+};
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.domain + '/' },
+    ...breadcrumbSegments.map((segment, index) => ({
+      '@type': 'ListItem',
+      position: index + 2,
+      name: breadcrumbNames[segment] || segment.replace(/[-_]/g, ' '),
+      item: SITE.domain + '/' + breadcrumbSegments.slice(0, index + 1).join('/') + '/',
+    })),
+  ],
+};
+const ld = noindex ? jsonLd : [orgLd, ...(hasBreadcrumbLd ? [] : [breadcrumbLd]), ...jsonLdItems];
 ---
 
 <!doctype html>
@@ -52,7 +82,7 @@ const ld = noindex ? jsonLd : [orgLd, ...(Array.isArray(jsonLd) ? jsonLd : jsonL
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
-    <meta name="description" content={description} />
+    <meta name="description" content={seoDescription} />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/png" href="/images/logo.png" />
@@ -70,7 +100,7 @@ const ld = noindex ? jsonLd : [orgLd, ...(Array.isArray(jsonLd) ? jsonLd : jsonL
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="DINGDAR Casting" />
     <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
+    <meta property="og:description" content={seoDescription} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
     <meta property="og:locale" content={ogLocale} />
@@ -79,7 +109,7 @@ const ld = noindex ? jsonLd : [orgLd, ...(Array.isArray(jsonLd) ? jsonLd : jsonL
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
+    <meta name="twitter:description" content={seoDescription} />
     <meta name="twitter:image" content={ogImage} />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />

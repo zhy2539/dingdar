@@ -17,8 +17,8 @@ export const NEWS: NewsItem[] = [
     date: '2026-10-14',
     excerpt:
       'Our new English website is now live. Buyers of crusher wear parts, bucket teeth and custom castings can send drawings, part numbers or samples directly for a technical review and quotation.',
-    cover: '/images/foundry-pouring.webp',
-    coverAlt: 'Molten metal pouring in the DINGDAR foundry',
+    cover: '/images/news-foundry-worker.webp',
+    coverAlt: 'Foundry worker pouring molten metal into molds',
     body: [
       'Henan Dingdar Machinery Equipment Manufacture Co., Ltd. has launched its international website at dingdar.com to make it easier for overseas buyers to start a casting project. The site covers the full product range — jaw crusher wear parts, cone crusher wear parts, impact crusher blow bars, hammer heads, double roll crusher parts, bucket teeth and adapters, and custom castings produced to drawing or sample.',
       'Every inquiry is reviewed as a technical requirement: geometry, material, casting process and inspection scope are confirmed before price and delivery are quoted. Buyers can start with a drawing, a 3D model, a part number, or simply a photo of the worn part.',
@@ -32,8 +32,8 @@ export const NEWS: NewsItem[] = [
     date: '2026-10-14',
     excerpt:
       'Jaw plates fail by impact, abrasion or both. A practical guide to high-manganese steel grades, when to move to alloy options, and what to send the foundry so the material choice is made on facts.',
-    cover: '/images/jaw-plates-main.webp',
-    coverAlt: 'High-manganese steel jaw plates for primary crushing',
+    cover: '/images/news-two-workers.webp',
+    coverAlt: 'Two workers managing molten metal in an industrial furnace',
     body: [
       'Jaw plate material is not a one-size choice. A plate that lasts well in one quarry can fail early in another, usually because the feed conditions — rock hardness, size, moisture and the crusher setup — change the failure mode. Understanding which mode is wearing your plates is the first step to choosing the right material.',
       'For the great majority of primary and secondary jaw applications, high-manganese steel in the Mn13 and Mn18 families is the standard. Under repeated impact, the surface work-hardens: the top layer compresses into a much harder skin while the core stays tough, so the plate resists both impact and abrasion at the same time. Mn13 (about 13% manganese, typically matching an <a href="https://www.astm.org" target="_blank" rel="noopener nofollow">ASTM A128</a>-grade equivalent) covers standard quarry feed; Mn18 with slightly higher manganese and refined treatment is specified where feed is harder or plates are larger and more likely to flex.',
@@ -48,8 +48,8 @@ export const NEWS: NewsItem[] = [
     date: '2026-10-14',
     excerpt:
       'Why a foundry cannot quote MOQ and lead time without seeing the part — and the three questions that unlock a fast, reliable answer for crusher wear parts and custom castings.',
-    cover: '/images/foundry-pouring.webp',
-    coverAlt: 'Casting production line at the DINGDAR foundry',
+    cover: '/images/news-molten-steel.webp',
+    coverAlt: 'Molten steel being handled in an industrial foundry',
     body: [
       'Inquiries that begin with "what is your MOQ?" usually get a frustrating answer from a foundry: it depends on the part. This is not a delay tactic. MOQ, tooling and lead time are all driven by the geometry of one specific casting, and quoting them before the part is known would simply be a guess.',
       'MOQ is driven by economics, not policy. A pattern or tooling set costs the same whether you cast one piece or a thousand, and that cost has to be spread across the order. A small, simple part that pours in one mould can be produced in low quantities at a fair price per piece; a large jaw plate that occupies a full mould and needs long cooling and heat-treatment time makes small runs expensive per piece. So the honest answer to "what is your MOQ" is usually "send the part and we will show you where the quantity curve makes sense" — and for repeat or frame orders, the quantity is often spread across the year rather than a single shipment.',
@@ -64,8 +64,8 @@ export const NEWS: NewsItem[] = [
     date: '2026-10-14',
     excerpt:
       'Green sand handles large wear castings at competitive cost; investment casting delivers precision on small components. How foundries match the process to the part — and when both are the wrong answer.',
-    cover: '/images/factory-mould-line.webp',
-    coverAlt: 'Casting process comparison at the DINGDAR foundry',
+    cover: '/images/news-furnace-worker.webp',
+    coverAlt: 'Foundry worker managing a furnace in an industrial plant',
     body: [
       'Choosing a casting process is often presented as a quality ladder: investment is "better" than green sand. In practice the right route is the one that matches the part size, geometry, tolerances and volume — and a foundry that casts everything one way is probably pushing a single pattern through your requirement.',
       'Green sand casting is the workhorse for medium and large castings. Sand is packed around the pattern, the mould is used once, and the process handles a very wide range of sizes and materials at competitive cost. Dimensional accuracy is standard, surface finish is standard, and tooling is relatively fast — which makes it the natural choice for large wear parts such as jaw plates and housings, and for anything heavy enough that precision casting would be impractical.',
@@ -96,8 +96,8 @@ export const NEWS: NewsItem[] = [
     date: '2026-10-15',
     excerpt:
       'A foundry can quote faster and more accurately when it has the right starting information. The five things to prepare before requesting a custom crusher wear parts quotation.',
-    cover: '/images/factory-casting-workshop.webp',
-    coverAlt: 'Casting production in the DINGDAR workshop',
+    cover: '/images/news-fire-worker.webp',
+    coverAlt: 'Worker operating machinery near molten metal and intense flames',
     body: [
       'The speed and accuracy of a casting quotation depend almost entirely on the starting information. With a complete set, a foundry can confirm tooling, material, MOQ, lead time and inspection scope in writing within a week; without it, the quote comes back full of assumptions or the review needs several rounds. Preparing the five items below removes most of that friction.',
       'First, the part reference — the single most important item. A part number, drawing, 3D model or sample is what the foundry needs to identify geometry and start the review. If you have only a photo of the worn part, send it anyway: it is enough to begin, and the missing details get confirmed during the review.',
@@ -129,8 +129,8 @@ export const NEWS: NewsItem[] = [
     date: '2026-10-15',
     excerpt:
       'The same part can last twice as long in one plant and fail early in another. The four groups of factors that determine crusher wear part life — and how to act on each.',
-    cover: '/images/H8bb76d8bdb4e44db9b044002488080b3J.webp',
-    coverAlt: 'Open-pit mining operation loading crushed rock',
+    cover: '/images/news-welding-worker.webp',
+    coverAlt: 'Worker in protective gear welding metal in an industrial plant',
     body: [
       'Service life is the number buyers care about most, and the honest starting point is that the part is only half the story. The same jaw plate or blow bar can last twice as long in one plant and fail early in another because of factors outside the casting itself. Understanding the four groups below explains most of the difference.',
       'Working conditions come first. Rock hardness and abrasiveness, feed size, moisture and clay content set the wear rate before anything else. Highly abrasive feed wears a plate quickly no matter the grade; wet, sticky feed changes the wear pattern entirely. When life numbers are compared between plants, the feed conditions have to be part of the comparison.',

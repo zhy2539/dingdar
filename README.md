@@ -119,6 +119,20 @@ npx wrangler pages deploy dist --project-name=dingdar --branch=main --commit-dir
 
 ## 8. Git 版本管理
 
+> ⚠️ **给其他 Agent（Accio Work 等）的重要提示 — 先读这里**
+>
+> **Git 仓库根在 `site\` 子目录**（`.git` 文件夹位于 `site\.git`），**项目根目录 `E:\豆包工作内容存放\丁达尔建站\` 本身不是 Git 仓库**。在项目根执行 `git` 会报「不是 Git 仓库」——请先把工作目录切换到 `site\` 再执行所有 git 操作：
+>
+> ```
+> cd E:\豆包工作内容存放\丁达尔建站\site
+> git status      # 查看改动
+> git add -A && git commit -m "说明"
+> git push        # 推 GitHub main → 自动部署上线
+> ```
+>
+> - **代理依赖**：本机 push 依赖 `site\.git\config` 中配置的仓库级代理 `http://127.0.0.1:7897`（仅本仓库，勿删除、勿改全局）。若 push 失败，先 `Test-NetConnection 127.0.0.1:7897` 确认代理存活，再重新 push。
+> - **运营文档不入库**：项目根的 `01-建站资产清单.md … 11-询盘录入规范.md` 及项目根 README 属于**本地存档**，不纳入 git。如需把文档纳入版本管理，统一放入 `site\docs\` 目录再提交。
+
 * 仓库位于 `site\`（分支 `main`），仓库级身份 DINGDAR [sales@hndingdar.com](mailto:sales@hndingdar.com)（仅本仓库设置，勿动全局 git 配置）
 
 * 远程：`origin` = `https://github.com/zhy2539/dingdar`（**私有仓库**，2026-10-15 创建并推送，本地与远程完全同步）
@@ -174,3 +188,4 @@ npx wrangler pages deploy dist --project-name=dingdar --branch=main --commit-dir
 * 多语言改动后必须同时检查：4 部词典键集合一致（可跑 `_assets\i18n_dyn_verify.py`）、`[lang]` 模板键引用存在、构建后抽查至少 1 个非英文页的 hreflang/canonical/翻译内容，再跑 verify_v2.py 验收
 * 非英文语言 title 天然较长，SEO 验收口径为 ≤70 字符（英文仍 ≤60），对应规则已写进 `verify_v2.py`，勿手动回退
 * 巡检工具：本机 curl 直连外网不稳定，页面巡检用浏览器工具（Playwright MCP 偶发不可用时改用 Aha Browser Use 的 http_get 判断 200/404）
+* 其他 Agent 若在**项目根**执行 git 会报「不是 Git 仓库」——仓库在 `site\`，先切工作目录到 `site\` 再操作（详见 §8 顶部提示）

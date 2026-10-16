@@ -182,10 +182,11 @@ const steps = [0, 1, 2, 3].map((i) => ({ title: home('h' + i + '.title'), text: 
       </div>
       <div class="grid grid--4">
         {PROCESSES.map((p, i) => (
-          <div class="card" style="padding:26px 24px;">
+          <a href={langPath(lang as Lang, '/processes/' + p.slug + '/')} class="card card--hover" style="padding:26px 24px;text-decoration:none;">
             <h3 style="font-size:1.05rem;margin-bottom:10px;">{home('mp' + i + '.name')}</h3>
             <p style="font-size:0.92rem;color:var(--muted);">{home('mp' + i + '.summary')}</p>
-          </div>
+            <span class="code" style="display:inline-block;margin-top:14px;color:var(--accent);">{t('common.readMore')} →</span>
+          </a>
         ))}
       </div>
       <div style="margin-top:36px;">

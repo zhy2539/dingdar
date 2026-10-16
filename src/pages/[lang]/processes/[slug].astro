@@ -1,0 +1,21 @@
+---
+import ProcessDetailPage from '../../../components/ProcessDetailPage.astro';
+import { PROCESS_DETAILS, getProcessDetail } from '../../../data/processDetails';
+import { LANG_CODES, type Lang } from '../../../i18n';
+
+export function getStaticPaths() {
+  const paths = [];
+  for (const lang of LANG_CODES) {
+    for (const process of PROCESS_DETAILS) {
+      paths.push({ params: { lang, slug: process.slug }, props: { process } });
+    }
+  }
+  return paths;
+}
+
+const { lang, slug } = Astro.params;
+const process = Astro.props.process || getProcessDetail(slug!);
+if (!process) throw new Error('Unknown process ' + slug);
+---
+
+<ProcessDetailPage process={process} lang={lang as Lang} />

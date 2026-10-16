@@ -1,0 +1,14 @@
+---
+import ProcessDetailPage from '../../components/ProcessDetailPage.astro';
+import { PROCESS_DETAILS, getProcessDetail } from '../../data/processDetails';
+
+export function getStaticPaths() {
+  return PROCESS_DETAILS.map((process) => ({ params: { slug: process.slug }, props: { process } }));
+}
+
+const { process: processFromProps } = Astro.props;
+const process = processFromProps || getProcessDetail(Astro.params.slug!);
+if (!process) throw new Error('Unknown process ' + Astro.params.slug);
+---
+
+<ProcessDetailPage process={process} lang="en" />

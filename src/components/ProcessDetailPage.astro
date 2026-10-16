@@ -1,0 +1,228 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from './PageHero.astro';
+import CtaBand from './CtaBand.astro';
+import FaqList from './FaqList.astro';
+import { SITE } from '../data/config';
+import type { ProcessDetail, ProcessLang } from '../data/processDetails';
+import { getProcessCopy } from '../data/processDetails';
+import { langPath } from '../i18n';
+
+interface Props {
+  process: ProcessDetail;
+  lang?: ProcessLang;
+}
+
+const { process, lang = 'en' } = Astro.props;
+const copy = getProcessCopy(process, lang);
+const isEnglish = lang === 'en';
+const seoTitles: Record<ProcessLang, string> = {
+  en: {
+    'green-sand': 'Green Sand Casting for Large Wear Parts | DINGDAR',
+    'shell-moulding': 'Shell Moulding for Repeatable Parts | DINGDAR',
+    'lost-foam': 'Lost Foam Casting for Complex Parts | DINGDAR',
+    investment: 'Investment Casting for Precision Parts | DINGDAR',
+  }[process.slug] || `${copy.name} | DINGDAR`,
+  es: {
+    'green-sand': 'Moldeo en arena verde para piezas grandes | DINGDAR',
+    'shell-moulding': 'Moldeo en cáscara para piezas repetibles | DINGDAR',
+    'lost-foam': 'Espuma perdida para piezas complejas | DINGDAR',
+    investment: 'Microfusión para piezas de precisión | DINGDAR',
+  }[process.slug] || `${copy.name} | DINGDAR`,
+  fr: {
+    'green-sand': 'Sable à vert pour grandes pièces d’usure | DINGDAR',
+    'shell-moulding': 'Moulage en carapace pour séries | DINGDAR',
+    'lost-foam': 'Mousse perdue pour pièces complexes | DINGDAR',
+    investment: 'Moulage de précision pour petites pièces | DINGDAR',
+  }[process.slug] || `${copy.name} | DINGDAR`,
+  ru: {
+    'green-sand': 'Литьё в песчаные формы для крупных деталей | DINGDAR',
+    'shell-moulding': 'Литьё в оболочковые формы для серий | DINGDAR',
+    'lost-foam': 'Литьё по газифицируемым моделям | DINGDAR',
+    investment: 'Литьё по выплавляемым моделям | DINGDAR',
+  }[process.slug] || `${copy.name} | DINGDAR`,
+  pt: {
+    'green-sand': 'Areia verde para peças grandes | DINGDAR',
+    'shell-moulding': 'Fundição em casca para séries | DINGDAR',
+    'lost-foam': 'Espuma perdida para peças complexas | DINGDAR',
+    investment: 'Fundição de precisão para peças | DINGDAR',
+  }[process.slug] || `${copy.name} | DINGDAR`,
+};
+const path = lang === 'en' ? `/processes/${process.slug}/` : langPath(lang, `/processes/${process.slug}/`);
+const enPath = `/processes/${process.slug}/`;
+const contactHref = lang === 'en' ? '/contact/' : langPath(lang, '/contact/');
+const processesHref = lang === 'en' ? '/processes/' : langPath(lang, '/processes/');
+const productsHref = lang === 'en' ? '/products/' : langPath(lang, '/products/');
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: isEnglish ? 'Home' : 'DINGDAR', item: SITE.domain + (lang === 'en' ? '/' : langPath(lang, '/')) },
+    { '@type': 'ListItem', position: 2, name: isEnglish ? 'Processes' : 'Casting Processes', item: SITE.domain + processesHref },
+    { '@type': 'ListItem', position: 3, name: copy.name, item: SITE.domain + path },
+  ],
+};
+const serviceLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: copy.name,
+  serviceType: 'Industrial casting process',
+  description: copy.description,
+  provider: { '@type': 'Organization', name: 'DINGDAR Casting', url: SITE.domain },
+  areaServed: 'Worldwide',
+};
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: process.faq.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+};
+const labels = isEnglish ? {
+  eyebrow: 'Casting process',
+  overview: 'Process overview',
+  flow: 'Process flow',
+  benefits: 'Why consider this route',
+  suitable: 'Suitable applications',
+  downstream: 'After casting',
+  faq: 'Process FAQ',
+  back: 'Compare all processes',
+  quote: 'Discuss your part',
+  products: 'View products',
+} : {
+  eyebrow: 'Casting process',
+  overview: 'Process overview',
+  flow: 'Process flow',
+  benefits: 'Why consider this route',
+  suitable: 'Suitable applications',
+  downstream: 'After casting',
+  faq: 'Process FAQ',
+  back: 'Compare all processes',
+  quote: 'Discuss your part',
+  products: 'View products',
+};
+---
+
+<BaseLayout
+  title={seoTitles[lang]}
+  description={copy.description}
+  path={path}
+  lang={lang}
+  enPath={enPath}
+  jsonLd={[breadcrumbLd, serviceLd, faqLd]}
+  preloadImages={[process.image]}
+>
+  <PageHero
+    eyebrow={labels.eyebrow}
+    title={copy.title}
+    lead={copy.lead}
+    img={process.image}
+    imgAlt={process.imageAlt}
+    ctaPrimary={{ label: labels.quote, href: contactHref }}
+    ctaSecondary={{ label: labels.back, href: processesHref }}
+  />
+
+  <section class="section">
+    <div class="container detail-grid">
+      <div>
+        <div class="sec-head">
+          <span class="eyebrow">{labels.overview}</span>
+          <h2>How {copy.name} fits your project</h2>
+        </div>
+        <p class="detail-copy">{process.overview}</p>
+      </div>
+      <aside class="detail-aside">
+        <strong>Send what you already have</strong>
+        <p>A drawing, sample, part number or equipment model is enough to start a technical review.</p>
+        <a class="btn btn--primary" href={contactHref} data-modal-open>{labels.quote}</a>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="sec-head center">
+        <span class="eyebrow">{labels.flow}</span>
+        <h2>From pattern to inspected casting</h2>
+        <p>The exact controls, material grade and acceptance documents are confirmed against the part requirement.</p>
+      </div>
+      <div class="process-flow">
+        {process.steps.map((step, index) => (
+          <article class="flow-step">
+            <span class="flow-number">{String(index + 1).padStart(2, '0')}</span>
+            <h3>{step.title}</h3>
+            <p>{step.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid grid--2 split-sections">
+        <div>
+          <div class="sec-head"><span class="eyebrow">{labels.benefits}</span><h2>What this route can offer</h2></div>
+          <ul class="check-list">
+            {process.benefits.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+        <div>
+          <div class="sec-head"><span class="eyebrow">{labels.suitable}</span><h2>Typical fit</h2></div>
+          <ul class="check-list">
+            {process.suitableFor.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container narrow-copy">
+      <div class="sec-head center"><span class="eyebrow">{labels.downstream}</span><h2>What happens after casting</h2></div>
+      <p class="detail-copy center">{process.downstream}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="sec-head"><span class="eyebrow">{labels.faq}</span><h2>Questions buyers usually ask</h2></div>
+      <FaqList items={process.faq} />
+    </div>
+  </section>
+
+  <section class="section section--soft related-links">
+    <div class="container">
+      <div class="sec-head center"><span class="eyebrow">Next step</span><h2>Review the part, not just the process</h2><p>We confirm process, material, tooling and inspection together before quotation.</p></div>
+      <div class="cta-row center-actions">
+        <a class="btn btn--primary" href={contactHref} data-modal-open>{labels.quote}</a>
+        <a class="btn btn--ghost" href={productsHref}>{labels.products}</a>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .detail-grid { display:grid; grid-template-columns:minmax(0,1.45fr) minmax(260px,.55fr); gap:48px; align-items:start; }
+    .detail-copy { color:var(--muted); line-height:1.85; font-size:1.02rem; }
+    .detail-aside { padding:28px; background:var(--bg-tint); border-left:4px solid var(--accent); }
+    .detail-aside strong { display:block; font-size:1.1rem; color:var(--ink); }
+    .detail-aside p { color:var(--muted); line-height:1.7; margin:10px 0 20px; }
+    .process-flow { display:grid; grid-template-columns:repeat(5,1fr); gap:16px; counter-reset:flow; }
+    .flow-step { position:relative; padding:26px 20px 22px; background:#fff; border-top:3px solid var(--accent); box-shadow:var(--shadow-sm); }
+    .flow-number { display:inline-flex; color:var(--accent); font-weight:800; font-size:.82rem; letter-spacing:.08em; margin-bottom:20px; }
+    .flow-step h3 { font-size:1.02rem; margin-bottom:10px; }
+    .flow-step p { color:var(--muted); font-size:.9rem; line-height:1.7; }
+    .split-sections { gap:64px; }
+    .check-list { list-style:none; padding:0; margin:0; display:grid; gap:14px; }
+    .check-list li { position:relative; padding:15px 18px 15px 42px; background:#fff; border:1px solid var(--line); color:var(--ink-2); line-height:1.55; }
+    .check-list li::before { content:'✓'; position:absolute; left:18px; top:14px; color:var(--accent); font-weight:800; }
+    .narrow-copy { max-width:880px; }
+    .related-links { border-top:1px solid var(--line); }
+    .center-actions { justify-content:center; }
+    @media (max-width: 1050px) { .process-flow { grid-template-columns:repeat(3,1fr); } }
+    @media (max-width: 720px) { .detail-grid { grid-template-columns:1fr; gap:28px; } .process-flow { grid-template-columns:1fr 1fr; } .split-sections { gap:38px; } }
+    @media (max-width: 440px) { .process-flow { grid-template-columns:1fr; } }
+  </style>
+</BaseLayout>

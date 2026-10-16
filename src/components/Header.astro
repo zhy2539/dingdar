@@ -100,9 +100,10 @@ const processHref = (slug: string) => hrefOf('/processes/' + slug + '/');
   .nav > a.active::after, .nav-parent.active::after { transform: scaleX(1); }
   .nav-dropdown { position: relative; }
   .nav-parent { display: inline-flex; align-items: center; gap: 6px; }
+  .nav-dropdown::after { content: ''; position: absolute; top: 100%; left: 0; right: 0; height: 14px; }
   .nav-caret { transition: transform 0.18s ease; }
   .nav-dropdown:hover .nav-caret, .nav-dropdown:focus-within .nav-caret { transform: rotate(180deg); }
-  .nav-submenu { position: absolute; top: calc(100% + 4px); left: 50%; min-width: 230px; padding: 8px; transform: translate(-50%, -8px); opacity: 0; visibility: hidden; pointer-events: none; background: #fff; border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 16px 44px rgba(9,20,32,0.14); transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s; z-index: 60; }
+  .nav-submenu { position: absolute; top: 100%; left: 50%; min-width: 230px; padding: 8px; transform: translate(-50%, -8px); opacity: 0; visibility: hidden; pointer-events: none; background: #fff; border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 16px 44px rgba(9,20,32,0.14); transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s; z-index: 60; }
   .nav-dropdown:hover .nav-submenu, .nav-dropdown:focus-within .nav-submenu { opacity: 1; visibility: visible; pointer-events: auto; transform: translate(-50%, 0); }
   .nav-submenu a { display: block; padding: 11px 14px; border-radius: 8px; color: var(--ink-2); font-size: 0.92rem; font-weight: 600; white-space: nowrap; }
   .nav-submenu a:hover, .nav-submenu a.active { color: var(--accent); background: var(--bg-tint); }

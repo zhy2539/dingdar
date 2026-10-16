@@ -1,5 +1,6 @@
 ---
 import { NAV, SITE } from '../data/config';
+import { PROCESS_DETAILS, getProcessCopy } from '../data/processDetails';
 import { LANG_CODES, LANGS, getT, langPath, type Lang, type AnyLang } from '../i18n';
 
 interface Props {
@@ -12,6 +13,8 @@ const path = Astro.url.pathname;
 const t = lang === 'en' ? null : getT(lang as Lang);
 const navLabel = (i: number) => (t ? t('nav.' + i) : NAV[i].label);
 const hrefOf = (href: string) => (lang === 'en' ? href : langPath(lang as Lang, href));
+const processName = (process: (typeof PROCESS_DETAILS)[number]) => lang === 'en' ? process.name : getProcessCopy(process, lang as Lang).name;
+const processHref = (slug: string) => hrefOf('/processes/' + slug + '/');
 ---
 
 <header class="site-header">
@@ -23,9 +26,25 @@ const hrefOf = (href: string) => (lang === 'en' ? href : langPath(lang as Lang, 
     <nav class="nav" aria-label="Main navigation">
       {
         NAV.map((n, i) => (
-          <a href={hrefOf(n.href)} class:list={{ active: path === hrefOf(n.href) || (hrefOf(n.href) !== '/' && path.startsWith(hrefOf(n.href))) }}>
-            {navLabel(i)}
-          </a>
+          n.href === '/processes/' ? (
+            <div class="nav-dropdown" class:list={{ active: path.startsWith(hrefOf('/processes/')) }}>
+              <a href={hrefOf(n.href)} class="nav-parent" aria-haspopup="true">
+                {navLabel(i)}
+                <svg class="nav-caret" viewBox="0 0 12 12" width="10" height="10" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 4l4 4 4-4"/></svg>
+              </a>
+              <div class="nav-submenu">
+                {PROCESS_DETAILS.map((process) => (
+                  <a href={processHref(process.slug)} class:list={{ active: path === processHref(process.slug) }}>
+                    {processName(process)}
+                  </a>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <a href={hrefOf(n.href)} class:list={{ active: path === hrefOf(n.href) || (hrefOf(n.href) !== '/' && path.startsWith(hrefOf(n.href))) }}>
+              {navLabel(i)}
+            </a>
+          )
         ))
       }
     </nav>
@@ -50,7 +69,16 @@ const hrefOf = (href: string) => (lang === 'en' ? href : langPath(lang as Lang, 
   <nav class="mobile-nav" data-mobile-nav>
     {
       NAV.map((n, i) => (
-        <a href={hrefOf(n.href)}>{navLabel(i)}</a>
+        n.href === '/processes/' ? (
+          <>
+            <a href={hrefOf(n.href)}>{navLabel(i)}</a>
+            <div class="mobile-subnav">
+              {PROCESS_DETAILS.map((process) => <a href={processHref(process.slug)}>{processName(process)}</a>)}
+            </div>
+          </>
+        ) : (
+          <a href={hrefOf(n.href)}>{navLabel(i)}</a>
+        )
       ))
     }
   </nav>
@@ -64,12 +92,21 @@ const hrefOf = (href: string) => (lang === 'en' ? href : langPath(lang as Lang, 
   .brand-name { font-weight: 800; font-size: 1.38rem; letter-spacing: 0.02em; color: var(--ink); display: flex; align-items: baseline; gap: 8px; }
   .brand-sub { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); }
   .nav { display: flex; gap: 10px; margin-left: auto; }
-  .nav a { position: relative; padding: 12px 16px; font-size: 1.04rem; font-weight: 600; letter-spacing: 0.01em; color: var(--ink-2); transition: color 0.18s; }
-  .nav a::after { content: ''; position: absolute; left: 16px; right: 16px; bottom: 4px; height: 2px; border-radius: 2px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform 0.18s ease; }
-  .nav a:hover { color: var(--accent); }
-  .nav a:hover::after { transform: scaleX(1); }
-  .nav a.active { color: var(--accent); }
-  .nav a.active::after { transform: scaleX(1); }
+  .nav > a, .nav-parent { position: relative; padding: 12px 16px; font-size: 1.04rem; font-weight: 600; letter-spacing: 0.01em; color: var(--ink-2); transition: color 0.18s; }
+  .nav > a::after, .nav-parent::after { content: ''; position: absolute; left: 16px; right: 16px; bottom: 4px; height: 2px; border-radius: 2px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform 0.18s ease; }
+  .nav > a:hover, .nav-parent:hover { color: var(--accent); }
+  .nav > a:hover::after, .nav-parent:hover::after { transform: scaleX(1); }
+  .nav > a.active, .nav-parent.active { color: var(--accent); }
+  .nav > a.active::after, .nav-parent.active::after { transform: scaleX(1); }
+  .nav-dropdown { position: relative; }
+  .nav-parent { display: inline-flex; align-items: center; gap: 6px; }
+  .nav-caret { transition: transform 0.18s ease; }
+  .nav-dropdown:hover .nav-caret, .nav-dropdown:focus-within .nav-caret { transform: rotate(180deg); }
+  .nav-submenu { position: absolute; top: calc(100% + 4px); left: 50%; min-width: 230px; padding: 8px; transform: translate(-50%, -8px); opacity: 0; visibility: hidden; pointer-events: none; background: #fff; border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 16px 44px rgba(9,20,32,0.14); transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s; z-index: 60; }
+  .nav-dropdown:hover .nav-submenu, .nav-dropdown:focus-within .nav-submenu { opacity: 1; visibility: visible; pointer-events: auto; transform: translate(-50%, 0); }
+  .nav-submenu a { display: block; padding: 11px 14px; border-radius: 8px; color: var(--ink-2); font-size: 0.92rem; font-weight: 600; white-space: nowrap; }
+  .nav-submenu a:hover, .nav-submenu a.active { color: var(--accent); background: var(--bg-tint); }
+  .nav-submenu a::after { display: none; }
   .header-actions { display: flex; align-items: center; gap: 12px; }
   .lang-switch { position: relative; }
   .lang-btn { display: inline-flex; align-items: center; gap: 6px; padding: 9px 14px; border: 1px solid var(--line); border-radius: 8px; background: #fff; color: var(--ink); font-size: 0.88rem; font-weight: 600; cursor: pointer; transition: border-color 0.15s, color 0.15s; }
@@ -84,6 +121,8 @@ const hrefOf = (href: string) => (lang === 'en' ? href : langPath(lang as Lang, 
   .menu-toggle span { width: 22px; height: 2px; background: var(--ink); border-radius: 2px; }
   .mobile-nav { display: none; padding: 12px 24px 24px; border-top: 1px solid var(--line); background: #fff; flex-direction: column; gap: 4px; }
   .mobile-nav a { padding: 14px 8px; font-size: 1.02rem; font-weight: 600; color: var(--ink); border-bottom: 1px solid var(--bg-tint); }
+  .mobile-nav .mobile-subnav { display: flex; flex-direction: column; margin: -2px 0 4px 16px; }
+  .mobile-nav .mobile-subnav a { padding: 10px 8px; font-size: 0.92rem; font-weight: 500; color: var(--muted); }
   .mobile-nav.open { display: flex; }
   @media (max-width: 1000px) {
     .nav { display: none; }

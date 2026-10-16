@@ -68,7 +68,12 @@ const steps = [0, 1, 2, 3].map((i) => ({ title: home('h' + i + '.title'), text: 
       <div class="grid grid--3">
         {CATEGORIES.map((c) => (
           <a href={langHref('/products/' + c.slug + '/')} class="card card--hover prod-card">
-            <div class="thumb"><img src={c.heroImg} alt={t('p.' + c.slug + '.cardTitle')} loading="lazy" width="800" height="600" /></div>
+            <div class="thumb">
+              <picture>
+                <source srcset={c.heroImg.replace('.webp', '-640.webp')} type="image/webp" />
+                <img src={c.heroImg} alt={t('p.' + c.slug + '.cardTitle')} loading="lazy" width="640" height="480" />
+              </picture>
+            </div>
             <div class="body">
               <h3>{t('p.' + c.slug + '.cardTitle')}</h3>
               <p>{t('p.' + c.slug + '.cardDesc')}</p>
@@ -88,7 +93,7 @@ const steps = [0, 1, 2, 3].map((i) => ({ title: home('h' + i + '.title'), text: 
     points={[0, 1, 2, 3].map((i) => home('aboutPoint' + i))}
     ctaLabel={home('aboutCta')}
     ctaHref={langHref('/about/')}
-    img="/images/foundry-pouring.webp"
+    img="/images/foundry-pouring-960.webp"
     imgAlt="Molten metal pouring at the DINGDAR foundry"
   />
 

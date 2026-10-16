@@ -20,7 +20,10 @@ const processHref = (slug: string) => hrefOf('/processes/' + slug + '/');
 <header class="site-header">
   <div class="container header-inner">
     <a href={hrefOf('/')} class="brand" aria-label="DINGDAR Casting home">
-      <img src="/images/logo.png" alt="DINGDAR logo" width="42" height="42" />
+      <picture>
+        <source srcset="/images/logo-96.webp" type="image/webp" />
+        <img src="/images/logo.png" alt="DINGDAR logo" width="42" height="42" decoding="async" />
+      </picture>
       <span class="brand-name">DINGDAR<span class="brand-sub">Castings</span></span>
     </a>
     <nav class="nav" aria-label="Main navigation">

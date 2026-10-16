@@ -9,7 +9,10 @@ const { code, name, img } = Astro.props;
 
 <div class="card card--hover prod-card">
   <div class="thumb">
-    <img src={img} alt={name + ' ' + code} loading="lazy" width="800" height="600" />
+    <picture>
+      <source srcset={img.replace('.webp', '-640.webp')} type="image/webp" />
+      <img src={img} alt={name + ' ' + code} loading="lazy" width="640" height="480" />
+    </picture>
   </div>
   <div class="body">
     <span class="code">{code}</span>

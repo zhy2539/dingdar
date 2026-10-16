@@ -14,7 +14,10 @@ const { eyebrow, title, tabs } = Astro.props;
   <div class="industry-tabs__stage">
     {tabs.map((tab, i) => (
       <div class={"industry-tabs__bg" + (i === 0 ? ' is-active' : '')} aria-hidden="true">
-        <img src={tab.img} alt="" loading="lazy" width="1600" height="900" />
+        <picture>
+          <source srcset={tab.img.replace('.webp', '-960.webp')} type="image/webp" />
+          <img src={tab.img} alt="" loading="lazy" width="960" height="540" />
+        </picture>
       </div>
     ))}
     <div class="industry-tabs__shade" aria-hidden="true"></div>

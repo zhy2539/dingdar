@@ -112,25 +112,7 @@ const ld = noindex ? jsonLd : [orgLd, ...(hasBreadcrumbLd ? [] : [breadcrumbLd])
     <meta name="twitter:description" content={seoDescription} />
     <meta name="twitter:image" content={ogImage} />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="preload"
-      as="style"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Merriweather:wght@400;700&display=swap"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Merriweather:wght@400;700&display=swap"
-      media="print"
-      onload="this.media='all'"
-    />
-    <noscript>
-      <link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Merriweather:wght@400;700&display=swap"
-      />
-    </noscript>
+    <!-- Fonts use local system fallbacks to avoid a render-blocking cross-origin request. -->
 
     {preloadImages.map((p) => (
       p.endsWith('.webp') ? (
@@ -146,13 +128,18 @@ const ld = noindex ? jsonLd : [orgLd, ...(hasBreadcrumbLd ? [] : [breadcrumbLd])
     <script type="application/ld+json" set:html={JSON.stringify(ld)} />
 
     {SITE.gaId && (
-      <>
-        <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${SITE.gaId}`} />
-        <script is:inline set:html={`window.dataLayer = window.dataLayer || [];
+      <script is:inline set:html={`window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', '${SITE.gaId}');`} />
-      </>
+window.addEventListener('load', function () {
+  window.setTimeout(function () {
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=${SITE.gaId}';
+    document.head.appendChild(s);
+    gtag('js', new Date());
+    gtag('config', '${SITE.gaId}');
+  }, 1200);
+});`} />
     )}
   </head>
   <body>

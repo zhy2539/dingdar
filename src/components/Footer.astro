@@ -40,7 +40,10 @@ const quickLinks = [
     <div class="cols">
       <div class="brand">
         <div class="brand-row">
-          <img src="/images/logo.png" alt="DINGDAR logo" width="40" height="40" />
+          <picture>
+            <source srcset="/images/logo-96.webp" type="image/webp" />
+            <img src="/images/logo.png" alt="DINGDAR logo" width="40" height="40" loading="lazy" decoding="async" />
+          </picture>
           <span class="brand-name">DINGDAR<span>Castings</span></span>
         </div>
         <p>

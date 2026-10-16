@@ -53,10 +53,11 @@ const faqs = [0, 1, 2, 3].map((i) => ({ q: pr('fq' + i + '.q'), a: pr('fq' + i +
       </div>
       <div class="grid grid--4">
         {PROCESSES.map((p, i) => (
-          <div class="card card--hover" style="padding:26px 24px;">
+          <a href={langHref('/processes/' + p.slug + '/')} class="card card--hover" style="padding:26px 24px;text-decoration:none;">
             <h3 style="font-size:1.08rem;margin-bottom:10px;">{t('home.mp' + i + '.name')}</h3>
             <p style="font-size:0.92rem;color:var(--muted);">{t('home.mp' + i + '.summary')}</p>
-          </div>
+            <span class="code" style="display:inline-block;margin-top:14px;color:var(--accent);">{common('readMore')} →</span>
+          </a>
         ))}
       </div>
       <div class="card" style="margin-top:40px;overflow-x:auto;">

@@ -7,10 +7,11 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "verify": "npm run build && node scripts/verify-site.mjs"
   },
   "dependencies": {
-    "@astrojs/sitemap": "^3.2.1",
-    "astro": "^5.1.1"
+    "@astrojs/sitemap": "^3.7.4",
+    "astro": "^7.4.1"
   }
 }

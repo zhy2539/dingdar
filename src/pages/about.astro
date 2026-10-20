@@ -251,6 +251,8 @@ const dlFields = [
               <input type="text" name="_honey" tabindex="-1" autocomplete="off" />
             </div>
             <input type="hidden" name="_subject" value="Company profile download request from dingdar.com" />
+            <input type="hidden" name="source_page" value="https://dingdar.com/about/#company-profile" />
+            <input type="hidden" name="page_language" value="en" />
 
             <div class="grid grid--2" style="gap:16px;">
               {dlFields.map((f) => (
@@ -270,7 +272,7 @@ const dlFields = [
           <div id="dl-success" style="display:none;margin-top:26px;padding:24px;border:1px solid #d8e8d8;background:#f2faf2;border-radius:12px;text-align:center;">
             <h3 style="font-size:1.15rem;margin-bottom:10px;">Thank you — your download is ready</h3>
             <p style="font-size:0.93rem;color:var(--muted);margin-bottom:16px;">The company profile PDF is below. Need specific castings reviewed next? We reply to technical inquiries within 12–24 hours.</p>
-            <a href="/company-profile.pdf" class="btn btn--primary btn--lg" download>Download Company Profile (PDF)</a>
+            <a href="/company-profile.pdf" class="btn btn--primary btn--lg" download data-profile-download>Download Company Profile (PDF)</a>
           </div>
         </div>
 
@@ -348,7 +350,7 @@ const dlFields = [
     try {
       const res = await fetch(endpoint, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
       if (res.ok) {
-        try { gtag('event', 'profile_downloaded'); } catch {}
+        try { gtag('event', 'profile_requested'); } catch {}
         form.style.display = 'none';
         success.style.display = 'block';
       } else {
@@ -361,5 +363,8 @@ const dlFields = [
       status.style.color = '#d9480f';
       success.style.display = 'block';
     }
+  });
+  document.querySelector('[data-profile-download]')?.addEventListener('click', () => {
+    try { gtag('event', 'profile_downloaded'); } catch {}
   });
 </script>

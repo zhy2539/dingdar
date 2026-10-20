@@ -15,6 +15,9 @@ const nw = (key: string) => t('nw.' + key);
 const common = (key: string) => t('common.' + key);
 const langHref = (enPath: string) => langPath(lang as Lang, enPath);
 const articleKey = (idx: number, suffix: string) => t('nw.a' + idx + '.' + suffix);
+const localizedNews = NEWS.map((news, idx) => ({ news, idx })).filter(({ idx }) => (
+  articleKey(idx, 'title').trim() && articleKey(idx, 'excerpt').trim() && articleKey(idx, 'b0').trim()
+));
 ---
 
 <BaseLayout
@@ -36,14 +39,14 @@ const articleKey = (idx: number, suffix: string) => t('nw.a' + idx + '.' + suffi
 
   <section class="section">
     <div class="container">
-      {NEWS.length === 0 ? (
+      {localizedNews.length === 0 ? (
         <div class="card" style="padding:56px 40px;text-align:center;">
           <h2 style="margin-bottom:12px;">Articles Coming Soon</h2>
           <p style="color:var(--muted);max-width:520px;margin:0 auto;">Company news and technical updates will be published here. For immediate questions, send an inquiry through the contact form.</p>
         </div>
       ) : (
         <div class="news-grid">
-          {NEWS.map((n, idx) => (
+          {localizedNews.map(({ news: n, idx }) => (
             <a href={langHref('/news/' + n.slug + '/')} class="card card--hover news-card">
               <div class="news-thumb"><img src={n.cover} alt={articleKey(idx, 'title')} loading="lazy" width="800" height="450" /></div>
               <div class="news-body">

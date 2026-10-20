@@ -16,10 +16,12 @@ interface Props {
   // 多语言：lang 为当前页面语言（默认 en）；enPath 为该页面的英文路径（用于 hreflang）
   lang?: AnyLang;
   enPath?: string;
+  /** Limit alternate links to translations that contain real page content. */
+  alternateLangs?: AnyLang[];
   preloadImages?: string[];
 }
 
-const { title, description, image, noindex, jsonLd, path, lang = 'en', enPath = path || '/', preloadImages = [] } = Astro.props;
+const { title, description, image, noindex, jsonLd, path, lang = 'en', enPath = path || '/', alternateLangs, preloadImages = [] } = Astro.props;
 const seoDescription = description.length > 155
   ? description.slice(0, 152).replace(/\s+\S*$/, '') + '...'
   : description;
@@ -27,7 +29,8 @@ const canonical = lang === 'en' ? (path ? `${SITE.domain}${path}` : Astro.url.or
 const ogImage = image ? `${SITE.domain}${image}` : `${SITE.domain}/images/og-default.webp`;
 const htmlLang = HTML_LANGS[lang];
 const ogLocale = OG_LOCALES[lang];
-const hreflang = hreflangUrls(enPath);
+const hreflang = hreflangUrls(enPath).filter((item) => !alternateLangs || alternateLangs.includes(item.code));
+const defaultAlternate = hreflang.find((item) => item.code === 'en') || hreflang[0];
 
 const orgLd = {
   '@context': 'https://schema.org',
@@ -92,7 +95,7 @@ const ld = noindex ? jsonLd : [orgLd, ...(hasBreadcrumbLd ? [] : [breadcrumbLd])
         {hreflang.map((h) => (
           <link rel="alternate" hreflang={h.code} href={SITE.domain + h.url} />
         ))}
-        <link rel="alternate" hreflang="x-default" href={SITE.domain + hreflang[0].url} />
+        {defaultAlternate && <link rel="alternate" hreflang="x-default" href={SITE.domain + defaultAlternate.url} />}
       </>
     )}
 
@@ -161,7 +164,7 @@ window.addEventListener('load', function () {
     )}
   </head>
   <body>
-    <Header lang={lang} enPath={enPath} />
+    <Header lang={lang} enPath={enPath} alternateLangs={alternateLangs} />
     <main><slot /></main>
     <Footer lang={lang} enPath={enPath} />
     <ModalContact lang={lang} />

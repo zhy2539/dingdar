@@ -1,2 +1,25 @@
 /resources/  /about/  301
 /resources/*  /about/  301
+/oem-casting  /about/#oem  301
+/oem-casting/  /about/#oem  301
+/certifications  /about/#compliance  301
+/certifications/  /about/#compliance  301
+
+# These localized articles were previously published as empty pages.
+# Redirect them to the complete English source until a real translation exists.
+/es/news/cone-crusher-liners-mantle-concave-guide/  /news/cone-crusher-liners-mantle-concave-guide/  301
+/fr/news/cone-crusher-liners-mantle-concave-guide/  /news/cone-crusher-liners-mantle-concave-guide/  301
+/ru/news/cone-crusher-liners-mantle-concave-guide/  /news/cone-crusher-liners-mantle-concave-guide/  301
+/pt/news/cone-crusher-liners-mantle-concave-guide/  /news/cone-crusher-liners-mantle-concave-guide/  301
+/es/news/blow-bars-manganese-vs-high-chrome/  /news/blow-bars-manganese-vs-high-chrome/  301
+/fr/news/blow-bars-manganese-vs-high-chrome/  /news/blow-bars-manganese-vs-high-chrome/  301
+/ru/news/blow-bars-manganese-vs-high-chrome/  /news/blow-bars-manganese-vs-high-chrome/  301
+/pt/news/blow-bars-manganese-vs-high-chrome/  /news/blow-bars-manganese-vs-high-chrome/  301
+/es/news/ball-mill-liners-mn18cr2-guide/  /news/ball-mill-liners-mn18cr2-guide/  301
+/fr/news/ball-mill-liners-mn18cr2-guide/  /news/ball-mill-liners-mn18cr2-guide/  301
+/ru/news/ball-mill-liners-mn18cr2-guide/  /news/ball-mill-liners-mn18cr2-guide/  301
+/pt/news/ball-mill-liners-mn18cr2-guide/  /news/ball-mill-liners-mn18cr2-guide/  301
+/es/news/mn13-jaw-plates-guide/  /news/mn13-jaw-plates-guide/  301
+/fr/news/mn13-jaw-plates-guide/  /news/mn13-jaw-plates-guide/  301
+/ru/news/mn13-jaw-plates-guide/  /news/mn13-jaw-plates-guide/  301
+/pt/news/mn13-jaw-plates-guide/  /news/mn13-jaw-plates-guide/  301

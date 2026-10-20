@@ -22,6 +22,7 @@ const sampleFields = [
   { name: 'country', label: ct('f3.label'), type: 'text', required: true, placeholder: ct('f3.placeholder') },
   { name: 'product', label: ct('f4.label'), type: 'select', required: false, options: ['sp.opt0', 'sp.opt1', 'sp.opt2', 'sp.opt3', 'sp.opt4', 'sp.opt5', 'sp.opt6'].map((k) => t(k)) },
   { name: 'quantity', label: ct('f5.label'), type: 'text', required: false, placeholder: sp('f4.placeholder') },
+  { name: 'reference_url', label: ({ es: 'Enlace de plano / foto (opcional)', fr: 'Lien du plan / de la photo (facultatif)', ru: 'Ссылка на чертёж / фото (необязательно)', pt: 'Link do desenho / foto (opcional)' } as Record<Lang, string>)[lang as Lang], type: 'url', required: false, placeholder: 'Google Drive, Dropbox or OneDrive URL' },
   { name: 'message', label: ct('f6.label'), type: 'textarea', required: true, placeholder: sp('f6.placeholder') },
 ];
 const uses = ['sp.u0', 'sp.u1', 'sp.u2', 'sp.u3'].map((k) => t(k));
@@ -58,6 +59,9 @@ const uses = ['sp.u0', 'sp.u1', 'sp.u2', 'sp.u3'].map((k) => t(k));
               <input type="text" name="_honey" tabindex="-1" autocomplete="off" />
             </div>
             <input type="hidden" name="_subject" value="Sample request from dingdar.com" />
+            <input type="hidden" name="source_page" value={'https://dingdar.com' + langPath(lang as Lang, '/request-sample/')} />
+            <input type="hidden" name="source_title" value={t('meta.sample.title')} />
+            <input type="hidden" name="page_language" value={lang} />
 
             <div class="grid grid--2" style="gap: 16px;">
               {sampleFields.map((f) => (
@@ -75,7 +79,7 @@ const uses = ['sp.u0', 'sp.u1', 'sp.u2', 'sp.u3'].map((k) => t(k));
                     <textarea id={f.name} name={f.name} rows="6" placeholder={f.placeholder} required={f.required}></textarea>
                   </div>
                 ) : (
-                  <div class="field">
+                  <div class="field" style={f.name === 'reference_url' ? 'grid-column: 1 / -1;' : undefined}>
                     <label for={f.name}>{f.label}</label>
                     <input id={f.name} name={f.name} type={f.type} placeholder={f.placeholder} required={f.required} />
                   </div>

@@ -64,7 +64,7 @@ const quickLinks = [
         </div>
       </div>
       <div>
-        <h4>{l('footer.quickLinks')}</h4>
+        <h2>{l('footer.quickLinks')}</h2>
         <ul class="links">
           {quickLinks.map((x) => (
             <li><a href={hrefOf(x.href)}>{l(x.key)}</a></li>
@@ -72,7 +72,7 @@ const quickLinks = [
         </ul>
       </div>
       <div>
-        <h4>{l('footer.contactT')}</h4>
+        <h2>{l('footer.contactT')}</h2>
         <ul class="contact">
           <li>📍 {SITE.location}</li>
           <li>📧 <a href={'mailto:' + SITE.email}>{SITE.email}</a></li>

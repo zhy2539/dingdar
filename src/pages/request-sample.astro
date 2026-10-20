@@ -19,6 +19,7 @@ const sampleFields = [
     'Custom castings / sample to match',
   ] },
   { name: 'quantity', label: 'Quantity / Part Reference', type: 'text', required: false, placeholder: 'e.g. 1 set of JCP-007, model & part number' },
+  { name: 'reference_url', label: 'Drawing / Photo Link (optional)', type: 'url', required: false, placeholder: 'Google Drive, Dropbox or OneDrive URL' },
   { name: 'message', label: 'Application & Expected Use *', type: 'textarea', required: true, placeholder: 'Machine model, part number, material or working conditions — and what you plan to evaluate with the sample.' },
 ];
 ---
@@ -56,6 +57,9 @@ const sampleFields = [
               <input type="text" name="_honey" tabindex="-1" autocomplete="off" />
             </div>
             <input type="hidden" name="_subject" value="Sample request from dingdar.com" />
+            <input type="hidden" name="source_page" value="https://dingdar.com/request-sample/" />
+            <input type="hidden" name="source_title" value="Request sample page" />
+            <input type="hidden" name="page_language" value="en" />
 
             <div class="grid grid--2" style="gap: 16px;">
               {sampleFields.map((f) => (
@@ -73,7 +77,7 @@ const sampleFields = [
                     <textarea id={f.name} name={f.name} rows="6" placeholder={f.placeholder} required={f.required}></textarea>
                   </div>
                 ) : (
-                  <div class="field">
+                  <div class="field" style={f.name === 'reference_url' ? 'grid-column: 1 / -1;' : undefined}>
                     <label for={f.name}>{f.label}</label>
                     <input id={f.name} name={f.name} type={f.type} placeholder={f.placeholder} required={f.required} />
                   </div>

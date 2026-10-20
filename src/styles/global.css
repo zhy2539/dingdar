@@ -9,8 +9,8 @@
   --ink-2: #33475c;        /* 次级标题 */
   --body: #4b6074;         /* 正文 */
   --muted: #7b8b9c;        /* 弱化文字 */
-  --accent: #e8590c;       /* 橙色 CTA */
-  --accent-hover: #d9480f;
+  --accent: #c2410c;       /* 橙色 CTA，白底/白字均满足 WCAG AA */
+  --accent-hover: #9a3412;
   --accent-soft: #fdf0e7;
   --line: #e3e9f0;
   --navy: #12263a;         /* 深底：footer */
@@ -105,6 +105,7 @@ h3 { font-size: 1.18rem; }
 
 /* 网格 */
 .grid { display: grid; gap: 24px; }
+.grid > * { min-width: 0; }
 .grid--2 { grid-template-columns: repeat(2, 1fr); }
 .grid--3 { grid-template-columns: repeat(3, 1fr); }
 .grid--4 { grid-template-columns: repeat(4, 1fr); }
@@ -281,7 +282,7 @@ h3 { font-size: 1.18rem; }
 
 /* 页脚（参考三列：品牌 + Quick Links + Get in Touch） */
 .footer { background: var(--navy); color: #9fb0c2; padding: 64px 0 28px; margin-top: 0; }
-.footer h4 { color: #fff; font-size: 0.95rem; letter-spacing: 0.04em; margin-bottom: 18px; }
+.footer h2 { color: #fff; font-size: 0.95rem; letter-spacing: 0.04em; margin-bottom: 18px; }
 .footer a { color: #9fb0c2; transition: color 0.15s; }
 .footer a:hover { color: #fff; }
 .footer .cols { display: grid; grid-template-columns: 1.7fr 1.1fr 1.2fr; gap: 48px; }
@@ -307,7 +308,7 @@ h3 { font-size: 1.18rem; }
 }
 @media (max-width: 640px) {
   .section { padding: 64px 0; }
-  .grid--3, .grid--2 { grid-template-columns: 1fr; }
+  .grid--4, .grid--3, .grid--2 { grid-template-columns: minmax(0, 1fr); }
   .stats { grid-template-columns: 1fr 1fr; }
   .steps { grid-template-columns: 1fr; }
   .footer .cols { grid-template-columns: 1fr; }

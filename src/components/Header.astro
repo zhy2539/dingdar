@@ -6,9 +6,10 @@ import { LANG_CODES, LANGS, getT, langPath, type Lang, type AnyLang } from '../i
 interface Props {
   lang?: AnyLang;
   enPath?: string;
+  alternateLangs?: AnyLang[];
 }
 
-const { lang = 'en', enPath = '/' } = Astro.props;
+const { lang = 'en', enPath = '/', alternateLangs } = Astro.props;
 const path = Astro.url.pathname;
 const t = lang === 'en' ? null : getT(lang as Lang);
 const navLabel = (i: number) => (t ? t('nav.' + i) : NAV[i].label);
@@ -58,8 +59,8 @@ const processHref = (slug: string) => hrefOf('/processes/' + slug + '/');
           <svg class="lang-caret" viewBox="0 0 12 12" width="10" height="10" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 4l4 4 4-4"/></svg>
         </button>
         <ul class="lang-menu" data-lang-menu>
-          <li><a href={langPath('en' as Lang, enPath)}>English</a></li>
-          {LANG_CODES.map((c) => (
+          {(!alternateLangs || alternateLangs.includes('en')) && <li><a href={langPath('en' as Lang, enPath)}>English</a></li>}
+          {LANG_CODES.filter((c) => !alternateLangs || alternateLangs.includes(c)).map((c) => (
             <li><a href={langPath(c, enPath)}>{LANGS.find((l) => l.code === c)?.label || c}</a></li>
           ))}
         </ul>

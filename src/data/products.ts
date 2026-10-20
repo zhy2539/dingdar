@@ -26,15 +26,15 @@ const IMG = (n: string) => `/images/${n}.webp`;
 export const CATEGORIES: Category[] = [
   {
     slug: 'jaw-crusher-wear-parts',
-    title: 'Jaw Crusher Wear Parts | Jaw Plates | DINGDAR',
+    title: 'Jaw Crusher Wear Parts | Mn13 Jaw Plates | DINGDAR',
     shortName: 'Jaw Crusher Wear Parts',
     cardTitle: 'Jaw Crusher Wear Parts',
-    cardDesc: 'Fixed and movable jaw plates, cheek plates and side liners for jaw crushers in mining and quarrying duty.',
+    cardDesc: 'Mn13 jaw plates in high-manganese steel for jaw crushers. Fixed, movable and cheek plates produced to your part number or drawing, factory direct from DINGDAR.',
     heroImg: IMG('prod-jaw'),
     bannerImg: IMG('H1667504f229a4ec69a6d66926679d9cbJ'),
     h1: 'Jaw Crusher Wear Parts',
     intro:
-      'Fixed and movable jaw plates, cheek plates and side liners cast in high-manganese steel for primary crushing in mining, quarrying and aggregate plants. Produced to your machine model, part number, drawing or sample.',
+      'Mn13 jaw plates are the standard for primary crushing, and we cast them in high-manganese steel — fixed, movable and cheek plates — for mining, quarrying and aggregate plants. Produced to your machine model, part number, drawing or sample.',
     parts: [
       { code: 'JCP-007', name: 'Jaw Plate', img: IMG('H8a38cb79479b45f39907a3d3034e8767X') },
       { code: 'JCP-008', name: 'Jaw Plate', img: IMG('H76e3bed70d0143cbb7ff1c441ca43759Y') },

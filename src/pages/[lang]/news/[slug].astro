@@ -2,14 +2,13 @@
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import CtaBand from '../../../components/CtaBand.astro';
 import { NEWS, getNews } from '../../../data/news';
-import { dicts, LANG_CODES, getT, langPath, type Lang } from '../../../i18n';
+import { dicts, LANG_CODES, getT, hasNewsTranslation, newsTranslationLangs, langPath, type Lang } from '../../../i18n';
 
 export function getStaticPaths() {
   const out = [];
   for (const lang of LANG_CODES) {
     for (const [idx, n] of NEWS.entries()) {
-      const dict = dicts[lang];
-      if (dict[`nw.a${idx}.title`]?.trim() && dict[`nw.a${idx}.excerpt`]?.trim() && dict[`nw.a${idx}.b0`]?.trim()) {
+      if (hasNewsTranslation(lang, idx, n.body.length)) {
         out.push({ params: { lang, slug: n.slug } });
       }
     }
@@ -32,10 +31,7 @@ const langHref = (enPath: string) => langPath(lang as Lang, enPath);
 const title = article('title');
 const excerpt = article('excerpt');
 const body = [0, 1, 2, 3, 4, 5].map((i) => article('b' + i)).filter((x) => x);
-const alternateLangs = ['en', ...LANG_CODES.filter((code) => {
-  const dict = dicts[code];
-  return Boolean(dict[`nw.a${idx}.title`]?.trim() && dict[`nw.a${idx}.excerpt`]?.trim() && dict[`nw.a${idx}.b0`]?.trim());
-})];
+const alternateLangs = newsTranslationLangs(idx, news.body.length);
 const ctaTitle = t('nw.ctaTitle');
 const ctaText = t('nw.ctaText');
 ---

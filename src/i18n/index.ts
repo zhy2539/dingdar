@@ -50,6 +50,30 @@ export function hreflangUrls(enPath: string): { code: AnyLang; url: string }[] {
   return urls;
 }
 
+// Only advertise localized article URLs when every visible article field is translated.
+// This prevents blank or partial article pages from being generated and linked as alternates.
+export function hasNewsTranslation(lang: Lang, articleIndex: number, paragraphCount: number): boolean {
+  const dict = dicts[lang];
+  const prefix = `nw.a${articleIndex}.`;
+  const requiredKeys = [
+    'title',
+    'excerpt',
+    ...Array.from({ length: paragraphCount }, (_, index) => `b${index}`),
+  ];
+
+  return requiredKeys.every((key) => {
+    const value = dict[prefix + key];
+    return typeof value === 'string' && value.trim().length > 0;
+  });
+}
+
+export function newsTranslationLangs(articleIndex: number, paragraphCount: number): AnyLang[] {
+  return [
+    'en',
+    ...LANG_CODES.filter((lang) => hasNewsTranslation(lang, articleIndex, paragraphCount)),
+  ];
+}
+
 // og:locale 映射
 export const OG_LOCALES: Record<AnyLang, string> = {
   en: 'en_US',

@@ -2,7 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import CtaBand from '../../components/CtaBand.astro';
 import { NEWS, getNews } from '../../data/news';
-import { dicts, LANG_CODES, type AnyLang } from '../../i18n';
+import { newsTranslationLangs } from '../../i18n';
 
 export function getStaticPaths() {
   return NEWS.map((n) => ({ params: { slug: n.slug } }));
@@ -17,10 +17,7 @@ if (!news) {
 
 const { title, date, excerpt, cover, coverAlt, body } = news;
 const idx = NEWS.findIndex((item) => item.slug === slug);
-const alternateLangs: AnyLang[] = ['en', ...LANG_CODES.filter((code) => {
-  const dict = dicts[code];
-  return Boolean(dict[`nw.a${idx}.title`]?.trim() && dict[`nw.a${idx}.excerpt`]?.trim() && dict[`nw.a${idx}.b0`]?.trim());
-})];
+const alternateLangs = newsTranslationLangs(idx, body.length);
 ---
 
 <BaseLayout

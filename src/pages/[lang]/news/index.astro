@@ -3,7 +3,7 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import PageHero from '../../../components/PageHero.astro';
 import CtaBand from '../../../components/CtaBand.astro';
 import { NEWS } from '../../../data/news';
-import { dicts, LANG_CODES, getT, langPath, type Lang } from '../../../i18n';
+import { LANG_CODES, getT, hasNewsTranslation, langPath, type Lang } from '../../../i18n';
 
 export function getStaticPaths() {
   return LANG_CODES.map((lang) => ({ params: { lang } }));
@@ -15,8 +15,8 @@ const nw = (key: string) => t('nw.' + key);
 const common = (key: string) => t('common.' + key);
 const langHref = (enPath: string) => langPath(lang as Lang, enPath);
 const articleKey = (idx: number, suffix: string) => t('nw.a' + idx + '.' + suffix);
-const localizedNews = NEWS.map((news, idx) => ({ news, idx })).filter(({ idx }) => (
-  articleKey(idx, 'title').trim() && articleKey(idx, 'excerpt').trim() && articleKey(idx, 'b0').trim()
+const localizedNews = NEWS.map((news, idx) => ({ news, idx })).filter(({ news, idx }) => (
+  hasNewsTranslation(lang as Lang, idx, news.body.length)
 ));
 ---
 

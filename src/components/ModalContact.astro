@@ -210,7 +210,7 @@ const netHint = lang === 'en' ? 'Network error. Please email hugo@dingdar.com or
     try {
       const res = await fetch(endpoint, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
       if (res.ok) {
-        try { gtag('event', 'inquiry_submitted'); } catch {}
+        if (window.dingdarTrackEvent) await window.dingdarTrackEvent('inquiry_submitted');
         window.location.href = form.dataset.thankYouPath || '/thank-you/';
       } else {
         if (status) { status.textContent = form.dataset.hintErr || 'Something went wrong. Please try again or use WhatsApp / email.'; status.style.color = '#d9480f'; }

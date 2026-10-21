@@ -168,7 +168,7 @@ const fields = [
     try {
       const res = await fetch(endpoint, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
       if (res.ok) {
-        try { gtag('event', 'inquiry_submitted'); } catch {}
+        if (window.dingdarTrackEvent) await window.dingdarTrackEvent('inquiry_submitted');
         window.location.href = '/thank-you/';
       } else {
         status.textContent = 'Something went wrong. Please try again or use WhatsApp / email.';

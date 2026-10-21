@@ -2,6 +2,7 @@
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import CtaBand from '../../../components/CtaBand.astro';
 import { NEWS, getNews } from '../../../data/news';
+import { getCategory } from '../../../data/products';
 import { dicts, LANG_CODES, getT, hasNewsTranslation, newsTranslationLangs, langPath, type Lang } from '../../../i18n';
 
 export function getStaticPaths() {
@@ -32,6 +33,18 @@ const title = article('title');
 const excerpt = article('excerpt');
 const body = [0, 1, 2, 3, 4, 5].map((i) => article('b' + i)).filter((x) => x);
 const alternateLangs = newsTranslationLangs(idx, news.body.length);
+const relatedProductSlugs: Record<number, string[]> = {
+  5: ['custom-castings', 'jaw-crusher-wear-parts', 'cone-crusher-wear-parts', 'impact-crusher-wear-parts'],
+  6: ['jaw-crusher-wear-parts', 'cone-crusher-wear-parts', 'impact-crusher-wear-parts'],
+  7: ['jaw-crusher-wear-parts', 'cone-crusher-wear-parts', 'impact-crusher-wear-parts'],
+};
+const relatedProducts = (relatedProductSlugs[idx] || []).map((productSlug) => {
+  const product = getCategory(productSlug)!;
+  return {
+    href: langHref('/products/' + productSlug + '/'),
+    label: t('p.' + productSlug + '.cardTitle') || product.shortName,
+  };
+});
 const ctaTitle = t('nw.ctaTitle');
 const ctaText = t('nw.ctaText');
 ---
@@ -65,6 +78,13 @@ const ctaText = t('nw.ctaText');
       <div class="article-body">
         {body.map((p) => (<p set:html={p}></p>))}
       </div>
+      {relatedProducts.length > 0 && (
+        <nav class="article-related" aria-label={common('browseProducts')}>
+          <strong>{common('browseProducts')}:</strong>
+          {relatedProducts.map((product) => <a href={product.href}>{product.label}</a>)}
+          <a class="article-related__cta" href={langHref('/contact/')}>{common('getQuote')} →</a>
+        </nav>
+      )}
       <a href={langHref('/news/')} class="btn btn--ghost" style="margin-top:12px;">← {common('backToNews')}</a>
     </div>
   </section>
@@ -81,4 +101,8 @@ const ctaText = t('nw.ctaText');
   .article-cover { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 14px; box-shadow: var(--shadow-md); }
   .article-body p { margin-bottom: 22px; font-size: 1.04rem; line-height: 1.8; color: var(--body); }
   .article-body a { color: var(--accent); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+  .article-related { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; margin: 32px 0 20px; padding: 20px 22px; border: 1px solid var(--line); border-radius: 14px; background: var(--bg-tint); }
+  .article-related a { color: var(--accent); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+  .article-related__cta { margin-left: auto; }
+  @media (max-width: 640px) { .article-related__cta { margin-left: 0; } }
 </style>

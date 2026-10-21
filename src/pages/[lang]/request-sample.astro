@@ -158,7 +158,7 @@ const uses = ['sp.u0', 'sp.u1', 'sp.u2', 'sp.u3'].map((k) => t(k));
     try {
       const res = await fetch(endpoint, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
       if (res.ok) {
-        try { gtag('event', 'sample_requested'); } catch {}
+        if (window.dingdarTrackEvent) await window.dingdarTrackEvent('sample_requested');
         window.location.href = form.dataset.thankYouPath || '/thank-you/';
       } else {
         status.textContent = 'Something went wrong. Please try again or use WhatsApp / email.';

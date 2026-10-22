@@ -58,6 +58,7 @@ const faqs = [
 if (p('q2.q') && p('q2.a')) {
   faqs.push({ q: p('q2.q'), a: p('q2.a') });
 }
+const jawQuoteChecklist = [0, 1, 2, 3, 4, 5].map((i) => pui('jawQuote' + i)).filter(Boolean);
 ---
 
 <BaseLayout title={p('title')} description={p('cardDesc')} path={path} lang={lang} enPath={'/products/' + cat.slug + '/'} jsonLd={[breadcrumbLd, productLd]} preloadImages={[cat.bannerImg]}>
@@ -131,6 +132,27 @@ if (p('q2.q') && p('q2.a')) {
       </div>
     </div>
   </section>
+
+  {cat.slug === 'jaw-crusher-wear-parts' && (
+    <section class="section">
+      <div class="container">
+        <div class="sec-head">
+          <span class="eyebrow">{pui('jawQuoteEyebrow')}</span>
+          <h2>{pui('jawQuoteH2')}</h2>
+          <p>{pui('jawQuoteIntro')}</p>
+        </div>
+        <div class="grid grid--3">
+          {jawQuoteChecklist.map((item, i) => (
+            <div class="card" style="padding:22px 24px;">
+              <h3 style="font-size:1rem;margin-bottom:8px;">{String(i + 1).padStart(2, '0')}</h3>
+              <p style="color:var(--muted);">{item}</p>
+            </div>
+          ))}
+        </div>
+        <p style="font-size:0.85rem;color:var(--muted);margin-top:18px;">{pui('jawQuoteNote')}</p>
+      </div>
+    </section>
+  )}
 
   <section class="section">
     <div class="container">

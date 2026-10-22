@@ -114,6 +114,34 @@ const reviewSteps = ['Casting', 'Heat Treatment', 'Machining', 'Inspection & Fin
     </div>
   </section>
 
+  {cat.slug === 'jaw-crusher-wear-parts' && (
+    <section class="section">
+      <div class="container">
+        <div class="sec-head">
+          <span class="eyebrow">Before you request a quote</span>
+          <h2>Jaw Plate Quote Checklist</h2>
+          <p>Share the details you have. A part number or clear photos are enough to start a technical review; missing details can be confirmed afterward.</p>
+        </div>
+        <div class="grid grid--3">
+          {[
+            'Crusher brand, model and series; fixed or movable plate position.',
+            'Part number, drawing or key dimensions; include the tooth or chamber profile if known.',
+            'Feed rock and typical feed size, plus the closed-side setting (CSS) if available.',
+            'Current plate life in hours or tonnes, and the wear or failure pattern.',
+            'Photos of the working face, back and mounting face; include a scale where possible.',
+            'Order quantity and delivery country so tooling, inspection and freight can be reviewed.',
+          ].map((item, i) => (
+            <div class="card" style="padding:22px 24px;">
+              <h3 style="font-size:1rem;margin-bottom:8px;">{String(i + 1).padStart(2, '0')}</h3>
+              <p style="color:var(--muted);">{item}</p>
+            </div>
+          ))}
+        </div>
+        <p style="font-size:0.85rem;color:var(--muted);margin-top:18px;">Recommendations depend on the actual machine reference and operating conditions; the checklist does not replace drawing or sample confirmation.</p>
+      </div>
+    </section>
+  )}
+
   <section class="section">
     <div class="container">
       <div class="sec-head">

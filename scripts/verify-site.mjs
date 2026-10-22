@@ -47,7 +47,35 @@ for (const lang of ['es', 'fr', 'ru', 'pt']) {
   for (const slug of unpublishedSlugs) {
     const path = join(dist, lang, 'news', slug, 'index.html');
     if (existsSync(path)) failures.push(`Untranslated article was generated: /${lang}/news/${slug}/`);
+    const localizedUrl = `https://dingdar.com/${lang}/news/${slug}/`;
+    if (urls.includes(localizedUrl)) failures.push(`Untranslated article is listed in sitemap: ${localizedUrl}`);
   }
+}
+
+for (const slug of unpublishedSlugs) {
+  const englishPath = join(dist, 'news', slug, 'index.html');
+  if (!existsSync(englishPath)) continue;
+  const html = text(englishPath);
+  for (const lang of ['es', 'fr', 'ru', 'pt']) {
+    const localizedUrl = `https://dingdar.com/${lang}/news/${slug}/`;
+    if (html.includes(localizedUrl)) failures.push(`Untranslated article is advertised as hreflang: ${localizedUrl}`);
+  }
+}
+
+const jawQuotePages = [
+  ['products/jaw-crusher-wear-parts/index.html', 'Jaw Plate Quote Checklist'],
+  ['es/products/jaw-crusher-wear-parts/index.html', 'Datos para cotizar placas de mandíbula'],
+  ['fr/products/jaw-crusher-wear-parts/index.html', 'Informations pour le devis de plaques de mâchoire'],
+  ['ru/products/jaw-crusher-wear-parts/index.html', 'Данные для расчёта стоимости щёковых плит'],
+  ['pt/products/jaw-crusher-wear-parts/index.html', 'Dados para cotar placas de mandíbula'],
+];
+for (const [relativePath, heading] of jawQuotePages) {
+  const path = join(dist, relativePath);
+  if (!existsSync(path)) {
+    failures.push(`Missing jaw plate quote checklist page: ${relativePath}`);
+    continue;
+  }
+  if (!text(path).includes(heading)) failures.push(`Missing localized jaw quote checklist heading: ${relativePath}`);
 }
 
 if (urls.some((url) => url.includes('/thank-you/') || url.includes('/oem-casting') || url.includes('/certifications'))) {

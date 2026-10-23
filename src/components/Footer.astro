@@ -1,5 +1,6 @@
 ---
 import { SITE } from '../data/config';
+import { CATEGORIES } from '../data/products';
 import { getT, langPath, type Lang, type AnyLang } from '../i18n';
 const year = new Date().getFullYear();
 
@@ -81,6 +82,12 @@ const quickLinks = [
         </ul>
       </div>
     </div>
+    <div class="product-strip" aria-label={l('footer.products')}>
+      <span class="strip-label">{l('footer.products')}:</span>
+      {CATEGORIES.map((c) => (
+        <a href={hrefOf('/products/' + c.slug + '/')}>{t ? t('p.' + c.slug + '.cardTitle') : c.cardTitle}</a>
+      ))}
+    </div>
     <div class="bottom">
       <span>© {year} {SITE.legalName}. All rights reserved.</span>
       <span class="bottom-links"><a href={hrefOf('/privacy/')}>{l('footer.privacy')}</a><span class="dot">·</span>{SITE.domain}</span>
@@ -102,6 +109,15 @@ const quickLinks = [
     transition: border-color 0.15s, color 0.15s;
   }
   .footer .social a:hover { border-color: var(--accent); color: var(--accent); }
+  .footer .product-strip {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 8px 18px;
+    margin-top: 28px; padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.12);
+    font-size: 0.86rem;
+  }
+  .footer .product-strip .strip-label { color: rgba(255,255,255,0.45); font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.72rem; }
+  .footer .product-strip a { color: #c9d6e2; }
+  .footer .product-strip a:hover { color: var(--accent); }
   .footer .bottom-links { display: inline-flex; align-items: center; gap: 8px; }
   .footer .dot { color: rgba(255,255,255,0.3); }
 </style>

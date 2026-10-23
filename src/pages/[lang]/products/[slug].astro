@@ -59,9 +59,18 @@ if (p('q2.q') && p('q2.a')) {
   faqs.push({ q: p('q2.q'), a: p('q2.a') });
 }
 const jawQuoteChecklist = [0, 1, 2, 3, 4, 5].map((i) => pui('jawQuote' + i)).filter(Boolean);
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
 ---
 
-<BaseLayout title={p('title')} description={p('cardDesc')} path={path} lang={lang} enPath={'/products/' + cat.slug + '/'} jsonLd={[breadcrumbLd, productLd]} preloadImages={[cat.bannerImg]}>
+<BaseLayout title={p('title')} description={p('cardDesc')} path={path} lang={lang} enPath={'/products/' + cat.slug + '/'} jsonLd={[breadcrumbLd, productLd, faqLd]} preloadImages={[cat.bannerImg]}>
   <PageHero
     eyebrow={pui('heroEyebrow')}
     title={p('h1')}

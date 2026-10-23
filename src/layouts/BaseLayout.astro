@@ -76,7 +76,7 @@ const breadcrumbLd = {
     })),
   ],
 };
-const ld = noindex ? jsonLd : [orgLd, ...(hasBreadcrumbLd ? [] : [breadcrumbLd]), ...jsonLdItems];
+const ld = noindex ? [] : [orgLd, ...(hasBreadcrumbLd ? [] : [breadcrumbLd]), ...jsonLdItems];
 ---
 
 <!doctype html>
@@ -146,7 +146,7 @@ const ld = noindex ? jsonLd : [orgLd, ...(hasBreadcrumbLd ? [] : [breadcrumbLd])
       )
     ))}
 
-    <script type="application/ld+json" set:html={JSON.stringify(ld)} />
+    {ld.length > 0 && <script type="application/ld+json" set:html={JSON.stringify(ld)} />}
 
     {SITE.gaId && (
       <script is:inline set:html={`window.dataLayer = window.dataLayer || [];

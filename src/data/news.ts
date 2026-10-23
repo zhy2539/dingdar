@@ -141,7 +141,7 @@ export const NEWS: NewsItem[] = [
   },
   {
     slug: 'cone-crusher-liners-mantle-concave-guide',
-    title: 'Cone Crusher Liners: How to Identify Mantle, Concave and Bowl Liners',
+    title: 'Cone Crusher Liners: Mantle, Concave & Bowl Liner Guide',
     date: '2026-10-19',
     excerpt:
       'Cone crusher liners are the largest recurring wear cost in secondary and tertiary crushing circuits. A step-by-step guide to identifying the mantle, concave and bowl liner from part numbers, measurements and worn-part photos — and the material options that match your feed conditions.',
@@ -208,7 +208,7 @@ export const NEWS: NewsItem[] = [
   },
   {
     slug: 'mn13-jaw-plates-guide',
-    title: 'Mn13 Jaw Plates: Grades, Work Hardening, and How to Specify Them',
+    title: 'Mn13 Jaw Plates: Grades, Work Hardening & Specification',
     date: '2026-10-20',
     excerpt:
       'What "Mn13" actually means on a jaw plate, how work hardening gives it long life in crushing, when Mn18 or an alloy grade is the better call, and the information that turns a part number into a reliable quotation.',

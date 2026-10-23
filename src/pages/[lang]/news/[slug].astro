@@ -34,9 +34,18 @@ const excerpt = article('excerpt');
 const body = [0, 1, 2, 3, 4, 5].map((i) => article('b' + i)).filter((x) => x);
 const alternateLangs = newsTranslationLangs(idx, news.body.length);
 const relatedProductSlugs: Record<number, string[]> = {
+  0: ['jaw-crusher-wear-parts'],
+  1: ['jaw-crusher-wear-parts'],
+  2: ['jaw-crusher-wear-parts', 'cone-crusher-wear-parts', 'custom-castings'],
+  3: ['custom-castings'],
+  4: ['jaw-crusher-wear-parts'],
   5: ['custom-castings', 'jaw-crusher-wear-parts', 'cone-crusher-wear-parts', 'impact-crusher-wear-parts'],
   6: ['jaw-crusher-wear-parts', 'cone-crusher-wear-parts', 'impact-crusher-wear-parts'],
   7: ['jaw-crusher-wear-parts', 'cone-crusher-wear-parts', 'impact-crusher-wear-parts'],
+  8: ['cone-crusher-wear-parts', 'jaw-crusher-wear-parts'],
+  9: ['impact-crusher-wear-parts', 'hammer-crusher-wear-parts'],
+  10: ['custom-castings'],
+  11: ['jaw-crusher-wear-parts'],
 };
 const relatedProducts = (relatedProductSlugs[idx] || []).map((productSlug) => {
   const product = getCategory(productSlug)!;

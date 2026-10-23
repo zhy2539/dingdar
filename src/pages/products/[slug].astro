@@ -5,6 +5,7 @@ import CtaBand from '../../components/CtaBand.astro';
 import FaqList from '../../components/FaqList.astro';
 import ProductCard from '../../components/ProductCard.astro';
 import { CATEGORIES, getCategory } from '../../data/products';
+import { PRODUCT_DEEP_DIVE } from '../../data/productDeepDive';
 import { SITE } from '../../data/config';
 
 export function getStaticPaths() {
@@ -33,6 +34,15 @@ const productLd = {
   brand: { '@type': 'Brand', name: 'DINGDAR' },
   category: 'Casting wear parts',
 };
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: cat.selection.map((s) => ({
+    '@type': 'Question',
+    name: s.q,
+    acceptedAnswer: { '@type': 'Answer', text: s.a },
+  })),
+};
 const customOptions = [
   'Drawing-based requirements',
   'Sample reference',
@@ -40,9 +50,10 @@ const customOptions = [
   'Branding / marking',
 ];
 const reviewSteps = ['Casting', 'Heat Treatment', 'Machining', 'Inspection & Finishing'];
+const deepDive = PRODUCT_DEEP_DIVE[cat.slug];
 ---
 
-<BaseLayout title={cat.title} description={cat.cardDesc} path={path} jsonLd={[breadcrumbLd, productLd]} preloadImages={[cat.bannerImg]}>
+<BaseLayout title={cat.title} description={cat.cardDesc} path={path} jsonLd={[breadcrumbLd, productLd, faqLd]} preloadImages={[cat.bannerImg]}>
   <PageHero
     eyebrow="Product category"
     title={cat.h1}
@@ -168,6 +179,26 @@ const reviewSteps = ['Casting', 'Heat Treatment', 'Machining', 'Inspection & Fin
     </div>
   </section>
 
+  {deepDive && (
+    <section class="section">
+      <div class="container" style="max-width:920px;">
+        <div class="sec-head">
+          <span class="eyebrow">Technical notes</span>
+          <h2>Specifying {cat.cardTitle} for Your Duty</h2>
+          <p>How this part family behaves in service, how it fails, and what to record before the next set is ordered.</p>
+        </div>
+        {deepDive.sections.map((s) => (
+          <div style="margin-top:38px;">
+            <h3 style="font-size:1.22rem;margin-bottom:14px;">{s.heading}</h3>
+            {s.paragraphs.map((p) => (
+              <p style="font-size:1.02rem;line-height:1.85;color:var(--body);margin-bottom:16px;">{p}</p>
+            ))}
+          </div>
+        ))}
+      </div>
+    </section>
+  )}
+
   <section class="section section--soft">
     <div class="container">
       <div class="sec-head">
@@ -199,6 +230,26 @@ const reviewSteps = ['Casting', 'Heat Treatment', 'Machining', 'Inspection & Fin
       </div>
     </div>
   </section>
+
+  {deepDive && deepDive.guides.length > 0 && (
+    <section class="section section--soft">
+      <div class="container">
+        <div class="sec-head">
+          <span class="eyebrow">Further reading</span>
+          <h2>Related Technical Guides</h2>
+          <p>Material selection, identification and inspection explained in detail.</p>
+        </div>
+        <div class="grid grid--3">
+          {deepDive.guides.map((g) => (
+            <a href={g.href} class="card card--hover" style="padding:24px 26px;">
+              <h3 style="font-size:1.02rem;line-height:1.5;">{g.label}</h3>
+              <span class="code" style="display:inline-block;margin-top:12px;">Read guide →</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
 
   <CtaBand
     title={'Request a Quote for ' + cat.shortName}

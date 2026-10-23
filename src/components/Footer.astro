@@ -20,7 +20,6 @@ const EN_FOOTER: Record<string, string> = {
   'footer.requestSample': 'Request a Sample',
   'footer.contactLink': 'Contact Us',
   'footer.quality': 'Quality & Inspection',
-  'footer.exhibitions': 'Exhibitions',
   'footer.contactT': 'Get in Touch',
   'footer.privacy': 'Privacy Policy',
 };
@@ -37,10 +36,7 @@ const quickLinks = [
   { href: '/contact/', key: 'footer.contactLink' },
 ];
 // 仅英文站存在的页面，避免多语言页生成 404 链接
-if (lang === 'en') {
-  quickLinks.splice(5, 0, { href: '/quality/', key: 'footer.quality' });
-  quickLinks.splice(6, 0, { href: '/exhibitions/', key: 'footer.exhibitions' });
-}
+if (lang === 'en') quickLinks.splice(5, 0, { href: '/quality/', key: 'footer.quality' });
 ---
 
 <footer class="footer">

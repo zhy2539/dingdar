@@ -234,6 +234,104 @@ const dlFields = [
     </div>
   </section>
 
+  <section class="section" id="exhibitions">
+    <div class="container">
+      <div class="sec-head">
+        <span class="eyebrow">Exhibitions</span>
+        <h2>Where We Exhibit — ANKIROS 2026, Istanbul</h2>
+        <p>22–24 October 2026 · Istanbul Expo Center (ifm), Yeşilköy · Hall 4, stand E170</p>
+      </div>
+
+      <div class="expo-grid expo-grid--lead">
+        <figure>
+          <picture>
+            <source
+              type="image/webp"
+              srcset="/images/ank2026-01-960.webp 960w, /images/ank2026-01-1440.webp 1440w"
+              sizes="(max-width: 900px) 92vw, 1100px"
+            />
+            <img
+              src="/images/ank2026-01.webp"
+              alt="DINGDAR stand E170 in Hall 4 at ANKIROS 2026, Istanbul"
+              width="1440"
+              height="1080"
+              loading="lazy"
+              decoding="async"
+            />
+          </picture>
+          <figcaption>Our stand in Hall 4, number E170 — ANKIROS 2026, Istanbul Expo Center.</figcaption>
+        </figure>
+      </div>
+
+      <div class="expo-grid expo-grid--2">
+        <figure>
+          <OptImg
+            src="/images/ank2026-03.webp"
+            alt="DINGDAR booth panels at ANKIROS 2026 listing casting, forging, heat treatment and machining capability"
+            width={960}
+            height={720}
+            sizes="(max-width: 760px) 92vw, 540px"
+          />
+          <figcaption>The capability panels: casting, forging, heat treatment, machining — the full route from raw material to finished component.</figcaption>
+        </figure>
+        <figure>
+          <OptImg
+            src="/images/ank2026-06.webp"
+            alt="DINGDAR team at the ANKIROS 2026 fair entrance on 23 October 2026"
+            width={960}
+            height={720}
+            sizes="(max-width: 760px) 92vw, 540px"
+          />
+          <figcaption>Day two at the fair, 23 October 2026.</figcaption>
+        </figure>
+      </div>
+
+      <div class="expo-grid expo-grid--3">
+        <figure>
+          <OptImg
+            src="/images/ank2026-05.webp"
+            alt="DINGDAR team outside the Istanbul Expo Center during ANKIROS 2026"
+            width={720}
+            height={960}
+            sizes="(max-width: 760px) 92vw, 350px"
+          />
+          <figcaption>The team at the Istanbul Expo Center.</figcaption>
+        </figure>
+        <figure>
+          <OptImg
+            src="/images/ank2026-04.webp"
+            alt="ANKIROS 2026 banner at the Istanbul Expo Center entrance reading 22-24 October 2026"
+            width={720}
+            height={960}
+            sizes="(max-width: 760px) 92vw, 350px"
+          />
+          <figcaption>ANKIROS 2026 ran 22–24 October.</figcaption>
+        </figure>
+        <figure>
+          <OptImg
+            src="/images/ank2026-02.webp"
+            alt="DINGDAR display counter at the TEKAFOS stand during ANKIROS 2026"
+            width={720}
+            height={960}
+            sizes="(max-width: 760px) 92vw, 350px"
+          />
+          <figcaption>DINGDAR display at the TEKAFOS stand.</figcaption>
+        </figure>
+      </div>
+
+      <p style="font-size:1.02rem;line-height:1.85;color:var(--body);max-width:860px;margin-top:34px;">
+        On the stand we carried the three lines we quote every week — crusher wear parts, ball mill liners,
+        and large custom castings and forgings — alongside component examples from the panels: hollow shafts,
+        ball valves, gears, large mining gear rings, rudder horns, mill end caps and mill refiner parts. If you
+        visited and did not leave a drawing, the next step is the same as at the stand:
+        <a href="/contact/" style="color:var(--accent);font-weight:600;">send the part number or a photo of the worn part</a>
+        and the material and inspection scope come back in writing. See also
+        <a href="/ball-mill-liners/" style="color:var(--accent);font-weight:600;">ball mill liners</a> and
+        <a href="/quality/" style="color:var(--accent);font-weight:600;">quality and inspection records</a>.
+      </p>
+    </div>
+  </section>
+
   <section class="section section--soft" id="company-profile">
     <div class="container">
       <div class="sec-head center">
@@ -320,6 +418,17 @@ const dlFields = [
   .contact-list a { color: var(--ink); font-weight: 600; }
   .contact-list a:hover { color: var(--accent); }
   @media (max-width: 900px) { .grid--2[style] { grid-template-columns: 1fr !important; } }
+
+  .expo-grid { display: grid; gap: 18px; margin-top: 22px; }
+  .expo-grid--lead { grid-template-columns: 1fr; }
+  .expo-grid--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .expo-grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .expo-grid figure { margin: 0; }
+  .expo-grid img { display: block; width: 100%; height: auto; border-radius: 12px; background: var(--bg-tint); }
+  .expo-grid figcaption { font-size: 0.84rem; color: var(--muted); margin-top: 9px; line-height: 1.55; }
+  @media (max-width: 760px) {
+    .expo-grid--2, .expo-grid--3 { grid-template-columns: 1fr; }
+  }
 </style>
 
 <script>

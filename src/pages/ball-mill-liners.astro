@@ -1,0 +1,306 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import FaqList from '../components/FaqList.astro';
+import { SITE } from '../data/config';
+
+const path = '/ball-mill-liners/';
+
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.domain + '/' },
+    { '@type': 'ListItem', position: 2, name: 'Products', item: SITE.domain + '/products/' },
+    { '@type': 'ListItem', position: 3, name: 'Ball Mill Liners', item: SITE.domain + path },
+  ],
+};
+
+const productLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: 'Ball Mill Liners',
+  description:
+    'Shell liners, head and end liners and grate plates for ball mills and rod mills, cast in high-manganese (Mn13, Mn18, Mn18Cr2), pearlitic chrome-moly and high-chromium iron, produced to drawing, part number or worn sample.',
+  image: [SITE.domain + '/images/factory-mill-head.webp', SITE.domain + '/images/factory-gear-ring.webp'],
+  url: SITE.domain + path,
+  brand: { '@type': 'Brand', name: 'DINGDAR' },
+  manufacturer: { '@type': 'Organization', name: 'DINGDAR Casting', url: SITE.domain },
+  category: 'Grinding mill wear parts',
+  material: 'High-manganese steel (Mn13, Mn18, Mn18Cr2), pearlitic chrome-moly steel, high-chromium cast iron (Cr15–Cr26)',
+  additionalProperty: [
+    {
+      '@type': 'PropertyValue',
+      name: 'Material',
+      value: 'High-manganese steel (Mn13, Mn18, Mn18Cr2), pearlitic chrome-moly steel, high-chromium cast iron (Cr15–Cr26)',
+    },
+    {
+      '@type': 'PropertyValue',
+      name: 'Casting process',
+      value: 'Green sand / shell moulding / lost foam, matched to liner geometry and section thickness',
+    },
+    {
+      '@type': 'PropertyValue',
+      name: 'Part types',
+      value: 'Shell liners, head liners, end liners, grate plates, lifter bars',
+    },
+  ],
+};
+
+const linerTypes = [
+  {
+    name: 'Shell liners',
+    detail:
+      'The working surface of the barrel. Supplied as plate, wave, corrugated or step profiles; the profile and lifter height set how far the charge is lifted before it falls.',
+    fit: 'Ball mills and rod mills, primary and regrind duty',
+  },
+  {
+    name: 'Lifter bars',
+    detail:
+      'Cast with the shell liner or as a separate bolt-on bar. Lifter height and face angle are the single largest lever on charge motion and therefore on power draw.',
+    fit: 'Any mill where the profile is being re-specified',
+  },
+  {
+    name: 'Head and end liners',
+    detail:
+      'Protect the mill heads at the feed and discharge ends, where the charge impacts at an angle and wear is often faster than on the barrel.',
+    fit: 'Feed end and discharge end of ball and rod mills',
+  },
+  {
+    name: 'Grate plates',
+    detail:
+      'Grate discharge mills use slotted plates to hold the pulp level and control retention time. Slot width is a process decision, not a casting detail.',
+    fit: 'Grate discharge ball mills',
+  },
+];
+
+const materials = [
+  {
+    grade: 'Mn13 / Mn18',
+    behaviour:
+      'Austenitic manganese steel. Tough in the as-quenched condition and work-hardens under impact, so the working face rises in hardness while the core stays ductile.',
+    fit: 'Large-ball charges and coarse feed where impact dominates; head and end liners.',
+  },
+  {
+    grade: 'Mn18Cr2',
+    behaviour:
+      'Manganese steel with higher carbon and chromium. Higher as-cast hardness and better abrasion resistance than plain Mn18, with toughness retained for high-impact service.',
+    fit: 'Large-diameter ball mills where the charge is heavy but the feed is not uncrushable.',
+  },
+  {
+    grade: 'Pearlitic chrome-moly',
+    behaviour:
+      'Through-hardening low-alloy steel, heat treated to a hard, uniform matrix. Wears by gradual abrasion rather than by deformation, and holds its profile predictably.',
+    fit: 'Rod mills and ball mills in abrasive, moderate-impact duty; long, stable liner campaigns.',
+  },
+  {
+    grade: 'High-chromium iron (Cr15–Cr26)',
+    behaviour:
+      'High carbide volume gives the best abrasion resistance of the group. Lower toughness, so it is less tolerant of heavy ball impact and of tramp material.',
+    fit: 'Fine grinding, regrind and abrasive slurry duty where impact energy is low.',
+  },
+];
+
+const faqs = [
+  {
+    q: 'What material are ball mill liners made of?',
+    a: 'Steel mill liners are cast in four families: high-manganese steel (Mn13, Mn18, Mn18Cr2), pearlitic chrome-moly low-alloy steel, high-chromium cast iron (Cr15–Cr26), and in some circuits ductile iron. The choice is driven by ball size, feed size, mill diameter and whether the dominant wear mechanism is impact or abrasion — not by a single "best" grade.',
+  },
+  {
+    q: 'What is the difference between shell liners and head liners?',
+    a: 'Shell liners cover the cylindrical barrel and their profile lifts and drops the grinding charge. Head liners protect the feed and discharge ends of the mill, where the charge strikes at an angle. They wear at different rates, so they are specified and replaced separately even though both belong to the same liner set.',
+  },
+  {
+    q: 'Do you supply liners for rod mills as well as ball mills?',
+    a: 'Yes. Rod mills run a lower, more rolling charge and typically suit pearlitic chrome-moly or manganese grades with a different profile from a ball mill. The duty is reviewed before the grade is proposed.',
+  },
+  {
+    q: 'How long do ball mill liners last?',
+    a: 'Liner life is quoted against a duty, not in isolation: mill diameter and speed, ball size and charge volume, feed size and hardness, throughput and pulp conditions all move it. Plants normally benchmark in tonnes milled or operating hours per liner set, and the next set is specified from those records plus photographs of the worn profile.',
+  },
+  {
+    q: 'Can you cast liners to a drawing or match an OEM part number?',
+    a: 'Yes. Send the liner drawing, the OEM part number, or a worn liner as a pattern reference, together with the mill model. Geometry, material grade, hardness and inspection scope are confirmed in a written technical review before production.',
+  },
+];
+---
+
+<BaseLayout
+  title="Ball Mill Liners | Mn18Cr2 & Chrome-Moly | DINGDAR"
+  description="Ball mill shell liners, head and end liners and grate plates cast in Mn13, Mn18Cr2, pearlitic chrome-moly and high-chrome iron, produced to drawing or part number."
+  path={path}
+  alternateLangs={['en']}
+  jsonLd={[breadcrumbLd, productLd, {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  }]}
+  preloadImages={['/images/factory-mill-head.webp']}
+>
+  <PageHero
+    eyebrow="Grinding mill wear parts"
+    title="Ball Mill Liners"
+    lead="Shell liners, lifter bars, head and end liners and grate plates for ball mills and rod mills — cast in manganese, pearlitic chrome-moly and high-chromium grades, and specified against your mill, charge and wear pattern rather than a catalogue number."
+    img="/images/factory-mill-head.webp"
+    imgAlt="Mill head and grinding mill components cast and machined in the DINGDAR workshop"
+    ctaPrimary={{ label: 'Request a Quote', href: '/contact/' }}
+    ctaSecondary={{ label: 'Send a Worn Liner Photo', href: '/contact/' }}
+  />
+
+  <section class="section">
+    <div class="container" style="max-width:920px;">
+      <div class="sec-head">
+        <span class="eyebrow">What a liner actually does</span>
+        <h2>A Liner Is a Structural Part That Happens to Wear</h2>
+      </div>
+      <p style="font-size:1.04rem;line-height:1.85;color:var(--body);margin-bottom:18px;">
+        A mill liner does two jobs at once. It protects the shell from the impact and abrasion of the
+        grinding charge, and its profile controls how that charge is lifted and dropped as the shell
+        rotates. The second job is the one that decides grinding efficiency: change the profile or the
+        material and you change power draw, product size and wear rate together.
+      </p>
+      <p style="font-size:1.04rem;line-height:1.85;color:var(--body);margin-bottom:18px;">
+        Because a liner change stops the mill for a full shift or longer, the material and profile
+        decision is made to run for months at a time. That is why the review before ordering is worth
+        more than the review after the first failure — and why a quotation that names a grade before
+        asking about ball size, mill diameter and feed is guessing.
+      </p>
+      <p style="font-size:1.04rem;line-height:1.85;color:var(--body);margin-bottom:0;">
+        DINGDAR has cast wear parts in Henan since 1986, with green sand, shell moulding, lost foam and
+        investment routes, heat treatment, machining and inspection under one roof. Mill liners follow
+        the same route as our crusher wear parts: geometry and material confirmed in writing, then cast,
+        heat treated, machined where required and released with inspection records.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="sec-head">
+        <span class="eyebrow">Part types</span>
+        <h2>Which Liners We Cast</h2>
+        <p>Each position in the mill wears differently, so each is specified separately.</p>
+      </div>
+      <div class="card" style="overflow-x:auto;">
+        <table class="tbl">
+          <thead>
+            <tr><th>Part</th><th>Function and specification notes</th><th>Typical position</th></tr>
+          </thead>
+          <tbody>
+            {linerTypes.map((l) => (
+              <tr><td><strong>{l.name}</strong></td><td>{l.detail}</td><td>{l.fit}</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:0.88rem;color:var(--muted);margin-top:14px;">
+        Profile drawings, bolt spacing and shell curvature are confirmed against your mill model or the
+        worn liner before pattern work begins.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="sec-head">
+        <span class="eyebrow">Materials</span>
+        <h2>Four Grade Families, Four Different Failure Modes</h2>
+        <p>Matching the grade to the wear mechanism is the decision that sets liner life. Two mills of the same size can need different liners.</p>
+      </div>
+      <div class="card" style="overflow-x:auto;">
+        <table class="tbl">
+          <thead>
+            <tr><th>Grade family</th><th>How it behaves in a mill</th><th>Where it fits</th></tr>
+          </thead>
+          <tbody>
+            {materials.map((m) => (
+              <tr><td><strong>{m.grade}</strong></td><td>{m.behaviour}</td><td>{m.fit}</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container" style="max-width:920px;">
+      <div class="sec-head">
+        <span class="eyebrow">Technical notes</span>
+        <h2>Why Liner Profile Decides Throughput</h2>
+      </div>
+      <div style="margin-top:30px;">
+        <h3 style="font-size:1.22rem;margin-bottom:14px;">Lifter height sets the charge trajectory</h3>
+        <p style="font-size:1.02rem;line-height:1.85;color:var(--body);margin-bottom:16px;">
+          The mill rotates below its critical speed, and the charge is carried up the rising side until
+          gravity takes over. A higher lifter, or a steeper face angle, carries the charge further before
+          release: the balls fall from a greater height, the impact on the toe of the charge increases and
+          so does power draw. A lower profile releases earlier, the charge rolls and cascades instead of
+          cataracting, and grinding relies more on attrition.
+        </p>
+        <p style="font-size:1.02rem;line-height:1.85;color:var(--body);margin-bottom:16px;">
+          Neither state is universally better. Coarse feed and hard ore generally want the higher, more
+          cataracting charge; fine grinding and regrind duty often run better with a gentler profile and
+          lower power per tonne. What does not work is a profile that has drifted: as lifters wear down,
+          the charge slips, throughput falls and the mill draws power without doing proportional work.
+          A liner set that is "still thick enough" can therefore already be costing more than a
+          replacement.
+        </p>
+        <h3 style="font-size:1.22rem;margin-bottom:14px;margin-top:30px;">The wear pattern tells you which problem you have</h3>
+        <p style="font-size:1.02rem;line-height:1.85;color:var(--body);margin-bottom:16px;">
+          Three patterns cover most cases. Even, gradual thinning across the working face is normal
+          abrasion and a life-cycle decision. Deep polishing or a hammered band points at slip and packing
+          — usually a profile or charge problem rather than a material one. Chipping, cracking or a liner
+          broken at a bolt hole points at impact, tramp metal, or a seating and torque issue, and the same
+          failure will repeat with any grade until the cause is corrected.
+        </p>
+        <h3 style="font-size:1.22rem;margin-bottom:14px;margin-top:30px;">What to record before the next set</h3>
+        <p style="font-size:1.02rem;line-height:1.85;color:var(--body);margin-bottom:14px;">
+          Six items make a liner enquiry answerable without a round of questions:
+        </p>
+        <ul style="font-size:1.02rem;line-height:1.9;color:var(--body);padding-left:22px;margin-bottom:16px;">
+          <li>Mill type, diameter × length, and drive power</li>
+          <li>Ball size and charge volume, or rod size for a rod mill</li>
+          <li>Feed size (F80) and product size (P80)</li>
+          <li>Current throughput and average power draw</li>
+          <li>Liner life achieved, in tonnes milled or operating hours</li>
+          <li>Photographs of the worn profile, with a scale, plus the liner part number or drawing</li>
+        </ul>
+        <p style="font-size:1.02rem;line-height:1.85;color:var(--body);margin-bottom:0;">
+          With those, the next set can be specified against how the mill actually behaves, and the
+          material and profile change — if any — is a decision rather than an experiment.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container" style="max-width:920px;">
+      <div class="sec-head">
+        <span class="eyebrow">Questions buyers ask</span>
+        <h2>Ball Mill Liner FAQ</h2>
+      </div>
+      <FaqList items={faqs} />
+      <p style="margin-top:26px;font-size:1.02rem;color:var(--body);">
+        Further reading:
+        <a href="/news/ball-mill-liners-mn18cr2-guide/" style="color:var(--accent);font-weight:600;text-decoration:underline;text-underline-offset:3px;">
+          ball mill liners — materials and what affects liner life
+        </a>
+        , and
+        <a href="/news/what-factors-affect-the-service-life-of-crusher-wear-parts/" style="color:var(--accent);font-weight:600;text-decoration:underline;text-underline-offset:3px;">
+          the operating factors that decide wear part service life
+        </a>.
+      </p>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Specify Your Liner Set"
+    text="Send the mill model, liner drawing or a worn liner photo — we confirm material, profile and inspection scope and reply within 12–24 hours."
+    cta="Request a Technical Review"
+  />
+</BaseLayout>

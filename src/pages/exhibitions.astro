@@ -1,0 +1,196 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import OptImg from '../components/OptImg.astro';
+import { SITE } from '../data/config';
+
+const path = '/exhibitions/';
+
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.domain + '/' },
+    { '@type': 'ListItem', position: 2, name: 'Exhibitions', item: SITE.domain + path },
+  ],
+};
+
+const eventLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Event',
+  name: 'ANKIROS 2026 — 17th International Iron-Steel, Foundry, Non-Ferrous Metallurgy Technologies, Machinery and Products Trade Fair',
+  startDate: '2026-10-22',
+  endDate: '2026-10-24',
+  eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+  eventStatus: 'https://schema.org/EventScheduled',
+  location: {
+    '@type': 'Place',
+    name: 'Istanbul Expo Center (ifm)',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Istanbul',
+      addressRegion: 'Yeşilköy',
+      addressCountry: 'TR',
+    },
+  },
+  organizer: { '@type': 'Organization', name: 'HM ANKIROS Fuarcılık A.Ş.', url: 'https://www.ankiros.com' },
+  description:
+    'DINGDAR exhibited at ANKIROS 2026 in Hall 4, stand E170, presenting crusher wear parts, ball mill liners and large custom castings.',
+};
+
+const details = [
+  { k: 'Fair', v: 'ANKIROS 2026 — 17th International Iron-Steel, Foundry, Non-Ferrous Metallurgy Technologies, Machinery and Products Trade Fair' },
+  { k: 'Dates', v: '22–24 October 2026' },
+  { k: 'Venue', v: 'Istanbul Expo Center (ifm), Yeşilköy, Istanbul, Türkiye' },
+  { k: 'Stand', v: 'Hall 4, stand E170' },
+  { k: 'On display', v: 'Crusher wear parts, ball mill liners, and large castings and forgings from raw material to finished machined component' },
+];
+
+const shots = [
+  { src: '/images/ank2026-01.webp', alt: 'DINGDAR stand E170 in Hall 4 at ANKIROS 2026', cap: 'Our stand in Hall 4 — E170' },
+  { src: '/images/ank2026-03.webp', alt: 'DINGDAR booth panels showing casting and forging capability', cap: 'Capability panels: casting, forging, heat treatment, machining' },
+  { src: '/images/ank2026-02.webp', alt: 'DINGDAR display counter at the TEKAFOS stand at ANKIROS 2026', cap: 'DINGDAR display at the TEKAFOS stand' },
+  { src: '/images/ank2026-05.webp', alt: 'DINGDAR team at the entrance of the Istanbul Expo Center', cap: 'The team at the Istanbul Expo Center' },
+  { src: '/images/ank2026-04.webp', alt: 'ANKIROS 2026 banner at the Istanbul Expo Center entrance', cap: 'ANKIROS 2026, 22–24 October' },
+  { src: '/images/ank2026-06.webp', alt: 'DINGDAR team outside the fair entrance on 23 October 2026', cap: 'Day two at the fair' },
+];
+---
+
+<BaseLayout
+  title="ANKIROS 2026, Istanbul — DINGDAR Stand E170 | Exhibitions"
+  description="DINGDAR exhibited at ANKIROS 2026 in Istanbul, Hall 4 stand E170, showing crusher wear parts, ball mill liners and large castings. Photos and stand details."
+  path={path}
+  alternateLangs={['en']}
+  jsonLd={[breadcrumbLd, eventLd]}
+>
+  <PageHero
+    eyebrow="Exhibitions"
+    title="ANKIROS 2026, Istanbul — Hall 4, Stand E170"
+    lead="22–24 October 2026, Istanbul Expo Center. Crusher wear parts, ball mill liners and large castings and forgings — shown in Hall 4, stand E170, with the process route behind each one."
+    img="/images/ank2026-hero.webp"
+    imgAlt="DINGDAR stand E170 at ANKIROS 2026, Istanbul"
+    ctaPrimary={{ label: 'Request a Quote', href: '/contact/' }}
+    ctaSecondary={{ label: 'See What We Cast', href: '/products/' }}
+  />
+
+  <section class="section">
+    <div class="container">
+      <div class="sec-head">
+        <span class="eyebrow">The fair</span>
+        <h2>Where We Were</h2>
+      </div>
+      <div class="card" style="overflow-x:auto;">
+        <table class="tbl">
+          <tbody>
+            {details.map((d) => (
+              <tr><th style="width:170px;">{d.k}</th><td>{d.v}</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="sec-head">
+        <span class="eyebrow">From the stand</span>
+        <h2>Photos</h2>
+        <p>Photographs taken at the fair on 22–23 October 2026.</p>
+      </div>
+      <div class="gallery">
+        {shots.map((s) => (
+          <figure class="shot">
+            <OptImg src={s.src} alt={s.alt} width={960} height={720} sizes="(max-width: 640px) 92vw, (max-width: 1024px) 45vw, 420px" />
+            <figcaption>{s.cap}</figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container" style="max-width:920px;">
+      <div class="sec-head">
+        <span class="eyebrow">What we brought</span>
+        <h2>Parts Buyers Asked About</h2>
+      </div>
+      <p style="font-size:1.04rem;line-height:1.85;color:var(--body);margin-bottom:18px;">
+        The stand carried the same three lines we quote every week: crusher wear parts for jaw, cone,
+        impact, hammer and roll crushers; ball mill liners and mill components; and large custom castings
+        and forgings. The capability panels showed the route behind them — casting, forging, heat
+        treatment, machining, welding and assembly — with the works' published limits of 400-ton casting
+        capacity, 30-metre machining capacity and a 32 m × 6 m × 6 m heat-treatment envelope.
+      </p>
+      <p style="font-size:1.04rem;line-height:1.85;color:var(--body);margin-bottom:18px;">
+        Component examples on the panels included hollow shafts, ball valves, gears, large mining gear
+        rings, rudder horns, mill end caps and mill refiner parts. These are the parts where a buyer needs
+        a foundry that can also machine and heat treat, because splitting the route across three suppliers
+        is where tolerance and lead time are usually lost.
+      </p>
+      <p style="font-size:1.04rem;line-height:1.85;color:var(--body);margin-bottom:0;">
+        If you stopped by and did not leave a drawing, the fastest next step is the same as at the stand:
+        send the part number, drawing or a photo of the worn part, and the material and inspection scope
+        come back in writing before any price is discussed.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container" style="max-width:920px;">
+      <div class="sec-head">
+        <span class="eyebrow">Related</span>
+        <h2>Where to Go Next</h2>
+      </div>
+      <ul style="font-size:1.02rem;line-height:2;color:var(--body);padding-left:22px;margin:0;">
+        <li><a href="/products/" style="color:var(--accent);font-weight:600;">Crusher wear parts and product categories</a> — jaw plates, mantles, blow bars, hammer heads, roll shells</li>
+        <li><a href="/ball-mill-liners/" style="color:var(--accent);font-weight:600;">Ball mill liners</a> — shell, head and end liners, grate plates and the records to send with an enquiry</li>
+        <li><a href="/products/custom-castings/" style="color:var(--accent);font-weight:600;">Custom castings to drawing</a> — the route for shafts, gears, valves and other large components</li>
+        <li><a href="/quality/" style="color:var(--accent);font-weight:600;">Quality and inspection records</a> — what ships with an order</li>
+      </ul>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Met Us in Istanbul?"
+    text="Send the drawing or part number you discussed at the stand and we will continue from there — material, inspection scope and delivery confirmed in writing."
+    cta="Continue the Conversation"
+  />
+</BaseLayout>
+
+<style>
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-top: 8px;
+  }
+  .gallery .shot {
+    margin: 0;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .gallery .shot img {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    display: block;
+  }
+  .gallery .shot figcaption {
+    padding: 10px 14px 12px;
+    font-size: 0.86rem;
+    color: var(--muted);
+    line-height: 1.45;
+  }
+  @media (max-width: 900px) {
+    .gallery { grid-template-columns: repeat(2, 1fr); }
+    .gallery .shot img { height: 190px; }
+  }
+  @media (max-width: 560px) {
+    .gallery { grid-template-columns: 1fr; }
+    .gallery .shot img { height: 220px; }
+  }
+</style>

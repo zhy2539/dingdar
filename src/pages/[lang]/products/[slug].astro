@@ -38,13 +38,29 @@ const breadcrumbLd = {
     { '@type': 'ListItem', position: 3, name: p('cardTitle'), item: SITE.domain + path },
   ],
 };
+const stripLabel = (line?: string) => {
+  if (!line) return '';
+  const idx = line.indexOf(':');
+  return idx > -1 ? line.slice(idx + 1).trim() : line.trim();
+};
+const rawSpecs = [0, 1, 2, 3, 4].map((i) => p('spec' + i) || cat.specs[i] || '');
+const materialSpec = stripLabel(rawSpecs[0]);
+const routeSpec = stripLabel(rawSpecs[1]);
 const productLd = {
   '@context': 'https://schema.org',
   '@type': 'Product',
   name: p('cardTitle'),
   description: p('intro'),
+  image: [SITE.domain + cat.heroImg, SITE.domain + cat.bannerImg],
+  url: SITE.domain + path,
   brand: { '@type': 'Brand', name: 'DINGDAR' },
+  manufacturer: { '@type': 'Organization', name: 'DINGDAR Casting', url: SITE.domain },
   category: 'Casting wear parts',
+  ...(materialSpec ? { material: materialSpec } : {}),
+  additionalProperty: [
+    ...(materialSpec ? [{ '@type': 'PropertyValue', name: 'Material', value: materialSpec }] : []),
+    ...(routeSpec ? [{ '@type': 'PropertyValue', name: 'Casting process', value: routeSpec }] : []),
+  ],
 };
 const customOptions = [pui('custom0'), pui('custom1'), pui('custom2'), pui('custom3')];
 const reviewSteps = [pui('r0'), pui('r1'), pui('r2'), pui('r3')];

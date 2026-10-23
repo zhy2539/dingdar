@@ -26,13 +26,27 @@ const breadcrumbLd = {
     { '@type': 'ListItem', position: 3, name: cat.cardTitle, item: SITE.domain + path },
   ],
 };
+const specValue = (prefix: string) => {
+  const line = cat.specs.find((s) => s.startsWith(prefix));
+  return line ? line.slice(prefix.length).trim() : '';
+};
+const materialSpec = specValue('Material:');
+const routeSpec = specValue('Casting routes:');
 const productLd = {
   '@context': 'https://schema.org',
   '@type': 'Product',
   name: cat.cardTitle,
   description: cat.intro,
+  image: [SITE.domain + cat.heroImg, SITE.domain + cat.bannerImg],
+  url: SITE.domain + path,
   brand: { '@type': 'Brand', name: 'DINGDAR' },
+  manufacturer: { '@type': 'Organization', name: 'DINGDAR Casting', url: SITE.domain },
   category: 'Casting wear parts',
+  ...(materialSpec ? { material: materialSpec } : {}),
+  additionalProperty: [
+    ...(materialSpec ? [{ '@type': 'PropertyValue', name: 'Material', value: materialSpec }] : []),
+    ...(routeSpec ? [{ '@type': 'PropertyValue', name: 'Casting process', value: routeSpec }] : []),
+  ],
 };
 const faqLd = {
   '@context': 'https://schema.org',

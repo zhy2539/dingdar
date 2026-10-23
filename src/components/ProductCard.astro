@@ -1,4 +1,6 @@
 ---
+import OptImg from './OptImg.astro';
+
 interface Props {
   code: string;
   name: string;
@@ -9,7 +11,13 @@ const { code, name, img } = Astro.props;
 
 <div class="card card--hover prod-card">
   <div class="thumb">
-    <img src={img} alt={name + ' ' + code} loading="lazy" width="640" height="480" />
+    <OptImg
+      src={img}
+      alt={name + ' ' + code}
+      width={640}
+      height={480}
+      sizes="(max-width: 640px) 46vw, (max-width: 1024px) 30vw, 300px"
+    />
   </div>
   <div class="body">
     <span class="code">{code}</span>

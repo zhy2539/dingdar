@@ -1,4 +1,5 @@
 ---
+import OptImg from '../components/OptImg.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import CtaBand from '../components/CtaBand.astro';
@@ -88,15 +89,15 @@ const dlFields = [
       </div>
       <div class="grid grid--3" style="margin-top:40px;">
         <div class="card" style="overflow:hidden;">
-          <img src="/images/foundry-pouring.webp" alt="Casting pouring operation" loading="lazy" width="900" height="450" style="width:100%;height:220px;object-fit:cover;" />
+          <OptImg src="/images/foundry-pouring.webp" alt="Casting pouring operation" width={900} height={450} sizes="(max-width: 768px) 92vw, 30vw" class="about-shot" />
           <div style="padding:20px 22px;"><h3 style="font-size:1.02rem;">Casting</h3><p style="font-size:0.9rem;color:var(--muted);margin-top:6px;">Process-matched production across four routes.</p></div>
         </div>
         <div class="card" style="overflow:hidden;">
-          <img src="/images/factory-machined-parts.webp" alt="Machined casting parts" loading="lazy" width="900" height="450" style="width:100%;height:220px;object-fit:cover;" />
+          <OptImg src="/images/factory-machined-parts.webp" alt="Machined casting parts" width={900} height={450} sizes="(max-width: 768px) 92vw, 30vw" class="about-shot" />
           <div style="padding:20px 22px;"><h3 style="font-size:1.02rem;">Machining &amp; Heat Treatment</h3><p style="font-size:0.9rem;color:var(--muted);margin-top:6px;">Value-added finishing to the agreed scope.</p></div>
         </div>
         <div class="card" style="overflow:hidden;">
-          <img src="/images/quality-inspection.webp" alt="Quality inspection" loading="lazy" width="900" height="450" style="width:100%;height:220px;object-fit:cover;" />
+          <OptImg src="/images/quality-inspection.webp" alt="Quality inspection" width={900} height={450} sizes="(max-width: 768px) 92vw, 30vw" class="about-shot" />
           <div style="padding:20px 22px;"><h3 style="font-size:1.02rem;">Inspection &amp; Delivery</h3><p style="font-size:0.9rem;color:var(--muted);margin-top:6px;">Release evidence and export packing planned before production.</p></div>
         </div>
       </div>

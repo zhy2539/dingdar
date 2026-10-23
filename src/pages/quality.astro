@@ -1,0 +1,171 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import FaqList from '../components/FaqList.astro';
+import { SITE } from '../data/config';
+
+const path = '/quality/';
+
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.domain + '/' },
+    { '@type': 'ListItem', position: 2, name: 'Quality & Inspection', item: SITE.domain + path },
+  ],
+};
+
+const stages = [
+  {
+    stage: 'Before pouring',
+    check: 'Pattern and drawing review, material grade confirmed against the duty, melting charge checked',
+    record: 'Approved drawing / part number, grade confirmation in the technical review',
+  },
+  {
+    stage: 'At pour',
+    check: 'Melt chemistry — manganese, chromium and carbon content against the specified grade',
+    record: 'Chemical composition report per heat',
+  },
+  {
+    stage: 'After heat treatment',
+    check: 'Hardness verification on the working section',
+    record: 'Hardness results with test location noted',
+  },
+  {
+    stage: 'Before despatch',
+    check: 'Dimensional check against drawing, visual inspection of working faces, casting defects',
+    record: 'Dimensional report; visual inspection record',
+  },
+  {
+    stage: 'On request',
+    check: 'Ultrasonic or magnetic-particle testing on heavy-section parts; third-party inspection',
+    record: 'NDT report or third-party certificate, scope agreed before production',
+  },
+];
+
+const faqs = [
+  {
+    q: 'What inspection records ship with an order?',
+    a: 'As agreed in the technical review: a chemical composition report for the heat, hardness results, a dimensional report against the drawing, and a visual inspection record. NDT reports and third-party inspection certificates are added when they are specified before production.',
+  },
+  {
+    q: 'Can I arrange third-party inspection before shipment?',
+    a: 'Yes. Inspection by a nominated surveyor can be arranged at the works, and the scope — dimensional, material verification, NDT, marking — is agreed before production so the visit happens at the right stage rather than after packing.',
+  },
+  {
+    q: 'Which certifications do you hold?',
+    a: 'Certification scope depends on the product and the period, so we do not publish a list that may be out of date. Ask for the current scope for your part and market, and it is confirmed in writing with the quotation.',
+  },
+  {
+    q: 'Can we visit the works before placing an order?',
+    a: 'Yes. Factory visits can be arranged and are usually combined with a review of the part drawing and the proposed process route. Contact us with the dates you have in mind.',
+  },
+];
+---
+
+<BaseLayout
+  title="Quality Control & Inspection Records | DINGDAR"
+  description="How DINGDAR inspects castings: melt chemistry, hardness, dimensional and visual records per order, with NDT and third-party inspection available on request."
+  path={path}
+  alternateLangs={['en']}
+  jsonLd={[breadcrumbLd, {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  }]}
+>
+  <PageHero
+    eyebrow="Quality & inspection"
+    title="What Gets Checked, and What You Get in Writing"
+    lead="A casting is only as good as the evidence that travels with it. This page sets out the inspection points on a DINGDAR order, the records released with the shipment, and the scope we do not claim without checking first."
+    img="/images/quality-inspection.webp"
+    imgAlt="Inspector checking a casting at the DINGDAR works"
+    ctaPrimary={{ label: 'Request a Quote', href: '/contact/' }}
+    ctaSecondary={{ label: 'Ask About Inspection Scope', href: '/contact/' }}
+  />
+
+  <section class="section">
+    <div class="container">
+      <div class="sec-head">
+        <span class="eyebrow">Inspection points</span>
+        <h2>Five Stages, Five Records</h2>
+        <p>Each stage produces a document. The scope is fixed in the technical review before production, not negotiated after the parts are cast.</p>
+      </div>
+      <div class="card" style="overflow-x:auto;">
+        <table class="tbl">
+          <thead>
+            <tr><th>Stage</th><th>What is checked</th><th>Record released</th></tr>
+          </thead>
+          <tbody>
+            {stages.map((s) => (
+              <tr><td><strong>{s.stage}</strong></td><td>{s.check}</td><td>{s.record}</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container" style="max-width:920px;">
+      <div class="sec-head">
+        <span class="eyebrow">Why it matters</span>
+        <h2>The Record Is the Argument</h2>
+      </div>
+      <p style="font-size:1.04rem;line-height:1.85;color:var(--body);margin-bottom:18px;">
+        Wear part failures are usually argued after the fact, and the argument is almost never settled by
+        opinion. A plate that cracked through a bolt hole, a liner that wore through in half the expected
+        hours, a blow bar that chipped on the first day — each has a small set of possible causes, and the
+        paperwork narrows them quickly. Chemistry tells you whether the grade poured matches the grade
+        ordered. Hardness tells you whether the heat treatment landed. Dimensions tell you whether the part
+        seated correctly. Without those three, every conversation about a failure starts from zero.
+      </p>
+      <p style="font-size:1.04rem;line-height:1.85;color:var(--body);margin-bottom:0;">
+        That is why the inspection scope is agreed at quotation stage. A buyer who specifies the evidence
+        before production receives it with the shipment; a buyer who asks afterwards is asking a foundry to
+        reconstruct a heat that has already been poured.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container" style="max-width:920px;">
+      <div class="sec-head">
+        <span class="eyebrow">Straight answers</span>
+        <h2>What We Do Not Claim</h2>
+      </div>
+      <p style="font-size:1.04rem;line-height:1.85;color:var(--body);margin-bottom:18px;">
+        Certification lists published on websites go stale, and a stale certificate is worse than no
+        certificate — it wastes a buyer's audit. We do not publish a badge wall. If your market or your
+        customer requires a specific certificate, tell us the standard and the part, and the current scope
+        for that combination is confirmed in writing with the quotation.
+      </p>
+      <p style="font-size:1.04rem;line-height:1.85;color:var(--body);margin-bottom:0;">
+        The same applies to capacity and lead-time claims: both are confirmed per project after the drawing
+        and quantity are known, because a number that is right for a 200 kg mantle is wrong for a 4-tonne
+        mill head.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container" style="max-width:920px;">
+      <div class="sec-head">
+        <span class="eyebrow">Questions buyers ask</span>
+        <h2>Inspection FAQ</h2>
+      </div>
+      <FaqList items={faqs} />
+    </div>
+  </section>
+
+  <CtaBand
+    title="Specify the Evidence Up Front"
+    text="Send the part, the standard you need to meet and your market — we confirm the inspection scope and the records that will ship with the order."
+    cta="Discuss Inspection Scope"
+  />
+</BaseLayout>

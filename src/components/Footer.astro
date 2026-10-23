@@ -19,6 +19,7 @@ const EN_FOOTER: Record<string, string> = {
   'footer.faq': 'FAQ',
   'footer.requestSample': 'Request a Sample',
   'footer.contactLink': 'Contact Us',
+  'footer.quality': 'Quality & Inspection',
   'footer.contactT': 'Get in Touch',
   'footer.privacy': 'Privacy Policy',
 };
@@ -34,6 +35,8 @@ const quickLinks = [
   { href: '/request-sample/', key: 'footer.requestSample' },
   { href: '/contact/', key: 'footer.contactLink' },
 ];
+// 仅英文站存在的页面，避免多语言页生成 404 链接
+if (lang === 'en') quickLinks.splice(5, 0, { href: '/quality/', key: 'footer.quality' });
 ---
 
 <footer class="footer">

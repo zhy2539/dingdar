@@ -1,4 +1,6 @@
 ---
+import OptImg from './OptImg.astro';
+
 interface Props {
   eyebrow: string;
   title: string;
@@ -15,7 +17,13 @@ const { eyebrow, title, text, points, ctaLabel, ctaHref, img, imgAlt } = Astro.p
 <section class="about-band">
   <div class="container about-band__inner">
     <div class="about-band__media">
-      <img src={img} alt={imgAlt} loading="lazy" width="1200" height="900" />
+      <OptImg
+        src={img}
+        alt={imgAlt}
+        width={1200}
+        height={900}
+        sizes="(max-width: 768px) 92vw, 560px"
+      />
       <span class="about-band__badge" aria-hidden="true"></span>
     </div>
     <div class="about-band__body">

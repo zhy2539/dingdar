@@ -1,0 +1,68 @@
+---
+import fs from 'node:fs';
+import path from 'node:path';
+
+interface Props {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  sizes?: string;
+  loading?: 'lazy' | 'eager';
+  decoding?: 'async' | 'sync';
+  class?: string;
+  fetchpriority?: 'high' | 'auto';
+}
+
+const {
+  src,
+  alt,
+  width,
+  height,
+  sizes = '(max-width: 768px) 92vw, 420px',
+  loading = 'lazy',
+  decoding = 'async',
+  class: cls,
+  fetchpriority,
+} = Astro.props;
+
+// 若已生成 480/960 变体则用 <picture> + srcset，否则退回单张图
+const base = src.replace(/\.webp$/, '');
+const candidates = src.endsWith('.webp')
+  ? [480, 960].filter((w) => {
+      try {
+        return fs.existsSync(path.join(process.cwd(), 'public', base + '-' + w + '.webp'));
+      } catch {
+        return false;
+      }
+    })
+  : [];
+const srcset = candidates.map((w) => `${base}-${w}.webp ${w}w`).join(', ');
+---
+
+{srcset ? (
+  <picture>
+    <source type="image/webp" srcset={srcset} sizes={sizes} />
+    <img
+      src={src}
+      alt={alt}
+      width={width}
+      height={height}
+      loading={loading}
+      decoding={decoding}
+      class={cls}
+      fetchpriority={fetchpriority}
+    />
+  </picture>
+) : (
+  <img
+    src={src}
+    alt={alt}
+    width={width}
+    height={height}
+    loading={loading}
+    decoding={decoding}
+    class={cls}
+    fetchpriority={fetchpriority}
+  />
+)}

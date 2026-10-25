@@ -1,10 +1,9 @@
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const dist = join(root, 'dist');
-const sitemapPath = join(dist, 'sitemap-0.xml');
 const failures = [];
 
 const text = (path) => readFileSync(path, 'utf8');
@@ -16,8 +15,12 @@ const pageFile = (url) => {
     : join(dist, pathname + '.html');
 };
 
-if (!existsSync(sitemapPath)) failures.push('Missing dist/sitemap-0.xml');
-const sitemap = existsSync(sitemapPath) ? text(sitemapPath) : '';
+// 站点地图按语种拆分：汇总 sitemap-en.xml / sitemap-es.xml ... （排除 sitemap-index.xml）
+const sitemapFiles = existsSync(dist)
+  ? readdirSync(dist).filter((name) => /^sitemap-(?!index).*\.xml$/.test(name))
+  : [];
+if (sitemapFiles.length === 0) failures.push('No language sitemaps found in dist');
+const sitemap = sitemapFiles.map((name) => text(join(dist, name))).join('\n');
 const urls = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map((match) => match[1]);
 
 for (const url of urls) {

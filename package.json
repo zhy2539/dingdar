@@ -6,7 +6,7 @@
   "description": "DINGDAR Casting - B2B inquiry site for crusher wear parts, bucket teeth and custom castings",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro build && node scripts/split-sitemap.mjs",
     "preview": "astro preview",
     "verify": "npm run build && node scripts/verify-site.mjs"
   },

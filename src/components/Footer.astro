@@ -92,6 +92,14 @@ if (lang === 'en') quickLinks.splice(5, 0, { href: '/quality/', key: 'footer.qua
       ))}
       <a href="/ball-mill-liners/">Ball Mill Liners</a>
     </div>
+    {lang === 'en' && (
+      <div class="product-strip" aria-label="Industries and materials">
+        <span class="strip-label">Industries &amp; Materials:</span>
+        <a href="/industries/mining/">Mining</a>
+        <a href="/industries/cement/">Cement &amp; Aggregate</a>
+        <a href="/materials/">Wear-Part Materials</a>
+      </div>
+    )}
     <div class="bottom">
       <span>© {year} {SITE.legalName}. All rights reserved.</span>
       <span class="bottom-links"><a href={hrefOf('/privacy/')}>{l('footer.privacy')}</a><span class="dot">·</span>{SITE.domain}</span>

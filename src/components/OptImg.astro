@@ -29,7 +29,7 @@ const {
 // 若已生成 480/960 变体则用 <picture> + srcset，否则退回单张图
 const base = src.replace(/\.webp$/, '');
 const candidates = src.endsWith('.webp')
-  ? [480, 960].filter((w) => {
+  ? [480, 640, 960].filter((w) => {
       try {
         return fs.existsSync(path.join(process.cwd(), 'public', base + '-' + w + '.webp'));
       } catch {

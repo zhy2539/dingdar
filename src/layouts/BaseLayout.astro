@@ -35,18 +35,41 @@ const defaultAlternate = hreflang.find((item) => item.code === 'en') || hreflang
 const orgLd = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
+  '@id': `${SITE.domain}/#organization`,
   name: 'DINGDAR Casting',
   legalName: SITE.legalName,
   url: SITE.domain,
+  logo: {
+    '@type': 'ImageObject',
+    url: `${SITE.domain}/images/logo.png`,
+  },
+  image: `${SITE.domain}/images/og-default.webp`,
   email: SITE.email,
   telephone: SITE.whatsappTel,
+  contactPoint: {
+    '@type': 'ContactPoint',
+    contactType: 'sales',
+    email: SITE.email,
+    telephone: SITE.whatsappTel,
+  },
   address: {
     '@type': 'PostalAddress',
-    addressLocality: 'Henan',
+    addressRegion: 'Henan',
     addressCountry: 'CN',
   },
   foundingDate: '1986',
+  slogan: SITE.tagline,
   description: SITE.description,
+};
+
+const websiteLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': `${SITE.domain}/#website`,
+  url: `${SITE.domain}/`,
+  name: 'DINGDAR Casting',
+  publisher: { '@id': `${SITE.domain}/#organization` },
+  inLanguage: ['en', 'es', 'fr', 'pt', 'ru'],
 };
 
 const jsonLdItems = (Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : []) as object[];
@@ -76,7 +99,7 @@ const breadcrumbLd = {
     })),
   ],
 };
-const ld = noindex ? [] : [orgLd, ...(hasBreadcrumbLd ? [] : [breadcrumbLd]), ...jsonLdItems];
+const ld = noindex ? [] : [orgLd, websiteLd, ...(hasBreadcrumbLd ? [] : [breadcrumbLd]), ...jsonLdItems];
 ---
 
 <!doctype html>

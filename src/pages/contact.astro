@@ -1,4 +1,4 @@
----
+﻿---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import { SITE } from '../data/config';
@@ -7,7 +7,7 @@ const fields = [
   { name: 'name', label: 'Your Name *', type: 'text', required: true, placeholder: 'Full name' },
   { name: 'email', label: 'Work Email *', type: 'email', required: true, placeholder: 'name@company.com' },
   { name: 'company', label: 'Company *', type: 'text', required: true, placeholder: 'Company name' },
-  { name: 'country', label: 'Country *', type: 'text', required: true, placeholder: 'Country / region' },
+  { name: 'country', label: 'Country', type: 'text', required: false, placeholder: 'Country / region' },
   { name: 'product', label: 'Product Interest', type: 'select', required: false, options: [
     'Jaw crusher wear parts',
     'Cone crusher wear parts',
@@ -150,7 +150,7 @@ const fields = [
     const company = data.get('company')?.trim();
     const country = data.get('country')?.trim();
     const message = data.get('message')?.trim();
-    if (!name || !email || !company || !country || !message) {
+    if (!name || !email || !company || !message) {
       status.textContent = 'Please complete all required fields.';
       status.style.color = '#d9480f';
       return;
@@ -180,3 +180,4 @@ const fields = [
     }
   });
 </script>
+

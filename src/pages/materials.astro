@@ -1,0 +1,258 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import FaqList from '../components/FaqList.astro';
+import { SITE } from '../data/config';
+
+const path = '/materials/';
+
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.domain + '/' },
+    { '@type': 'ListItem', position: 2, name: 'Wear-Part Materials', item: SITE.domain + path },
+  ],
+};
+
+const grades = [
+  {
+    family: 'Austenitic manganese steel',
+    spec: 'Mn13, Mn18, Mn18Cr2 — ASTM A128 (Hadfield) family and GB/DIN equivalents',
+    hardness: 'Roughly 170–230 HB as cast; work-hardens in service toward roughly 450–550 HB at the worn surface',
+    behaviour: 'Very high toughness. The surface hardens only where impact is applied, so the part stays ductile underneath and resists cracking and breakage.',
+    fits: 'Primary and coarse crushing, jaw plates, cone mantles and concaves, hammer heads, thick-section parts with real impact energy',
+    limits: 'Pure sliding abrasion with little impact — the surface never work-hardens and a chrome iron will outlast it',
+  },
+  {
+    family: 'High-chromium white iron',
+    spec: 'Cr15–Cr26 families — ASTM A532 and GB/DIN equivalents',
+    hardness: 'Typically in the 500–600 HB range as cast (roughly 52–60 HRC), depending on class and section',
+    behaviour: 'Hard chromium-rich carbides in a supporting matrix. Excellent resistance to scratching and grinding abrasion, with much lower toughness than manganese steel.',
+    fits: 'Blow bars, impact plates, fine grinding chambers, mill internals in abrasive duty, chute and hopper liners',
+    limits: 'Heavy uncrushable impact, thermal cycling, and thin sections that cannot feed the casting — cracking rather than wearing out',
+  },
+  {
+    family: 'Pearlitic chrome-moly steel',
+    spec: 'Medium-chromium, molybdenum-bearing cast steel grades, heat treated',
+    hardness: 'Typically around 250–350 HB after heat treatment, per grade and section',
+    behaviour: 'A middle path: useful abrasion resistance with enough toughness to survive large castings and moderate impact, and better machinability than white iron.',
+    fits: 'Large mill shell and head liners, thick-section parts where a chrome iron would crack',
+    limits: 'Fine, high-silica abrasion where a high-chromium iron is affordable',
+  },
+  {
+    family: 'Low-alloy and martensitic cast steel',
+    spec: 'Low-alloy grades, quenched and tempered to the drawing',
+    hardness: 'Set by heat treatment — commonly in the 30–50 HRC band, depending on temper and section',
+    behaviour: 'Strength and toughness with moderate wear resistance; responds predictably to heat treatment and machines well.',
+    fits: 'Structural castings with a wear face, housings, adapters, brackets and machined components',
+    limits: 'High-stress grinding abrasion, where carbide-bearing irons are the correct answer',
+  },
+  {
+    family: 'Ductile iron',
+    spec: 'GGG40 / GGG50 / GGG60 and similar — ISO 1083 (EN-GJS), ASTM A536, GB 1348',
+    hardness: 'Typically around 130–250 HB, per grade',
+    behaviour: 'Castability, strength and machinability together; a sound choice for complex shapes that are not wear faces.',
+    fits: 'Housings, frames, covers and components where stiffness and machining matter more than abrasion',
+    limits: 'Any position where abrasion is the dominant mechanism',
+  },
+];
+
+const questions = [
+  { k: 'How does the part actually fail?', v: 'Worn evenly thin, chipped at the edge, cracked through a section, deformed, or worn in one band. Each answer points to a different family — and a harder alloy only helps the first one.' },
+  { k: 'How much impact energy reaches the surface?', v: 'Manganese steel needs impact to work-harden; without it, it wears quickly. High-chromium iron needs the impact to stay modest; too much and it cracks. Feed size distribution is the practical proxy for this.' },
+  { k: 'How thick is the section?', v: 'Section thickness sets cooling rate, and cooling rate sets what the microstructure can be. A grade that performs in a 40 mm plate may not be achievable in a 200 mm cone liner without a different chemistry.' },
+  { k: 'What is the abrasion mechanism?', v: 'Scratching abrasion from hard silica, grinding abrasion under a charge, or erosion from a fast particle stream. They do not respond to the same carbide volume or the same matrix hardness.' },
+  { k: 'What is the replacement window?', v: 'A planned shutdown every eight weeks and an unplanned failure in week five call for different compromises between wear resistance and toughness.' },
+];
+
+const faqs = [
+  { q: 'Is a harder material always a better wear part?', a: 'No. Hardness predicts resistance to scratching, not resistance to cracking. A high-chromium iron at 58 HRC will outlast a manganese plate in fine abrasive duty and can fail in a week in a primary crusher fed with slabby rock, because it has far less toughness. The specification has to match the failure mode, not a single number on a data sheet.' },
+  { q: 'Which standard do you certify against?', a: 'Castings are produced and certified against the standard the project specifies — the ASTM A128 series for austenitic manganese steel, ASTM A532 for high-chromium irons, ISO 1083 / ASTM A536 for ductile iron, with GB and DIN equivalents where the drawing calls for them. The exact standard and acceptance criteria are confirmed in writing before production.' },
+  { q: 'Can you supply a material certificate with the order?', a: 'Yes. A certificate with the heat analysis is standard, and dimensional inspection reports, hardness records and visual inspection records can ship with it. NDT or third-party inspection is arranged when specified. The document scope is agreed with the purchase order so the paperwork matches what your QA team needs.' },
+  { q: 'Can you match the grade of an existing part?', a: 'Send the part or a section of it, together with any OEM specification, drawing or hardness reading you have. The chemistry and hardness are checked and the achievable equivalent is confirmed in the review — including where the original grade cannot be reproduced in the section size required.' },
+  { q: 'Do you heat treat in house?', a: 'Heat treatment is carried out in the plant, matched to the grade: solution treatment for austenitic manganese steel, hardening and tempering for martensitic and chrome-moly grades. Hardness is recorded as part of the release documents.' },
+];
+---
+
+<BaseLayout
+  title="Wear-Part Materials — Mn13, Mn18Cr2, High-Chrome | DINGDAR"
+  description="How manganese steel, high-chromium iron, chrome-moly steel and ductile iron behave as wear parts — hardness, toughness and which duty each grade fits."
+  path={path}
+  alternateLangs={['en']}
+  jsonLd={[
+    breadcrumbLd,
+    {
+      '@context': 'https://schema.org',
+      '@type': 'TechArticle',
+      headline: 'Wear-Part Materials: Manganese, High-Chromium, Chrome-Moly and Ductile Iron',
+      about: 'Material selection for crusher and mill wear parts',
+      url: SITE.domain + path,
+      publisher: { '@id': SITE.domain + '/#organization' },
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faqs.map((f) => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a },
+      })),
+    },
+  ]}
+>
+  <PageHero
+    eyebrow="Material selection"
+    title="Wear-Part Materials: What Each Grade Is Actually For"
+    lead="Manganese steel, high-chromium white iron, pearlitic chrome-moly steel, martensitic cast steel and ductile iron — how they differ, and which failure mode each one is the right answer to."
+    img="/images/about-steel-mill.webp"
+    imgAlt="Cast and heat-treated wear parts in the DINGDAR plant"
+    ctaPrimary={{ label: 'Ask for a Grade Recommendation', href: '/contact/' }}
+    ctaSecondary={{ label: 'See Applications', href: '/industries/mining/' }}
+  />
+
+  <section class="section">
+    <div class="container" style="max-width:920px;">
+      <div class="sec-head">
+        <span class="eyebrow">The short version</span>
+        <h2>Toughness and Wear Resistance Trade Against Each Other</h2>
+      </div>
+      <p style="font-size:1.04rem;line-height:1.85;color:var(--body);margin-bottom:18px;">
+        Every wear part sits somewhere on a single line: at one end, a material that resists scratching
+        but cracks under impact; at the other, a material that absorbs impact but wears away quickly when
+        the load is gentle. Manganese steel and high-chromium iron are the two ends of that line. Everything
+        else — chrome-moly steel, martensitic steel, ductile iron — sits between or beside them.
+      </p>
+      <p style="font-size:1.04rem;line-height:1.85;color:var(--body);margin-bottom:0;">
+        Choosing a grade is therefore not a search for the hardest material. It is a decision about which
+        failure mode you are willing to accept, made with the feed, the machine and the maintenance window
+        in view.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="sec-head">
+        <span class="eyebrow">Grade families</span>
+        <h2>Five Families, Compared</h2>
+        <p>Hardness values are typical ranges, not guarantees — the section size, heat treatment and standard class move them.</p>
+      </div>
+      <div class="grade-list">
+        {grades.map((g) => (
+          <article class="grade">
+            <div class="grade-head">
+              <h3>{g.family}</h3>
+              <p class="grade-spec">{g.spec}</p>
+            </div>
+            <dl class="grade-facts">
+              <div><dt>Hardness</dt><dd>{g.hardness}</dd></div>
+              <div><dt>Behaviour</dt><dd>{g.behaviour}</dd></div>
+              <div><dt>Where it fits</dt><dd>{g.fits}</dd></div>
+              <div><dt>Where it fails</dt><dd class="limit">{g.limits}</dd></div>
+            </dl>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container" style="max-width:920px;">
+      <div class="sec-head">
+        <span class="eyebrow">Why one number misleads</span>
+        <h2>Hardness Is a Symptom, Not the Specification</h2>
+      </div>
+      <p style="font-size:1.04rem;line-height:1.85;color:var(--body);margin-bottom:18px;">
+        Two white irons can both read 60 HRC and behave completely differently in service, because
+        hardness says nothing about which carbides are present, how they are distributed, or how well the
+        matrix supports them. Chromium-rich M<sub>7</sub>C<sub>3</sub> carbides are harder and blockier than
+        the M<sub>3</sub>C carbides in a lower-alloy iron, and they resist scratching abrasion far better at
+        the same bulk hardness.
+      </p>
+      <p style="font-size:1.04rem;line-height:1.85;color:var(--body);margin-bottom:18px;">
+        The same logic runs the other way for manganese steel. Its as-cast hardness looks unremarkable next
+        to a chrome iron, and that number is the wrong thing to compare: the material is designed to harden
+        only where the charge hits it, which is why it survives conditions that destroy a harder, more
+        brittle part.
+      </p>
+      <p style="font-size:1.04rem;line-height:1.85;color:var(--body);margin-bottom:0;">
+        Section size belongs in the same conversation. A thick section cools slowly, and a slow-cooled
+        structure is not the structure the data sheet was written for. This is why large cone liners and
+        thick jaw plates are routinely specified in a higher-manganese, chromium-bearing grade rather than
+        the standard one.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container" style="max-width:920px;">
+      <div class="sec-head">
+        <span class="eyebrow">Selection</span>
+        <h2>Five Questions We Ask Before Naming a Grade</h2>
+      </div>
+      <div style="margin-top:26px;">
+        {questions.map((q) => (
+          <div style="margin-bottom:22px;">
+            <h3 style="font-size:1.12rem;margin-bottom:8px;color:var(--ink);">{q.k}</h3>
+            <p style="font-size:1.02rem;line-height:1.8;color:var(--body);margin:0;">{q.v}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container" style="max-width:920px;">
+      <div class="sec-head">
+        <span class="eyebrow">Questions buyers ask</span>
+        <h2>Material FAQ</h2>
+      </div>
+      <FaqList items={faqs} />
+      <p style="margin-top:26px;font-size:1.02rem;color:var(--body);">
+        Further reading:
+        <a href="/news/how-to-choose-jaw-plate-material/" style="color:var(--accent);font-weight:600;text-decoration:underline;text-underline-offset:3px;">
+          choosing jaw plate material
+        </a>,
+        <a href="/news/mn13-jaw-plates-guide/" style="color:var(--accent);font-weight:600;text-decoration:underline;text-underline-offset:3px;">
+          Mn13 jaw plates in practice
+        </a>
+        and
+        <a href="/news/ball-mill-liners-mn18cr2-guide/" style="color:var(--accent);font-weight:600;text-decoration:underline;text-underline-offset:3px;">
+          Mn18Cr2 mill liners
+        </a>.
+      </p>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Tell Us How the Last Part Failed"
+    text="The failure mode, the feed and the machine model are enough to narrow the grade. We reply with a material recommendation and inspection scope within 12–24 hours."
+    cta="Ask for a Grade Recommendation"
+  />
+<style>
+  .grade-list { display: grid; gap: 16px; margin-top: 6px; }
+  .grade {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 22px 24px;
+  }
+  .grade-head { border-bottom: 1px solid var(--line); padding-bottom: 12px; margin-bottom: 14px; }
+  .grade-head h3 { font-size: 1.15rem; margin: 0 0 6px; color: var(--ink); }
+  .grade-spec { font-size: 0.86rem; color: var(--muted); margin: 0; line-height: 1.55; }
+  .grade-facts { margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 28px; }
+  .grade-facts dt {
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 4px;
+  }
+  .grade-facts dd { margin: 0; font-size: 0.96rem; line-height: 1.65; color: var(--body); }
+  .grade-facts dd.limit { color: #7a4a2f; }
+  @media (max-width: 760px) {
+    .grade { padding: 18px 16px; }
+    .grade-facts { grid-template-columns: 1fr; gap: 12px; }
+  }
+</style>
+
+</BaseLayout>

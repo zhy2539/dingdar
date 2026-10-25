@@ -1,0 +1,254 @@
+﻿---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import FaqList from '../../components/FaqList.astro';
+import { SITE } from '../../data/config';
+
+const path = '/industries/mining/';
+
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.domain + '/' },
+    { '@type': 'ListItem', position: 2, name: 'Industries', item: SITE.domain + '/industries/mining/' },
+    { '@type': 'ListItem', position: 3, name: 'Mining', item: SITE.domain + path },
+  ],
+};
+
+const positions = [
+  {
+    part: 'Primary crushing — jaw plates',
+    grade: 'Mn13, Mn18 or Mn18Cr2 austenitic manganese steel',
+    fails: 'Even abrasion, or cracking at the tooth roots when the feed is slabby or contains oversize',
+    buying: 'Feed opening, throw and toggle setting; whether the jaw is corrugated or smooth; wear depth at replacement',
+  },
+  {
+    part: 'Secondary / tertiary — mantles and concaves',
+    grade: 'Mn18Cr2 for heavy impact and thick sections; high-chromium iron where the duty is fine and abrasive',
+    fails: 'Scalloped worn profile that opens the closed-side setting, or breakage from tramp metal',
+    buying: 'Cone model, chamber type (coarse / medium / fine), CSS, and the profile actually worn',
+  },
+  {
+    part: 'Impact crushing — blow bars, impact plates',
+    grade: 'High-chromium white iron (Cr15–Cr26)',
+    fails: 'Rounded leading edge that stops breaking rather than wearing through',
+    buying: 'Rotor diameter, bar profile (standard / tall), feed size and the product size required',
+  },
+  {
+    part: 'Hammer mills and shredders — hammer heads, grates',
+    grade: 'Mn13 / Mn18 for impact; high-chromium iron for abrasive, low-impact duty',
+    fails: 'Uneven wear across the hammer face, or a broken eye from a jammed feed',
+    buying: 'Hammer weight and hole geometry, rotor speed, and the wear pattern photo',
+  },
+  {
+    part: 'Grinding — mill liners, grate plates, lifter bars',
+    grade: 'Pearlitic chrome-moly steel for large sections; Mn18Cr2 where impact dominates; high-chromium iron in fine grinding',
+    fails: 'Flattened lifters that let the charge slip — throughput falls before the liner is worn out',
+    buying: 'Mill size, ball size and charge, F80 / P80, power draw, and the tonnes or hours achieved per set',
+  },
+  {
+    part: 'Loading and hauling — bucket teeth, adapters, GET',
+    grade: 'Alloy steel with a hardened wear tip',
+    fails: 'Tip wear that changes digging angle, or adapter fretting in the nose',
+    buying: 'Machine model, bucket type, pin or pinless retention, and the ground conditions',
+  },
+];
+
+const variables = [
+  { k: 'Energy of impact, not just tonnage', v: 'Two plants can crush the same tonnage with completely different wear because one feed is slabby and the other is already reduced. Impact energy at the liner surface is what work-hardens manganese and what cracks high-chromium iron.' },
+  { k: 'Abrasion index and silica content', v: 'A high silica fraction in the feed shifts the balance toward high-chromium irons. A clean, coarse, high-impact feed shifts it back toward manganese.' },
+  { k: 'Reduction ratio and closed-side setting', v: 'A tighter CSS loads the chamber differently and moves the wear band. A profile that was right for a 40 mm product is usually wrong for a 20 mm one.' },
+  { k: 'Section thickness', v: 'Thick sections cool slowly in the mould and can lose toughness if the grade is chosen for a thin casting. Large cone liners and thick jaw plates are where Mn18Cr2 earns its cost over Mn13.' },
+  { k: 'Tramp metal and operating discipline', v: 'A broken liner is almost never a material failure on its own. It is a torn liner plus a history of uncrushable metal, a jammed chamber or bolts run loose.' },
+];
+
+const enquiry = [
+  'Equipment make and model, or the OEM part number',
+  'A drawing, or a photograph of the worn part with a scale in frame',
+  'Material grade currently used, and the standard it must meet',
+  'Feed size, product size and throughput the circuit is expected to hold',
+  'How the part failed — worn through, cracked, broken, deformed or worn unevenly',
+  'Wear life achieved, in tonnes or operating hours, and the replacement interval you want to reach',
+];
+
+const faqs = [
+  { q: 'Manganese or high-chromium — which one should I specify?', a: 'Manganese steel is the right answer where impact dominates: primary crushing, coarse cone chambers, hammer duty with big feed. It work-hardens under that impact and its toughness stops the cracking that a brittle iron would suffer. High-chromium iron wins where the wear is abrasion with modest impact: fine crushing, blow bars in a well-controlled rotor, mill internals in fine grinding. Most circuits need both, in different positions.' },
+  { q: 'Can you supply against an OEM part number without a drawing?', a: 'Yes, in most cases. Send the OEM number together with the machine model and, where possible, a photo of the worn part. We confirm the geometry and the material grade in writing before tooling or casting starts, so an assumption never becomes a delivered part.' },
+  { q: 'What is the smallest order you will quote?', a: 'There is no single threshold — it depends on whether a pattern already exists, how large the part is and which casting route it needs. Send the part details and the annual volume and the feasible minimum is confirmed with the quotation rather than as a rule of thumb.' },
+  { q: 'Do you supply inspection documents with mining wear parts?', a: 'Material certificates with the heat analysis, dimensional inspection reports, hardness records and visual inspection records can ship with the order. NDT or third-party inspection is arranged when the project specifies it. The document scope is agreed before production, not after.' },
+  { q: 'How do I get wear life up without changing supplier every season?', a: 'Record what the part did. Tonnes or hours achieved, the wear pattern photograph, the feed size and the failure mode are enough to tell whether the problem is grade, profile or operation. A replacement specified from those records is a decision; the same part reordered against a catalogue number is a guess.' },
+];
+---
+
+<BaseLayout
+  title="Mining Wear Parts — Crusher &amp; Mill Consumables | DINGDAR"
+  description="Jaw plates, cone mantles and concaves, blow bars, mill liners and bucket teeth for mining and ore processing, cast to drawing or OEM part number since 1986."
+  path={path}
+  alternateLangs={['en']}
+  jsonLd={[
+    breadcrumbLd,
+    {
+      '@context': 'https://schema.org',
+      '@type': 'CollectionPage',
+      name: 'Wear Parts for Mining and Ore Processing',
+      url: SITE.domain + path,
+      about: 'Crusher and grinding mill wear parts for mining operations',
+      mainEntity: {
+        '@type': 'ItemList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Jaw crusher wear parts', url: SITE.domain + '/products/jaw-crusher-wear-parts/' },
+          { '@type': 'ListItem', position: 2, name: 'Cone crusher wear parts', url: SITE.domain + '/products/cone-crusher-wear-parts/' },
+          { '@type': 'ListItem', position: 3, name: 'Impact crusher wear parts', url: SITE.domain + '/products/impact-crusher-wear-parts/' },
+          { '@type': 'ListItem', position: 4, name: 'Hammer crusher wear parts', url: SITE.domain + '/products/hammer-crusher-wear-parts/' },
+          { '@type': 'ListItem', position: 5, name: 'Ball mill liners', url: SITE.domain + '/ball-mill-liners/' },
+          { '@type': 'ListItem', position: 6, name: 'Bucket teeth and adapters', url: SITE.domain + '/products/bucket-teeth-adapters/' },
+        ],
+      },
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faqs.map((f) => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a },
+      })),
+    },
+  ]}
+>
+  <PageHero
+    eyebrow="Mining & ore processing"
+    title="Wear Parts for Mining and Ore Processing"
+    lead="Jaw plates, cone mantles and concaves, blow bars, mill liners and bucket teeth — cast in manganese, high-chromium and chrome-moly grades, and specified against the duty the part actually sees."
+    img="/images/banner-cone.webp"
+    imgAlt="Cone crusher wear parts produced by DINGDAR for mining duty"
+    ctaPrimary={{ label: 'Request a Technical Review', href: '/contact/' }}
+    ctaSecondary={{ label: 'See Material Grades', href: '/materials/' }}
+  />
+
+  <section class="section">
+    <div class="container" style="max-width:920px;">
+      <div class="sec-head">
+        <span class="eyebrow">Where the money goes</span>
+        <h2>A Wear Part Is a Consumable, Not a Spare</h2>
+      </div>
+      <p style="font-size:1.04rem;line-height:1.85;color:var(--body);margin-bottom:18px;">
+        In a mining circuit, wear parts are the second-largest line after energy. A jaw plate, a cone mantle
+        or a set of mill liners is bought several times a year, and the only number that matters is cost per
+        tonne crushed or milled — not the price on the quotation. A part that costs 20% less and lasts 30%
+        shorter is the more expensive decision.
+      </p>
+      <p style="font-size:1.04rem;line-height:1.85;color:var(--body);margin-bottom:18px;">
+        The complication is that "the same part" is not the same duty everywhere. Two identical cone
+        crushers, one fed with a clean coarse feed and one with a slabby, damp, high-silica feed, will wear a
+        mantle in completely different ways. That is why a quotation that names a grade before asking what
+        the chamber is doing is a guess dressed as a price.
+      </p>
+      <p style="font-size:1.04rem;line-height:1.85;color:var(--body);margin-bottom:0;">
+        DINGDAR has cast wear parts in Henan since 1986, with green sand, shell moulding, lost foam and
+        investment routes, heat treatment, machining and inspection in the same plant. Mining consumables
+        are reviewed the same way as any other drawing: geometry, material, hardness and inspection scope
+        agreed in writing, then cast, heat treated, machined where required and released with records.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="sec-head">
+        <span class="eyebrow">Part positions</span>
+        <h2>What Wears Where, and What To Specify</h2>
+        <p>Six positions cover most of the consumable spend in a crushing and grinding circuit.</p>
+      </div>
+      <div class="card" style="overflow-x:auto;">
+        <table class="tbl">
+          <thead>
+            <tr><th>Position</th><th>Typical grade</th><th>How it usually fails</th><th>What to send</th></tr>
+          </thead>
+          <tbody>
+            {positions.map((p) => (
+              <tr>
+                <td><strong>{p.part}</strong></td>
+                <td>{p.grade}</td>
+                <td>{p.fails}</td>
+                <td>{p.buying}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:0.88rem;color:var(--muted);margin-top:14px;">
+        Grade families and their behaviour are set out in more detail on the
+        <a href="/materials/" style="color:var(--accent);font-weight:600;">wear-part materials</a> page.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container" style="max-width:920px;">
+      <div class="sec-head">
+        <span class="eyebrow">Five variables</span>
+        <h2>Why Two Identical Crushers Wear Differently</h2>
+      </div>
+      <div style="margin-top:26px;">
+        {variables.map((v) => (
+          <div style="margin-bottom:22px;">
+            <h3 style="font-size:1.12rem;margin-bottom:8px;color:var(--ink);">{v.k}</h3>
+            <p style="font-size:1.02rem;line-height:1.8;color:var(--body);margin:0;">{v.v}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container" style="max-width:920px;">
+      <div class="sec-head">
+        <span class="eyebrow">Enquiry checklist</span>
+        <h2>What Makes a Quote Answerable in One Round</h2>
+        <p>Six items, and the technical review does not need a second exchange.</p>
+      </div>
+      <ul style="font-size:1.02rem;line-height:1.9;color:var(--body);padding-left:22px;margin:20px 0 26px;">
+        {enquiry.map((e) => <li>{e}</li>)}
+      </ul>
+      <p style="font-size:1.02rem;line-height:1.85;color:var(--body);margin-bottom:0;">
+        Drawings are the fastest route, but a worn part photographed next to a ruler, plus the machine
+        model, is usually enough to start. Send it to
+        <a href="/contact/" style="color:var(--accent);font-weight:600;">our technical team</a> and the
+        material and inspection scope come back in writing.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container" style="max-width:920px;">
+      <div class="sec-head">
+        <span class="eyebrow">Questions buyers ask</span>
+        <h2>Mining Wear Parts FAQ</h2>
+      </div>
+      <FaqList items={faqs} />
+      <p style="margin-top:26px;font-size:1.02rem;color:var(--body);">
+        Further reading:
+        <a href="/news/how-to-choose-jaw-plate-material/" style="color:var(--accent);font-weight:600;text-decoration:underline;text-underline-offset:3px;">
+          how to choose jaw plate material
+        </a>,
+        <a href="/news/what-factors-affect-the-service-life-of-crusher-wear-parts/" style="color:var(--accent);font-weight:600;text-decoration:underline;text-underline-offset:3px;">
+          what decides crusher wear part service life
+        </a>
+        and
+        <a href="/news/what-information-is-needed-for-a-custom-crusher-wear-parts-quote/" style="color:var(--accent);font-weight:600;text-decoration:underline;text-underline-offset:3px;">
+          the information needed for a custom wear parts quote
+        </a>.
+      </p>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Send the Part, Not the Catalogue Number"
+    text="A drawing, an OEM part number or a photo of the worn part — we confirm material, geometry and inspection scope and reply with technical feedback within 12–24 hours."
+    cta="Request a Quote"
+  />
+</BaseLayout>
+

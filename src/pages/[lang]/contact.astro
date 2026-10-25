@@ -1,4 +1,4 @@
----
+﻿---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/PageHero.astro';
 import { SITE } from '../../data/config';
@@ -18,7 +18,7 @@ const fields = [
   { name: 'name', label: ct('f0.label'), type: 'text', required: true, placeholder: ct('f0.placeholder') },
   { name: 'email', label: ct('f1.label'), type: 'email', required: true, placeholder: ct('f1.placeholder') },
   { name: 'company', label: ct('f2.label'), type: 'text', required: true, placeholder: ct('f2.placeholder') },
-  { name: 'country', label: ct('f3.label'), type: 'text', required: true, placeholder: ct('f3.placeholder') },
+  { name: 'country', label: ct('f3.label').replace(' *', ''), type: 'text', required: false, placeholder: ct('f3.placeholder') },
   { name: 'product', label: ct('f4.label'), type: 'select', required: false, options: ['ct.opt0', 'ct.opt1', 'ct.opt2', 'ct.opt3', 'ct.opt4', 'ct.opt5', 'ct.opt6', 'ct.opt7'].map((k) => t(k)) },
   { name: 'quantity', label: ct('f5.label'), type: 'text', required: false, placeholder: ct('f5.placeholder') },
   { name: 'reference_url', label: ({ es: 'Enlace de plano / foto (opcional)', fr: 'Lien du plan / de la photo (facultatif)', ru: 'Ссылка на чертёж / фото (необязательно)', pt: 'Link do desenho / foto (opcional)' } as Record<Lang, string>)[lang as Lang], type: 'url', required: false, placeholder: 'Google Drive, Dropbox or OneDrive URL' },
@@ -178,3 +178,4 @@ const helps = [0, 1, 2, 3].map((i) => ct('h' + i));
     }
   });
 </script>
+

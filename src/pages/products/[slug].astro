@@ -67,7 +67,7 @@ const reviewSteps = ['Casting', 'Heat Treatment', 'Machining', 'Inspection & Fin
 const deepDive = PRODUCT_DEEP_DIVE[cat.slug];
 ---
 
-<BaseLayout title={cat.title} description={cat.cardDesc} path={path} jsonLd={[breadcrumbLd, productLd, faqLd]} preloadImages={[cat.bannerImg]}>
+<BaseLayout title={cat.title} description={cat.cardDesc} path={path} image={cat.heroImg.replace('.webp', '-og.webp')} jsonLd={[breadcrumbLd, productLd, faqLd]} preloadImages={[cat.bannerImg]}>
   <PageHero
     eyebrow="Product category"
     title={cat.h1}

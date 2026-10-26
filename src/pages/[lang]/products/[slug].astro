@@ -86,7 +86,7 @@ const faqLd = {
 };
 ---
 
-<BaseLayout title={p('title')} description={p('cardDesc')} path={path} lang={lang} enPath={'/products/' + cat.slug + '/'} jsonLd={[breadcrumbLd, productLd, faqLd]} preloadImages={[cat.bannerImg]}>
+<BaseLayout image={cat.heroImg.replace('.webp', '-og.webp')} title={p('title')} description={p('cardDesc')} path={path} lang={lang} enPath={'/products/' + cat.slug + '/'} jsonLd={[breadcrumbLd, productLd, faqLd]} preloadImages={[cat.bannerImg]}>
   <PageHero
     eyebrow={pui('heroEyebrow')}
     title={p('h1')}

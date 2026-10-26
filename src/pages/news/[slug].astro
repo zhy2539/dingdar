@@ -43,6 +43,7 @@ const relatedProducts = (relatedProductSlugs[idx] || []).map((productSlug) => {
   title={`${title}`}
   description={excerpt}
   path={`/news/${slug}/`}
+  image={cover.replace('.webp', '-og.webp')}
   alternateLangs={alternateLangs}
   jsonLd={{
     '@context': 'https://schema.org',
@@ -53,8 +54,7 @@ const relatedProducts = (relatedProductSlugs[idx] || []).map((productSlug) => {
     image: 'https://dingdar.com' + cover,
     author: { '@type': 'Organization', name: 'DINGDAR Casting' },
     publisher: { '@type': 'Organization', name: 'Henan Dingdar Machinery Equipment Manufacture Co., Ltd.' },
-  }}
->
+  }}>
   <section class="section" style="padding-top:64px;">
     <div class="container" style="max-width:860px;">
       <nav class="breadcrumb" aria-label="Breadcrumb">

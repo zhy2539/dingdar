@@ -62,6 +62,7 @@ const ctaText = t('nw.ctaText');
   title={`${title}`}
   description={excerpt}
   path={langPath(lang as Lang, '/news/' + slug + '/')}
+  image={news.cover.replace('.webp', '-og.webp')}
   lang={lang}
   enPath={'/news/' + slug + '/'}
   alternateLangs={alternateLangs}

@@ -83,7 +83,8 @@ export async function onRequestPost({ request, env }) {
     phone: pick(fields, ['phone', 'tel', 'whatsapp']),
     message: pick(fields, ['message', 'requirements', 'enquiry', 'inquiry', 'details']),
     source_page: pick(fields, ['source_page']).slice(0, 300),
-    lang: pick(fields, ['lang', 'language']).slice(0, 8),
+    // 站内表单实际提交的字段名是 page_language，早期只认 lang 导致该列一直是空的
+    lang: pick(fields, ['lang', 'language', 'page_language']).slice(0, 8),
     extra: JSON.stringify(
       Object.fromEntries(
         Object.entries(fields).filter(

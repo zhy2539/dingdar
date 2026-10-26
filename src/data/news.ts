@@ -8,11 +8,14 @@ export interface NewsItem {
   cover: string;
   coverAlt: string;
   body: string[];
+  /** 同主题的其它文章 slug，用于文章间互链（不指向自身） */
+  related?: string[];
 }
 
 export const NEWS: NewsItem[] = [
   {
     slug: 'dingdar-launches-international-website',
+    related: ['how-to-choose-jaw-plate-material', 'what-information-is-needed-for-a-custom-crusher-wear-parts-quote'],
     title: 'DINGDAR Launches Its International Website',
     date: '2026-10-14',
     excerpt:
@@ -28,6 +31,7 @@ export const NEWS: NewsItem[] = [
   },
   {
     slug: 'how-to-choose-jaw-plate-material',
+    related: ['mn13-jaw-plates-guide', 'how-to-identify-the-correct-jaw-plate-for-your-crusher', 'what-factors-affect-the-service-life-of-crusher-wear-parts'],
     title: 'How to Choose Jaw Plate Material: Mn13 and Mn18',
     date: '2026-10-14',
     excerpt:
@@ -44,6 +48,7 @@ export const NEWS: NewsItem[] = [
   },
   {
     slug: 'crusher-wear-parts-moq-lead-time',
+    related: ['what-information-is-needed-for-a-custom-crusher-wear-parts-quote', 'what-inspection-records-should-buyers-request-for-crusher-wear-parts', 'green-sand-vs-investment-casting'],
     title: 'MOQ, Tooling and Lead Time for Crusher Wear Parts',
     date: '2026-10-14',
     excerpt:
@@ -60,6 +65,7 @@ export const NEWS: NewsItem[] = [
   },
   {
     slug: 'green-sand-vs-investment-casting',
+    related: ['crusher-wear-parts-moq-lead-time', 'ball-mill-liners-mn18cr2-guide'],
     title: 'Green Sand vs Investment Casting: Which Route?',
     date: '2026-10-14',
     excerpt:
@@ -76,6 +82,7 @@ export const NEWS: NewsItem[] = [
   },
   {
     slug: 'how-to-identify-the-correct-jaw-plate-for-your-crusher',
+    related: ['mn13-jaw-plates-guide', 'how-to-choose-jaw-plate-material'],
     title: 'How to Identify the Correct Jaw Plate for Your Crusher',
     date: '2026-10-15',
     excerpt:
@@ -92,6 +99,7 @@ export const NEWS: NewsItem[] = [
   },
   {
     slug: 'what-information-is-needed-for-a-custom-crusher-wear-parts-quote',
+    related: ['crusher-wear-parts-moq-lead-time', 'what-inspection-records-should-buyers-request-for-crusher-wear-parts'],
     title: 'Information Needed for a Custom Crusher Wear Parts Quote',
     date: '2026-10-15',
     excerpt:
@@ -109,6 +117,7 @@ export const NEWS: NewsItem[] = [
   },
   {
     slug: 'what-inspection-records-should-buyers-request-for-crusher-wear-parts',
+    related: ['what-information-is-needed-for-a-custom-crusher-wear-parts-quote', 'crusher-wear-parts-moq-lead-time'],
     title: 'Inspection Records to Request for Crusher Wear Parts',
     date: '2026-10-15',
     excerpt:
@@ -125,6 +134,7 @@ export const NEWS: NewsItem[] = [
   },
   {
     slug: 'what-factors-affect-the-service-life-of-crusher-wear-parts',
+    related: ['mn13-jaw-plates-guide', 'blow-bars-manganese-vs-high-chrome', 'cone-crusher-liners-mantle-concave-guide'],
     title: 'What Factors Affect the Service Life of Crusher Wear Parts?',
     date: '2026-10-15',
     excerpt:
@@ -141,6 +151,7 @@ export const NEWS: NewsItem[] = [
   },
   {
     slug: 'cone-crusher-liners-mantle-concave-guide',
+    related: ['what-factors-affect-the-service-life-of-crusher-wear-parts', 'blow-bars-manganese-vs-high-chrome'],
     title: 'Cone Crusher Liners: Mantle, Concave & Bowl Liner Guide',
     date: '2026-10-19',
     excerpt:
@@ -164,6 +175,7 @@ export const NEWS: NewsItem[] = [
   },
   {
     slug: 'blow-bars-manganese-vs-high-chrome',
+    related: ['what-factors-affect-the-service-life-of-crusher-wear-parts', 'cone-crusher-liners-mantle-concave-guide'],
     title: 'Blow Bars: High Manganese vs High Chrome Steel',
     date: '2026-10-19',
     excerpt:
@@ -186,6 +198,7 @@ export const NEWS: NewsItem[] = [
   },
   {
     slug: 'ball-mill-liners-mn18cr2-guide',
+    related: ['green-sand-vs-investment-casting', 'what-factors-affect-the-service-life-of-crusher-wear-parts'],
     title: 'Ball Mill Liners: Materials and What Affects Liner Life',
     date: '2026-10-19',
     excerpt:
@@ -208,6 +221,7 @@ export const NEWS: NewsItem[] = [
   },
   {
     slug: 'mn13-jaw-plates-guide',
+    related: ['how-to-choose-jaw-plate-material', 'how-to-identify-the-correct-jaw-plate-for-your-crusher', 'what-factors-affect-the-service-life-of-crusher-wear-parts'],
     title: 'Mn13 Jaw Plates: Grades, Work Hardening & Specification',
     date: '2026-10-20',
     excerpt:

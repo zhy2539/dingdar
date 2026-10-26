@@ -18,12 +18,24 @@ const faqs = [
   { q: 'How do you handle claims?', a: 'Claims are settled against the inspection scope fixed when the order was placed — which is why that scope is agreed up front and written into the quotation.' },
   { q: 'Do you support one-stop sourcing of teeth and crusher parts?', a: 'Yes. Distributors and traders commonly order bucket teeth, adapters and crusher wear parts in one order, and we plan multi-category orders as a single project.' },
 ];
+
+// 页面问答与可见内容一一对应，避免结构化数据与正文不一致
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
 ---
 
 <BaseLayout
   title="FAQ | Crusher Parts, MOQ, Lead Time, Samples | DINGDAR"
   description="Answers on inquiries, MOQ, tooling, lead time, samples, materials, casting processes, inspection records and claims for crusher parts."
   path="/faq/"
+  jsonLd={faqLd}
 >
   <PageHero
     eyebrow="FAQ"

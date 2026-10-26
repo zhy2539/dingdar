@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import CtaBand from '../../components/CtaBand.astro';
-import { NEWS, getNews } from '../../data/news';
+import { NEWS, getNews, type NewsItem } from '../../data/news';
 import { getCategory } from '../../data/products';
 import { newsTranslationLangs } from '../../i18n';
 
@@ -19,6 +19,10 @@ if (!news) {
 const { title, date, excerpt, cover, coverAlt, body } = news;
 const idx = NEWS.findIndex((item) => item.slug === slug);
 const alternateLangs = newsTranslationLangs(idx, body.length);
+// 文章之间互链：把内容上同一主题的文章串成簇，避免每篇文章只有一个来自列表页的入链
+const relatedPosts = (news.related ?? [])
+  .map((s) => getNews(s))
+  .filter((item): item is NewsItem => Boolean(item));
 const relatedProductSlugs: Record<number, string[]> = {
   0: ['jaw-crusher-wear-parts'],
   1: ['jaw-crusher-wear-parts'],
@@ -71,6 +75,12 @@ const relatedProducts = (relatedProductSlugs[idx] || []).map((productSlug) => {
           <strong>Related products:</strong>
           {relatedProducts.map((product) => <a href={product.href}>{product.label}</a>)}
           <a class="article-related__cta" href="/contact/">Request a technical review →</a>
+        </nav>
+      )}
+      {relatedPosts.length > 0 && (
+        <nav class="article-related" aria-label="Related articles">
+          <strong>Continue reading:</strong>
+          {relatedPosts.map((post) => <a href={'/news/' + post.slug + '/'}>{post.title}</a>)}
         </nav>
       )}
       <p style="font-size:0.88rem;color:var(--muted);line-height:1.7;margin-bottom:18px;">

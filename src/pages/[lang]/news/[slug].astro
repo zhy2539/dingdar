@@ -56,6 +56,14 @@ const relatedProducts = (relatedProductSlugs[idx] || []).map((productSlug) => {
 });
 const ctaTitle = t('nw.ctaTitle');
 const ctaText = t('nw.ctaText');
+// 只链到确实有该语种译文的文章，否则会把用户送到英文页
+const relatedPosts = (news.related ?? []).flatMap((s) => {
+  const i = NEWS.findIndex((item) => item.slug === s);
+  if (i < 0) return [];
+  const item = NEWS[i];
+  if (!hasNewsTranslation(lang as Lang, i, item.body.length)) return [];
+  return [{ href: langHref('/news/' + item.slug + '/'), label: t('nw.a' + i + '.title') }];
+});
 ---
 
 <BaseLayout
@@ -93,6 +101,12 @@ const ctaText = t('nw.ctaText');
           <strong>{common('browseProducts')}:</strong>
           {relatedProducts.map((product) => <a href={product.href}>{product.label}</a>)}
           <a class="article-related__cta" href={langHref('/contact/')}>{common('getQuote')} →</a>
+        </nav>
+      )}
+      {relatedPosts.length > 0 && (
+        <nav class="article-related" aria-label={common('readMore')}>
+          <strong>{common('readMore')}:</strong>
+          {relatedPosts.map((post) => <a href={post.href}>{post.label}</a>)}
         </nav>
       )}
       <a href={langHref('/news/')} class="btn btn--ghost" style="margin-top:12px;">← {common('backToNews')}</a>

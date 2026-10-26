@@ -1,0 +1,153 @@
+# Pages CMS 配置（https://pagescms.org）
+#
+# 用途：在浏览器里编辑产品与文章，保存后自动提交到本仓库，
+# Cloudflare Pages 检测到新提交会自动重新构建并部署。
+# 编辑入口：https://app.pagescms.org  —— 用 GitHub 账号登录后选择 zhy2539/dingdar 仓库。
+#
+# 注意：
+# 1. 文章顺序不要调整 —— 多语种译文本按「文章序号 + 段落数」匹配，
+#    新增文章请追加到列表末尾，否则西/法/葡/俄译文会错位或消失。
+# 2. 正文用富文本编辑器写作，也支持直接粘贴 HTML（表格、列表都能保留）。
+# 3. 图片上传后落在 public/images/，字段里写入 /images/xxx.webp 这样的路径。
+
+media:
+  input: public/images
+  output: /images
+
+content:
+  - name: news
+    label: 文章
+    type: file
+    path: src/data/news.json
+    format: json
+    list: true
+    view:
+      primary: title
+      sort: date
+      order: desc
+    fields:
+      - name: title
+        label: 标题
+        type: string
+        required: true
+      - name: slug
+        label: URL 短名
+        description: 英文小写、用连字符，例如 how-to-choose-jaw-plate-material。发布后不要再改，改了旧链接会 404。
+        type: string
+        required: true
+        pattern: "^[a-z0-9-]+$"
+      - name: date
+        label: 发布日期
+        type: date
+        options:
+          format: yyyy-MM-dd
+        required: true
+      - name: excerpt
+        label: 摘要
+        description: 一句话概括，同时用作搜索结果里的描述（建议 120–155 字符）。
+        type: text
+        required: true
+      - name: cover
+        label: 封面图
+        description: 建议 1200×675 的 webp，路径形如 /images/news-xxx.webp。
+        type: image
+        required: true
+      - name: coverAlt
+        label: 封面图说明
+        description: 英文描述图片内容，供无障碍阅读与图片搜索使用。
+        type: string
+        required: true
+      - name: body
+        label: 正文段落
+        description: 每一条是一个内容块（段落／列表／表格）。段数改动会影响多语种译文的匹配，改老文章时尽量保持段数不变。
+        type: rich-text
+        list: true
+      - name: related
+        label: 相关文章 slug
+        description: 可填 2–3 个已发布文章的 slug，用于文末"继续阅读"互链。
+        type: string
+        list: true
+
+  - name: products
+    label: 产品分类
+    type: file
+    path: src/data/products.json
+    format: json
+    list: true
+    view:
+      primary: cardTitle
+    fields:
+      - name: slug
+        label: URL 短名
+        description: 英文小写、用连字符，例如 jaw-crusher-wear-parts。页面地址为 /products/<slug>/。发布后不要修改。
+        type: string
+        required: true
+        pattern: "^[a-z0-9-]+$"
+      - name: title
+        label: 页面标题（SEO title）
+        description: 显示在浏览器标签与搜索结果里，建议 50–60 字符，末尾带 | DINGDAR。
+        type: string
+        required: true
+      - name: shortName
+        label: 简称
+        type: string
+        required: true
+      - name: cardTitle
+        label: 卡片标题
+        type: string
+        required: true
+      - name: cardDesc
+        label: 卡片描述
+        description: 产品列表页卡片上的一句话介绍。
+        type: text
+        required: true
+      - name: heroImg
+        label: 主图
+        type: image
+        required: true
+      - name: bannerImg
+        label: 横幅图
+        type: image
+      - name: h1
+        label: 页面大标题（H1）
+        type: string
+        required: true
+      - name: intro
+        label: 页面导语
+        type: text
+        required: true
+      - name: parts
+        label: 样例件
+        description: 产品页上的件号卡片。没有件号可留空。
+        type: object
+        list: true
+        fields:
+          - name: code
+            label: 件号
+            type: string
+          - name: name
+            label: 名称
+            type: string
+          - name: img
+            label: 图片
+            type: image
+      - name: applications
+        label: 适用场景
+        type: string
+        list: true
+      - name: specs
+        label: 规格要点
+        type: text
+        list: true
+      - name: selection
+        label: 选型问答
+        description: 产品页 FAQ 区块，也会写入结构化数据。
+        type: object
+        list: true
+        fields:
+          - name: q
+            label: 问题
+            type: string
+          - name: a
+            label: 回答
+            type: text

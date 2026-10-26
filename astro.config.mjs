@@ -13,7 +13,11 @@ export default defineConfig({
   },
   integrations: [
     sitemap({
-      filter: (page) => !page.includes('/thank-you/') && !page.includes('/oem-casting') && !page.includes('/certifications'),
+      filter: (page) =>
+        !page.includes('/thank-you/') &&
+        !page.includes('/admin/') &&
+        !page.includes('/oem-casting') &&
+        !page.includes('/certifications'),
     }),
   ],
 });

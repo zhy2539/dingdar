@@ -19,7 +19,9 @@ export const SITE = {
   waText: 'Hello DINGDAR, I found your website and would like to ask about your cast wear parts. Please share more details.',
   responsePromise: 'Technical feedback within 12–24 hours',
   // 询盘表单端点：留空时页面展示直达联系方式（邮件/WhatsApp）。
-  // 上线前填入 Formspree 端点（如 https://formspree.io/f/xxxx）或自有 Worker 端点。
+  // 现阶段仍直发 Formspree，保证邮件通知不断。
+  // 待 /api/inquiry 在线上验证通过后，再改成 '/api/inquiry'
+  // （该 Function 会写 D1 供 /admin 展示，同时转发一份给 Formspree）。
   formEndpoint: 'https://formspree.io/f/mwlvryqb',
   // Google Analytics 4 衡量 ID（数据流 DINGDAR Casting Site，2026-10-14 创建）
   gaId: 'G-LVB325JZGL',

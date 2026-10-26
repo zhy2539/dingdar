@@ -12,6 +12,8 @@
 
 const DEFAULT_FORMSPREE = 'https://formspree.io/f/mwlvryqb';
 
+// D1 数据库：dingdar-inquiries（Pages 绑定变量名 DB）
+
 const json = (data, status = 200) =>
   new Response(JSON.stringify(data), {
     status,

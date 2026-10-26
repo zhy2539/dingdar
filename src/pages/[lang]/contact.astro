@@ -1,7 +1,8 @@
-﻿---
+---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/PageHero.astro';
 import { SITE } from '../../data/config';
+import Turnstile from '../../components/Turnstile.astro';
 import { dicts, LANG_CODES, getT, langPath, type Lang } from '../../i18n';
 
 export function getStaticPaths() {
@@ -51,7 +52,7 @@ const helps = [0, 1, 2, 3].map((i) => ct('h' + i));
           <h2 style="font-size:1.5rem;">{ct('formTitle')}</h2>
           <p style="font-size:0.95rem;color:var(--muted);margin:10px 0 24px;">{ct('formNote')}</p>
 
-          <form id="inquiry" action={SITE.formEndpoint} method="POST" novalidate data-hint-required={ct('hintRequired')} data-hint-email={ct('hintEmail')} data-thank-you-path={langPath(lang as Lang, '/thank-you/')}>
+          <form id="inquiry" action={SITE.formEndpoint} method="POST" novalidate data-hint-required={ct('hintRequired')} data-hint-email={ct('hintEmail')} data-hint-captcha={ct('hintCaptcha')} data-thank-you-path={langPath(lang as Lang, '/thank-you/')}>
             <div class="hp-field" aria-hidden="true">
               <label>Leave this field empty</label>
               <input type="text" name="_honey" tabindex="-1" autocomplete="off" />
@@ -86,6 +87,7 @@ const helps = [0, 1, 2, 3].map((i) => ct('h' + i));
             </div>
 
             <div class="field" style="margin-top: 6px;">
+            <Turnstile />
               <button type="submit" class="btn btn--primary btn--lg" style="width:100%;">{ct('sendInquiry')}</button>
               <p class="hint" id="form-status" role="status" aria-live="polite"></p>
             </div>

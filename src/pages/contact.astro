@@ -1,7 +1,8 @@
-﻿---
+---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import { SITE } from '../data/config';
+import Turnstile from '../components/Turnstile.astro';
 
 const fields = [
   { name: 'name', label: 'Your Name *', type: 'text', required: true, placeholder: 'Full name' },
@@ -93,6 +94,7 @@ const fields = [
               ))}
             </div>
 
+            <Turnstile />
             <div class="field" style="margin-top: 6px;">
               <button type="submit" class="btn btn--primary btn--lg" style="width:100%;">Send Inquiry</button>
               <a

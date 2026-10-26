@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/PageHero.astro';
 import CtaBand from '../../components/CtaBand.astro';
+import Turnstile from '../../components/Turnstile.astro';
 import { CAPABILITY_STATS, COMPLIANCE, OEM_STEPS, OEM_CUSTOMIZABLE, SITE } from '../../data/config';
 import { dicts, LANG_CODES, getT, langPath, type Lang } from '../../i18n';
 
@@ -243,7 +244,7 @@ const inside = ['rs.in0', 'rs.in1', 'rs.in2', 'rs.in3', 'rs.in4'].map((k) => t(k
           <h3 style="font-size:1.5rem;">{rs('formTitle')}</h3>
           <p style="font-size:0.95rem;color:var(--muted);margin:10px 0 24px;">{rs('formNote')}</p>
 
-          <form id="dl" action={SITE.formEndpoint} method="POST" novalidate data-err-required={rs('errRequired')} data-err-email={rs('errEmail')}>
+          <form id="dl" action={SITE.formEndpoint} method="POST" novalidate data-hint-captcha={ct('hintCaptcha')} data-err-required={rs('errRequired')} data-err-email={rs('errEmail')}>
             <div class="hp-field" aria-hidden="true">
               <label>Leave this field empty</label>
               <input type="text" name="_honey" tabindex="-1" autocomplete="off" />
@@ -262,6 +263,7 @@ const inside = ['rs.in0', 'rs.in1', 'rs.in2', 'rs.in3', 'rs.in4'].map((k) => t(k
             </div>
 
             <div class="field" style="margin-top:6px;">
+            <Turnstile />
               <button type="submit" class="btn btn--primary btn--lg" style="width:100%;">{rs('getDownloadLink')}</button>
               <p class="hint" id="form-status" role="status" aria-live="polite"></p>
             </div>

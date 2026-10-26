@@ -1,6 +1,7 @@
 ---
 import { SITE } from '../data/config';
 import { getT, langPath, type Lang, type AnyLang } from '../i18n';
+import Turnstile from './Turnstile.astro';
 
 interface Props {
   lang?: AnyLang;
@@ -30,6 +31,7 @@ const closeLabel = lang === 'en' ? 'Close' : 'Close';
 const emptyHint = lang === 'en' ? 'Please complete all required fields.' : l('ct.hintRequired');
 const emailHint = lang === 'en' ? 'Please enter a valid email address.' : l('ct.hintEmail');
 const errHint = lang === 'en' ? 'Something went wrong. Please try again or use WhatsApp / email.' : l('ct.hintError');
+const captchaHint = lang === 'en' ? 'Please tick the security check just above the button, then submit again.' : l('ct.hintCaptcha');
 const netHint = lang === 'en' ? 'Network error. Please email hugo@dingdar.com or message us on WhatsApp.' : l('ct.hintNetwork');
 ---
 
@@ -43,7 +45,7 @@ const netHint = lang === 'en' ? 'Network error. Please email hugo@dingdar.com or
     <p id="mc-subtitle" style="font-size:0.9rem;color:var(--muted);margin-bottom:22px;">{subtitle}</p>
 
     <form data-mc-form action={SITE.formEndpoint} method="POST" novalidate
-      data-hint-required={emptyHint} data-hint-email={emailHint} data-hint-err={errHint} data-hint-net={netHint} data-thank-you-path={thankYouPath}>
+      data-hint-required={emptyHint} data-hint-email={emailHint} data-hint-err={errHint} data-hint-net={netHint} data-hint-captcha={captchaHint} data-thank-you-path={thankYouPath}>
       <div class="hp-field" aria-hidden="true">
         <label>Leave this field empty</label>
         <input type="text" name="_honey" tabindex="-1" autocomplete="off" />
@@ -78,6 +80,7 @@ const netHint = lang === 'en' ? 'Network error. Please email hugo@dingdar.com or
         ))}
       </div>
 
+      <Turnstile />
       <button type="submit" class="btn btn--primary btn--lg" style="width:100%;">{submitLabel}</button>
       <p class="hint" data-mc-status role="status" aria-live="polite"></p>
     </form>
@@ -157,6 +160,7 @@ const netHint = lang === 'en' ? 'Network error. Please email hugo@dingdar.com or
     modal.classList.add('open');
     modal.setAttribute('aria-hidden', 'false');
     document.body.classList.add('modal-open');
+    window.ddTsRender?.(modal.querySelector('[data-turnstile]'));
     modal.querySelector('button[data-mc-close]')?.focus();
   }
   function closeModal() {
@@ -164,6 +168,7 @@ const netHint = lang === 'en' ? 'Network error. Please email hugo@dingdar.com or
     modal.classList.remove('open');
     modal.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('modal-open');
+    window.ddTsReset?.(modal);
     lastFocused?.focus?.();
   }
 

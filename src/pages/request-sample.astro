@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import { SITE } from '../data/config';
+import Turnstile from '../components/Turnstile.astro';
 
 const path = '/request-sample/';
 const sampleFields = [
@@ -85,6 +86,7 @@ const sampleFields = [
               ))}
             </div>
 
+            <Turnstile />
             <div class="field" style="margin-top: 6px;">
               <button type="submit" class="btn btn--primary btn--lg" style="width:100%;">Request Sample</button>
               <p class="hint" id="form-status" role="status" aria-live="polite"></p>

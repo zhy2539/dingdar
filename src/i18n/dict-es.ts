@@ -739,6 +739,7 @@ export const es: Record<string, string> = {
   'ct.responseTitle': 'Promesa de respuesta',
   'ct.responseText': 'Respuesta técnica en 12–24 horas. Cada consulta se lee como un requisito técnico, no como una petición de precio.',
   'ct.hintRequired': 'Completa todos los campos obligatorios.',
+  'ct.hintCaptcha': 'Marca la verificación de seguridad y vuelve a enviar.',
   'ct.hintEmail': 'Introduce una dirección de correo válida.',
   'ct.hintEndpoint': 'El formulario aún no está configurado. Contáctanos directamente:',
   'ct.hintError': 'Algo salió mal. Inténtalo de nuevo o usa WhatsApp / correo.',

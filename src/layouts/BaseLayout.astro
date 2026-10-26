@@ -227,5 +227,66 @@ window.addEventListener('load', function () {
         }
       });
     </script>
+
+    <!-- Cloudflare Turnstile：显式渲染，隐藏弹窗内的控件延后到打开时再渲染 -->
+    <script is:inline>
+      window.ddTsRender = function (el) {
+        if (!el || el.dataset.tsRendered === '1' || !window.turnstile) return;
+        try {
+          var id = window.turnstile.render(el, {
+            sitekey: el.dataset.sitekey,
+            theme: 'light',
+            size: 'normal',
+          });
+          el.dataset.tsRendered = '1';
+          el.dataset.tsId = id;
+        } catch (err) {}
+      };
+      window.ddTsReset = function (root) {
+        var el = (root || document).querySelector('[data-turnstile]');
+        if (!el || !window.turnstile) return;
+        if (el.dataset.tsId) {
+          try { window.turnstile.reset(el.dataset.tsId); } catch (err) {}
+        }
+      };
+      window.ddTsOnload = function () {
+        window.__ddTsReady = true;
+        var list = document.querySelectorAll('[data-turnstile]');
+        for (var i = 0; i < list.length; i++) {
+          // 弹窗在关闭状态是 display:none，控件放进去会渲染成空白，等打开时再渲染
+          if (list[i].closest('.mc-modal')) continue;
+          window.ddTsRender(list[i]);
+        }
+      };
+
+      // 提交前本地校验：控件没通过就明确提示，而不是让用户看到"出错了"
+      document.addEventListener(
+        'submit',
+        function (e) {
+          var form = e.target;
+          if (!form || !form.querySelector) return;
+          var widget = form.querySelector('[data-turnstile]');
+          if (!widget) return;
+          var token = form.querySelector('input[name="cf-turnstile-response"]');
+          if (token && token.value) return;
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          var hint =
+            form.dataset.hintCaptcha ||
+            'Please tick the security check just above the button, then submit again.';
+          var box = form.querySelector('#form-status, [data-mc-status], .hint');
+          if (box) {
+            box.textContent = hint;
+            box.style.color = '#d9480f';
+          }
+        },
+        true
+      );
+    </script>
+    <script
+      is:inline
+      src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=ddTsOnload"
+      async
+      defer></script>
   </body>
 </html>

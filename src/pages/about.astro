@@ -1,9 +1,10 @@
-﻿---
+---
 import OptImg from '../components/OptImg.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { CAPABILITY_STATS, COMPLIANCE, OEM_STEPS, OEM_CUSTOMIZABLE, SITE } from '../data/config';
+import Turnstile from '../components/Turnstile.astro';
 
 const routes = [
   'Green sand casting',
@@ -318,6 +319,7 @@ const dlFields = [
               ))}
             </div>
 
+            <Turnstile />
             <div class="field" style="margin-top:6px;">
               <button type="submit" class="btn btn--primary btn--lg" style="width:100%;">Get the Download Link</button>
               <p class="hint" id="form-status" role="status" aria-live="polite"></p>

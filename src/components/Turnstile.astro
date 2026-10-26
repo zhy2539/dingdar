@@ -1,0 +1,26 @@
+---
+/**
+ * Cloudflare Turnstile 人机校验占位。
+ * 脚本由 BaseLayout 统一加载（render=explicit），这里只放容器，
+ * 避免 forms 在隐藏状态下（弹窗）初始化失败。
+ */
+const SITE_KEY = '0x4AAAAAAFmIDImrBZkEu-Ba';
+---
+<div class="ts-field" data-turnstile data-sitekey={SITE_KEY}></div>
+
+<style>
+  .ts-field {
+    margin: 4px 0 14px;
+    min-height: 65px;
+    display: flex;
+    align-items: center;
+  }
+  .ts-field:empty::after {
+    content: '';
+    width: 300px;
+    height: 65px;
+    border-radius: 6px;
+    background: var(--bg-tint, #f1f4f8);
+    opacity: 0.6;
+  }
+</style>

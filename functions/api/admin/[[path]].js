@@ -138,6 +138,15 @@ export async function onRequest({ request, env, params }) {
     return json({ ok: true });
   }
 
+  // 删除单条（清理测试数据 / 垃圾询盘）。前端有二次确认。
+  if (route === 'delete' && method === 'POST') {
+    const body = await request.json().catch(() => ({}));
+    const id = Number(body.id);
+    if (!Number.isInteger(id) || id <= 0) return json({ ok: false, error: 'bad_request' }, 400);
+    await env.DB.prepare('DELETE FROM inquiries WHERE id = ?').bind(id).run();
+    return json({ ok: true });
+  }
+
   if (route === 'export' && method === 'GET') {
     const status = url.searchParams.get('status') || '';
     const sql = `SELECT id, created_at, name, email, company, country, phone, message, source_page, lang, status

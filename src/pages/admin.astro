@@ -16,7 +16,7 @@ const title = '询盘后台 · DINGDAR';
       :root {
         --ink: #0f172a;
         --body: #334155;
-        --muted: #64748b;
+        --muted: #5b6779;
         --line: #e2e8f0;
         --soft: #f1f5f9;
         --bg: #f1f3f6;
@@ -109,6 +109,8 @@ const title = '询盘后台 · DINGDAR';
       .btn--primary { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
       .btn--primary:hover { background: #a33609; border-color: #a33609; }
       .btn--sm { font-size: 0.79rem; padding: 4px 9px; border-radius: 7px; }
+      .btn--danger { color: #b42318; border-color: #f0d5d1; }
+      .btn--danger:hover { background: #fff6f5; border-color: #e3b2aa; color: #96170e; }
 
       /* ---------- 统计卡 / 筛选 ---------- */
       .stats {
@@ -401,7 +403,7 @@ const title = '询盘后台 · DINGDAR';
         <div class="toolbar">
           <div class="search">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.2-3.2"></path></svg>
-            <input id="q" type="search" placeholder="搜索姓名、公司、邮箱、国家、正文…" />
+            <input id="q" type="search" placeholder="搜索姓名、公司、邮箱、正文…" />
           </div>
           <a class="btn" id="export" href="/api/admin/export" download>导出 CSV</a>
         </div>
@@ -595,13 +597,9 @@ const title = '询盘后台 · DINGDAR';
         addFact('产品上下文', ex.product_context);
         addFact('样品 / 资料', ex.document || ex.catalogue);
 
-        // 「从哪来」
+        // 「从哪来」：页面名称 + 具体路径（语种由顶部徽标体现，不重复）
         const srcTitle = srcInfo.title || srcInfo.label;
-        const srcBits = [];
-        srcBits.push(`<b>${esc(srcTitle)}</b>`);
-        if (srcInfo.detail) srcBits.push(`<code>${esc(srcInfo.detail)}</code>`);
-        if (srcInfo.loc) srcBits.push(`${esc(LANGS[srcInfo.loc] || srcInfo.loc)}站`);
-        if (langLabel) srcBits.push(`表单语言 ${esc(langLabel)}`);
+        const srcBits = [`<b>${esc(srcTitle)}</b>`, `<code>${esc(srcInfo.path)}</code>`];
         if (srcInfo.host) srcBits.push(esc(srcInfo.host));
 
         // 操作
@@ -612,6 +610,7 @@ const title = '询盘后台 · DINGDAR';
               `Re: ${kind.t} — ${it.company || it.name || 'dingdar.com'}`
             )}">回复邮件</a>`
           : '';
+        const delBtn = `<button class="btn btn--sm btn--danger" data-del="${it.id}" title="删除后不可恢复">删除</button>`;
 
         return `<article class="inq" data-status="${esc(it.status)}">
           <div class="ihead">
@@ -646,6 +645,7 @@ const title = '询盘后台 · DINGDAR';
               ${actBtn('replied', '标记已回复')}
               ${actBtn('archived', '归档')}
               ${actBtn('new', '重置为新')}
+              ${delBtn}
             </div>
           </div>
         </article>`;
@@ -671,6 +671,22 @@ const title = '询盘后台 · DINGDAR';
           const box = expand.parentElement.querySelector('[data-msg]');
           const collapsed = box.classList.toggle('clamp');
           expand.textContent = collapsed ? '展开全文' : '收起';
+          return;
+        }
+        const del = t.closest('button[data-del]');
+        if (del) {
+          if (!confirm('确定删除这条询盘？删除后不可恢复。')) return;
+          del.disabled = true;
+          try {
+            await fetch('/api/admin/delete', {
+              method: 'POST',
+              headers: { 'content-type': 'application/json' },
+              body: JSON.stringify({ id: Number(del.dataset.del) }),
+            });
+          } catch {
+            /* 忽略，靠 load() 反映真实状态 */
+          }
+          load();
           return;
         }
         const btn = t.closest('button[data-to]');

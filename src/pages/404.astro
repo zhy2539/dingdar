@@ -1,23 +1,51 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../data/config';
 ---
 
 <BaseLayout
-  title="Page Not Found | DINGDAR"
-  description="The page you are looking for could not be found."
+  title="Page not found | DINGDAR Casting"
+  description="The page you were looking for is not here. Browse crusher wear parts, application notes by industry, or send a drawing for a quotation."
+  path="/404/"
   noindex={true}
+  alternateLangs={['en']}
 >
-  <section class="section">
-    <div class="container" style="max-width:640px;text-align:center;">
-      <div style="font-size:4.5rem;font-weight:800;color:var(--accent);line-height:1;">404</div>
-      <h1 style="margin-top:10px;">Page Not Found</h1>
-      <p style="margin-top:14px;font-size:1.05rem;">
-        The page you requested does not exist or has moved. Try the homepage or browse our product catalog.
+  <section class="section" style="padding-top:96px;">
+    <div class="container" style="max-width:820px;">
+      <span class="eyebrow">404</span>
+      <h1 style="font-size:clamp(1.9rem,4vw,2.7rem);margin:14px 0 18px;">That page is not here</h1>
+      <p style="font-size:1.05rem;color:var(--body);line-height:1.8;max-width:640px;">
+        The link may be from an older version of the site. Everything below is one click away — or send the part
+        number and a drawing, and we will answer with a technical review.
       </p>
-      <div class="cta-row" style="display:flex;gap:14px;justify-content:center;margin-top:30px;flex-wrap:wrap;">
-        <a href="/" class="btn btn--primary">Back to Home</a>
-        <a href="/products/" class="btn btn--ghost">Browse Products</a>
+
+      <div class="grid grid--3" style="margin-top:34px;">
+        <a href="/products/" class="card card--hover" style="padding:24px 26px;">
+          <h2 style="font-size:1.02rem;line-height:1.5;">Crusher wear parts</h2>
+          <p style="font-size:0.9rem;color:var(--muted);margin:10px 0 0;line-height:1.6;">
+            Jaw plates, cone liners, blow bars, hammers, roll shells, bucket teeth.
+          </p>
+        </a>
+        <a href="/industries/mining/" class="card card--hover" style="padding:24px 26px;">
+          <h2 style="font-size:1.02rem;line-height:1.5;">Mining and ore processing</h2>
+          <p style="font-size:0.9rem;color:var(--muted);margin:10px 0 0;line-height:1.6;">
+            Wear positions across a crushing and grinding circuit.
+          </p>
+        </a>
+        <a href="/materials/" class="card card--hover" style="padding:24px 26px;">
+          <h2 style="font-size:1.02rem;line-height:1.5;">Wear-part materials</h2>
+          <p style="font-size:0.9rem;color:var(--muted);margin:10px 0 0;line-height:1.6;">
+            Mn13, Mn18Cr2, high-chromium and ductile iron compared.
+          </p>
+        </a>
       </div>
+
+      <p style="margin-top:30px;font-size:0.95rem;color:var(--muted);">
+        Or contact us directly:
+        <a href={'mailto:' + SITE.email} style="color:var(--accent);font-weight:600;">{SITE.email}</a>
+        ·
+        <a href="/contact/" style="color:var(--accent);font-weight:600;">Request a quote</a>
+      </p>
     </div>
   </section>
 </BaseLayout>

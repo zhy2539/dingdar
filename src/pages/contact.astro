@@ -74,7 +74,20 @@ const fields = [
                 ) : (
                   <div class="field" style={f.name === 'reference_url' ? 'grid-column: 1 / -1;' : undefined}>
                     <label for={f.name}>{f.label}</label>
-                    <input id={f.name} name={f.name} type={f.type} placeholder={f.placeholder} required={f.required} />
+                    <input
+                      id={f.name}
+                      name={f.name}
+                      type={f.type}
+                      placeholder={f.placeholder}
+                      required={f.required}
+                      autocomplete={{
+                        name: 'name',
+                        email: 'email',
+                        company: 'organization',
+                        country: 'country-name',
+                        reference_url: 'url',
+                      }[f.name] || 'on'}
+                    />
                   </div>
                 )
               ))}
@@ -82,7 +95,18 @@ const fields = [
 
             <div class="field" style="margin-top: 6px;">
               <button type="submit" class="btn btn--primary btn--lg" style="width:100%;">Send Inquiry</button>
+              <a
+                href="https://wa.me/8619337861987?text=Hello%20DINGDAR%2C%20I%20would%20like%20a%20quotation.%20I%20can%20send%20the%20drawing%20or%20a%20photo%20of%20the%20worn%20part."
+                class="btn btn--ghost"
+                style="width:100%;margin-top:10px;"
+                target="_blank"
+                rel="noopener"
+              >Send drawings on WhatsApp instead</a>
               <p class="hint" id="form-status" role="status" aria-live="polite"></p>
+              <p style="font-size:0.82rem;color:var(--muted);line-height:1.6;margin-top:12px;">
+                Drawings, photos or part numbers can be sent after submitting — reply to our confirmation email, or use
+                WhatsApp. Both reach the same inbox, and a drawing shortens the quote by a full round of questions.
+              </p>
             </div>
           </form>
         </div>

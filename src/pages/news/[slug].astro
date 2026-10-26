@@ -68,7 +68,7 @@ const relatedProducts = (relatedProductSlugs[idx] || []).map((productSlug) => {
       <h1 style="margin-top:18px;margin-bottom:26px;">{title}</h1>
       <img src={cover} alt={coverAlt} width="1200" height="675" class="article-cover" />
       <div class="article-body">
-        {body.map((p) => (<p set:html={p}></p>))}
+        {body.map((p) => (<div class="blk" set:html={p}></div>))}
       </div>
       {relatedProducts.length > 0 && (
         <nav class="article-related" aria-label="Related product pages">
@@ -102,7 +102,14 @@ const relatedProducts = (relatedProductSlugs[idx] || []).map((productSlug) => {
 <style>
   .article-body { margin-top: 32px; }
   .article-cover { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 14px; box-shadow: var(--shadow-md); }
-  .article-body p { margin-bottom: 22px; font-size: 1.04rem; line-height: 1.8; color: var(--body); }
+  .article-body p, .article-body .blk { margin-bottom: 22px; font-size: 1.04rem; line-height: 1.8; color: var(--body); }
+  .article-body ul, .article-body ol { margin: 0 0 22px 1.2em; padding: 0; }
+  .article-body li { margin-bottom: 9px; font-size: 1.02rem; line-height: 1.75; color: var(--body); }
+  .article-body h3 { margin: 30px 0 12px; font-size: 1.18rem; }
+  .article-body table { width: 100%; border-collapse: collapse; margin: 6px 0 24px; font-size: 0.95rem; }
+  .article-body th, .article-body td { padding: 10px 12px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+  .article-body th { background: var(--bg-tint); font-weight: 700; }
+  .article-body .blk > ul:last-child, .article-body .blk > table:last-child { margin-bottom: 0; }
   .article-body a { color: var(--accent); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
   .article-related { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; margin: 32px 0 20px; padding: 20px 22px; border: 1px solid var(--line); border-radius: 14px; background: var(--bg-tint); }
   .article-related a { color: var(--accent); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }

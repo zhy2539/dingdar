@@ -178,15 +178,17 @@ const ld = noindex ? [] : [orgLd, websiteLd, ...(hasBreadcrumbLd ? [] : [breadcr
     {SITE.gaId && (
       <script is:inline set:html={`window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
-window.dingdarTrackEvent = function (name) {
-  return new Promise(function (resolve) {
-    var done = false;
-    var finish = function () { if (!done) { done = true; resolve(); } };
-    window.setTimeout(finish, 1000);
-    try { gtag('event', name, { event_callback: finish, event_timeout: 900 }); }
-    catch (_) { finish(); }
-  });
-};
+window.dingdarTrackEvent = function (name, params) {
+   return new Promise(function (resolve) {
+     var done = false;
+     var finish = function () { if (!done) { done = true; resolve(); } };
+     window.setTimeout(finish, 1000);
+     var payload = { event_callback: finish, event_timeout: 900 };
+     if (params) { for (var k in params) { if (Object.prototype.hasOwnProperty.call(params, k)) payload[k] = params[k]; } }
+     try { gtag('event', name, payload); }
+     catch (_) { finish(); }
+   });
+ };
 window.addEventListener('load', function () {
   window.setTimeout(function () {
     var s = document.createElement('script');
@@ -220,12 +222,44 @@ window.addEventListener('load', function () {
     </a>
 
     <script is:inline>
-      document.addEventListener('click', function (e) {
-        var t = e.target && e.target.closest ? e.target.closest('[data-wa-float], a[href*="wa.me"]') : null;
-        if (t) {
-          try { gtag('event', 'whatsapp_click'); } catch (_) {}
+      // 交互埋点：WhatsApp / 电话 / 邮箱 / 开始填表
+      // 全部用事件委托，不依赖各页面自己的脚本，新增页面也会自动生效
+      (function () {
+        function track(name, params) {
+          if (window.dingdarTrackEvent) { window.dingdarTrackEvent(name, params); return; }
+          try { gtag('event', name, params || {}); } catch (_) {}
         }
-      });
+
+        document.addEventListener('click', function (e) {
+          var el = e.target && e.target.closest ? e.target : null;
+          if (!el) return;
+
+          // WhatsApp：悬浮按钮或任意 wa.me 链接
+          if (el.closest('[data-wa-float], a[href*="wa.me"]')) {
+            track('whatsapp_click');
+            return;
+          }
+          // 电话 / 邮箱
+          var link = el.closest('a[href^="tel:"], a[href^="mailto:"]');
+          if (link) {
+            var href = link.getAttribute('href') || '';
+            track(href.indexOf('tel:') === 0 ? 'tel_click' : 'email_click');
+          }
+        }, true);
+
+        // 一开始填写询盘表单就算一次 form_start（同一表单每页只记一次）
+        document.addEventListener('focusin', function (e) {
+          var el = e.target;
+          if (!el || !el.closest) return;
+          var form = el.closest('form');
+          if (!form) return;
+          var action = form.getAttribute('action') || '';
+          if (action.indexOf('/api/inquiry') === -1) return;
+          if (form.dataset.gaStarted === '1') return;
+          form.dataset.gaStarted = '1';
+          track('form_start');
+        }, true);
+      })();
     </script>
 
     <!-- Cloudflare Turnstile：显式渲染，隐藏弹窗内的控件延后到打开时再渲染 -->

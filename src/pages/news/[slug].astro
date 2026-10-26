@@ -18,6 +18,9 @@ if (!news) {
 }
 
 const { title, date, excerpt, cover, coverAlt, body } = news;
+// meta description 单独可控：excerpt 偏长，直接当摘要会被搜索结果截断
+const metaDescription = news.metaDescription || excerpt;
+const relatedPages = news.relatedPages ?? [];
 // 正文按 Markdown 渲染：CMS 里写 Markdown，历史内容里的 HTML 会原样保留
 const blocks = body.map((b) => marked.parse(b, { async: false, gfm: true }) as string);
 const idx = NEWS.findIndex((item) => item.slug === slug);
@@ -48,7 +51,7 @@ const relatedProducts = (relatedProductSlugs[idx] || []).map((productSlug) => {
 
 <BaseLayout
   title={`${title}`}
-  description={excerpt}
+  description={metaDescription}
   path={`/news/${slug}/`}
   image={cover.replace('.webp', '-og.webp')}
   alternateLangs={alternateLangs}
@@ -57,7 +60,7 @@ const relatedProducts = (relatedProductSlugs[idx] || []).map((productSlug) => {
     '@type': 'NewsArticle',
     headline: title,
     datePublished: date,
-    description: excerpt,
+    description: metaDescription,
     image: 'https://dingdar.com' + cover,
     author: { '@type': 'Organization', name: 'DINGDAR Casting' },
     publisher: { '@type': 'Organization', name: 'Henan Dingdar Machinery Equipment Manufacture Co., Ltd.' },
@@ -78,6 +81,12 @@ const relatedProducts = (relatedProductSlugs[idx] || []).map((productSlug) => {
           <strong>Related products:</strong>
           {relatedProducts.map((product) => <a href={product.href}>{product.label}</a>)}
           <a class="article-related__cta" href="/contact/">Request a technical review →</a>
+        </nav>
+      )}
+      {relatedPages.length > 0 && (
+        <nav class="article-related" aria-label="Related pages">
+          <strong>Related pages:</strong>
+          {relatedPages.map((page) => <a href={page.href}>{page.label}</a>)}
         </nav>
       )}
       {relatedPosts.length > 0 && (

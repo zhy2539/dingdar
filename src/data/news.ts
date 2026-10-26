@@ -15,6 +15,14 @@ export interface NewsItem {
   body: string[];
   /** 同主题的其它文章 slug，用于文章间互链（不指向自身） */
   related?: string[];
+  /**
+   * 搜索结果里显示的摘要。excerpt 是给人读的导语，通常偏长（200 字以上），
+   * 直接当 meta description 会被 Google 截断，所以这里单独写一版 150–160 字符的。
+   * 不填则回落到 excerpt。
+   */
+  metaDescription?: string;
+  /** 指向非产品分类页的补充内链，例如能力页 /ball-mill-liners/ */
+  relatedPages?: { href: string; label: string }[];
 }
 
 export const NEWS = raw as NewsItem[];

@@ -707,6 +707,7 @@ export const es: Record<string, string> = {
     'Envía tu plano, modelo de equipo o requisito de abastecimiento. Los planos ayudan pero no son necesarios para la primera conversación — organizamos la información técnica necesaria para una revisión y presupuesto útiles.',
   'ct.formTitle': 'Solicitar un presupuesto',
   'ct.formNote': 'Los campos marcados con * son obligatorios. Respondemos con respuesta técnica en 12–24 horas.',
+  'ct.fPhone': 'Teléfono / WhatsApp',
   'ct.f0.label': 'Tu nombre *',
   'ct.f0.placeholder': 'Nombre completo',
   'ct.f1.label': 'Correo de trabajo *',

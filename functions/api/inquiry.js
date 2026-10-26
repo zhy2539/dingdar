@@ -11,6 +11,7 @@
  */
 
 import { sendInquiryEmail } from '../_lib/notify.js';
+import { sendBuyerAck } from '../_lib/ack.js';
 
 const DEFAULT_FORMSPREE = 'https://formspree.io/f/mwlvryqb';
 
@@ -259,9 +260,20 @@ export async function onRequestPost({ request, env }) {
   // 邮件通知：额外提醒，失败不影响主链路
   const notify = await sendInquiryEmail(env, record, extra, createdAt);
 
+  // 客户确认信：让买家马上知道信到了，顺便把 12–24 小时的预期讲清楚
+  const ack = await sendBuyerAck(env, record, extra);
+
   if (!stored && !forwarded && !notify.ok) return json({ ok: false, error: 'delivery_failed' }, 502);
   return json(
-    { ok: true, stored, forwarded, notified: notify.ok, ...(notify.skipped ? { notify_skipped: notify.detail } : {}) },
+    {
+      ok: true,
+      stored,
+      forwarded,
+      notified: notify.ok,
+      acksent: ack.ok,
+      ...(notify.skipped ? { notify_skipped: notify.detail } : {}),
+      ...(ack.skipped ? { ack_skipped: ack.detail } : {}),
+    },
     200
   );
 }

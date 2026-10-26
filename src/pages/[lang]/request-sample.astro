@@ -21,6 +21,7 @@ const sampleFields = [
   { name: 'email', label: ct('f1.label'), type: 'email', required: true, placeholder: ct('f1.placeholder') },
   { name: 'company', label: ct('f2.label'), type: 'text', required: true, placeholder: ct('f2.placeholder') },
   { name: 'country', label: ct('f3.label'), type: 'text', required: true, placeholder: ct('f3.placeholder') },
+  { name: 'phone', label: ct('fPhone'), type: 'tel', required: false, placeholder: '+86 138 0000 0000' },
   { name: 'product', label: ct('f4.label'), type: 'select', required: false, options: ['sp.opt0', 'sp.opt1', 'sp.opt2', 'sp.opt3', 'sp.opt4', 'sp.opt5', 'sp.opt6'].map((k) => t(k)) },
   { name: 'quantity', label: ct('f5.label'), type: 'text', required: false, placeholder: sp('f4.placeholder') },
   { name: 'reference_url', label: ({ es: 'Enlace de plano / foto (opcional)', fr: 'Lien du plan / de la photo (facultatif)', ru: 'Ссылка на чертёж / фото (необязательно)', pt: 'Link do desenho / foto (opcional)' } as Record<Lang, string>)[lang as Lang], type: 'url', required: false, placeholder: 'Google Drive, Dropbox or OneDrive URL' },

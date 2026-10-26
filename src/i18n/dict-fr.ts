@@ -707,6 +707,7 @@ export const fr: Record<string, string> = {
     'Envoyez votre plan, votre modèle d\'équipement ou votre besoin d\'approvisionnement. Les plans aident mais ne sont pas nécessaires pour la première conversation — nous organisons les informations techniques utiles pour une revue et un devis.',
   'ct.formTitle': 'Demander un devis',
   'ct.formNote': 'Les champs marqués * sont obligatoires. Nous répondons avec une réponse technique sous 12–24 heures.',
+  'ct.fPhone': 'Téléphone / WhatsApp',
   'ct.f0.label': 'Votre nom *',
   'ct.f0.placeholder': 'Nom complet',
   'ct.f1.label': 'E-mail professionnel *',

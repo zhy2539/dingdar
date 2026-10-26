@@ -701,6 +701,7 @@ export const pt: Record<string, string> = {
     'Envie seu desenho, modelo de equipamento ou necessidade de fornecimento. Desenhos ajudam, mas não são necessários para a primeira conversa — organizamos as informações técnicas úteis para revisão e cotação.',
   'ct.formTitle': 'Solicitar orçamento',
   'ct.formNote': 'Campos marcados com * são obrigatórios. Respondemos com uma resposta técnica em 12–24 horas.',
+  'ct.fPhone': 'Telefone / WhatsApp',
   'ct.f0.label': 'Seu nome *',
   'ct.f0.placeholder': 'Nome completo',
   'ct.f1.label': 'E-mail de trabalho *',

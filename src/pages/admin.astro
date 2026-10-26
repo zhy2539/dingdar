@@ -405,6 +405,7 @@ const title = '询盘后台 · DINGDAR';
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.2-3.2"></path></svg>
             <input id="q" type="search" placeholder="搜索姓名、公司、邮箱、正文…" />
           </div>
+          <button class="btn" id="notify-test" type="button">测试通知邮件</button>
           <a class="btn" id="export" href="/api/admin/export" download>导出 CSV</a>
         </div>
 
@@ -743,6 +744,32 @@ const title = '询盘后台 · DINGDAR';
 
       $('#pw').addEventListener('keydown', (e) => {
         if (e.key === 'Enter') $('#do-login').click();
+      });
+
+      $('#notify-test').addEventListener('click', async () => {
+        const b = $('#notify-test');
+        const old = b.textContent;
+        b.disabled = true;
+        b.textContent = '发送中…';
+        try {
+          const res = await fetch('/api/admin/notify-test', {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: '{}',
+          });
+          const d = await res.json().catch(() => ({}));
+          if (res.ok) {
+            alert(`测试邮件已发出，收件人：${d.to}\n发件人：${d.from}\n\n如果没收到，先查一下垃圾箱。`);
+          } else if (d.skipped) {
+            alert(`发信通道还没启用。\n\n${d.message}\n\n需要在 Cloudflare Pages 的 Production 环境变量里加上 RESEND_API_KEY。`);
+          } else {
+            alert(`发送失败（HTTP ${d.status || res.status}）\n\n${d.detail || d.error || '未知错误'}`);
+          }
+        } catch {
+          alert('网络异常，请重试。');
+        }
+        b.disabled = false;
+        b.textContent = old;
       });
 
       $('#logout').addEventListener('click', async () => {

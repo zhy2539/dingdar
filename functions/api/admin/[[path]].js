@@ -66,6 +66,8 @@ const csvCell = (v) => {
   return /[",\n\r]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
 };
 
+import { sendInquiryEmail, NOTIFY_DEFAULT_TO } from '../../_lib/notify.js';
+
 export async function onRequest({ request, env, params }) {
   const seg = Array.isArray(params.path) ? params.path.join('/') : String(params.path || '');
   const route = seg.replace(/^\/+|\/+$/g, '');
@@ -163,6 +165,58 @@ export async function onRequest({ request, env, params }) {
         'cache-control': 'no-store',
       },
     });
+  }
+
+  // 发一封测试通知邮件，用来验证 RESEND_API_KEY / NOTIFY_EMAIL 是否真的通了。
+  // 有指定 id 就用那条询盘，否则取最新一条；库里空着就用内置样例。
+  if (route === 'notify-test' && method === 'POST') {
+    const body = await request.json().catch(() => ({}));
+    const id = Number(body.id);
+    let row = null;
+    if (Number.isInteger(id) && id > 0) {
+      row = await env.DB.prepare('SELECT * FROM inquiries WHERE id = ?').bind(id).first();
+    } else {
+      row = await env.DB.prepare('SELECT * FROM inquiries ORDER BY created_at DESC LIMIT 1').first();
+    }
+    if (!row) {
+      row = {
+        id: 0,
+        created_at: new Date().toISOString(),
+        name: '测试联系人',
+        email: 'test@example.com',
+        company: 'Notify Test Co.',
+        country: 'China',
+        phone: '+86 138 0000 0000',
+        message: '这是一封测试邮件，用于验证询盘通知链路是否可用。收到即说明配置正确。',
+        source_page: 'https://dingdar.com/contact/',
+        lang: 'en',
+        extra: JSON.stringify({
+          _subject: 'New inquiry from dingdar.com',
+          product: 'Jaw crusher wear parts',
+          quantity: '200 pcs / year',
+          source_title: 'Contact page',
+        }),
+      };
+    }
+    let extra = {};
+    try {
+      extra = JSON.parse(row.extra || '{}');
+    } catch {
+      extra = {};
+    }
+    const r = await sendInquiryEmail(env, row, extra, row.created_at);
+    const payload = {
+      ok: r.ok,
+      to: env.NOTIFY_EMAIL || NOTIFY_DEFAULT_TO,
+      from: env.NOTIFY_FROM || 'DINGDAR Website <onboarding@resend.dev>',
+      status: r.status || null,
+      detail: r.detail || null,
+    };
+    if (r.skipped) {
+      payload.skipped = true;
+      payload.message = 'RESEND_API_KEY 未设置，发信通道还没启用';
+    }
+    return json(payload, r.ok ? 200 : 502);
   }
 
   return json({ ok: false, error: 'not_found' }, 404);

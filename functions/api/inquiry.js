@@ -10,6 +10,8 @@
  * 因此即使环境变量还没配好，表单也不会比现在更差。
  */
 
+import { sendInquiryEmail } from '../_lib/notify.js';
+
 const DEFAULT_FORMSPREE = 'https://formspree.io/f/mwlvryqb';
 
 // D1 数据库：dingdar-inquiries（Pages 绑定变量名 DB）
@@ -96,6 +98,14 @@ export async function onRequestPost({ request, env }) {
     ip_hash: await hashIp(request.headers.get('cf-connecting-ip'), env.ADMIN_SECRET),
   };
 
+  const createdAt = new Date().toISOString();
+  let extra = {};
+  try {
+    extra = JSON.parse(record.extra || '{}');
+  } catch {
+    extra = {};
+  }
+
   let stored = false;
   if (env.DB) {
     try {
@@ -104,8 +114,8 @@ export async function onRequestPost({ request, env }) {
           (created_at, name, email, company, country, phone, message, source_page, lang, extra, status, user_agent, ip_hash)
          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'new', ?, ?)`
       )
-        .bind(
-          new Date().toISOString(),
+         .bind(
+           createdAt,
           record.name,
           record.email,
           record.company,
@@ -141,8 +151,14 @@ export async function onRequestPost({ request, env }) {
     console.error('Formspree forward failed', err);
   }
 
-  if (!stored && !forwarded) return json({ ok: false, error: 'delivery_failed' }, 502);
-  return json({ ok: true, stored, forwarded });
+  // 邮件通知：额外提醒，失败不影响主链路
+  const notify = await sendInquiryEmail(env, record, extra, createdAt);
+
+  if (!stored && !forwarded && !notify.ok) return json({ ok: false, error: 'delivery_failed' }, 502);
+  return json(
+    { ok: true, stored, forwarded, notified: notify.ok, ...(notify.skipped ? { notify_skipped: notify.detail } : {}) },
+    200
+  );
 }
 
 export async function onRequestGet() {

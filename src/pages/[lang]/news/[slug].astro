@@ -32,8 +32,10 @@ const common = (key: string) => t('common.' + key);
 const langHref = (enPath: string) => langPath(lang as Lang, enPath);
 const title = article('title');
 const excerpt = article('excerpt');
-const body = [0, 1, 2, 3, 4, 5].map((i) => article('b' + i)).filter((x) => x);
+const body = Array.from({ length: news.body.length }, (_, i) => article('b' + i)).filter((x) => x);
 const blocks = body.map((b) => marked.parse(b, { async: false, gfm: true }) as string);
+const metaDescription = news.metaDescription || excerpt;
+const relatedPages = news.relatedPages ?? [];
 const alternateLangs = newsTranslationLangs(idx, news.body.length);
 const relatedProductSlugs: Record<number, string[]> = {
   0: ['jaw-crusher-wear-parts'],
@@ -70,7 +72,7 @@ const relatedPosts = (news.related ?? []).flatMap((s) => {
 
 <BaseLayout
   title={`${title}`}
-  description={excerpt}
+  description={metaDescription}
   path={langPath(lang as Lang, '/news/' + slug + '/')}
   image={news.cover.replace('.webp', '-og.webp')}
   lang={lang}
@@ -81,7 +83,7 @@ const relatedPosts = (news.related ?? []).flatMap((s) => {
     '@type': 'NewsArticle',
     headline: title,
     datePublished: news.date,
-    description: excerpt,
+    description: metaDescription,
     image: 'https://dingdar.com' + news.cover,
     author: { '@type': 'Organization', name: 'DINGDAR Casting' },
     publisher: { '@type': 'Organization', name: 'Henan Dingdar Machinery Equipment Manufacture Co., Ltd.' },
@@ -103,6 +105,12 @@ const relatedPosts = (news.related ?? []).flatMap((s) => {
           <strong>{common('browseProducts')}:</strong>
           {relatedProducts.map((product) => <a href={product.href}>{product.label}</a>)}
           <a class="article-related__cta" href={langHref('/contact/')}>{common('getQuote')} →</a>
+        </nav>
+      )}
+      {relatedPages.length > 0 && (
+        <nav class="article-related" aria-label="Related pages">
+          <strong>Related pages:</strong>
+          {relatedPages.map((page) => <a href={langHref(page.href)}>{page.label}</a>)}
         </nav>
       )}
       {relatedPosts.length > 0 && (

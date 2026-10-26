@@ -90,7 +90,7 @@ if (lang === 'en') quickLinks.splice(5, 0, { href: '/quality/', key: 'footer.qua
       {CATEGORIES.map((c) => (
         <a href={hrefOf('/products/' + c.slug + '/')}>{t ? t('p.' + c.slug + '.cardTitle') : c.cardTitle}</a>
       ))}
-      <a href="/ball-mill-liners/">Ball Mill Liners</a>
+      {lang === 'en' && <a href="/ball-mill-liners/">Ball Mill Liners</a>}
     </div>
     {lang === 'en' && (
       <div class="product-strip" aria-label="Industries and materials">

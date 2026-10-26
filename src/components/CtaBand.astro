@@ -6,7 +6,15 @@ interface Props {
   href?: string;
   btn?: 'primary' | 'light';
 }
+import { langPath, type Lang } from '../i18n';
 const { title, text, cta, href = '/contact/', btn = 'primary' } = Astro.props;
+
+// Contact CTAs open the quick-inquiry modal, so they need the locale-aware URL
+// even when the caller passes the bare '/contact/'.
+const seg = Astro.url.pathname.split('/')[1];
+const curLang = (['es', 'fr', 'pt', 'ru'].includes(seg) ? seg : 'en') as Lang;
+const isContact = href.endsWith('/contact/');
+const target = isContact ? langPath(curLang, '/contact/') : href;
 ---
 
 <section class="section">
@@ -17,10 +25,10 @@ const { title, text, cta, href = '/contact/', btn = 'primary' } = Astro.props;
         <p>{text}</p>
       </div>
       {
-        href === '/contact/' ? (
-          <a href="/contact/" class:list={['btn', btn === 'primary' ? 'btn--primary' : 'btn--light', 'btn--lg']} data-modal-open>{cta}</a>
+        isContact ? (
+          <a href={target} class:list={['btn', btn === 'primary' ? 'btn--primary' : 'btn--light', 'btn--lg']} data-modal-open>{cta}</a>
         ) : (
-          <a href={href} class:list={['btn', btn === 'primary' ? 'btn--primary' : 'btn--light', 'btn--lg']}>{cta}</a>
+          <a href={target} class:list={['btn', btn === 'primary' ? 'btn--primary' : 'btn--light', 'btn--lg']}>{cta}</a>
         )
       }
     </div>

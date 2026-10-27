@@ -1,0 +1,200 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import FaqList from '../components/FaqList.astro';
+import { SITE } from '../data/config';
+
+const path = '/crusher-wear-parts-quotation/';
+const faqs = [
+  {
+    q: 'Can I request a quotation without a finished drawing?',
+    a: 'Yes. A part number, equipment model, clear photos of the worn part or a sample can start the review. The missing dimensions, material and acceptance details are confirmed before a quotation is prepared.',
+  },
+  {
+    q: 'What information affects the material recommendation?',
+    a: 'The crusher model, part position, feed material, typical feed size, impact level, moisture, current wear pattern and achieved service record all help match the grade to the duty. A catalogue grade should not be selected without the application context.',
+  },
+  {
+    q: 'How are MOQ, tooling and lead time confirmed?',
+    a: 'They are confirmed against the specific part. Geometry and size affect pattern or tooling, material and inspection affect the production route, and quantity affects how fixed costs are spread. Annual volume and delivery market should be included where known.',
+  },
+  {
+    q: 'Which inspection records can be included?',
+    a: 'The agreed scope can include material certificates, dimensional inspection, hardness records, visual inspection, NDT and third-party inspection. Requirements should be stated before production so they are included in the quotation and release plan.',
+  },
+  {
+    q: 'Can you support OEM or private-label requirements?',
+    a: 'Yes. Drawing revisions, custom dimensions, marking, branding, packaging and acceptance criteria can be reviewed as part of the project before tooling or production starts.',
+  },
+];
+
+const checklist = [
+  {
+    title: '1. Part identity and geometry',
+    text: 'Send the part number, crusher brand and exact model. A current 2D drawing, 3D model, sample or clear photos of the working, mounting and side faces help confirm the profile, bolt-hole pattern and critical dimensions.',
+    links: [{ label: 'jaw crusher wear parts', href: '/products/jaw-crusher-wear-parts/' }, { label: 'impact crusher wear parts', href: '/products/impact-crusher-wear-parts/' }],
+  },
+  {
+    title: '2. Machine duty and wear conditions',
+    text: 'State the application, feed material, typical feed size, closed-side setting or relevant operating data, and whether the duty is primary, secondary or tertiary. Add the current wear pattern, failure mode and service record if you have them.',
+    links: [{ label: 'mining application notes', href: '/industries/mining/' }, { label: 'material comparison', href: '/materials/' }],
+  },
+  {
+    title: '3. Material, hardness and process requirements',
+    text: 'Tell us the specified grade or the result you need to improve. High-manganese steel, high-chromium cast iron, alloy steel and ductile iron are reviewed against the part and operating conditions. If a standard, hardness range or heat-treatment requirement applies, include it.',
+    links: [{ label: 'materials we cast', href: '/materials/' }, { label: 'casting process guide', href: '/processes/' }],
+  },
+  {
+    title: '4. Quantity, delivery market and commercial scope',
+    text: 'Include the first-order quantity, expected annual volume, repeat-order plan, delivery country and destination port when known. If several references belong to the same machine or shipment, list them together so tooling, inspection, packing and freight can be reviewed as one project.',
+    links: [{ label: 'MOQ and lead-time guide', href: '/news/crusher-wear-parts-moq-lead-time/' }],
+  },
+  {
+    title: '5. Inspection, documentation and identification',
+    text: 'Specify dimensional checks, hardness records, material certificates, NDT, third-party inspection, marking, packaging and certificate language before the quote. This keeps the acceptance scope visible and prevents documents being added after production.',
+    links: [{ label: 'inspection records guide', href: '/news/what-inspection-records-should-buyers-request-for-crusher-wear-parts/' }],
+  },
+];
+
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.domain + '/' },
+    { '@type': 'ListItem', position: 2, name: 'Crusher Wear Parts Quotation Checklist', item: SITE.domain + path },
+  ],
+};
+const pageLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': SITE.domain + path + '#webpage',
+  url: SITE.domain + path,
+  name: 'Crusher Wear Parts Quotation Checklist',
+  description: 'A practical checklist for preparing a crusher wear parts quotation from a drawing, part number, sample or equipment model.',
+  isPartOf: { '@id': SITE.domain + '/#website' },
+  about: { '@id': SITE.domain + '/#organization' },
+};
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.q,
+    acceptedAnswer: { '@type': 'Answer', text: faq.a },
+  })),
+};
+---
+
+<BaseLayout
+  title="Crusher Wear Parts Quotation Checklist | DINGDAR"
+  description="Prepare a crusher wear parts quotation with the right part reference, application, material, quantity, inspection scope and delivery details."
+  path={path}
+  alternateLangs={['en']}
+  image="/images/factory-mill-head-og.webp"
+  jsonLd={[breadcrumbLd, pageLd, faqLd]}
+>
+  <PageHero
+    eyebrow="Buyer quotation checklist"
+    title="Crusher Wear Parts Quotation Checklist"
+    lead="Send the information you have — a drawing is useful, but a part number, equipment model, sample or clear worn-part photos are enough to start a technical review."
+    lead2="Use this checklist to reduce clarification rounds and help us confirm the material, process, inspection scope and delivery basis before quoting."
+    img="/images/factory-finished-stock.webp"
+    imgAlt="Finished crusher wear castings prepared for inspection and shipment"
+    ctaPrimary={{ label: 'Request a Quote', href: '/contact/' }}
+    ctaSecondary={{ label: 'Browse Products ↓', href: '/products/' }}
+  />
+
+  <section class="section">
+    <div class="container">
+      <div class="sec-head center">
+        <span class="eyebrow">Start with what you have</span>
+        <h2>Five Inputs That Make a Quote Useful</h2>
+        <p>You do not need to prepare a perfect technical package before the first conversation. The goal is to make the part identifiable, the operating duty understandable and the acceptance scope visible.</p>
+      </div>
+      <div class="grid grid--2 checklist-grid">
+        {checklist.map((item) => (
+          <article class="card checklist-card">
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+            <div class="related-links">
+              {item.links.map((link) => <a href={link.href}>{link.label} →</a>)}
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="sec-head">
+        <span class="eyebrow">What happens in review</span>
+        <h2>From Reference to Quotation</h2>
+        <p>The quotation should explain what is being priced, not hide the technical assumptions behind a single number.</p>
+      </div>
+      <div class="steps">
+        <div class="step"><span class="n"></span><h3>Identify the part</h3><p>Match the part number, machine model, drawing, sample or photos to the geometry and revision that need to be produced.</p></div>
+        <div class="step"><span class="n"></span><h3>Confirm duty and grade</h3><p>Review feed conditions, wear pattern, material, hardness and casting route against the actual operating requirement.</p></div>
+        <div class="step"><span class="n"></span><h3>Define the release scope</h3><p>Agree dimensions, marking, inspection records, NDT or third-party inspection before production starts.</p></div>
+        <div class="step"><span class="n"></span><h3>Quote supply basis</h3><p>Confirm quantity, tooling, MOQ, lead time, packing and delivery market on the same technical basis.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="sec-head">
+        <span class="eyebrow">Related buyer guides</span>
+        <h2>Prepare for the Technical Conversation</h2>
+      </div>
+      <div class="grid grid--3">
+        <a href="/news/what-information-is-needed-for-a-custom-crusher-wear-parts-quote/" class="card card--hover guide-card">
+          <h3>Information Needed for a Custom Crusher Wear Parts Quote</h3>
+          <p>See how part identity, application, quantity, acceptance criteria and destination change the quotation.</p>
+          <span class="code">Read guide →</span>
+        </a>
+        <a href="/news/crusher-wear-parts-moq-lead-time/" class="card card--hover guide-card">
+          <h3>MOQ, Tooling and Lead Time</h3>
+          <p>Understand which variables determine the commercial answer for a casting project.</p>
+          <span class="code">Read guide →</span>
+        </a>
+        <a href="/news/what-inspection-records-should-buyers-request-for-crusher-wear-parts/" class="card card--hover guide-card">
+          <h3>Inspection Records to Request</h3>
+          <p>Specify material, dimensional, hardness, visual and additional inspection evidence before shipment.</p>
+          <span class="code">Read guide →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container" style="max-width:920px;">
+      <div class="sec-head">
+        <span class="eyebrow">Frequently asked before quoting</span>
+        <h2>Questions Buyers Ask</h2>
+      </div>
+      <FaqList items={faqs} />
+    </div>
+  </section>
+
+  <CtaBand
+    title="Have the Part Reference Ready?"
+    text="Send the drawing, part number, equipment model or worn-part photos with quantity and delivery market if known. We reply with technical feedback within 12–24 hours."
+    cta="Request a Quote"
+  />
+</BaseLayout>
+
+<style>
+  .checklist-grid { align-items: stretch; }
+  .checklist-card { padding: 26px 28px; display: flex; flex-direction: column; }
+  .checklist-card h3 { font-size: 1.12rem; margin-bottom: 12px; }
+  .checklist-card p { color: var(--body); line-height: 1.75; }
+  .related-links { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-top: auto; padding-top: 20px; }
+  .related-links a, .guide-card .code { color: var(--accent); font-weight: 700; text-decoration: none; }
+  .related-links a:hover, .guide-card:hover .code { text-decoration: underline; text-underline-offset: 3px; }
+  .guide-card { padding: 26px 28px; display: flex; flex-direction: column; gap: 12px; }
+  .guide-card h3 { font-size: 1.06rem; line-height: 1.45; }
+  .guide-card p { color: var(--muted); line-height: 1.7; }
+  .guide-card .code { margin-top: auto; }
+</style>

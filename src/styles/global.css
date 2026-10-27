@@ -363,7 +363,11 @@ h3 { font-size: 1.18rem; }
   .about-band__inner { grid-template-columns: 1fr; gap: 40px; }
   .industry-tabs__stage { min-height: 480px; }
 }
+.quote-guide-callout { padding: 30px 32px; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+.quote-guide-callout h2 { font-size: 1.45rem; margin: 8px 0 10px; }
+.quote-guide-callout p { max-width: 720px; color: var(--muted); line-height: 1.7; }
 @media (max-width: 640px) {
+  .quote-guide-callout { padding: 24px; }
   .fact-bar { padding: 56px 0; }
   .fact-bar__inner { grid-template-columns: repeat(2, 1fr); gap: 20px 8px; }
   .fact { border-left: none; }

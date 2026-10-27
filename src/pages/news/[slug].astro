@@ -21,8 +21,18 @@ const { title, date, excerpt, cover, coverAlt, body } = news;
 // meta description 单独可控：excerpt 偏长，直接当摘要会被搜索结果截断
 const metaDescription = news.metaDescription || excerpt;
 const relatedPages = news.relatedPages ?? [];
+const quoteGuideSlugs = new Set([
+  'crusher-wear-parts-moq-lead-time',
+  'what-information-is-needed-for-a-custom-crusher-wear-parts-quote',
+  'what-inspection-records-should-buyers-request-for-crusher-wear-parts',
+]);
+const showQuoteGuide = quoteGuideSlugs.has(slug!);
+const quoteGuideLink = '<a href="/crusher-wear-parts-quotation/">crusher wear parts quotation checklist</a>';
+const bodyWithQuoteGuide = showQuoteGuide && body.length > 0
+  ? [...body.slice(0, -1), body[body.length - 1] + ` Start with the ${quoteGuideLink} before sending the request.`]
+  : body;
 // 正文按 Markdown 渲染：CMS 里写 Markdown，历史内容里的 HTML 会原样保留
-const blocks = body.map((b) => marked.parse(b, { async: false, gfm: true }) as string);
+const blocks = bodyWithQuoteGuide.map((b) => marked.parse(b, { async: false, gfm: true }) as string);
 const idx = NEWS.findIndex((item) => item.slug === slug);
 const alternateLangs = newsTranslationLangs(idx, body.length);
 // 文章之间互链：把内容上同一主题的文章串成簇，避免每篇文章只有一个来自列表页的入链
@@ -90,6 +100,12 @@ const relatedProducts = (relatedProductSlugs[idx] || []).map((productSlug) => {
         <nav class="article-related" aria-label="Related pages">
           <strong>Related pages:</strong>
           {relatedPages.map((page) => <a href={page.href}>{page.label}</a>)}
+        </nav>
+      )}
+      {showQuoteGuide && (
+        <nav class="article-related" aria-label="Quotation checklist">
+          <strong>Buyer resource:</strong>
+          <a href="/crusher-wear-parts-quotation/">Crusher Wear Parts Quotation Checklist</a>
         </nav>
       )}
       {relatedPosts.length > 0 && (

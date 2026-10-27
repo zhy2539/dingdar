@@ -95,6 +95,14 @@ const langHref = (enPath: string) => langPath(lang as Lang, enPath);
           <div class="card step"><span class="n" style="counter-increment:none;">{i + 1}</span><h3>{prod('s' + i + '.title')}</h3><p>{prod('s' + i + '.text')}</p></div>
         ))}
       </div>
+      <div class="card quote-guide-callout" style="margin-top:32px;">
+        <div>
+          <span class="eyebrow">{common('quoteChecklistEyebrow')}</span>
+          <h2>{common('quoteChecklistTitle')}</h2>
+          <p>{common('quoteChecklistText')}</p>
+        </div>
+        <a href="/crusher-wear-parts-quotation/" class="btn btn--primary">{common('openChecklist')} →</a>
+      </div>
     </div>
   </section>
 

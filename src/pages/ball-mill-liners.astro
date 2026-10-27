@@ -29,24 +29,31 @@ const productLd = {
   manufacturer: { '@type': 'Organization', name: 'DINGDAR Casting', url: SITE.domain },
   category: 'Grinding mill wear parts',
   material: 'High-manganese steel (Mn13, Mn18, Mn18Cr2), pearlitic chrome-moly steel, high-chromium cast iron (Cr15–Cr26)',
-  additionalProperty: [
-    {
-      '@type': 'PropertyValue',
-      name: 'Material',
-      value: 'High-manganese steel (Mn13, Mn18, Mn18Cr2), pearlitic chrome-moly steel, high-chromium cast iron (Cr15–Cr26)',
-    },
-    {
-      '@type': 'PropertyValue',
-      name: 'Casting process',
-      value: 'Green sand / shell moulding / lost foam, matched to liner geometry and section thickness',
-    },
-    {
-      '@type': 'PropertyValue',
-      name: 'Part types',
-      value: 'Shell liners, head liners, end liners, grate plates, lifter bars',
-    },
-  ],
-};
+   additionalProperty: [
+     {
+       '@type': 'PropertyValue',
+       name: 'Material',
+       value: 'High-manganese steel (Mn13, Mn18, Mn18Cr2), pearlitic chrome-moly steel, high-chromium cast iron (Cr15–Cr26)',
+     },
+     {
+       '@type': 'PropertyValue',
+       name: 'Casting process',
+       value: 'Green sand / shell moulding / lost foam, matched to liner geometry and section thickness',
+     },
+     {
+       '@type': 'PropertyValue',
+       name: 'Part types',
+       value: 'Shell liners, head liners, end liners, grate plates, lifter bars',
+     },
+   ],
+   offers: {
+     '@type': 'Offer',
+     url: SITE.domain + path,
+     priceCurrency: 'USD',
+     availability: 'https://schema.org/InStock',
+     seller: { '@type': 'Organization', name: 'DINGDAR Casting', url: SITE.domain },
+   },
+ };
 
 const linerTypes = [
   {

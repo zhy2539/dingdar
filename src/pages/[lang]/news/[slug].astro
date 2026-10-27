@@ -96,8 +96,8 @@ const relatedPosts = (news.related ?? []).flatMap((s) => {
       <nav class="breadcrumb" aria-label="Breadcrumb">
         <a href={langHref('/')}>{t('nav.0')}</a> / <a href={langHref('/news/')}>{t('nav.3')}</a> / <span>{title}</span>
       </nav>
-      <span class="badge">{news.date}</span>
-      <h1 style="margin-top:18px;margin-bottom:26px;">{title}</h1>
+       <span class="badge">{news.date} · DINGDAR Technical Team</span>
+       <h1 style="margin-top:18px;margin-bottom:26px;">{title}</h1>
       <img src={news.cover} alt={title} width="1200" height="675" class="article-cover" />
       <div class="article-body">
         {blocks.map((p) => (<div class="blk" set:html={p}></div>))}

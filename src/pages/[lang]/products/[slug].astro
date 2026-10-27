@@ -208,7 +208,7 @@ const faqHeading = pui('faqHeading') || 'Buyer questions before ordering';
         <h2>{pui('specH2')}</h2>
         <p>{pui('specP')}</p>
       </div>
-      <div class="table-wrap">
+      <div class="table-wrap" role="region" aria-label={pui('specH2')} tabindex="0">
         <table>
           <tbody>
             {specs.map((s) => {

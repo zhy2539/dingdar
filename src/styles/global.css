@@ -33,6 +33,7 @@ body {
   font-size: 16px;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
 }
 img { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; }
@@ -312,6 +313,9 @@ h3 { font-size: 1.18rem; }
   .stats { grid-template-columns: 1fr 1fr; }
   .steps { grid-template-columns: 1fr; }
   .footer .cols { grid-template-columns: 1fr; }
+  .table-wrap { max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .table-wrap table { min-width: 560px; }
+  .table-wrap td, .table-wrap th { overflow-wrap: anywhere; word-break: normal; }
 }
 
 /* ============================================================

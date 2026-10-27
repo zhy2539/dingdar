@@ -61,15 +61,8 @@ const productLd = {
      ...(materialSpec ? [{ '@type': 'PropertyValue', name: 'Material', value: materialSpec }] : []),
      ...(routeSpec ? [{ '@type': 'PropertyValue', name: 'Casting process', value: routeSpec }] : []),
    ],
-   // B2B 页面不展示具体价格，使用询价型 Offer 仍为 Product 实体提供供货状态。
-   offers: {
-     '@type': 'Offer',
-     url: SITE.domain + path,
-     priceCurrency: 'USD',
-     availability: 'https://schema.org/InStock',
-     seller: { '@type': 'Organization', name: 'DINGDAR Casting', url: SITE.domain },
-   },
- };
+   // B2B 页面采用询价模式；没有公开价格时不输出不完整的 Offer，避免触发无效商家信息。
+  };
 const customOptions = [pui('custom0'), pui('custom1'), pui('custom2'), pui('custom3')];
 const reviewSteps = [pui('r0'), pui('r1'), pui('r2'), pui('r3')];
 const apps = [0, 1, 2, 3].map((i) => p('app' + i)).filter((x) => x);

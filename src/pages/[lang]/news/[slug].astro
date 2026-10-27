@@ -85,9 +85,11 @@ const relatedPosts = (news.related ?? []).flatMap((s) => {
     datePublished: news.date,
     description: metaDescription,
     image: 'https://dingdar.com' + news.cover,
-    author: { '@type': 'Organization', name: 'DINGDAR Casting' },
-    publisher: { '@type': 'Organization', name: 'Henan Dingdar Machinery Equipment Manufacture Co., Ltd.' },
-  }}
+     author: { '@type': 'Organization', name: 'DINGDAR Casting' },
+     publisher: { '@type': 'Organization', name: 'Henan Dingdar Machinery Equipment Manufacture Co., Ltd.' },
+     mainEntityOfPage: { '@type': 'WebPage', '@id': 'https://dingdar.com' + langPath(lang as Lang, '/news/' + slug + '/') },
+     dateModified: news.date,
+   }}
 >
   <section class="section" style="padding-top:64px;">
     <div class="container" style="max-width:860px;">

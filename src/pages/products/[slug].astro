@@ -65,6 +65,19 @@ const faqLd = {
     acceptedAnswer: { '@type': 'Answer', text: s.a },
   })),
 };
+const pageLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': SITE.domain + path + '#webpage',
+  url: SITE.domain + path,
+  name: cat.title,
+  description: cat.intro,
+  isPartOf: { '@id': SITE.domain + '/#website' },
+  about: { '@id': SITE.domain + '/#organization' },
+  breadcrumb: { '@id': SITE.domain + path + '#breadcrumb' },
+};
+// Visible FAQ answers and FAQPage JSON-LD share the same source array.
+const faqHeading = 'Buyer questions before ordering';
 const customOptions = [
   'Drawing-based requirements',
   'Sample reference',
@@ -75,7 +88,7 @@ const reviewSteps = ['Casting', 'Heat Treatment', 'Machining', 'Inspection & Fin
 const deepDive = PRODUCT_DEEP_DIVE[cat.slug];
 ---
 
-<BaseLayout title={cat.title} description={cat.cardDesc} path={path} image={cat.heroImg.replace('.webp', '-og.webp')} jsonLd={[breadcrumbLd, productLd, faqLd]} preloadImages={[cat.bannerImg]}>
+<BaseLayout title={cat.title} description={cat.cardDesc} path={path} image={cat.heroImg.replace('.webp', '-og.webp')} jsonLd={[breadcrumbLd, productLd, faqLd, pageLd]} preloadImages={[cat.bannerImg]}>
   <PageHero
     eyebrow="Product category"
     title={cat.h1}
@@ -225,7 +238,7 @@ const deepDive = PRODUCT_DEEP_DIVE[cat.slug];
     <div class="container">
       <div class="sec-head">
         <span class="eyebrow">Selection guide</span>
-        <h2>How to Select the Right Part</h2>
+        <h2>{faqHeading}</h2>
       </div>
       <FaqList items={cat.selection} />
     </div>

@@ -212,6 +212,22 @@
       {
         "q": "Do you produce blow bars to original profiles?",
         "a": "Yes — original profile, keyway and fixing geometry are reproduced from the part number, drawing or sample, and confirmed before production."
+      },
+      {
+        "q": "What should we send for an impact crusher wear parts quotation?",
+        "a": "Send the crusher make and model, part number or drawing, a clear photo or sample if available, the feed material and typical feed size, the required quantity and the delivery country. These details let the technical review confirm the profile, material, inspection scope and quotation basis."
+      },
+      {
+        "q": "Can inspection records ship with impact crusher wear parts?",
+        "a": "Material certificates, dimensional inspection reports, hardness records and visual inspection records can be supplied as agreed. NDT or third-party inspection can also be arranged when specified before production."
+      },
+      {
+        "q": "How are MOQ and lead time confirmed for blow bars?",
+        "a": "MOQ and lead time depend on the bar geometry, pattern or tooling status, material, heat treatment, machining, inspection scope and quantity. They are confirmed during the technical review rather than guessed before the part reference is known."
+      },
+      {
+        "q": "Which inspection records should accompany an impact crusher wear parts order?",
+        "a": "The agreed package can include material certificates, dimensional inspection reports, hardness records and visual inspection records. NDT or third-party inspection can be added when the requirement is specified before production."
       }
     ]
   },

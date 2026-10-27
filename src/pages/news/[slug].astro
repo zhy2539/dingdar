@@ -58,14 +58,15 @@ const relatedProducts = (relatedProductSlugs[idx] || []).map((productSlug) => {
   jsonLd={{
     '@context': 'https://schema.org',
     '@type': 'NewsArticle',
+    '@id': 'https://dingdar.com/news/' + slug + '/#article',
     headline: title,
     datePublished: date,
+    dateModified: date,
     description: metaDescription,
     image: 'https://dingdar.com' + cover,
-     author: { '@type': 'Organization', name: 'DINGDAR Casting' },
-     publisher: { '@type': 'Organization', name: 'Henan Dingdar Machinery Equipment Manufacture Co., Ltd.' },
+     author: { '@type': 'Organization', name: 'DINGDAR Casting', url: 'https://dingdar.com/' },
+     publisher: { '@id': 'https://dingdar.com/#organization' },
      mainEntityOfPage: { '@type': 'WebPage', '@id': 'https://dingdar.com/news/' + slug + '/' },
-     dateModified: date,
     }}>
   <section class="section" style="padding-top:64px;">
     <div class="container" style="max-width:860px;">

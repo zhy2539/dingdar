@@ -39,7 +39,8 @@
     },
     {
         "slug":  "crusher-wear-parts-moq-lead-time",
-        "related":  [
+        "metaDescription": "How MOQ, tooling and lead time are confirmed for crusher wear parts, and what buyers should send for a faster technical quotation.",
+        "related": [
                         "what-information-is-needed-for-a-custom-crusher-wear-parts-quote",
                         "what-inspection-records-should-buyers-request-for-crusher-wear-parts",
                         "green-sand-vs-investment-casting"
@@ -59,7 +60,8 @@
     },
     {
         "slug":  "green-sand-vs-investment-casting",
-        "related":  [
+        "metaDescription": "Compare green sand, shell moulding, lost foam and investment casting by part size, geometry, tolerance, finish and volume.",
+        "related": [
                         "crusher-wear-parts-moq-lead-time",
                         "ball-mill-liners-mn18cr2-guide"
                     ],
@@ -97,7 +99,8 @@
     },
     {
         "slug":  "what-information-is-needed-for-a-custom-crusher-wear-parts-quote",
-        "related":  [
+        "metaDescription": "Five items to prepare for a crusher wear parts quotation: part reference, application, quantity, acceptance criteria and destination.",
+        "related": [
                         "crusher-wear-parts-moq-lead-time",
                         "what-inspection-records-should-buyers-request-for-crusher-wear-parts"
                     ],
@@ -117,7 +120,8 @@
     },
     {
         "slug":  "what-inspection-records-should-buyers-request-for-crusher-wear-parts",
-        "related":  [
+        "metaDescription": "Which material, dimensional, hardness, visual and NDT records buyers should request for crusher wear parts before shipment.",
+        "related": [
                         "what-information-is-needed-for-a-custom-crusher-wear-parts-quote",
                         "crusher-wear-parts-moq-lead-time"
                     ],

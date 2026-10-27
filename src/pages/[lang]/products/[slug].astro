@@ -79,8 +79,10 @@ const faqs = [
   { q: p('q0.q'), a: p('q0.a') },
   { q: p('q1.q'), a: p('q1.a') },
 ];
-if (p('q2.q') && p('q2.a')) {
-  faqs.push({ q: p('q2.q'), a: p('q2.a') });
+for (const i of [2, 3, 4, 5]) {
+  if (p('q' + i + '.q') && p('q' + i + '.a')) {
+    faqs.push({ q: p('q' + i + '.q'), a: p('q' + i + '.a') });
+  }
 }
 const jawQuoteChecklist = [0, 1, 2, 3, 4, 5].map((i) => pui('jawQuote' + i)).filter(Boolean);
 const faqLd = {
@@ -92,9 +94,21 @@ const faqLd = {
     acceptedAnswer: { '@type': 'Answer', text: f.a },
   })),
 };
+const pageLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': SITE.domain + path + '#webpage',
+  url: SITE.domain + path,
+  name: p('title'),
+  description: p('intro'),
+  isPartOf: { '@id': SITE.domain + '/#website' },
+  about: { '@id': SITE.domain + '/#organization' },
+  breadcrumb: { '@id': SITE.domain + path + '#breadcrumb' },
+};
+const faqHeading = pui('faqHeading') || 'Buyer questions before ordering';
 ---
 
-<BaseLayout image={cat.heroImg.replace('.webp', '-og.webp')} title={p('title')} description={p('cardDesc')} path={path} lang={lang} enPath={'/products/' + cat.slug + '/'} jsonLd={[breadcrumbLd, productLd, faqLd]} preloadImages={[cat.bannerImg]}>
+<BaseLayout image={cat.heroImg.replace('.webp', '-og.webp')} title={p('title')} description={p('cardDesc')} path={path} lang={lang} enPath={'/products/' + cat.slug + '/'} jsonLd={[breadcrumbLd, productLd, faqLd, pageLd]} preloadImages={[cat.bannerImg]}>
   <PageHero
     eyebrow={pui('heroEyebrow')}
     title={p('h1')}
@@ -217,7 +231,7 @@ const faqLd = {
     <div class="container">
       <div class="sec-head">
         <span class="eyebrow">{pui('selEyebrow')}</span>
-        <h2>{pui('selH2')}</h2>
+        <h2>{faqHeading}</h2>
       </div>
       <FaqList items={faqs} />
     </div>

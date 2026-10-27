@@ -64,6 +64,13 @@ const uses = ['sp.u0', 'sp.u1', 'sp.u2', 'sp.u3'].map((k) => t(k));
             <input type="hidden" name="source_page" value={'https://dingdar.com' + langPath(lang as Lang, '/request-sample/')} />
             <input type="hidden" name="source_title" value={t('meta.sample.title')} />
             <input type="hidden" name="page_language" value={lang} />
+            <input type="hidden" name="utm_source" value="" />
+            <input type="hidden" name="utm_medium" value="" />
+            <input type="hidden" name="utm_campaign" value="" />
+            <input type="hidden" name="utm_content" value="" />
+            <input type="hidden" name="utm_term" value="" />
+            <input type="hidden" name="referrer" value="" />
+            <input type="hidden" name="first_page" value="" />
 
             <div class="grid grid--2" style="gap: 16px;">
               {sampleFields.map((f) => (
@@ -135,6 +142,27 @@ const uses = ['sp.u0', 'sp.u1', 'sp.u2', 'sp.u3'].map((k) => t(k));
   const form = document.getElementById('sample');
   const status = document.getElementById('form-status');
   const endpoint = form.getAttribute('action') || '';
+  const attributionKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+  const attribution = new URLSearchParams(window.location.search);
+  attributionKeys.forEach((key) => {
+    const input = form.elements.namedItem(key);
+    if (input) input.value = attribution.get(key) || '';
+  });
+  const referrerInput = form.elements.namedItem('referrer');
+  if (referrerInput) referrerInput.value = document.referrer || '';
+  const firstPageInput = form.elements.namedItem('first_page');
+  try {
+    const saved = JSON.parse(sessionStorage.getItem('dingdar_attribution') || '{}');
+    if (firstPageInput && typeof saved.first_page === 'string') firstPageInput.value = saved.first_page;
+  } catch (_) {}
+  try {
+    const saved = JSON.parse(sessionStorage.getItem('dingdar_attribution') || '{}');
+    Object.entries(saved).forEach(([key, value]) => {
+      const input = form.elements.namedItem(key);
+      if (input && typeof value === 'string') input.value = value;
+    });
+  } catch (_) {}
+
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     status.textContent = '';

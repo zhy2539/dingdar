@@ -62,6 +62,13 @@ const helps = [0, 1, 2, 3].map((i) => ct('h' + i));
             <input type="hidden" name="source_page" value={'https://dingdar.com' + langPath(lang as Lang, '/contact/')} />
             <input type="hidden" name="source_title" value={t('meta.contact.title')} />
             <input type="hidden" name="page_language" value={lang} />
+            <input type="hidden" name="utm_source" value="" />
+            <input type="hidden" name="utm_medium" value="" />
+            <input type="hidden" name="utm_campaign" value="" />
+            <input type="hidden" name="utm_content" value="" />
+            <input type="hidden" name="utm_term" value="" />
+            <input type="hidden" name="referrer" value="" />
+            <input type="hidden" name="first_page" value="" />
 
             <div class="grid grid--2" style="gap: 16px;">
               {fields.map((f) => (
@@ -142,6 +149,27 @@ const helps = [0, 1, 2, 3].map((i) => ct('h' + i));
   const form = document.getElementById('inquiry');
   const status = document.getElementById('form-status');
   const endpoint = form.getAttribute('action') || '';
+  const attributionKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+  const attribution = new URLSearchParams(window.location.search);
+  attributionKeys.forEach((key) => {
+    const input = form.elements.namedItem(key);
+    if (input) input.value = attribution.get(key) || '';
+  });
+  const referrerInput = form.elements.namedItem('referrer');
+  if (referrerInput) referrerInput.value = document.referrer || '';
+  const firstPageInput = form.elements.namedItem('first_page');
+  try {
+    const saved = JSON.parse(sessionStorage.getItem('dingdar_attribution') || '{}');
+    if (firstPageInput && typeof saved.first_page === 'string') firstPageInput.value = saved.first_page;
+  } catch (_) {}
+  try {
+    const saved = JSON.parse(sessionStorage.getItem('dingdar_attribution') || '{}');
+    Object.entries(saved).forEach(([key, value]) => {
+      const input = form.elements.namedItem(key);
+      if (input && typeof value === 'string') input.value = value;
+    });
+  } catch (_) {}
+
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     status.textContent = '';
@@ -152,7 +180,7 @@ const helps = [0, 1, 2, 3].map((i) => ct('h' + i));
     const company = data.get('company')?.trim();
     const country = data.get('country')?.trim();
     const message = data.get('message')?.trim();
-    if (!name || !email || !company || !country || !message) {
+    if (!name || !email || !company || !message) {
       status.textContent = form.dataset.hintRequired || 'Please complete all required fields.';
       status.style.color = '#d9480f';
       return;

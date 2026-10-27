@@ -180,8 +180,14 @@ export async function onRequestPost({ request, env }) {
     source_page: pick(fields, ['source_page']).slice(0, 300),
     // 站内表单实际提交的字段名是 page_language，早期只认 lang 导致该列一直是空的
     lang: pick(fields, ['lang', 'language', 'page_language']).slice(0, 8),
-    extra: JSON.stringify(
-      Object.fromEntries(
+    extra: JSON.stringify({
+      utm_source: pick(fields, ['utm_source']),
+      utm_medium: pick(fields, ['utm_medium']),
+      utm_campaign: pick(fields, ['utm_campaign']),
+      utm_content: pick(fields, ['utm_content']),
+      utm_term: pick(fields, ['utm_term']),
+      referrer: pick(fields, ['referrer']),
+      ...Object.fromEntries(
         Object.entries(fields).filter(
           ([k]) =>
             ![
@@ -199,7 +205,7 @@ export async function onRequestPost({ request, env }) {
             ].includes(k)
         )
       )
-    ).slice(0, 4000),
+    }).slice(0, 4000),
     user_agent: (request.headers.get('user-agent') || '').slice(0, 300),
     ip_hash: ipHash,
   };

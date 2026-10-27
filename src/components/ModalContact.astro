@@ -56,6 +56,13 @@ const netHint = lang === 'en' ? 'Network error. Please email hugo@dingdar.com or
       <input type="hidden" name="source_title" value="" />
       <input type="hidden" name="page_language" value={lang} />
       <input type="hidden" name="product_context" value="" />
+      <input type="hidden" name="utm_source" value="" />
+      <input type="hidden" name="utm_medium" value="" />
+      <input type="hidden" name="utm_campaign" value="" />
+      <input type="hidden" name="utm_content" value="" />
+      <input type="hidden" name="utm_term" value="" />
+      <input type="hidden" name="referrer" value="" />
+      <input type="hidden" name="first_page" value="" />
 
       <div class="mc-grid">
         {fields.map((f) => (
@@ -141,7 +148,13 @@ const netHint = lang === 'en' ? 'Network error. Please email hugo@dingdar.com or
       source_title: document.title,
       page_language: document.documentElement.lang || 'en',
       product_context: product,
+      ...Object.fromEntries(['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].map((key) => [key, new URLSearchParams(window.location.search).get(key) || ''])),
+      referrer: document.referrer || '',
     };
+    try {
+      const saved = JSON.parse(sessionStorage.getItem('dingdar_attribution') || '{}');
+      Object.assign(values, saved);
+    } catch (_) {}
     Object.entries(values).forEach(([name, value]) => {
       const input = form.elements.namedItem(name);
       if (input) input.value = value;

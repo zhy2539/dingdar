@@ -262,6 +262,24 @@ window.addEventListener('load', function () {
       })();
     </script>
 
+    <!-- 首次来源归因：只保存 UTM 与 referrer，不保存姓名、邮箱等个人信息 -->
+    <script is:inline>
+      (function () {
+        try {
+          var params = new URLSearchParams(window.location.search);
+          var keys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+          var current = {};
+          keys.forEach(function (key) { var value = params.get(key); if (value) current[key] = value.slice(0, 200); });
+          if (document.referrer) current.referrer = document.referrer.slice(0, 500);
+          var existing = JSON.parse(sessionStorage.getItem('dingdar_attribution') || '{}');
+          if (!existing.first_page) current.first_page = window.location.href.slice(0, 500);
+          var merged = Object.assign({}, current, existing);
+          if (!existing.first_page) merged.first_page = window.location.href.slice(0, 500);
+          sessionStorage.setItem('dingdar_attribution', JSON.stringify(merged));
+        } catch (_) {}
+      })();
+    </script>
+
     <!-- Cloudflare Turnstile：显式渲染，隐藏弹窗内的控件延后到打开时再渲染 -->
     <script is:inline>
       window.ddTsRender = function (el) {

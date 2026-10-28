@@ -8,7 +8,7 @@
     "heroImg": "/images/prod-jaw.webp",
     "bannerImg": "/images/H1667504f229a4ec69a6d66926679d9cbJ.webp",
     "h1": "Jaw Crusher Wear Parts",
-    "intro": "Mn13 jaw plates are the standard for primary crushing, and we cast them in high-manganese steel — fixed, movable and cheek plates — for mining, quarrying and aggregate plants. Produced to your machine model, part number, drawing or sample.",
+    "intro": "Mn13 jaw plates are the standard for primary crushing, and we cast them in high-manganese steel — fixed, movable and cheek plates — for mining, quarrying and aggregate plants. Produced to your machine model, part number, drawing or sample. Share the wear pattern and feed conditions so we can review the jaw plate material before quoting.",
     "parts": [
       {
         "code": "JCP-007",
@@ -71,6 +71,10 @@
       {
         "q": "Which crusher brands do you cover?",
         "a": "We produce to reference across major jaw crusher models. If the exact reference is not listed, send the part number or sample and we will match it."
+      },
+      {
+        "q": "How do I choose a jaw crusher jaw plate?",
+        "a": "Start with the crusher model, fixed or movable position, feed rock, feed size, closed-side setting and the current wear pattern. Those details help us review the jaw plate profile and choose Mn13, Mn18 or an alloy option before quoting."
       }
     ]
   },
@@ -83,7 +87,7 @@
     "heroImg": "/images/prod-cone.webp",
     "bannerImg": "/images/banner-cone.webp",
     "h1": "Cone Crusher Wear Parts",
-    "intro": "Mantle liners, concave and bowl liners, gyratory concaves and upper housing castings for cone crushers — cast in manganese and alloy grades, produced to your model reference, drawing or sample.",
+    "intro": "Mantle liners, concave and bowl liners, gyratory concaves and upper housing castings for cone crushers — cast in manganese and alloy grades, produced to your model reference, drawing or sample. For cone crusher liner analysis, we compare the mantle and concave geometry with your chamber profile, feed conditions and wear pattern before quoting.",
     "parts": [
       {
         "code": "CCP-001",
@@ -146,6 +150,10 @@
       {
         "q": "Can you match a specific chamber profile?",
         "a": "Yes — send the part number, drawing or a worn sample, and we produce to the original chamber geometry with the agreed crushing profile."
+      },
+      {
+        "q": "How do you analyze cone crusher liners before quoting?",
+        "a": "We review the mantle or concave reference, crusher model, chamber profile, feed material, feed size, closed-side setting and current wear pattern. Those details help confirm the liner geometry, manganese or alloy grade, inspection scope and quotation basis."
       }
     ]
   },
@@ -366,7 +374,7 @@
     "heroImg": "/images/prod-teeth.webp",
     "bannerImg": "/images/banner-teeth.webp",
     "h1": "Excavator Bucket Teeth & Adapters",
-    "intro": "Bucket teeth, adapters, side cutters and cast wear parts for excavators and loaders, with references covering major machine brands and models. Produced to reference or by drawing.",
+    "intro": "Bucket teeth and adapters, side cutters and cast wear parts for excavators and loaders, with references covering major machine brands and models. Produced to reference or by drawing, with geometry and retaining system checked for your excavator model.",
     "parts": [
       {
         "code": "CAT 305",
@@ -425,6 +433,10 @@
       {
         "q": "Do you supply teeth and adapters as matched sets?",
         "a": "Yes — we can supply tooth, adapter and retaining pin as a matched set for one-stop sourcing, which is common for our distributor customers."
+      },
+      {
+        "q": "Can you supply bucket teeth and adapters for my excavator model?",
+        "a": "Yes. Send the machine brand, model, part number or a clear photo of the worn tooth and adapter. We match the geometry and retaining system before confirming the material and quotation basis."
       }
     ]
   },

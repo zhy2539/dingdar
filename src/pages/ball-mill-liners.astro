@@ -22,38 +22,32 @@ const productLd = {
   '@type': 'Product',
   name: 'Ball Mill Liners',
   description:
-    'Shell liners, head and end liners and grate plates for ball mills and rod mills, cast in high-manganese (Mn13, Mn18, Mn18Cr2), pearlitic chrome-moly and high-chromium iron, produced to drawing, part number or worn sample.',
+    'Shell liners, head and end liners and grate plates for ball mills and rod mills, including pearlitic chrome-moly steel liners for rod mills and ball mills, cast in high-manganese (Mn13, Mn18, Mn18Cr2), pearlitic chrome-moly and high-chromium iron, produced to drawing, part number or worn sample.',
   image: [SITE.domain + '/images/factory-mill-head.webp', SITE.domain + '/images/factory-gear-ring.webp'],
   url: SITE.domain + path,
   brand: { '@type': 'Brand', name: 'DINGDAR' },
   manufacturer: { '@type': 'Organization', name: 'DINGDAR Casting', url: SITE.domain },
   category: 'Grinding mill wear parts',
   material: 'High-manganese steel (Mn13, Mn18, Mn18Cr2), pearlitic chrome-moly steel, high-chromium cast iron (Cr15–Cr26)',
-   additionalProperty: [
-     {
-       '@type': 'PropertyValue',
-       name: 'Material',
-       value: 'High-manganese steel (Mn13, Mn18, Mn18Cr2), pearlitic chrome-moly steel, high-chromium cast iron (Cr15–Cr26)',
-     },
-     {
-       '@type': 'PropertyValue',
-       name: 'Casting process',
-       value: 'Green sand / shell moulding / lost foam, matched to liner geometry and section thickness',
-     },
-     {
-       '@type': 'PropertyValue',
-       name: 'Part types',
-       value: 'Shell liners, head liners, end liners, grate plates, lifter bars',
-     },
-   ],
-   offers: {
-     '@type': 'Offer',
-     url: SITE.domain + path,
-     priceCurrency: 'USD',
-     availability: 'https://schema.org/InStock',
-     seller: { '@type': 'Organization', name: 'DINGDAR Casting', url: SITE.domain },
-   },
- };
+  additionalProperty: [
+    {
+      '@type': 'PropertyValue',
+      name: 'Material',
+      value: 'High-manganese steel (Mn13, Mn18, Mn18Cr2), pearlitic chrome-moly steel, high-chromium cast iron (Cr15–Cr26)',
+    },
+    {
+      '@type': 'PropertyValue',
+      name: 'Casting process',
+      value: 'Green sand / shell moulding / lost foam, matched to liner geometry and section thickness',
+    },
+    {
+      '@type': 'PropertyValue',
+      name: 'Part types',
+      value: 'Shell liners, head liners, end liners, grate plates, lifter bars',
+    },
+  ],
+  // B2B 产品页采用询价模式；没有公开价格时不输出不完整的 Offer。
+};
 
 const linerTypes = [
   {
@@ -153,7 +147,7 @@ const faqs = [
   <PageHero
     eyebrow="Grinding mill wear parts"
     title="Ball Mill Liners"
-    lead="Shell liners, lifter bars, head and end liners and grate plates for ball mills and rod mills — cast in manganese, pearlitic chrome-moly and high-chromium grades, and specified against your mill, charge and wear pattern rather than a catalogue number."
+    lead="Shell liners, lifter bars, head and end liners and grate plates for ball mills and rod mills — including pearlitic chrome-moly steel liners for rod mills and ball mills, plus high-chrome alloy options for controlled abrasive duty. Every set is specified against your mill, charge and wear pattern rather than a catalogue number."
     img="/images/factory-mill-head.webp"
     imgAlt="Mill head and grinding mill components cast and machined in the DINGDAR workshop"
     ctaPrimary={{ label: 'Request a Quote', href: '/contact/' }}
@@ -164,7 +158,7 @@ const faqs = [
     <div class="container" style="max-width:920px;">
       <div class="sec-head">
         <span class="eyebrow">What a liner actually does</span>
-        <h2>A Liner Is a Structural Part That Happens to Wear</h2>
+        <h2>Ball Mill Shell Liners: Protection and Charge Control</h2>
       </div>
       <p style="font-size:1.04rem;line-height:1.85;color:var(--body);margin-bottom:18px;">
         A mill liner does two jobs at once. It protects the shell from the impact and abrasion of the
@@ -191,7 +185,7 @@ const faqs = [
     <div class="container">
       <div class="sec-head">
         <span class="eyebrow">Part types</span>
-        <h2>Which Liners We Cast</h2>
+        <h2>Types of Liners in a Ball Mill</h2>
         <p>Each position in the mill wears differently, so each is specified separately.</p>
       </div>
       <div class="card" style="overflow-x:auto;">
@@ -217,7 +211,7 @@ const faqs = [
     <div class="container">
       <div class="sec-head">
         <span class="eyebrow">Materials</span>
-        <h2>Four Grade Families, Four Different Failure Modes</h2>
+        <h2>Ball Mill Liner Materials: Mn13, Mn18Cr2, High-Chrome Alloy and Chrome-Moly</h2>
         <p>Matching the grade to the wear mechanism is the decision that sets liner life. Two mills of the same size can need different liners.</p>
       </div>
       <div class="card" style="overflow-x:auto;">

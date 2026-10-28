@@ -1,15 +1,15 @@
 [
     {
-        "slug":  "dingdar-launches-international-website",
-        "related":  [
+    "slug": "dingdar-launches-international-website",
+    "cover": "/images/news-foundry-worker.webp",
+    "related": [
                         "how-to-choose-jaw-plate-material",
                         "what-information-is-needed-for-a-custom-crusher-wear-parts-quote"
                     ],
         "title":  "DINGDAR Launches Its International Website",
         "date":  "2026-10-14",
-        "excerpt":  "Our new English website is now live. Buyers of crusher wear parts, bucket teeth and custom castings can send drawings, part numbers or samples directly for a technical review and quotation.",
-        "cover":  "/images/news-foundry-worker.webp",
-        "coverAlt":  "Foundry worker pouring molten metal into molds",
+            "excerpt": "Our new English website is now live. Buyers of crusher wear parts, bucket teeth and custom castings can send drawings, part numbers or samples directly for a technical review and quotation.",
+    "coverAlt":  "Foundry worker pouring molten metal into molds",
         "body":  [
                      "Henan Dingdar Machinery Equipment Manufacture Co., Ltd. has launched its international website at dingdar.com to make it easier for overseas buyers to start a casting project. The site covers the full product range — jaw crusher wear parts, cone crusher wear parts, impact crusher blow bars, hammer heads, double roll crusher parts, bucket teeth and adapters, and custom castings produced to drawing or sample.",
                      "Every inquiry is reviewed as a technical requirement: geometry, material, casting process and inspection scope are confirmed before price and delivery are quoted. Buyers can start with a drawing, a 3D model, a part number, or simply a photo of the worn part.",
@@ -18,17 +18,17 @@
                  ]
     },
     {
-        "slug":  "how-to-choose-jaw-plate-material",
-        "related":  [
+    "slug": "how-to-choose-jaw-plate-material",
+    "cover": "/images/news-two-workers.webp",
+    "related": [
                         "mn13-jaw-plates-guide",
                         "how-to-identify-the-correct-jaw-plate-for-your-crusher",
                         "what-factors-affect-the-service-life-of-crusher-wear-parts"
                     ],
         "title":  "How to Choose Jaw Plate Material: Mn13 and Mn18",
         "date":  "2026-10-14",
-        "excerpt":  "Jaw plates fail by impact, abrasion or both. A practical guide to high-manganese steel grades, when to move to alloy options, and what to send the foundry so the material choice is made on facts.",
-        "cover":  "/images/news-two-workers.webp",
-        "coverAlt":  "Two workers managing molten metal in an industrial furnace",
+            "excerpt": "Jaw plates fail by impact, abrasion or both. A practical guide to high-manganese steel grades, when to move to alloy options, and what to send the foundry so the material choice is made on facts.",
+    "coverAlt":  "Two workers managing molten metal in an industrial furnace",
         "body":  [
                      "Jaw plate material is not a one-size choice. A plate that lasts well in one quarry can fail early in another, usually because the feed conditions — rock hardness, size, moisture and the crusher setup — change the failure mode. Understanding which mode is wearing your plates is the first step to choosing the right material; the second is knowing what each grade family can and cannot do.",
                      "Read the wear pattern before looking at a grade table. The failure mode tells you which property the part actually needs:\u003ctable\u003e\u003ctr\u003e\u003cth\u003eFailure mode\u003c/th\u003e\u003cth\u003eWhat the part needs\u003c/th\u003e\u003cth\u003eUsual direction\u003c/th\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003eSmooth, polished wear face, little deformation\u003c/td\u003e\u003ctd\u003eHigher initial hardness\u003c/td\u003e\u003ctd\u003eMove away from Hadfield manganese toward alloy or composite grades\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003eGouging, metal flow, peened surface\u003c/td\u003e\u003ctd\u003eToughness under repeated impact\u003c/td\u003e\u003ctd\u003eStandard Mn13 duty, or Mn18 for heavier plates\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003eBreakage through the plate body\u003c/td\u003e\u003ctd\u003eToughness plus section design review\u003c/td\u003e\u003ctd\u003eManganese, with the geometry and clamping checked — a harder grade makes it worse\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003eCracks starting at bolt holes or thin sections\u003c/td\u003e\u003ctd\u003eSection and preload review first\u003c/td\u003e\u003ctd\u003eMaterial change alone will not fix this\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003eOne-sided or end-only wear\u003c/td\u003e\u003ctd\u003eFeed or setting correction\u003c/td\u003e\u003ctd\u003eFix the machine condition before buying a different grade\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003eThat table is why the same part number is legitimately supplied in different grades to different pits.",
@@ -159,16 +159,16 @@
                  ]
     },
     {
-        "slug":  "cone-crusher-liners-mantle-concave-guide",
-        "related":  [
+    "slug": "cone-crusher-liners-mantle-concave-guide",
+    "cover": "/images/factory-mill-head.webp",
+    "related": [
                         "what-factors-affect-the-service-life-of-crusher-wear-parts",
                         "blow-bars-manganese-vs-high-chrome"
                     ],
         "title":  "Cone Crusher Liners: Mantle, Concave \u0026 Bowl Liner Guide",
         "date":  "2026-10-19",
-        "excerpt":  "Cone crusher liners are the largest recurring wear cost in secondary and tertiary crushing circuits. A step-by-step guide to identifying the mantle, concave and bowl liner from part numbers, measurements and worn-part photos — and the material options that match your feed conditions.",
-        "cover":  "/images/news-two-workers.webp",
-        "coverAlt":  "Two workers managing molten metal in an industrial furnace",
+            "excerpt": "Cone crusher liners are the largest recurring wear cost in secondary and tertiary crushing circuits. A step-by-step guide to identifying the mantle, concave and bowl liner from part numbers, measurements and worn-part photos — and the material options that match your feed conditions.",
+    "coverAlt":  "Two workers managing molten metal in an industrial furnace",
         "body":  [
                      "In most crushing plants the cone crusher liner is the single largest recurring wear item in the secondary and tertiary stages. The mantle on the moving head and the concave or bowl liner on the frame are replaced on a cycle measured in weeks or months depending on duty, and every change carries the cost of the castings themselves plus the downtime of the crusher. A wrong liner — wrong profile, wrong material, or a pattern that has drifted from the original drawing — does not just wear faster; it changes the product shape, forces the plant to compensate with settings, and in the worst cases damages the machine. That is why identification comes before price in every serious liner inquiry.",
                      "A cone crusher crushes by compression. The mantle is mounted on the main shaft, which is carried in an eccentric that makes the head gyrate inside the fixed concave ring; the crushing chamber between the two surfaces narrows toward the discharge end, and rock is broken as it is squeezed between the moving and stationary liners. Because the liner profile defines the shape of that chamber, the liner is doing two jobs at once: it protects the structural steel and it sets the reduction ratio, the throughput and the product shape. A coarse-profile liner opens the chamber for high throughput with a coarser product; a fine profile closes the chamber for better reduction and shape at lower capacity. The same crusher can therefore legitimately run different liners, and that is the first reason a machine model alone cannot identify a part.",
@@ -185,16 +185,16 @@
                  ]
     },
     {
-        "slug":  "blow-bars-manganese-vs-high-chrome",
-        "related":  [
+    "slug": "blow-bars-manganese-vs-high-chrome",
+    "cover": "/images/factory-casting-workshop.webp",
+    "related": [
                         "what-factors-affect-the-service-life-of-crusher-wear-parts",
                         "cone-crusher-liners-mantle-concave-guide"
                     ],
         "title":  "Blow Bars: High Manganese vs High Chrome Steel",
         "date":  "2026-10-19",
-        "excerpt":  "The material of an impact crusher blow bar decides its life and its price per ton crushed. When manganese work-hardening wins, when high-chrome hardness wins, how bi-metal and ceramic options fit, and the operating conditions that decide the choice.",
-        "cover":  "/images/news-furnace-worker.webp",
-        "coverAlt":  "Foundry worker managing a furnace in an industrial plant",
+            "excerpt": "The material of an impact crusher blow bar decides its life and its price per ton crushed. When manganese work-hardening wins, when high-chrome hardness wins, how bi-metal and ceramic options fit, and the operating conditions that decide the choice.",
+    "coverAlt":  "Foundry worker managing a furnace in an industrial plant",
         "body":  [
                      "In an impact crusher the blow bar is the component that wears fastest, gets changed most often and carries the largest share of the wear cost per ton of product. Every revolution of the rotor sends the bar into the feed, and the bar transfers the kinetic energy that breaks the rock. Because the bar sees the feed at full rotor speed, its material choice has an outsized effect: the difference between a manganese bar and a high-chrome bar on the same rotor can be several times in bar life, and the correct choice is not the one with the higher hardness on paper but the one matched to the impact energy and abrasiveness of the actual feed. Getting that match wrong shows up quickly — in broken bars, in rapid wear, or in a bar that wears slowly but shatters on the first oversized piece.",
                      "An impact crusher crushes by impact rather than compression. Material enters the rotor path, is struck by the blow bars, is thrown against the stationary impact plates and breaks by the force of the collisions, then falls to the discharge. The blow bar therefore does two mechanical jobs: it imparts the energy and it takes the abrasion of the material passing at rotor speed. Two wear mechanisms act on the same bar. The first is impact wear — the direct blow of large, heavy feed, which deforms the surface and can crack a brittle material. The second is sliding abrasion — the scouring of fine, gritty material across the working face, which grinds away even a hard surface over time. The balance between the two is set by the feed: big rocks and low fines produce mostly impact wear; well-crushed, sandy or gritty feed produces mostly abrasive wear. A material choice is really a bet on which mechanism dominates in your application.",
@@ -210,8 +210,9 @@
                  ]
     },
     {
-        "slug":  "ball-mill-liners-mn18cr2-guide",
-        "related":  [
+    "slug": "ball-mill-liners-mn18cr2-guide",
+    "cover": "/images/about-steel-mill.webp",
+    "related": [
                         "green-sand-vs-investment-casting",
                         "what-factors-affect-the-service-life-of-crusher-wear-parts"
                     ],
@@ -232,9 +233,8 @@
                          ],
         "title":  "Ball Mill Liners: Materials and What Affects Liner Life",
         "date":  "2026-10-19",
-        "excerpt":  "Ball mill liners protect the shell and control grinding charge movement. Compare Mn13, Mn18Cr2, high-chrome and rubber liners, then send mill dimensions, media size and current profile for a technical quote.",
-        "cover":  "/images/news-welding-worker.webp",
-        "coverAlt":  "Worker in protective gear welding metal in an industrial plant",
+            "excerpt": "Ball mill liners protect the shell and control grinding charge movement. Compare Mn13, Mn18Cr2, high-chrome and rubber liners, then send mill dimensions, media size and current profile for a technical quote.",
+    "coverAlt":  "Worker in protective gear welding metal in an industrial plant",
         "body":  [
                      "A ball mill liner is usually treated as a wear part, but it is more accurate to call it a structural part that happens to wear. The liner does two jobs at once: it protects the mill shell from the impact and abrasion of the grinding charge, and its profile controls how that charge is lifted and dropped as the shell rotates. Because the second job decides grinding efficiency, the liner is not just a consumable — a change of profile or material changes the power draw, the product size and the liner wear together. And because a liner change stops the mill for a full shift or longer, the material and profile decision is typically made to run for months or years at a time, which makes the review before ordering worth more than the review after the first failure.",
                      "The mechanics are simple to picture. The mill shell rotates around a horizontal axis, partially filled with grinding media — steel balls in a ball mill, or the ore plus media in a SAG mill — and the feed to be ground. The rotation speed is normally kept below the critical speed at which the charge would centrifuge; in that window the lifters on the liner pick up the charge, carry it partway up the shell and release it, so the media cascade and grind the ore by impact and attrition. The liner profile is what makes the lift happen: taller lifters raise the charge higher and increase impact energy, flatter profiles let the charge slide and increase abrasion. A liner that has worn its lifters down is, in effect, a different grinding machine than it was when new — which is why monitoring liner height is part of monitoring mill performance, not just maintenance scheduling.",
@@ -250,17 +250,17 @@
                  ]
     },
     {
-        "slug":  "mn13-jaw-plates-guide",
-        "related":  [
+    "slug": "mn13-jaw-plates-guide",
+    "cover": "/images/news-fire-worker-640.webp",
+    "related": [
                         "how-to-choose-jaw-plate-material",
                         "how-to-identify-the-correct-jaw-plate-for-your-crusher",
                         "what-factors-affect-the-service-life-of-crusher-wear-parts"
                     ],
         "title":  "Mn13 Jaw Plates: Grades, Work Hardening \u0026 Specification",
         "date":  "2026-10-20",
-        "excerpt":  "What \"Mn13\" actually means on a jaw plate, how work hardening gives it long life in crushing, when Mn18 or an alloy grade is the better call, and the information that turns a part number into a reliable quotation.",
-        "cover":  "/images/news-foundry-worker.webp",
-        "coverAlt":  "Foundry worker inspecting castings on a production floor",
+            "excerpt": "What \"Mn13\" actually means on a jaw plate, how work hardening gives it long life in crushing, when Mn18 or an alloy grade is the better call, and the information that turns a part number into a reliable quotation.",
+    "coverAlt":  "Foundry worker inspecting castings on a production floor",
         "body":  [
                      "Mn13 jaw plates are the default wear material for the fixed and movable jaws of jaw crushers, and the name carries real information: a manganese content around 13 percent in the Hadfield family of austenitic manganese steels, the same material family covered by ASTM A128. The reason the grade dominates primary crushing is the same reason it behaves differently from a common abrasion-resistant steel — Mn13 does not simply resist wear; it becomes harder where it is hit. For a buyer comparing jaw plates, the practical questions are what the grade really contains, how the work hardening works, when Mn18 or an alloy grade is the better call, and what to send the foundry so the plate is quoted on facts. This guide works through those questions in order.",
                      "Mn13 is a family, not a single recipe. The nominal 13% manganese sits in a specification band — commonly around 11.5% to 14% — with carbon near 1.1–1.35%, silicon about 0.3–1.0%, and sulphur and phosphorus held low. A common variant adds chromium in the Mn13Cr2 form, roughly 1.7–2.2% Cr, which raises the as-cast hardness and improves resistance to sliding abrasion without giving up the toughness of the manganese family. The same family extends upward: Mn18 (about 17–19% Mn) and Mn22 (21–23% Mn) are specified for heavier duty, usually with chromium as well. Ranges like these are published by most foundries, but they are typical bands, not a guarantee — the meaningful number is the melt chemistry of the actual heat, confirmed by a material certificate against the standard agreed for the order, an ASTM A128-series or GB equivalent.",
@@ -282,10 +282,10 @@
                         "ball-mill-liners-mn18cr2-guide",
                         "what-factors-affect-the-service-life-of-crusher-wear-parts"
                     ],
-        "title":  "How to Choose Ball Mill Liners: Mn13, Mn18Cr2, High Chrome or Rubber?",
-        "date":  "2026-10-26",
-        "excerpt":  "A practical ball mill liner selection guide: compare Mn13, Mn18Cr2, high-chrome and rubber liners by impact, abrasion, mill zone and inspection needs before requesting a quote.",
-        "cover":  "/images/news-foundry-worker.webp",
+    "title": "How to Choose Ball Mill Liners: Mn13, Mn18Cr2, High Chrome or Rubber?",
+    "date": "2026-10-26",
+    "excerpt": "A practical ball mill liner selection guide: compare Mn13, Mn18Cr2, high-chrome and rubber liners by impact, abrasion, mill zone and inspection needs before requesting a quote.",
+    "cover": "/images/factory-finished-stock.webp",
         "coverAlt":  "Foundry worker inspecting castings on a production floor",
         "metaDescription":  "How to choose ball mill liners: compare Mn13, Mn18Cr2, high-chrome and rubber by mill zone, impact, abrasion, media size and inspection needs before a quote.",
         "relatedPages":  [

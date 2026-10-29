@@ -61,6 +61,46 @@ async function isAuthed(request, env) {
   return safeEqual(sig, await hmac(env.ADMIN_SECRET, exp));
 }
 
+async function loginIpHash(request, env) {
+  const ip = request.headers.get('cf-connecting-ip') || request.headers.get('x-forwarded-for') || '';
+  if (!ip || !env.ADMIN_SECRET) return '';
+  return (await hmac(env.ADMIN_SECRET, ip.split(',')[0].trim())).slice(0, 32);
+}
+
+async function isLoginBlocked(env, ipHash) {
+  if (!env.DB || !ipHash) return false;
+  try {
+    const since = new Date(Date.now() - 15 * 60 * 1000).toISOString();
+    const row = await env.DB.prepare(
+      'SELECT COUNT(*) AS n FROM admin_login_attempts WHERE ip_hash = ? AND attempted_at >= ?'
+    ).bind(ipHash, since).first();
+    return (row?.n ?? 0) >= 5;
+  } catch (err) {
+    console.error('admin login rate-limit lookup failed', err);
+    return false;
+  }
+}
+
+async function recordLoginFailure(env, ipHash) {
+  if (!env.DB || !ipHash) return;
+  try {
+    await env.DB.prepare(
+      'INSERT INTO admin_login_attempts (ip_hash, attempted_at) VALUES (?, ?)'
+    ).bind(ipHash, new Date().toISOString()).run();
+  } catch (err) {
+    console.error('admin login rate-limit write failed', err);
+  }
+}
+
+async function clearLoginFailures(env, ipHash) {
+  if (!env.DB || !ipHash) return;
+  try {
+    await env.DB.prepare('DELETE FROM admin_login_attempts WHERE ip_hash = ?').bind(ipHash).run();
+  } catch (err) {
+    console.error('admin login rate-limit cleanup failed', err);
+  }
+}
+
 const csvCell = (v) => {
   const s = v === null || v === undefined ? '' : String(v);
   return /[",\n\r]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
@@ -79,10 +119,16 @@ export async function onRequest({ request, env, params }) {
   }
 
   if (route === 'login' && method === 'POST') {
+    const ipHash = await loginIpHash(request, env);
+    if (await isLoginBlocked(env, ipHash)) {
+      return json({ ok: false, error: 'rate_limited' }, 429, { 'retry-after': '900' });
+    }
     const body = await request.json().catch(() => ({}));
     if (!safeEqual(String(body.password || ''), env.ADMIN_PASSWORD)) {
+      await recordLoginFailure(env, ipHash);
       return json({ ok: false, error: 'bad_password' }, 401);
     }
+    await clearLoginFailures(env, ipHash);
     const token = await issueToken(env.ADMIN_SECRET);
     return json({ ok: true }, 200, {
       'set-cookie': `${COOKIE}=${token}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=${MAX_AGE}`,

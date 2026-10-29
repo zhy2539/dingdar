@@ -50,10 +50,10 @@ async function readFields(request) {
 }
 
 async function hashIp(ip, secret) {
-  if (!ip) return '';
+  if (!ip || !secret) return '';
   const key = await crypto.subtle.importKey(
     'raw',
-    new TextEncoder().encode(secret || 'dingdar'),
+    new TextEncoder().encode(secret),
     { name: 'HMAC', hash: 'SHA-256' },
     false,
     ['sign']
@@ -104,7 +104,8 @@ async function isRateLimited(env, ipHash) {
  */
 async function verifyTurnstile(env, request, fields) {
   const secret = env.TURNSTILE_SECRET_KEY;
-  if (!secret) return { ok: true, skipped: true };
+  const required = String(env.REQUIRE_TURNSTILE || '').toLowerCase() === 'true';
+  if (!secret) return required ? { ok: false, reason: 'not_configured' } : { ok: true, skipped: true };
 
   const token =
     fields['cf-turnstile-response'] || fields['cf_turnstile_response'] || '';
@@ -125,8 +126,10 @@ async function verifyTurnstile(env, request, fields) {
     return { ok: !!data.success, reason: (data['error-codes'] || []).join(',') };
   } catch (err) {
     console.error('turnstile verify failed', err);
-    // 校验服务本身挂了不该拒单，放行并留日志
-    return { ok: true, skipped: 'verify_error' };
+    // 生产环境可通过 TURNSTILE_FAIL_OPEN=true 显式选择故障放行；默认拒绝，避免验证码故障变成无防护入口。
+    return String(env.TURNSTILE_FAIL_OPEN || '').toLowerCase() === 'true'
+      ? { ok: true, skipped: 'verify_error' }
+      : { ok: false, reason: 'verify_error' };
   }
 }
 
@@ -159,6 +162,10 @@ export async function onRequestPost({ request, env }) {
   }
 
   // 3) 同一 IP 每小时限流（IP 只存 HMAC 哈希）
+  if (!env.ADMIN_SECRET) {
+    console.error('inquiry rejected: ADMIN_SECRET is not configured');
+    return json({ ok: false, error: 'service_not_configured' }, 503);
+  }
   const ipHash = await hashIp(request.headers.get('cf-connecting-ip'), env.ADMIN_SECRET);
   if (await isRateLimited(env, ipHash)) {
     return json({ ok: false, error: 'rate_limited' }, 429);

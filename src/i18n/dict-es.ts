@@ -848,16 +848,16 @@ export const es: Record<string, string> = {
     'Henan Dingdar Machinery Equipment Manufacture Co., Ltd. opera el sitio web dingdar.com (y sus versiones en /es/, /fr/, /ru/ y /pt/). Esta política se aplica a todas las versiones del sitio. Si nos contactas por correo o WhatsApp, esta política también describe cómo tratamos esa información.',
   'pv.s1.title': 'Qué recogemos',
   'pv.s1.body':
-    'Datos de consulta: los campos que envías a través de nuestros formularios de contacto o muestras — nombre, correo de trabajo, empresa, país, producto de interés, cantidad y el mensaje que escribes. Solo recogemos lo que decides enviar. Marcador antispam: nuestros formularios incluyen un campo honeypot oculto que rellenan los bots automatizados; si se rellena, el envío se descarta sin leerse. Datos técnicos: Google Analytics 4 recoge estadísticas anónimas de uso como páginas visitadas, región aproximada, tipo de dispositivo y referencia, para entender cómo se usa el sitio.',
+    'Datos de consulta: los campos que envías a través de nuestros formularios de contacto o muestras — nombre, correo de trabajo, empresa, país, producto de interés, cantidad y el mensaje que escribes. Solo recogemos lo que decides enviar. Marcador antispam: nuestros formularios incluyen un campo honeypot oculto que rellenan los bots automatizados; si se rellena, el envío se descarta sin leerse. Datos de operación: las consultas pueden guardarse en Cloudflare D1 junto con la página de origen, idioma, parámetros UTM, referencia, primera página de entrada, un user-agent truncado y un hash HMAC de la IP para gestionar, proteger y medir el seguimiento. Cuando está activado, Cloudflare Turnstile recibe el token y la información necesaria para comprobar que el envío no es automatizado. Google Analytics 4 recoge estadísticas de uso.',
   'pv.s2.title': 'Cómo usamos tus datos',
   'pv.s2.body':
-    'Para responder tu consulta y realizar la revisión técnica solicitada. Para preparar presupuestos, muestras y pedidos cuando un proyecto avanza. Para responder preguntas enviadas por correo o WhatsApp. Para medir el uso del sitio de forma agregada (Google Analytics 4). Para proteger el sitio contra spam y abuso. No vendemos tus datos y no usamos los datos de consulta para listas de marketing sin tu consentimiento.',
+    'Para responder tu consulta y realizar la revisión técnica solicitada. Para preparar presupuestos, muestras y pedidos cuando un proyecto avanza. Para responder preguntas enviadas por correo o WhatsApp. Para medir el uso del sitio de forma agregada (Google Analytics 4). Para proteger el sitio contra spam y abuso mediante un hash unidireccional de IP. Para atribuir una consulta a su primera página y campaña cuando estén presentes. No vendemos tus datos y no usamos los datos de consulta para listas de marketing sin tu consentimiento.',
   'pv.s3.title': 'Quién procesa tus datos',
   'pv.s3.body':
-    'Formspree procesa los formularios de consulta como nuestro procesador de formularios y recibe solo los campos que envías. Cloudflare aloja el sitio y entrega el contenido a través de su red global. Google Analytics 4 procesa estadísticas de uso agregadas; sus datos pueden procesarse fuera de tu país de residencia. No transferimos datos personales a ningún otro tercero. Si un tercero se involucra en el procesamiento de tu pedido (por ejemplo, un transitario), compartimos solo los detalles mínimos necesarios para ese envío.',
+    'Cloudflare Pages y D1 alojan el sitio, reciben las consultas y almacenan los registros necesarios para la revisión y el seguimiento. Cloudflare Turnstile comprueba los envíos cuando está activado. Formspree recibe una copia de los campos enviados para el flujo de notificación. Resend, cuando está configurado, envía el aviso interno y el acuse automático al correo proporcionado. Google Analytics 4 procesa estadísticas de uso y sus datos pueden tratarse fuera de tu país. Estos proveedores actúan para las funciones descritas; no vendemos tus datos ni usamos las consultas para listas de marketing sin tu consentimiento.',
   'pv.s4.title': 'Retención',
   'pv.s4.body':
-    'Los mensajes de consulta se conservan durante el tiempo necesario para completar la revisión y el presupuesto, y para registros comerciales legítimos. Si pides eliminar tus datos de consulta, lo haremos a menos que la ley nos obligue a conservarlos.',
+    'Los registros de consulta, incluidos los campos de atribución y seguridad, se conservan durante el tiempo necesario para completar la revisión y el presupuesto y para registros comerciales legítimos. Si pides eliminar tus datos de consulta, lo haremos a menos que la ley nos obligue a conservarlos.',
   'pv.s5.title': 'Tus derechos',
   'pv.s5.body':
     'Según tu ubicación, puedes tener derecho a acceder, corregir o eliminar los datos personales que nos enviaste, a oponerte o restringir el procesamiento, y a retirar el consentimiento en cualquier momento. Para ejercer estos derechos, escribe a hugo@dingdar.com con tu solicitud. Respondemos a las solicitudes verificadas en un plazo razonable.',
@@ -866,13 +866,13 @@ export const es: Record<string, string> = {
     'Usamos cookies de Google Analytics 4 para medir el uso del sitio. Puedes bloquearlas o eliminarlas en la configuración de tu navegador, o usar los controles de cookies de Google. Bloquear las cookies analíticas no afecta tu capacidad para usar el sitio ni enviar una consulta.',
   'pv.s7.title': 'Seguridad',
   'pv.s7.body':
-    'El sitio se sirve por HTTPS. Recogemos solo el mínimo de datos necesario y no almacenamos credenciales de pago ni de cuentas.',
+    'El sitio se sirve por HTTPS. El acceso a las consultas está protegido por contraseña administrativa y una cookie de sesión firmada. No almacenamos datos de pago ni credenciales de cuentas; evita enviar información sensible innecesaria.',
   'pv.s8.title': 'Cambios en esta política',
   'pv.s8.body':
     'Si esta política cambia, la versión actualizada se publicará en esta página con una fecha revisada. El uso continuado del sitio tras los cambios significa que aceptas la política actualizada.',
   'pv.s9.title': 'Contacto',
   'pv.s9.body':
-    'Las preguntas sobre esta política pueden enviarse a hugo@dingdar.com o a través de nuestra página de contacto. Última actualización: 14 de octubre de 2026.',
+    'Las preguntas sobre esta política pueden enviarse a hugo@dingdar.com o a través de nuestra página de contacto. Última actualización: 29 de octubre de 2026.',
 
   // thank-you
   'tk.badge': 'Consulta recibida',

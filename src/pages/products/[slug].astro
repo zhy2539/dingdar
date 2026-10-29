@@ -20,6 +20,7 @@ const path = '/products/' + cat.slug + '/';
 const breadcrumbLd = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
+  '@id': SITE.domain + path + '#breadcrumb',
   itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.domain + '/' },
     { '@type': 'ListItem', position: 2, name: 'Products', item: SITE.domain + '/products/' },
@@ -32,22 +33,23 @@ const specValue = (prefix: string) => {
 };
 const materialSpec = specValue('Material:');
 const routeSpec = specValue('Casting routes:');
-const productLd = {
+const serviceLd = {
   '@context': 'https://schema.org',
-  '@type': 'Product',
+  '@type': 'Service',
+  '@id': SITE.domain + path + '#service',
   name: cat.cardTitle,
   description: cat.intro,
   image: [SITE.domain + cat.heroImg, SITE.domain + cat.bannerImg],
   url: SITE.domain + path,
-  brand: { '@type': 'Brand', name: 'DINGDAR' },
-  manufacturer: { '@type': 'Organization', name: 'DINGDAR Casting', url: SITE.domain },
-  category: 'Casting wear parts',
+  serviceType: 'Custom casting and wear-part manufacturing',
+  provider: { '@id': SITE.domain + '/#organization' },
+  areaServed: 'Worldwide',
   ...(materialSpec ? { material: materialSpec } : {}),
   additionalProperty: [
     ...(materialSpec ? [{ '@type': 'PropertyValue', name: 'Material', value: materialSpec }] : []),
     ...(routeSpec ? [{ '@type': 'PropertyValue', name: 'Casting process', value: routeSpec }] : []),
   ],
-  // B2B 产品页采用询价模式；没有公开价格时不输出不完整的 Offer，避免触发无效商家信息。
+  // B2B 页面采用询价模式，不输出没有公开依据的价格、评分或评论。
 };
 const faqLd = {
   '@context': 'https://schema.org',
@@ -81,7 +83,7 @@ const reviewSteps = ['Casting', 'Heat Treatment', 'Machining', 'Inspection & Fin
 const deepDive = PRODUCT_DEEP_DIVE[cat.slug];
 ---
 
-<BaseLayout title={cat.title} description={cat.cardDesc} path={path} image={cat.heroImg.replace('.webp', '-og.webp')} jsonLd={[breadcrumbLd, productLd, faqLd, pageLd]} preloadImages={[cat.bannerImg]}>
+<BaseLayout title={cat.title} description={cat.cardDesc} path={path} image={cat.heroImg.replace('.webp', '-og.webp')} jsonLd={[breadcrumbLd, serviceLd, faqLd, pageLd]} preloadImages={[cat.bannerImg]}>
   <PageHero
     eyebrow="Product category"
     title={cat.h1}

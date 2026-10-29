@@ -93,6 +93,7 @@ const breadcrumbNames: Record<string, string> = {
 const breadcrumbLd = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
+  '@id': `${SITE.domain}${breadcrumbPath}#breadcrumb`,
   itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.domain + '/' },
     ...breadcrumbSegments.map((segment, index) => ({

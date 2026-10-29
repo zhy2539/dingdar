@@ -842,16 +842,16 @@ export const pt: Record<string, string> = {
     'A Henan Dingdar Machinery Equipment Manufacture Co., Ltd. opera o site dingdar.com (e suas versões /es/, /fr/, /ru/ e /pt/). Esta política se aplica a todas as versões do site. Se você entrar em contato por e-mail ou WhatsApp, esta política também descreve como tratamos essas informações.',
   'pv.s1.title': 'O que coletamos',
   'pv.s1.body':
-    'Dados de consulta: os campos que você envia por nossos formulários de contato ou amostras — nome, e-mail de trabalho, empresa, país, produto de interesse, quantidade e sua mensagem. Coletamos apenas o que você decide enviar. Marcador antispam: nossos formulários incluem um campo honeypot oculto que bots preenchem; se preenchido, o envio é descartado sem ser lido. Dados técnicos: o Google Analytics 4 coleta estatísticas anonimizadas — páginas visitadas, região aproximada, tipo de dispositivo e referenciador — para entender o uso do site.',
+    'Dados de consulta: os campos que você envia por nossos formulários de contato ou amostras — nome, e-mail de trabalho, empresa, país, produto de interesse, quantidade e sua mensagem. Coletamos apenas o que você decide enviar. Marcador antispam: nossos formulários incluem um campo honeypot oculto; se preenchido por bots, o envio é descartado. Dados operacionais: as consultas podem ser armazenadas no Cloudflare D1 com página de origem, idioma, parâmetros UTM, referenciador, primeira página de entrada, user-agent truncado e hash HMAC do IP para encaminhamento, proteção e medição. Quando ativado, o Cloudflare Turnstile recebe o token e as informações necessárias à verificação. O Google Analytics 4 também coleta estatísticas de uso.',
   'pv.s2.title': 'Como usamos seus dados',
   'pv.s2.body':
-    'Para responder à sua consulta e conduzir a revisão técnica solicitada. Para preparar cotações, amostras e pedidos quando um projeto avança. Para responder a perguntas enviadas por e-mail ou WhatsApp. Para medir o uso do site de forma agregada (Google Analytics 4). Para proteger o site contra spam e abuso. Não vendemos seus dados e não usamos dados de consulta para listas de marketing sem seu consentimento.',
+    'Para responder à sua consulta e conduzir a revisão técnica solicitada. Para preparar cotações, amostras e pedidos quando um projeto avança. Para responder a perguntas por e-mail ou WhatsApp. Para medir o uso agregado do site (Google Analytics 4). Para proteger contra spam com um hash unidirecional do IP e atribuir a consulta à primeira página e campanha quando presentes. Não vendemos seus dados e não usamos consultas em listas de marketing sem seu consentimento.',
   'pv.s3.title': 'Quem processa seus dados',
   'pv.s3.body':
-    'A Formspree processa os formulários de consulta como nosso processador de formulários e recebe apenas os campos que você envia. A Cloudflare hospeda o site e entrega conteúdo por sua rede global. O Google Analytics 4 processa estatísticas agregadas; esses dados podem ser processados fora do seu país de residência. Não transferimos dados pessoais a outros terceiros. Se um terceiro participar do processamento do seu pedido (por exemplo, um despachante), compartilhamos apenas o mínimo necessário para esse embarque.',
+    'Cloudflare Pages e D1 hospedam o site, recebem consultas e armazenam os registros necessários à revisão e ao acompanhamento. O Cloudflare Turnstile verifica os envios quando ativado. A Formspree recebe uma cópia dos campos enviados para o fluxo de notificação. O Resend, quando configurado, envia o aviso interno e a confirmação automática ao endereço informado. O Google Analytics 4 processa estatísticas que podem ser tratadas fora do seu país. Esses provedores atuam apenas nas funções descritas; não vendemos dados nem usamos consultas em listas de marketing sem consentimento.',
   'pv.s4.title': 'Retenção',
   'pv.s4.body':
-    'Mensagens de consulta são retidas pelo tempo necessário para revisão e cotação, e para registros comerciais legítimos. Se você solicitar a exclusão de seus dados de consulta, faremos, salvo obrigação legal de retenção.',
+    'Os registros de consulta, incluindo campos de atribuição e segurança, são mantidos pelo tempo necessário para revisão e cotação e para registros comerciais legítimos. Se você solicitar a exclusão, faremos isso, salvo obrigação legal de retenção.',
   'pv.s5.title': 'Seus direitos',
   'pv.s5.body':
     'Dependendo da sua jurisdição, você pode ter o direito de acessar, corrigir ou excluir os dados pessoais que nos enviou, opor-se ou restringir o processamento e retirar seu consentimento a qualquer momento. Para exercer esses direitos, escreva para hugo@dingdar.com. Respondemos a solicitações verificadas em prazo razoável.',
@@ -860,13 +860,13 @@ export const pt: Record<string, string> = {
     'Usamos cookies do Google Analytics 4 para medir o uso do site. Você pode bloqueá-los ou excluí-los nas configurações do navegador ou usar os controles de cookies do Google. Bloquear cookies analíticos não afeta sua capacidade de usar o site ou enviar uma consulta.',
   'pv.s7.title': 'Segurança',
   'pv.s7.body':
-    'O site é servido por HTTPS. Coletamos apenas o mínimo necessário e não armazenamos dados de pagamento nem credenciais de contas.',
+    'O site é servido por HTTPS. O acesso às consultas é protegido por senha administrativa e cookie de sessão assinado. Não armazenamos dados de pagamento nem credenciais de contas; evite enviar informações sensíveis desnecessárias.',
   'pv.s8.title': 'Alterações nesta política',
   'pv.s8.body':
     'Se esta política mudar, a versão atualizada será publicada nesta página com data revisada. O uso contínuo do site após as alterações constitui aceitação da política atualizada.',
   'pv.s9.title': 'Contato',
   'pv.s9.body':
-    'Perguntas sobre esta política podem ser enviadas para hugo@dingdar.com ou pela nossa página de contato. Última atualização: 14 de outubro de 2026.',
+    'Perguntas sobre esta política podem ser enviadas para hugo@dingdar.com ou pela nossa página de contato. Última atualização: 29 de outubro de 2026.',
 
   // thank-you
   'tk.badge': 'Consulta recebida',

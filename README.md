@@ -16,17 +16,19 @@
 | 公司事实源  | Henan Dingdar Machinery Equipment Manufacture Co., Ltd.（河南丁达尔机械设备制造有限公司）                                                                              |
 | 网站对外口径 | Since 1986、180,000 m² 厂区、720+ 员工、52 R&D、4 条铸造路线（green sand / shell moulding / lost foam / investment）、5,400+ 件类型；材料 Mn13/Mn18、Cr15–Cr26、合金钢、GGG40/50/60 |
 
-## 2. 技术架构（纯静态，无自建后端）
+## 2. 技术架构（Astro 静态前端 + Cloudflare 询盘后端）
 
 | 层  | 选型                                  | 说明                                                                                             |
 | -- | ----------------------------------- | ---------------------------------------------------------------------------------------------- |
-| 框架 | Astro 5 静态站                         | 源码 `site/`，构建产物 `site/dist/`                                                                   |
-| 托管 | Cloudflare Pages（免费，全球 CDN）         | 项目名 `dingdar`                                                                                  |
+| 前端框架 | Astro 7 静态生成                         | 源码 `site/`，构建产物 `site/dist/`；产品、新闻和多语言页面在构建期生成                                                                   |
+| 服务端 | Cloudflare Pages Functions              | `/api/inquiry` 接收询盘；`/api/admin/*` 提供受保护的后台接口                                                        |
+| 数据库 | Cloudflare D1                         | 询盘写入 `inquiries`；迁移位于 `migrations/0001_inquiries.sql` 和 `migrations/0002_admin_login_attempts.sql`                                                                   |
+| 托管 | Cloudflare Pages（全球 CDN）         | 项目名 `dingdar`                                                                                  |
 | 域名 | 注册在**阿里云**，NS 指向 Cloudflare         | **DNS 由用户手动在阿里云管理，任何 Agent 不得修改 DNS**                                                          |
-| 表单 | Formspree（免费端点）                     | `https://formspree.io/f/mwlvryqb`，后台 Workflow 页 `https://formspree.io/forms/mwlvryqb/workflow` |
+| 询盘转发 | Formspree + Resend                     | Formspree 保留原有转发链路；Resend 可发送内部提醒和客户自动确认邮件 |
 | 统计 | Google Analytics 4                  | 测量 ID `G-LVB325JZGL`（账号 a381915185 / 媒体资源 p521486701 / 数据流 16125796941）                        |
 | 搜索 | Google Search Console               | 域名属性 `sc-domain:dingdar.com`，sitemap 已提交                                                       |
-| 代码托管 | GitHub 私有仓库                          | `https://github.com/zhy2539/dingdar`（2026-10-15 创建并推送，分支 main）                                  |
+| 代码托管 | GitHub 私有仓库                          | `https://github.com/zhy2539/dingdar`（分支 main）                                  |
 | 字体 | Merriweather（标题，OFL）+ Inter（正文，OFL） | 无版权纠纷                                                                                          |
 
 ## 3. 目录结构
@@ -50,10 +52,25 @@ E:\豆包工作内容存放\丁达尔建站\
 
 ## 4. 常用命令（在 `site\` 目录执行）
 
+生产环境变量（仅在 Cloudflare Pages → Settings → Environment variables 配置，不写入仓库）：
+
+- `ADMIN_PASSWORD`：后台登录密码
+- `ADMIN_SECRET`：随机长字符串，用于签发管理 Cookie 和 IP 哈希；生产环境必填
+- `DB`：Cloudflare D1 绑定变量
+- `TURNSTILE_SECRET_KEY`：Turnstile 服务端密钥；启用 `REQUIRE_TURNSTILE=true` 时必填
+- `TURNSTILE_FAIL_OPEN`：仅在明确接受验证码故障放行风险时设为 `true`，默认拒绝验证异常
+- `RESEND_API_KEY`、`NOTIFY_EMAIL`、`NOTIFY_FROM`：Resend 通知链路配置
+- `FORMSPREE_ENDPOINT`：可选，用于覆盖默认 Formspree 转发端点
+
+数据库迁移：首次部署执行 `migrations/0001_inquiries.sql`；已有数据库升级时执行 `migrations/0002_admin_login_attempts.sql`，启用后台登录失败计数。
+
 ```
 npm install                 # 首次/依赖变更后
 npm run build               # 构建（产物 site\dist\）
 python ..\_assets\verify_v2.py   # SEO 静态验收（在项目根目录执行）
+
+# 如果使用当前仓库脚本，也可以运行
+npm run verify                 # 构建 + sitemap/title/H1/canonical 等站点验证
 ```
 
 部署（**已接入 GitHub 自动部署，push 即上线**，2026-10-15 配置）：
@@ -178,6 +195,8 @@ npx wrangler pages deploy dist --project-name=dingdar --branch=main --commit-dir
 ## 12. 已知注意事项（踩过的坑，勿重蹈）
 
 * Formspree 通知邮箱自动化改动**不可行**（react-select 控件无法自动化），改邮箱只能用户手动后台操作
+* Product Schema 使用非价格增强方案：报价制页面不虚构 `price`、`offers`、`review` 或 `aggregateRating`；页面通过 Service/Product 业务标记、真实图片和 `additionalProperty` 表达材料、工艺与部件类型。GSC 中遗留的旧产品报告需等待重新抓取后再复核。
+* 询盘 API 在生产环境要求 `ADMIN_SECRET`；后台登录失败计数依赖 `migrations/0002_admin_login_attempts.sql`，Cloudflare WAF/Rate Limiting 仍建议作为边缘层补充防护。
 * wrangler login OAuth 登录**不可用**（此前多次超时），部署一律用 API Token 环境变量
 * Cloudflare API Token 无 DNS 权限，DNS 操作走浏览器 UI
 * GSC sitemap 提交只接受完整绝对 URL，相对路径 / 斜杠形式报 "地址无效"

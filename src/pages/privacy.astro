@@ -32,7 +32,9 @@ const path = '/privacy/';
       <ul style="line-height:1.9;color:var(--ink-2);">
         <li><strong>Inquiry data</strong> — the fields you submit through our contact or sample forms: name, work email, company, country, product interest, quantity and the message you write. We collect only what you choose to send.</li>
         <li><strong>Anti-spam marker</strong> — our forms include a hidden honeypot field that automated bots fill. If it is filled, the submission is discarded without being read.</li>
-        <li><strong>Technical data</strong> — Google Analytics 4 collects anonymized usage statistics such as pages visited, approximate region, device type and referrer, so we can understand how the site is used.</li>
+        <li><strong>Technical data</strong> — Google Analytics 4 collects usage statistics such as pages visited, approximate region, device type and referrer, so we can understand how the site is used.</li>
+        <li><strong>Inquiry operations data</strong> — submitted inquiries may be stored in Cloudflare D1 with the source page, page language, UTM campaign fields, referrer, first landing page, a truncated user-agent and an HMAC-based IP hash. These fields help us route, protect and measure inquiry handling; they are not used as marketing-list consent.</li>
+        <li><strong>Security verification</strong> — when enabled, Cloudflare Turnstile receives the verification token and relevant request information to distinguish people from automated abuse.</li>
       </ul>
 
       <h2 style="font-size:1.4rem;margin:34px 0 18px;">How we use your data</h2>
@@ -41,7 +43,8 @@ const path = '/privacy/';
         <li>To prepare quotations, samples and orders when a project moves forward.</li>
         <li>To answer questions sent by email or WhatsApp.</li>
         <li>To measure site usage in aggregate form (Google Analytics 4).</li>
-        <li>To protect the site against spam and abuse.</li>
+        <li>To protect the site against spam and abuse, including rate limiting based on a one-way IP hash.</li>
+        <li>To attribute an inquiry to its first landing page and campaign parameters when those parameters are present.</li>
       </ul>
       <p style="line-height:1.8;color:var(--ink-2);">
         We do <strong>not</strong> sell your data, and we do not use inquiry data for marketing lists without your consent.
@@ -49,17 +52,19 @@ const path = '/privacy/';
 
       <h2 style="font-size:1.4rem;margin:34px 0 18px;">Who processes your data</h2>
       <ul style="line-height:1.9;color:var(--ink-2);">
-        <li><strong>Formspree</strong> — our inquiry forms are processed by Formspree as our form processor. Formspree receives only the fields you submit and uses them to deliver the message to us.</li>
-        <li><strong>Cloudflare</strong> — hosts the site and delivers content via its global network.</li>
-        <li><strong>Google Analytics 4</strong> — processes aggregated usage statistics. Google Analytics data may be processed outside your country of residence.</li>
+        <li><strong>Cloudflare Pages and D1</strong> — Cloudflare hosts the site, provides the inquiry endpoint and stores inquiry records for the technical review and follow-up process.</li>
+        <li><strong>Cloudflare Turnstile</strong> — when enabled, Turnstile checks form submissions for automated abuse.</li>
+        <li><strong>Formspree</strong> — our inquiry endpoint forwards a copy of submitted form fields to Formspree so the existing notification workflow can deliver the inquiry to us.</li>
+        <li><strong>Resend</strong> — when configured, Resend sends an internal inquiry notification and an automatic acknowledgement to the email address supplied by the buyer.</li>
+        <li><strong>Google Analytics 4</strong> — processes usage statistics. Google Analytics data may be processed outside your country of residence.</li>
       </ul>
       <p style="line-height:1.8;color:var(--ink-2);">
-        We do not transfer personal data to any other third parties. If a third party becomes involved in processing your order (for example a freight forwarder), we only share the minimum details needed for that shipment.
+        These providers process data only for the functions described above. We do not sell your data or use inquiry data for marketing lists without your consent. If a third party becomes involved in processing your order (for example a freight forwarder), we only share the minimum details needed for that shipment.
       </p>
 
       <h2 style="font-size:1.4rem;margin:34px 0 18px;">Retention</h2>
       <p style="line-height:1.8;color:var(--ink-2);">
-        Inquiry messages are kept for the time needed to complete the review and quotation process, and for legitimate business records. If you ask us to delete your inquiry data, we will do so unless we are required by law to keep it.
+        Inquiry records are kept in Cloudflare D1 and related notification systems for the time needed to complete the review and quotation process, and for legitimate business records. Attribution and security fields are retained with the inquiry record for the same operational period unless a shorter period is required by the applicable system. If you ask us to delete your inquiry data, we will do so unless we are required by law to keep it.
       </p>
 
       <h2 style="font-size:1.4rem;margin:34px 0 18px;">Your rights</h2>
@@ -75,7 +80,7 @@ const path = '/privacy/';
 
       <h2 style="font-size:1.4rem;margin:34px 0 18px;">Security</h2>
       <p style="line-height:1.8;color:var(--ink-2);">
-        The site is served over HTTPS. We collect only the minimum data needed and do not store payment or account credentials.
+        The site is served over HTTPS. Inquiry access is restricted by an administrative password and signed session cookie. We do not store payment or account credentials. No security method is perfect, so please avoid sending passwords, payment-card data or other unnecessary sensitive information through an inquiry form.
       </p>
 
       <h2 style="font-size:1.4rem;margin:34px 0 18px;">Changes to this policy</h2>
@@ -85,7 +90,7 @@ const path = '/privacy/';
 
       <h2 style="font-size:1.4rem;margin:34px 0 18px;">Contact</h2>
       <p style="line-height:1.8;color:var(--ink-2);">
-        Questions about this policy can be sent to <a href={'mailto:' + SITE.email} style="color:var(--accent);font-weight:700;">{SITE.email}</a> or via our <a href="/contact/" style="color:var(--accent);font-weight:700;">contact page</a>. Last updated: 14 October 2026.
+        Questions about this policy can be sent to <a href={'mailto:' + SITE.email} style="color:var(--accent);font-weight:700;">{SITE.email}</a> or via our <a href="/contact/" style="color:var(--accent);font-weight:700;">contact page</a>. Last updated: 29 October 2026.
       </p>
     </div>
   </section>

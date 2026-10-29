@@ -848,16 +848,16 @@ export const fr: Record<string, string> = {
     'Henan Dingdar Machinery Equipment Manufacture Co., Ltd. exploite le site dingdar.com (et ses versions /es/, /fr/, /ru/ et /pt/). Cette politique s\'applique à toutes les versions du site. Si vous nous contactez par e-mail ou WhatsApp, cette politique décrit aussi la manière dont nous traitons ces informations.',
   'pv.s1.title': 'Ce que nous collectons',
   'pv.s1.body':
-    'Données de demande : les champs que vous envoyez via nos formulaires de contact ou d\'échantillons — nom, e-mail professionnel, entreprise, pays, produit d\'intérêt, quantité et le message que vous écrivez. Nous ne collectons que ce que vous choisissez d\'envoyer. Marqueur anti-spam : nos formulaires incluent un champ honeypot caché que les robots remplissent ; s\'il est rempli, la soumission est écartée sans être lue. Données techniques : Google Analytics 4 collecte des statistiques anonymisées — pages visitées, région approximative, type d\'appareil et référent — pour comprendre l\'utilisation du site.',
+    'Données de demande : les champs que vous envoyez via nos formulaires de contact ou d\'échantillons — nom, e-mail professionnel, entreprise, pays, produit d\'intérêt, quantité et message. Nous ne collectons que ce que vous choisissez d\'envoyer. Marqueur anti-spam : les formulaires incluent un champ honeypot caché ; s\'il est rempli, l\'envoi est écarté. Données opérationnelles : les demandes peuvent être stockées dans Cloudflare D1 avec la page d\'origine, la langue, les paramètres UTM, le référent, la première page d\'entrée, un user-agent tronqué et un hachage HMAC de l\'IP pour le suivi, la protection et la mesure. Lorsque Turnstile est activé, Cloudflare reçoit le jeton et les informations nécessaires à la vérification. Google Analytics 4 collecte aussi des statistiques d\'utilisation.',
   'pv.s2.title': 'Comment nous utilisons vos données',
   'pv.s2.body':
-    'Pour répondre à votre demande et mener la revue technique demandée. Pour préparer devis, échantillons et commandes quand un projet avance. Pour répondre aux questions envoyées par e-mail ou WhatsApp. Pour mesurer l\'utilisation du site de façon agrégée (Google Analytics 4). Pour protéger le site contre le spam et les abus. Nous ne vendons pas vos données et n\'utilisons pas les données de demande pour des listes marketing sans votre consentement.',
+    'Pour répondre à votre demande et mener la revue technique demandée. Pour préparer devis, échantillons et commandes quand un projet avance. Pour répondre aux questions envoyées par e-mail ou WhatsApp. Pour mesurer l\'utilisation du site de façon agrégée (Google Analytics 4). Pour protéger le site contre le spam et les abus au moyen d\'un hachage unidirectionnel de l\'IP et attribuer une demande à sa première page et à sa campagne lorsqu\'elles sont présentes. Nous ne vendons pas vos données et n\'utilisons pas les demandes pour des listes marketing sans votre consentement.',
   'pv.s3.title': 'Qui traite vos données',
   'pv.s3.body':
-    'Formspree traite les formulaires de demande comme notre processeur de formulaires et ne reçoit que les champs que vous envoyez. Cloudflare héberge le site et distribue le contenu via son réseau mondial. Google Analytics 4 traite des statistiques agrégées ; ces données peuvent être traitées hors de votre pays de résidence. Nous ne transférons pas de données personnelles à d\'autres tiers. Si un tiers participe au traitement de votre commande (par exemple un transitaire), nous ne partageons que le minimum nécessaire à cette expédition.',
+    'Cloudflare Pages et D1 hébergent le site, reçoivent les demandes et stockent les éléments nécessaires à la revue et au suivi. Cloudflare Turnstile vérifie les envois lorsqu\'il est activé. Formspree reçoit une copie des champs envoyés pour le flux de notification. Resend, lorsqu\'il est configuré, envoie la notification interne et l\'accusé automatique à l\'adresse fournie. Google Analytics 4 traite des statistiques d\'utilisation, qui peuvent être traitées hors de votre pays. Ces prestataires agissent pour les fonctions décrites ; nous ne vendons pas vos données et n\'utilisons pas les demandes pour des listes marketing sans consentement.',
   'pv.s4.title': 'Conservation',
   'pv.s4.body':
-    'Les messages de demande sont conservés le temps nécessaire à la revue et au devis, et pour les documents commerciaux légitimes. Si vous demandez la suppression de vos données de demande, nous le ferons sauf obligation légale de les conserver.',
+    'Les dossiers de demande, y compris les champs d\'attribution et de sécurité, sont conservés le temps nécessaire à la revue et au devis ainsi que pour les documents commerciaux légitimes. Si vous demandez la suppression de vos données, nous le ferons sauf obligation légale de les conserver.',
   'pv.s5.title': 'Vos droits',
   'pv.s5.body':
     'Selon votre localisation, vous pouvez avoir le droit d\'accéder, corriger ou supprimer les données personnelles que vous nous avez envoyées, de vous opposer ou de restreindre le traitement, et de retirer votre consentement à tout moment. Pour exercer ces droits, écrivez à hugo@dingdar.com. Nous répondons aux demandes vérifiées dans un délai raisonnable.',
@@ -866,13 +866,13 @@ export const fr: Record<string, string> = {
     'Nous utilisons les cookies de Google Analytics 4 pour mesurer l\'utilisation du site. Vous pouvez les bloquer ou les supprimer dans les paramètres de votre navigateur, ou utiliser les contrôles de cookies de Google. Bloquer les cookies analytiques n\'affecte pas votre capacité à utiliser le site ni à envoyer une demande.',
   'pv.s7.title': 'Sécurité',
   'pv.s7.body':
-    'Le site est servi en HTTPS. Nous collectons uniquement le minimum nécessaire et ne stockons pas de données de paiement ni d\'identifiants de compte.',
+    'Le site est servi en HTTPS. L\'accès aux demandes est protégé par un mot de passe administratif et un cookie de session signé. Nous ne stockons pas de données de paiement ni d\'identifiants de compte ; évitez d\'envoyer des informations sensibles inutiles.',
   'pv.s8.title': 'Modifications de cette politique',
   'pv.s8.body':
     'Si cette politique change, la version mise à jour sera publiée sur cette page avec une date révisée. L\'utilisation continue du site après les modifications vaut acceptation de la politique à jour.',
   'pv.s9.title': 'Contact',
   'pv.s9.body':
-    'Les questions sur cette politique peuvent être envoyées à hugo@dingdar.com ou via notre page de contact. Dernière mise à jour : 14 octobre 2026.',
+    'Les questions sur cette politique peuvent être envoyées à hugo@dingdar.com ou via notre page de contact. Dernière mise à jour : 29 octobre 2026.',
 
   // thank-you
   'tk.badge': 'Demande reçue',

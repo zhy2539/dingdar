@@ -44,6 +44,7 @@ const serviceLd = {
   serviceType: 'Custom casting and wear-part manufacturing',
   provider: { '@id': SITE.domain + '/#organization' },
   areaServed: 'Worldwide',
+  // 这是报价制 B2B 服务，不是带有价格、退货或配送承诺的零售商品 Offer。
   ...(materialSpec ? { material: materialSpec } : {}),
   additionalProperty: [
     ...(materialSpec ? [{ '@type': 'PropertyValue', name: 'Material', value: materialSpec }] : []),

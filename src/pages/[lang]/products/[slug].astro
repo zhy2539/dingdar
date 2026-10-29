@@ -58,6 +58,7 @@ const serviceLd = {
   serviceType: 'Custom casting and wear-part manufacturing',
   provider: { '@id': SITE.domain + '/#organization' },
   areaServed: 'Worldwide',
+  // This is a quote-based B2B service, not a retail product Offer with price, returns or shipping promises.
   ...(materialSpec ? { material: materialSpec } : {}),
   additionalProperty: [
     ...(materialSpec ? [{ '@type': 'PropertyValue', name: 'Material', value: materialSpec }] : []),

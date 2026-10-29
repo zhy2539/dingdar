@@ -111,7 +111,7 @@ const faqHeading = pui('faqHeading') || 'Buyer questions before ordering';
     lead={p('intro')}
     img={cat.bannerImg}
     imgAlt={p('cardTitle')}
-    ctaPrimary={{ label: common('requestQuote'), href: langHref('/contact/') }}
+    ctaPrimary={{ label: common('requestQuote'), href: langHref('/contact/'), product: cat.cardTitle, productOption: cat.shortName }}
     ctaSecondary={{ label: pui('browseParts'), href: '#parts' }}
   />
 

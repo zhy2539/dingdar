@@ -91,7 +91,7 @@ const deepDive = PRODUCT_DEEP_DIVE[cat.slug];
     lead={cat.intro}
     img={cat.bannerImg}
     imgAlt={cat.cardTitle}
-    ctaPrimary={{ label: 'Request a Quote', href: '/contact/' }}
+    ctaPrimary={{ label: 'Request a Quote', href: '/contact/', product: cat.cardTitle, productOption: cat.shortName }}
     ctaSecondary={{ label: 'Browse Parts ↓', href: '#parts' }}
   />
 

@@ -18,6 +18,7 @@ const sampleFields = [
     'Hammer crusher wear parts',
     'Double roll crusher parts',
     'Bucket teeth & adapters',
+    'Ball mill liners',
     'Custom castings / sample to match',
   ] },
   { name: 'quantity', label: 'Quantity / Part Reference', type: 'text', required: false, placeholder: 'e.g. 1 set of JCP-007, model & part number' },
@@ -53,7 +54,7 @@ const sampleFields = [
           <h2 style="font-size:1.5rem;">Request a Sample</h2>
           <p style="font-size:0.95rem;color:var(--muted);margin:10px 0 24px;">Fields marked * are required. We confirm sample availability, preparation time and policy in the technical review.</p>
 
-          <form id="sample" action={SITE.formEndpoint} method="POST" novalidate>
+          <form id="sample" data-form-type="sample" action={SITE.formEndpoint} method="POST" novalidate>
             <div class="hp-field" aria-hidden="true">
               <label>Leave this field empty</label>
               <input type="text" name="_honey" tabindex="-1" autocomplete="off" />
@@ -192,10 +193,20 @@ const sampleFields = [
     try {
       const res = await fetch(endpoint, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
       if (res.ok) {
-        if (window.dingdarTrackEvent) await window.dingdarTrackEvent('sample_requested');
+        if (window.dingdarTrackEvent) await window.dingdarTrackEvent('sample_requested', { form_type: 'sample', page_language: document.documentElement.lang || 'en' });
         window.location.href = '/thank-you/';
       } else {
-        status.textContent = 'Something went wrong. Please try again or use WhatsApp / email.';
+        let detail = {};
+        try { detail = await res.json(); } catch (_) {}
+        const messages = {
+          invalid_email: 'Please enter a valid work email address.',
+          invalid_source: 'Please refresh the page and try again.',
+          too_short: 'Please add the part reference, machine model or evaluation purpose.',
+          captcha_failed: 'Please complete the security check and try again.',
+          rate_limited: 'Please wait a while before sending another request.',
+          service_not_configured: 'The request service is being configured. Please use WhatsApp or email instead.',
+        };
+        status.textContent = messages[detail.error] || 'Something went wrong. Please try again or use WhatsApp / email.';
         status.style.color = '#d9480f';
       }
     } catch {

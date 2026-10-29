@@ -245,7 +245,7 @@ const inside = ['rs.in0', 'rs.in1', 'rs.in2', 'rs.in3', 'rs.in4'].map((k) => t(k
           <h3 style="font-size:1.5rem;">{rs('formTitle')}</h3>
           <p style="font-size:0.95rem;color:var(--muted);margin:10px 0 24px;">{rs('formNote')}</p>
 
-          <form id="dl" action={SITE.formEndpoint} method="POST" novalidate data-hint-captcha={ct('hintCaptcha')} data-err-required={rs('errRequired')} data-err-email={rs('errEmail')}>
+          <form id="dl" data-form-type="profile" action={SITE.formEndpoint} method="POST" novalidate data-hint-captcha={ct('hintCaptcha')} data-err-required={rs('errRequired')} data-err-email={rs('errEmail')}>
             <div class="hp-field" aria-hidden="true">
               <label>Leave this field empty</label>
               <input type="text" name="_honey" tabindex="-1" autocomplete="off" />

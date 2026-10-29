@@ -302,7 +302,7 @@ const dlFields = [
           <h3 style="font-size:1.5rem;">Download the Company Profile</h3>
           <p style="font-size:0.95rem;color:var(--muted);margin:10px 0 24px;">Leave your details and the download link appears immediately. We may follow up with project-specific information when you are ready.</p>
 
-          <form id="dl" action={SITE.formEndpoint} method="POST" novalidate>
+          <form id="dl" data-form-type="profile" action={SITE.formEndpoint} method="POST" novalidate>
             <div class="hp-field" aria-hidden="true">
               <label>Leave this field empty</label>
               <input type="text" name="_honey" tabindex="-1" autocomplete="off" />

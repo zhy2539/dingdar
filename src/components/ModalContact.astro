@@ -18,7 +18,7 @@ const fields = [
   { name: 'country', label: lang === 'en' ? 'Country' : l('ct.f3.label'), type: 'text', required: false, placeholder: lang === 'en' ? 'Country / region' : l('ct.f3.placeholder') },
   { name: 'phone', label: lang === 'en' ? 'Phone / WhatsApp' : l('ct.fPhone'), type: 'tel', required: false, placeholder: '+86 138 0000 0000' },
   { name: 'product', label: lang === 'en' ? 'Product Interest' : l('ct.f4.label'), type: 'select', required: false, options: lang === 'en'
-    ? ['Jaw crusher wear parts', 'Cone crusher wear parts', 'Impact crusher wear parts', 'Hammer crusher wear parts', 'Double roll crusher parts', 'Bucket teeth & adapters', 'Custom castings', 'Other / not sure yet']
+    ? ['Jaw crusher wear parts', 'Cone crusher wear parts', 'Impact crusher wear parts', 'Hammer crusher wear parts', 'Double roll crusher parts', 'Bucket teeth & adapters', 'Ball mill liners', 'Custom castings', 'Other / not sure yet']
     : ['ct.opt0', 'ct.opt1', 'ct.opt2', 'ct.opt3', 'ct.opt4', 'ct.opt5', 'ct.opt6', 'ct.opt7'].map((k) => l(k))
   },
   { name: 'reference_url', label: ({ en: 'Drawing / photo link (optional)', es: 'Enlace de plano / foto (opcional)', fr: 'Lien du plan / de la photo (facultatif)', ru: 'Ссылка на чертёж / фото (необязательно)', pt: 'Link do desenho / foto (opcional)' } as Record<AnyLang, string>)[lang], type: 'url', required: false, placeholder: 'Google Drive, Dropbox or OneDrive URL', wide: true },
@@ -45,7 +45,7 @@ const netHint = lang === 'en' ? 'Network error. Please email hugo@dingdar.com or
     <h3 id="mc-title" style="font-size:1.4rem;margin-bottom:8px;">{title}</h3>
     <p id="mc-subtitle" style="font-size:0.9rem;color:var(--muted);margin-bottom:22px;">{subtitle}</p>
 
-    <form data-mc-form action={SITE.formEndpoint} method="POST" novalidate
+    <form data-mc-form data-form-type="quote" action={SITE.formEndpoint} method="POST" novalidate
       data-hint-required={emptyHint} data-hint-email={emailHint} data-hint-err={errHint} data-hint-net={netHint} data-hint-captcha={captchaHint} data-thank-you-path={thankYouPath}>
       <div class="hp-field" aria-hidden="true">
         <label>Leave this field empty</label>

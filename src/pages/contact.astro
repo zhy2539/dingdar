@@ -48,7 +48,7 @@ const fields = [
           <h2 style="font-size:1.5rem;">Request a Quote</h2>
           <p style="font-size:0.95rem;color:var(--muted);margin:10px 0 24px;">Fields marked * are required. We reply with technical feedback within 12–24 hours.</p>
 
-          <form id="inquiry" action={SITE.formEndpoint} method="POST" novalidate>
+          <form id="inquiry" data-form-type="quote" action={SITE.formEndpoint} method="POST" novalidate>
             <div class="hp-field" aria-hidden="true">
               <label>Leave this field empty</label>
               <input type="text" name="_honey" tabindex="-1" autocomplete="off" />

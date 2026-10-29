@@ -53,7 +53,7 @@ const helps = [0, 1, 2, 3].map((i) => ct('h' + i));
           <h2 style="font-size:1.5rem;">{ct('formTitle')}</h2>
           <p style="font-size:0.95rem;color:var(--muted);margin:10px 0 24px;">{ct('formNote')}</p>
 
-          <form id="inquiry" action={SITE.formEndpoint} method="POST" novalidate data-hint-required={ct('hintRequired')} data-hint-email={ct('hintEmail')} data-hint-captcha={ct('hintCaptcha')} data-thank-you-path={langPath(lang as Lang, '/thank-you/')}>
+          <form id="inquiry" data-form-type="quote" action={SITE.formEndpoint} method="POST" novalidate data-hint-required={ct('hintRequired')} data-hint-email={ct('hintEmail')} data-hint-captcha={ct('hintCaptcha')} data-thank-you-path={langPath(lang as Lang, '/thank-you/')}>
             <div class="hp-field" aria-hidden="true">
               <label>Leave this field empty</label>
               <input type="text" name="_honey" tabindex="-1" autocomplete="off" />

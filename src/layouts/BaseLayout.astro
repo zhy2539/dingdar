@@ -263,11 +263,12 @@ window.addEventListener('load', function () {
           if (!el || !el.closest) return;
           var form = el.closest('form');
           if (!form) return;
-          var action = form.getAttribute('action') || '';
-          if (action.indexOf('/api/inquiry') === -1) return;
-          if (form.dataset.gaStarted === '1') return;
-          form.dataset.gaStarted = '1';
-          track('form_start');
+           var action = form.getAttribute('action') || '';
+           var formType = form.dataset.formType || (action.indexOf('/api/inquiry') !== -1 ? 'quote' : 'other');
+           if (form.dataset.gaStarted === '1') return;
+           form.dataset.gaStarted = '1';
+           track('form_start', { form_type: formType, page_language: document.documentElement.lang || 'en' });
+
         }, true);
       })();
     </script>

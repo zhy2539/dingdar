@@ -9,8 +9,8 @@ interface Props {
   lead2?: string;
   img?: string;
   imgAlt?: string;
-  ctaPrimary?: { label: string; href: string };
-  ctaSecondary?: { label: string; href: string };
+  ctaPrimary?: { label: string; href: string; product?: string; productOption?: string };
+  ctaSecondary?: { label: string; href: string; product?: string; productOption?: string };
   trust?: string[];
   stats?: { value: string; label: string }[];
 }
@@ -18,10 +18,13 @@ const { eyebrow, title, lead, lead2, img, imgAlt, ctaPrimary, ctaSecondary, trus
 
 // 桌面端按视口宽度在 960w 与原始 1440w 之间选择，减少首屏传输量
 let heroSrcset = '';
+let mobileImg = img;
 if (img && img.endsWith('.webp')) {
   const base = img.replace(/\.webp$/, '');
   const has960 = fs.existsSync(path.join(process.cwd(), 'public', base + '-960.webp'));
+  const hasMobile = fs.existsSync(path.join(process.cwd(), 'public', base + '-mobile.webp'));
   if (has960) heroSrcset = `${base}-960.webp 960w, ${img} 1440w`;
+  if (!hasMobile) mobileImg = img;
 }
 ---
 
@@ -29,7 +32,7 @@ if (img && img.endsWith('.webp')) {
   <div class="hero-bg">
     {img ? (
       <picture>
-        <source media="(max-width: 768px)" srcset={img.replace('.webp', '-mobile.webp')} type="image/webp" />
+        <source media="(max-width: 768px)" srcset={mobileImg} type="image/webp" />
         {heroSrcset && <source srcset={heroSrcset} sizes="100vw" type="image/webp" />}
         <img src={img} alt={imgAlt || title} loading="eager" fetchpriority="high" decoding="async" width="1440" height="810" />
       </picture>
@@ -46,12 +49,18 @@ if (img && img.endsWith('.webp')) {
     <div class="cta-row">
       {ctaPrimary && (
         ctaPrimary.href.endsWith('/contact/') ? (
-          <a href={ctaPrimary.href} class="btn btn--primary btn--lg" data-modal-open>{ctaPrimary.label}</a>
+          <a href={ctaPrimary.href} class="btn btn--primary btn--lg" data-modal-open data-product={ctaPrimary.product || title} data-product-option={ctaPrimary.productOption || ''}>{ctaPrimary.label}</a>
         ) : (
           <a href={ctaPrimary.href} class="btn btn--primary btn--lg">{ctaPrimary.label}</a>
         )
       )}
-      {ctaSecondary && <a href={ctaSecondary.href} class="btn btn--hero-ghost btn--lg">{ctaSecondary.label}</a>}
+      {ctaSecondary && (
+        ctaSecondary.href.endsWith('/contact/') ? (
+          <a href={ctaSecondary.href} class="btn btn--hero-ghost btn--lg" data-modal-open data-product={ctaSecondary.product || title} data-product-option={ctaSecondary.productOption || ''}>{ctaSecondary.label}</a>
+        ) : (
+          <a href={ctaSecondary.href} class="btn btn--hero-ghost btn--lg">{ctaSecondary.label}</a>
+        )
+      )}
     </div>
     {trust && (
       <div class="trust-line">

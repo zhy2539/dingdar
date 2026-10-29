@@ -22,7 +22,7 @@ const sampleFields = [
   { name: 'company', label: ct('f2.label'), type: 'text', required: true, placeholder: ct('f2.placeholder') },
   { name: 'country', label: ct('f3.label'), type: 'text', required: true, placeholder: ct('f3.placeholder') },
   { name: 'phone', label: ct('fPhone'), type: 'tel', required: false, placeholder: '+86 138 0000 0000' },
-  { name: 'product', label: ct('f4.label'), type: 'select', required: false, options: ['sp.opt0', 'sp.opt1', 'sp.opt2', 'sp.opt3', 'sp.opt4', 'sp.opt5', 'sp.opt6'].map((k) => t(k)) },
+  { name: 'product', label: ct('f4.label'), type: 'select', required: false, options: ['sp.opt0', 'sp.opt1', 'sp.opt2', 'sp.opt3', 'sp.opt4', 'sp.opt5', 'sp.opt6', 'sp.opt7'].map((k) => t(k)) },
   { name: 'quantity', label: ct('f5.label'), type: 'text', required: false, placeholder: sp('f4.placeholder') },
   { name: 'reference_url', label: ({ es: 'Enlace de plano / foto (opcional)', fr: 'Lien du plan / de la photo (facultatif)', ru: 'Ссылка на чертёж / фото (необязательно)', pt: 'Link do desenho / foto (opcional)' } as Record<Lang, string>)[lang as Lang], type: 'url', required: false, placeholder: 'Google Drive, Dropbox or OneDrive URL' },
   { name: 'message', label: ct('f6.label'), type: 'textarea', required: true, placeholder: sp('f6.placeholder') },
@@ -55,7 +55,7 @@ const uses = ['sp.u0', 'sp.u1', 'sp.u2', 'sp.u3'].map((k) => t(k));
           <h2 style="font-size:1.5rem;">{sp('formTitle')}</h2>
           <p style="font-size:0.95rem;color:var(--muted);margin:10px 0 24px;">{sp('formNote')}</p>
 
-          <form id="sample" action={SITE.formEndpoint} method="POST" novalidate data-hint-captcha={ct('hintCaptcha')} data-thank-you-path={langPath(lang as Lang, '/thank-you/')}>
+          <form id="sample" data-form-type="sample" action={SITE.formEndpoint} method="POST" novalidate data-hint-captcha={ct('hintCaptcha')} data-thank-you-path={langPath(lang as Lang, '/thank-you/')}>
             <div class="hp-field" aria-hidden="true">
               <label>Leave this field empty</label>
               <input type="text" name="_honey" tabindex="-1" autocomplete="off" />
@@ -189,10 +189,20 @@ const uses = ['sp.u0', 'sp.u1', 'sp.u2', 'sp.u3'].map((k) => t(k));
     try {
       const res = await fetch(endpoint, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
       if (res.ok) {
-        if (window.dingdarTrackEvent) await window.dingdarTrackEvent('sample_requested');
+        if (window.dingdarTrackEvent) await window.dingdarTrackEvent('sample_requested', { form_type: 'sample', page_language: document.documentElement.lang || 'en' });
         window.location.href = form.dataset.thankYouPath || '/thank-you/';
       } else {
-        status.textContent = 'Something went wrong. Please try again or use WhatsApp / email.';
+        let detail = {};
+        try { detail = await res.json(); } catch (_) {}
+        const messages = {
+          invalid_email: 'Please enter a valid work email address.',
+          invalid_source: 'Please refresh the page and try again.',
+          too_short: 'Please add the part reference, machine model or evaluation purpose.',
+          captcha_failed: 'Please complete the security check and try again.',
+          rate_limited: 'Please wait a while before sending another request.',
+          service_not_configured: 'The request service is being configured. Please use WhatsApp or email instead.',
+        };
+        status.textContent = messages[detail.error] || 'Something went wrong. Please try again or use WhatsApp / email.';
         status.style.color = '#d9480f';
       }
     } catch {

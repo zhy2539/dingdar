@@ -7,7 +7,7 @@ import Turnstile from '../components/Turnstile.astro';
 const fields = [
   { name: 'name', label: 'Your Name *', type: 'text', required: true, placeholder: 'Full name' },
   { name: 'email', label: 'Work Email *', type: 'email', required: true, placeholder: 'name@company.com' },
-  { name: 'company', label: 'Company *', type: 'text', required: true, placeholder: 'Company name' },
+  { name: 'company', label: 'Company (optional)', type: 'text', required: false, placeholder: 'Company name (optional)' },
   { name: 'country', label: 'Country', type: 'text', required: false, placeholder: 'Country / region' },
   { name: 'phone', label: 'Phone / WhatsApp', type: 'tel', required: false, placeholder: '+86 138 0000 0000' },
   { name: 'product', label: 'Product Interest', type: 'select', required: false, options: [
@@ -205,8 +205,8 @@ const fields = [
     const company = data.get('company')?.trim();
     const country = data.get('country')?.trim();
     const message = data.get('message')?.trim();
-    if (!name || !email || !company || !message) {
-      status.textContent = 'Please complete all required fields.';
+    if (!name || !email || !message) {
+      status.textContent = 'Please complete your name, work email and a short requirement.';
       status.style.color = '#d9480f';
       return;
     }
@@ -226,7 +226,17 @@ const fields = [
         if (window.dingdarTrackEvent) await window.dingdarTrackEvent('inquiry_submitted');
         window.location.href = '/thank-you/';
       } else {
-        status.textContent = 'Something went wrong. Please try again or use WhatsApp / email.';
+        let detail = '';
+        try { detail = await res.json(); } catch (_) {}
+        const messages = {
+          invalid_email: 'Please enter a valid work email address.',
+          invalid_source: 'Please refresh the page and try again.',
+          too_short: 'Please add a part number, equipment model, or a few words about your requirement.',
+          captcha_failed: 'Please complete the security check and try again.',
+          rate_limited: 'Please wait a while before sending another inquiry.',
+          service_not_configured: 'The inquiry service is being configured. Please use WhatsApp or email instead.',
+        };
+        status.textContent = messages[detail.error] || 'Something went wrong. Please try again or use WhatsApp / email.';
         status.style.color = '#d9480f';
       }
     } catch {

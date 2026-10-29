@@ -63,7 +63,12 @@ async function hashIp(ip, secret) {
 }
 
 // 允许的来源站点（含 www 与 pages.dev 预览域）
-const ALLOWED_HOSTS = ['dingdar.com', 'www.dingdar.com', 'dingdar.pages.dev'];
+const ALLOWED_HOSTS = ['dingdar.com', 'www.dingdar.com'];
+
+function isAllowedHost(hostname) {
+  const host = String(hostname || '').toLowerCase();
+  return ALLOWED_HOSTS.includes(host) || host.endsWith('.dingdar.pages.dev');
+}
 
 /**
  * 来源页校验：真人从站内表单提交时，source_page 一定是我们自己的域名。
@@ -73,7 +78,7 @@ function isSameSiteSource(sourcePage) {
   if (!sourcePage || typeof sourcePage !== 'string') return false;
   try {
     const u = new URL(sourcePage);
-    return ALLOWED_HOSTS.includes(u.hostname.toLowerCase());
+    return isAllowedHost(u.hostname);
   } catch {
     return false;
   }

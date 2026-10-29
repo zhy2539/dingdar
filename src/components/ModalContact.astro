@@ -14,7 +14,7 @@ const thankYouPath = lang === 'en' ? '/thank-you/' : langPath(lang as Lang, '/th
 const fields = [
   { name: 'name', label: lang === 'en' ? 'Your Name *' : l('ct.f0.label'), type: 'text', required: true, placeholder: lang === 'en' ? 'Full name' : l('ct.f0.placeholder') },
   { name: 'email', label: lang === 'en' ? 'Work Email *' : l('ct.f1.label'), type: 'email', required: true, placeholder: lang === 'en' ? 'name@company.com' : l('ct.f1.placeholder') },
-  { name: 'company', label: lang === 'en' ? 'Company *' : l('ct.f2.label'), type: 'text', required: true, placeholder: lang === 'en' ? 'Company name' : l('ct.f2.placeholder') },
+  { name: 'company', label: lang === 'en' ? 'Company (optional)' : l('ct.f2.label').replace(' *', ''), type: 'text', required: false, placeholder: lang === 'en' ? 'Company name (optional)' : l('ct.f2.placeholder') },
   { name: 'country', label: lang === 'en' ? 'Country' : l('ct.f3.label'), type: 'text', required: false, placeholder: lang === 'en' ? 'Country / region' : l('ct.f3.placeholder') },
   { name: 'phone', label: lang === 'en' ? 'Phone / WhatsApp' : l('ct.fPhone'), type: 'tel', required: false, placeholder: '+86 138 0000 0000' },
   { name: 'product', label: lang === 'en' ? 'Product Interest' : l('ct.f4.label'), type: 'select', required: false, options: lang === 'en'
@@ -212,8 +212,8 @@ const netHint = lang === 'en' ? 'Network error. Please email hugo@dingdar.com or
     const email = data.get('email')?.trim();
     const company = data.get('company')?.trim();
     const message = data.get('message')?.trim();
-    if (!name || !email || !company || !message) {
-      if (status) { status.textContent = form.dataset.hintRequired || 'Please complete all required fields.'; status.style.color = '#d9480f'; }
+    if (!name || !email || !message) {
+      if (status) { status.textContent = 'Please complete your name, work email and a short requirement.'; status.style.color = '#d9480f'; }
       return;
     }
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {

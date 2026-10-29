@@ -18,7 +18,7 @@ const langHref = (enPath: string) => langPath(lang as Lang, enPath);
 const fields = [
   { name: 'name', label: ct('f0.label'), type: 'text', required: true, placeholder: ct('f0.placeholder') },
   { name: 'email', label: ct('f1.label'), type: 'email', required: true, placeholder: ct('f1.placeholder') },
-  { name: 'company', label: ct('f2.label'), type: 'text', required: true, placeholder: ct('f2.placeholder') },
+  { name: 'company', label: ct('f2.label').replace(' *', ''), type: 'text', required: false, placeholder: ct('f2.placeholder') },
   { name: 'country', label: ct('f3.label').replace(' *', ''), type: 'text', required: false, placeholder: ct('f3.placeholder') },
   { name: 'phone', label: ct('fPhone'), type: 'tel', required: false, placeholder: '+86 138 0000 0000' },
   { name: 'product', label: ct('f4.label'), type: 'select', required: false, options: ['ct.opt0', 'ct.opt1', 'ct.opt2', 'ct.opt3', 'ct.opt4', 'ct.opt5', 'ct.opt6', 'ct.opt7'].map((k) => t(k)) },
@@ -180,8 +180,8 @@ const helps = [0, 1, 2, 3].map((i) => ct('h' + i));
     const company = data.get('company')?.trim();
     const country = data.get('country')?.trim();
     const message = data.get('message')?.trim();
-    if (!name || !email || !company || !message) {
-      status.textContent = form.dataset.hintRequired || 'Please complete all required fields.';
+    if (!name || !email || !message) {
+      status.textContent = 'Please complete your name, work email and a short requirement.';
       status.style.color = '#d9480f';
       return;
     }
@@ -200,7 +200,17 @@ const helps = [0, 1, 2, 3].map((i) => ct('h' + i));
         if (window.dingdarTrackEvent) await window.dingdarTrackEvent('inquiry_submitted');
         window.location.href = form.dataset.thankYouPath || '/thank-you/';
       } else {
-        status.textContent = 'Something went wrong. Please try again or use WhatsApp / email.';
+        let detail = {};
+        try { detail = await res.json(); } catch (_) {}
+        const messages = {
+          invalid_email: 'Please enter a valid work email address.',
+          invalid_source: 'Please refresh the page and try again.',
+          too_short: 'Please add a part number, equipment model, or a few words about your requirement.',
+          captcha_failed: 'Please complete the security check and try again.',
+          rate_limited: 'Please wait a while before sending another inquiry.',
+          service_not_configured: 'The inquiry service is being configured. Please use WhatsApp or email instead.',
+        };
+        status.textContent = messages[detail.error] || 'Something went wrong. Please try again or use WhatsApp / email.';
         status.style.color = '#d9480f';
       }
     } catch {

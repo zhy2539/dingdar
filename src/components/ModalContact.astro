@@ -261,8 +261,15 @@ const waHref = 'https://wa.me/' + SITE.whatsappTel + '?text=' + encodeURICompone
     .mc-head h3 { font-size: 1.15rem; }
     .mc-head p { font-size: 0.82rem; }
     .mc-close { top: 12px; right: 12px; }
-    .mc-body { padding: 16px 20px 12px; }
+    .mc-body { padding: 16px 20px 0; }
     .mc-foot { margin: 0 20px calc(14px + env(safe-area-inset-bottom)); }
+    /* 提交按钮钉在滚动区底部：字段再多也不用滑到底才能提交 */
+    .mc-submit {
+      position: sticky; bottom: 0; z-index: 2;
+      margin-top: 4px; margin-bottom: 12px;
+      box-shadow: 0 -12px 16px -8px rgba(255, 255, 255, 0.98), 0 10px 24px rgba(194, 65, 12, 0.24);
+    }
+    .mc-card .hint { margin: 6px 0 12px; }
     .mc-grid { grid-template-columns: 1fr; }
     .mc-wide { grid-column: auto; }
     .mc-card .field input,
@@ -352,16 +359,17 @@ const waHref = 'https://wa.me/' + SITE.whatsappTel + '?text=' + encodeURICompone
     const email = data.get('email')?.trim();
     const message = data.get('message')?.trim();
     if (!name || !email || !message) {
-      if (status) { status.textContent = form.dataset.hintRequired || 'Please complete all required fields.'; status.style.color = '#d9480f'; }
+      if (status) { status.textContent = form.dataset.hintRequired || 'Please complete all required fields.'; status.style.color = '#d9480f'; status.scrollIntoView({ block: 'nearest' }); }
       return;
     }
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
-      if (status) { status.textContent = form.dataset.hintEmail || 'Please enter a valid email address.'; status.style.color = '#d9480f'; }
+      if (status) { status.textContent = form.dataset.hintEmail || 'Please enter a valid email address.'; status.style.color = '#d9480f'; status.scrollIntoView({ block: 'nearest' }); }
       return;
     }
     if (!endpoint) {
       if (status) {
         status.innerHTML = 'The form endpoint is not configured yet. Please contact us directly: <a href="mailto:hugo@dingdar.com" style="color:#e8590c;font-weight:700;">hugo@dingdar.com</a> or WhatsApp +86 19337861987.';
+        status.scrollIntoView({ block: 'nearest' });
       }
       return;
     }
@@ -371,10 +379,10 @@ const waHref = 'https://wa.me/' + SITE.whatsappTel + '?text=' + encodeURICompone
         if (window.dingdarTrackEvent) await window.dingdarTrackEvent('inquiry_submitted', { form_type: 'quote', page_language: document.documentElement.lang || 'en', page_path: window.location.pathname });
         window.location.href = form.dataset.thankYouPath || '/thank-you/';
       } else {
-        if (status) { status.textContent = form.dataset.hintErr || 'Something went wrong. Please try again or use WhatsApp / email.'; status.style.color = '#d9480f'; }
+        if (status) { status.textContent = form.dataset.hintErr || 'Something went wrong. Please try again or use WhatsApp / email.'; status.style.color = '#d9480f'; status.scrollIntoView({ block: 'nearest' }); }
       }
     } catch {
-      if (status) { status.textContent = form.dataset.hintNet || 'Network error. Please email hugo@dingdar.com or message us on WhatsApp.'; status.style.color = '#d9480f'; }
+      if (status) { status.textContent = form.dataset.hintNet || 'Network error. Please email hugo@dingdar.com or message us on WhatsApp.'; status.style.color = '#d9480f'; status.scrollIntoView({ block: 'nearest' }); }
     }
   });
 </script>

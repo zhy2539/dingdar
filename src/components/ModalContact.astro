@@ -347,7 +347,9 @@ const waHref = 'https://wa.me/' + SITE.whatsappTel + '?text=' + encodeURICompone
     if (!modal) return;
     lastFocused = document.activeElement;
     setFormContext(trigger);
+    if (status) { status.textContent = ''; }  // 上一轮的错误提示不要带到新一轮
     modal.classList.add('open');
+    if (bodyEl) bodyEl.scrollTop = 0;         // 每次打开都从第一个字段开始
     modal.setAttribute('aria-hidden', 'false');
     document.body.classList.add('modal-open');
     window.ddTsRender?.(modal.querySelector('[data-turnstile]'));

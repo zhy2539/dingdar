@@ -16,82 +16,112 @@ const fields = [
   { name: 'email', label: lang === 'en' ? 'Work Email *' : l('ct.f1.label'), type: 'email', required: true, placeholder: lang === 'en' ? 'name@company.com' : l('ct.f1.placeholder') },
   { name: 'company', label: lang === 'en' ? 'Company (optional)' : l('ct.f2.label').replace(' *', ''), type: 'text', required: false, placeholder: lang === 'en' ? 'Company name (optional)' : l('ct.f2.placeholder') },
   { name: 'country', label: lang === 'en' ? 'Country' : l('ct.f3.label'), type: 'text', required: false, placeholder: lang === 'en' ? 'Country / region' : l('ct.f3.placeholder') },
-  { name: 'phone', label: lang === 'en' ? 'Phone / WhatsApp' : l('ct.fPhone'), type: 'tel', required: false, placeholder: '+86 138 0000 0000' },
-  { name: 'product', label: lang === 'en' ? 'Product Interest' : l('ct.f4.label'), type: 'select', required: false, options: lang === 'en'
-    ? ['Jaw crusher wear parts', 'Cone crusher wear parts', 'Impact crusher wear parts', 'Hammer crusher wear parts', 'Double roll crusher parts', 'Bucket teeth & adapters', 'Ball mill liners', 'Custom castings', 'Other / not sure yet']
-    : ['ct.opt0', 'ct.opt1', 'ct.opt2', 'ct.opt3', 'ct.opt4', 'ct.opt5', 'ct.opt6', 'ct.opt7'].map((k) => l(k))
-  },
-  { name: 'reference_url', label: ({ en: 'Drawing / photo link (optional)', es: 'Enlace de plano / foto (opcional)', fr: 'Lien du plan / de la photo (facultatif)', ru: 'Ссылка на чертёж / фото (необязательно)', pt: 'Link do desenho / foto (opcional)' } as Record<AnyLang, string>)[lang], type: 'url', required: false, placeholder: 'Google Drive, Dropbox or OneDrive URL', wide: true },
+  { name: 'phone', label: lang === 'en' ? 'Phone / WhatsApp' : l('ct.fPhone'), type: 'tel', required: false, placeholder: '+86 138 0000 0000', wide: true },
   { name: 'message', label: lang === 'en' ? 'Message *' : l('ct.f6.label'), type: 'textarea', required: true, placeholder: lang === 'en' ? 'Part number, drawing, equipment model, material or working conditions — whatever you have.' : l('ct.f6.placeholder') },
 ];
 const title = lang === 'en' ? 'Request a Quote' : l('ct.formTitle');
 const subtitle = lang === 'en' ? 'Fields marked * are required. We reply with technical feedback within 12–24 hours.' : l('ct.formNote');
-const selectPlaceholder = lang === 'en' ? 'Select a category' : l('ct.selectCategory');
+const promise = lang === 'en'
+  ? 'Technical feedback within 12–24 hours. Every inquiry is read as a technical requirement, not a price request.'
+  : l('ct.responseText');
 const submitLabel = lang === 'en' ? 'Send Inquiry' : l('ct.sendInquiry');
-const closeLabel = lang === 'en' ? 'Close' : 'Close';
+const closeLabel = 'Close';
 const emptyHint = lang === 'en' ? 'Please complete all required fields.' : l('ct.hintRequired');
 const emailHint = lang === 'en' ? 'Please enter a valid email address.' : l('ct.hintEmail');
 const errHint = lang === 'en' ? 'Something went wrong. Please try again or use WhatsApp / email.' : l('ct.hintError');
 const captchaHint = lang === 'en' ? 'Please tick the security check just above the button, then submit again.' : l('ct.hintCaptcha');
 const netHint = lang === 'en' ? 'Network error. Please email hugo@dingdar.com or message us on WhatsApp.' : l('ct.hintNetwork');
+const waHref = 'https://wa.me/' + SITE.whatsappTel + '?text=' + encodeURIComponent(SITE.waText);
 ---
 
 <div class="mc-modal" data-mc-modal aria-hidden="true">
   <div class="mc-overlay" data-mc-close></div>
   <div class="mc-card" role="dialog" aria-modal="true" aria-labelledby="mc-title" aria-describedby="mc-subtitle" tabindex="-1">
-    <button class="mc-close" data-mc-close aria-label={closeLabel}>
-      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
-    </button>
-    <h3 id="mc-title" style="font-size:1.4rem;margin-bottom:8px;">{title}</h3>
-    <p id="mc-subtitle" style="font-size:0.9rem;color:var(--muted);margin-bottom:22px;">{subtitle}</p>
-
-    <form data-mc-form data-form-type="quote" action={SITE.formEndpoint} method="POST" novalidate
-      data-hint-required={emptyHint} data-hint-email={emailHint} data-hint-err={errHint} data-hint-net={netHint} data-hint-captcha={captchaHint} data-thank-you-path={thankYouPath}>
-      <div class="hp-field" aria-hidden="true">
-        <label>Leave this field empty</label>
-        <input type="text" name="_honey" tabindex="-1" autocomplete="off" />
+    <header class="mc-head">
+      <span class="mc-badge" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" />
+          <path d="M14 3v5h5" />
+          <path d="M9 13h4M9 17h6" />
+        </svg>
+      </span>
+      <div class="mc-head-text">
+        <h3 id="mc-title">{title}</h3>
+        <p id="mc-subtitle">{subtitle}</p>
       </div>
-      <input type="hidden" name="_subject" value="New inquiry from dingdar.com" />
-      <input type="hidden" name="source_page" value="" />
-      <input type="hidden" name="source_title" value="" />
-      <input type="hidden" name="page_language" value={lang} />
-      <input type="hidden" name="product_context" value="" />
-      <input type="hidden" name="utm_source" value="" />
-      <input type="hidden" name="utm_medium" value="" />
-      <input type="hidden" name="utm_campaign" value="" />
-      <input type="hidden" name="utm_content" value="" />
-      <input type="hidden" name="utm_term" value="" />
-      <input type="hidden" name="referrer" value="" />
-      <input type="hidden" name="first_page" value="" />
+      <button class="mc-close" data-mc-close aria-label={closeLabel}>
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12" /></svg>
+      </button>
+    </header>
 
-      <div class="mc-grid">
-        {fields.map((f) => (
-          f.type === 'select' ? (
-            <div class="field mc-wide">
-              <label for={'mc-' + f.name}>{f.label}</label>
-              <select id={'mc-' + f.name} name={f.name}>
-                <option value="">{selectPlaceholder}</option>
-                {f.options.map((o) => <option value={o}>{o}</option>)}
-              </select>
-            </div>
-          ) : f.type === 'textarea' ? (
-            <div class="field mc-wide">
-              <label for={'mc-' + f.name}>{f.label}</label>
-              <textarea id={'mc-' + f.name} name={f.name} rows="4" placeholder={f.placeholder} required={f.required}></textarea>
-            </div>
-          ) : (
-            <div class:list={['field', f.wide && 'mc-wide']}>
-              <label for={'mc-' + f.name}>{f.label}</label>
-              <input id={'mc-' + f.name} name={f.name} type={f.type} placeholder={f.placeholder} required={f.required} />
-            </div>
-          )
-        ))}
-      </div>
+    <div class="mc-body">
+      <form data-mc-form data-form-type="quote" action={SITE.formEndpoint} method="POST" novalidate
+        data-hint-required={emptyHint} data-hint-email={emailHint} data-hint-err={errHint} data-hint-net={netHint} data-hint-captcha={captchaHint} data-thank-you-path={thankYouPath}>
+        <div class="hp-field" aria-hidden="true">
+          <label>Leave this field empty</label>
+          <input type="text" name="_honey" tabindex="-1" autocomplete="off" />
+        </div>
+        <input type="hidden" name="_subject" value="New inquiry from dingdar.com" />
+        <input type="hidden" name="source_page" value="" />
+        <input type="hidden" name="source_title" value="" />
+        <input type="hidden" name="page_language" value={lang} />
+        <input type="hidden" name="product_context" value="" />
+        <input type="hidden" name="utm_source" value="" />
+        <input type="hidden" name="utm_medium" value="" />
+        <input type="hidden" name="utm_campaign" value="" />
+        <input type="hidden" name="utm_content" value="" />
+        <input type="hidden" name="utm_term" value="" />
+        <input type="hidden" name="referrer" value="" />
+        <input type="hidden" name="first_page" value="" />
 
-      <Turnstile />
-      <button type="submit" class="btn btn--primary btn--lg" style="width:100%;">{submitLabel}</button>
-      <p class="hint" data-mc-status role="status" aria-live="polite"></p>
-    </form>
+        <div class="mc-grid">
+          {fields.map((f) => (
+            f.type === 'textarea' ? (
+              <div class="field mc-wide">
+                <label for={'mc-' + f.name}>{f.label}</label>
+                <textarea id={'mc-' + f.name} name={f.name} rows="4" placeholder={f.placeholder} required={f.required}></textarea>
+              </div>
+            ) : (
+              <div class:list={['field', f.wide && 'mc-wide']}>
+                <label for={'mc-' + f.name}>{f.label}</label>
+                <input
+                  id={'mc-' + f.name}
+                  name={f.name}
+                  type={f.type}
+                  placeholder={f.placeholder}
+                  required={f.required}
+                  autocomplete={{
+                    name: 'name',
+                    email: 'email',
+                    company: 'organization',
+                    country: 'country-name',
+                    phone: 'tel',
+                  }[f.name] || 'on'}
+                />
+              </div>
+            )
+          ))}
+        </div>
+
+        <Turnstile />
+        <button type="submit" class="btn btn--primary btn--lg mc-submit">
+          <span>{submitLabel}</span>
+          <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+        </button>
+
+        <p class="mc-promise">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 12.5 5 5L20 6.5" /></svg>
+          <span>{promise}</span>
+        </p>
+
+        <p class="mc-alt">
+          <span class="mc-alt-label">WhatsApp</span>
+          <a href={waHref} target="_blank" rel="noopener">{SITE.whatsapp}</a>
+        </p>
+
+        <p class="hint" data-mc-status role="status" aria-live="polite"></p>
+      </form>
+    </div>
   </div>
 </div>
 
@@ -99,35 +129,132 @@ const netHint = lang === 'en' ? 'Network error. Please email hugo@dingdar.com or
   .mc-modal {
     position: fixed; inset: 0; z-index: 200;
     display: none; align-items: flex-start; justify-content: center;
-    padding: 6vh 20px 20px;
+    padding: 6vh 20px 24px;
   }
   .mc-modal.open { display: flex; }
   :global(body.modal-open) { overflow: hidden; }
-  .mc-overlay { position: absolute; inset: 0; background: rgba(9, 20, 32, 0.55); backdrop-filter: blur(2px); }
+  .mc-overlay {
+    position: absolute; inset: 0;
+    background: rgba(8, 18, 30, 0.58);
+    backdrop-filter: blur(3px);
+    animation: mcFade 0.18s ease;
+  }
   .mc-card {
     position: relative; z-index: 1;
-    width: 100%; max-width: 560px;
-    background: #fff; border-radius: 16px;
-    padding: 32px 30px 26px;
-    box-shadow: 0 24px 70px rgba(6, 14, 22, 0.35);
-    max-height: 86vh; overflow-y: auto;
+    display: flex; flex-direction: column;
+    width: 100%; max-width: 640px;
+    max-height: 88vh;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 30px 80px rgba(6, 14, 22, 0.38), 0 2px 6px rgba(6, 14, 22, 0.12);
+    animation: mcRise 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+    overflow: hidden;
+  }
+  /* 头部：浅底 + 图标，固定不随表单滚动 */
+  .mc-head {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 24px 30px 20px;
+    background: linear-gradient(180deg, #f7fafc 0%, #ffffff 100%);
+    border-bottom: 1px solid var(--line);
+  }
+  .mc-badge {
+    flex: 0 0 auto;
+    width: 42px; height: 42px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--accent-soft); color: var(--accent);
+    border: 1px solid #f3d7c4;
+  }
+  .mc-head-text { min-width: 0; padding-right: 34px; }
+  .mc-head h3 {
+    font-size: 1.3rem; line-height: 1.25; letter-spacing: -0.01em;
+    margin: 0 0 6px;
+  }
+  .mc-head p {
+    margin: 0; font-size: 0.875rem; line-height: 1.55; color: var(--muted);
+    max-width: 46ch;
   }
   .mc-close {
-    position: absolute; top: 14px; right: 14px;
-    width: 34px; height: 34px; border-radius: 50%;
-    border: none; background: var(--bg-tint); color: var(--ink);
+    position: absolute; top: 16px; right: 16px;
+    width: 32px; height: 32px; border-radius: 50%;
+    border: 1px solid transparent; background: rgba(255, 255, 255, 0.8);
+    color: var(--ink-2);
     display: flex; align-items: center; justify-content: center;
-    cursor: pointer; transition: background 0.15s;
+    cursor: pointer; transition: background 0.15s, color 0.15s, border-color 0.15s;
   }
-  .mc-close:hover { background: var(--line); }
+  .mc-close:hover { background: var(--bg-tint); color: var(--ink); border-color: var(--line); }
+  .mc-close:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .mc-body { padding: 22px 30px 24px; overflow-y: auto; }
   .mc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; }
   .mc-wide { grid-column: 1 / -1; }
-  .mc-card .btn { margin-top: 4px; }
-  .mc-card .hint { margin-top: 10px; font-size: 0.84rem; }
+
+  .mc-card .field { margin-bottom: 14px; }
+  .mc-card .field label { font-size: 0.855rem; margin-bottom: 6px; }
+  .mc-card .field input,
+  .mc-card .field textarea {
+    padding: 11px 13px;
+    border-radius: 10px;
+    background: #fcfdfe;
+    border-color: #dfe6ee;
+  }
+  .mc-card .field input::placeholder,
+  .mc-card .field textarea::placeholder { color: #9aa9b8; }
+  .mc-card .field input:hover,
+  .mc-card .field textarea:hover { border-color: #cbd6e2; }
+
+  .mc-submit {
+    width: 100%; margin-top: 8px;
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    box-shadow: 0 10px 24px rgba(194, 65, 12, 0.24);
+  }
+  .mc-submit svg { transition: transform 0.18s ease; }
+  .mc-submit:hover svg { transform: translateX(3px); }
+
+  .mc-promise {
+    display: flex; align-items: flex-start; gap: 8px;
+    margin: 14px 0 0; padding: 10px 12px;
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    font-size: 0.79rem; line-height: 1.5; color: var(--ink-2);
+  }
+  .mc-promise svg { flex: 0 0 auto; color: #2f9e44; margin-top: 1px; }
+
+  .mc-alt {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    margin: 12px 0 0; font-size: 0.82rem; color: var(--muted);
+  }
+  .mc-alt a { color: var(--accent); font-weight: 700; text-decoration: none; }
+  .mc-alt a:hover { text-decoration: underline; }
+  .mc-alt-label { font-weight: 600; color: var(--ink-2); }
+
+  .mc-card .hint { margin-top: 10px; font-size: 0.82rem; }
+
   @media (max-width: 640px) {
+    .mc-modal { padding: 0; align-items: flex-end; }
+    .mc-card {
+      max-width: none; max-height: 94vh;
+      border-radius: 18px 18px 0 0;
+      animation: mcSlide 0.24s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .mc-head { padding: 20px 20px 16px; gap: 12px; }
+    .mc-badge { width: 36px; height: 36px; border-radius: 10px; }
+    .mc-head h3 { font-size: 1.15rem; }
+    .mc-head p { font-size: 0.82rem; }
+    .mc-close { top: 12px; right: 12px; }
+    .mc-body { padding: 18px 20px calc(20px + env(safe-area-inset-bottom)); }
     .mc-grid { grid-template-columns: 1fr; }
     .mc-wide { grid-column: auto; }
-    .mc-modal { padding: 4vh 12px 12px; }
+    .mc-card .field input,
+    .mc-card .field textarea { font-size: 16px; } /* 移动端避免 iOS 聚焦缩放 */
+  }
+
+  @keyframes mcFade { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes mcRise { from { opacity: 0; transform: translateY(10px) scale(0.99); } to { opacity: 1; transform: none; } }
+  @keyframes mcSlide { from { transform: translateY(24px); opacity: 0.6; } to { transform: none; opacity: 1; } }
+  @media (prefers-reduced-motion: reduce) {
+    .mc-overlay, .mc-card { animation: none; }
+    .mc-submit svg { transition: none; }
   }
 </style>
 
@@ -142,7 +269,6 @@ const netHint = lang === 'en' ? 'Network error. Please email hugo@dingdar.com or
     if (!form) return;
     const h1 = document.querySelector('h1')?.textContent?.trim() || '';
     const product = trigger?.dataset?.product || h1;
-    const productOption = trigger?.dataset?.productOption || product;
     const values = {
       source_page: window.location.href,
       source_title: document.title,
@@ -159,12 +285,6 @@ const netHint = lang === 'en' ? 'Network error. Please email hugo@dingdar.com or
       const input = form.elements.namedItem(name);
       if (input) input.value = value;
     });
-    const select = form.elements.namedItem('product');
-    if (select && productOption) {
-      const needle = productOption.toLowerCase();
-      const match = Array.from(select.options).find((option) => option.value && (needle.includes(option.value.toLowerCase()) || option.value.toLowerCase().includes(needle)));
-      if (match) select.value = match.value;
-    }
   }
 
   function openModal(trigger) {

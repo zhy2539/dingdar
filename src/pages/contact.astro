@@ -17,6 +17,7 @@ const fields = [
     'Hammer crusher wear parts',
     'Double roll crusher parts',
     'Bucket teeth & adapters',
+    'Ball mill liners',
     'Custom castings',
     'Other / not sure yet',
   ] },
@@ -114,8 +115,8 @@ const fields = [
               >Send drawings on WhatsApp instead</a>
               <p class="hint" id="form-status" role="status" aria-live="polite"></p>
               <p style="font-size:0.82rem;color:var(--muted);line-height:1.6;margin-top:12px;">
-                Drawings, photos or part numbers can be sent after submitting — reply to our confirmation email, or use
-                WhatsApp. Both reach the same inbox, and a drawing shortens the quote by a full round of questions.
+                No drawing yet? A part number, machine model or photo of the worn part is enough to start a technical review.
+                You can share additional details via WhatsApp after sending this form.
               </p>
             </div>
           </form>
@@ -223,7 +224,7 @@ const fields = [
     try {
       const res = await fetch(endpoint, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
       if (res.ok) {
-        if (window.dingdarTrackEvent) await window.dingdarTrackEvent('inquiry_submitted');
+        if (window.dingdarTrackEvent) await window.dingdarTrackEvent('inquiry_submitted', { form_type: 'quote', page_language: document.documentElement.lang || 'en', page_path: window.location.pathname });
         window.location.href = '/thank-you/';
       } else {
         let detail = '';

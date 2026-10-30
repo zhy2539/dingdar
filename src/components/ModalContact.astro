@@ -210,10 +210,9 @@ const netHint = lang === 'en' ? 'Network error. Please email hugo@dingdar.com or
     if (data.get('_honey')) return;
     const name = data.get('name')?.trim();
     const email = data.get('email')?.trim();
-    const company = data.get('company')?.trim();
     const message = data.get('message')?.trim();
     if (!name || !email || !message) {
-      if (status) { status.textContent = 'Please complete your name, work email and a short requirement.'; status.style.color = '#d9480f'; }
+      if (status) { status.textContent = form.dataset.hintRequired || 'Please complete all required fields.'; status.style.color = '#d9480f'; }
       return;
     }
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
@@ -229,7 +228,7 @@ const netHint = lang === 'en' ? 'Network error. Please email hugo@dingdar.com or
     try {
       const res = await fetch(endpoint, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
       if (res.ok) {
-        if (window.dingdarTrackEvent) await window.dingdarTrackEvent('inquiry_submitted');
+        if (window.dingdarTrackEvent) await window.dingdarTrackEvent('inquiry_submitted', { form_type: 'quote', page_language: document.documentElement.lang || 'en', page_path: window.location.pathname });
         window.location.href = form.dataset.thankYouPath || '/thank-you/';
       } else {
         if (status) { status.textContent = form.dataset.hintErr || 'Something went wrong. Please try again or use WhatsApp / email.'; status.style.color = '#d9480f'; }

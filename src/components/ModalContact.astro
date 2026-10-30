@@ -102,13 +102,11 @@ const waHref = 'https://wa.me/' + SITE.whatsappTel + '?text=' + encodeURICompone
         </div>
 
         <Turnstile />
+        <p class="hint" data-mc-status role="status" aria-live="polite"></p>
         <button type="submit" class="btn btn--primary btn--lg mc-submit">
           <span>{submitLabel}</span>
           <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
         </button>
-
-
-        <p class="hint" data-mc-status role="status" aria-live="polite"></p>
       </form>
     </div>
 
@@ -232,7 +230,7 @@ const waHref = 'https://wa.me/' + SITE.whatsappTel + '?text=' + encodeURICompone
   .mc-wa:hover { color: var(--accent-hover); text-decoration: underline; }
   .mc-wa svg { flex: 0 0 auto; }
 
-  .mc-card .hint { margin-top: 10px; font-size: 0.82rem; }
+  .mc-card .hint { margin: 0 0 10px; font-size: 0.82rem; }
 
   /* 矮屏（1366×768 / 1280×720 笔记本）再收紧一档，保证首屏完整不裁切 */
   @media (max-height: 820px) {
@@ -269,7 +267,7 @@ const waHref = 'https://wa.me/' + SITE.whatsappTel + '?text=' + encodeURICompone
       margin-top: 4px; margin-bottom: 12px;
       box-shadow: 0 -12px 16px -8px rgba(255, 255, 255, 0.98), 0 10px 24px rgba(194, 65, 12, 0.24);
     }
-    .mc-card .hint { margin: 6px 0 12px; }
+    .mc-card .hint { margin: 0 0 10px; }
     .mc-grid { grid-template-columns: 1fr; }
     .mc-wide { grid-column: auto; }
     .mc-card .field input,
@@ -359,17 +357,17 @@ const waHref = 'https://wa.me/' + SITE.whatsappTel + '?text=' + encodeURICompone
     const email = data.get('email')?.trim();
     const message = data.get('message')?.trim();
     if (!name || !email || !message) {
-      if (status) { status.textContent = form.dataset.hintRequired || 'Please complete all required fields.'; status.style.color = '#d9480f'; status.scrollIntoView({ block: 'nearest' }); }
+      if (status) { status.textContent = form.dataset.hintRequired || 'Please complete all required fields.'; status.style.color = '#d9480f'; requestAnimationFrame(() => status.scrollIntoView({ block: 'nearest' })); }
       return;
     }
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
-      if (status) { status.textContent = form.dataset.hintEmail || 'Please enter a valid email address.'; status.style.color = '#d9480f'; status.scrollIntoView({ block: 'nearest' }); }
+      if (status) { status.textContent = form.dataset.hintEmail || 'Please enter a valid email address.'; status.style.color = '#d9480f'; requestAnimationFrame(() => status.scrollIntoView({ block: 'nearest' })); }
       return;
     }
     if (!endpoint) {
       if (status) {
         status.innerHTML = 'The form endpoint is not configured yet. Please contact us directly: <a href="mailto:hugo@dingdar.com" style="color:#e8590c;font-weight:700;">hugo@dingdar.com</a> or WhatsApp +86 19337861987.';
-        status.scrollIntoView({ block: 'nearest' });
+        requestAnimationFrame(() => status.scrollIntoView({ block: 'nearest' }));
       }
       return;
     }
@@ -379,10 +377,10 @@ const waHref = 'https://wa.me/' + SITE.whatsappTel + '?text=' + encodeURICompone
         if (window.dingdarTrackEvent) await window.dingdarTrackEvent('inquiry_submitted', { form_type: 'quote', page_language: document.documentElement.lang || 'en', page_path: window.location.pathname });
         window.location.href = form.dataset.thankYouPath || '/thank-you/';
       } else {
-        if (status) { status.textContent = form.dataset.hintErr || 'Something went wrong. Please try again or use WhatsApp / email.'; status.style.color = '#d9480f'; status.scrollIntoView({ block: 'nearest' }); }
+        if (status) { status.textContent = form.dataset.hintErr || 'Something went wrong. Please try again or use WhatsApp / email.'; status.style.color = '#d9480f'; requestAnimationFrame(() => status.scrollIntoView({ block: 'nearest' })); }
       }
     } catch {
-      if (status) { status.textContent = form.dataset.hintNet || 'Network error. Please email hugo@dingdar.com or message us on WhatsApp.'; status.style.color = '#d9480f'; status.scrollIntoView({ block: 'nearest' }); }
+      if (status) { status.textContent = form.dataset.hintNet || 'Network error. Please email hugo@dingdar.com or message us on WhatsApp.'; status.style.color = '#d9480f'; requestAnimationFrame(() => status.scrollIntoView({ block: 'nearest' })); }
     }
   });
 </script>

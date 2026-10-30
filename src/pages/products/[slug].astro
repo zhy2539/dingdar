@@ -105,6 +105,11 @@ const deepDive = PRODUCT_DEEP_DIVE[cat.slug];
       <div class="grid grid--3">
         {cat.parts.map((p) => <ProductCard code={p.code} name={p.name} img={p.img} />)}
       </div>
+      {cat.slug === 'bucket-teeth-adapters' && (
+        <p style="margin-top:24px;color:var(--body);line-height:1.7;">
+          Before ordering a replacement, read our <a href="/news/bucket-teeth-adapters-fit-guide/">bucket tooth and adapter fit checklist</a> to verify the tooth pocket, retaining system and bucket-lip connection.
+        </p>
+      )}
       <div class="card" style="margin-top:32px;padding:26px 28px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;">
         <div>
           <h3 style="font-size:1.1rem;">Can't Find Your Part?</h3>

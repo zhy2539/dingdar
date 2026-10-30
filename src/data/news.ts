@@ -4,6 +4,7 @@
 // 多语种译文按「文章序号 + 段落数」匹配（见 i18n/hasNewsTranslation），
 // 所以新增文章请追加到数组末尾，不要调整既有文章的顺序。
 import raw from './news.json';
+import bucketTeethFitGuide from './articles/bucket-teeth-adapters-fit-guide.md?raw';
 
 export interface NewsItem {
   slug: string;
@@ -25,6 +26,20 @@ export interface NewsItem {
   relatedPages?: { href: string; label: string }[];
 }
 
-export const NEWS = raw as NewsItem[];
+// 新文章追加在既有索引之后，避免改变按文章序号绑定的旧译文。
+const bucketTeethArticle: NewsItem = {
+  slug: 'bucket-teeth-adapters-fit-guide',
+  title: 'Bucket Teeth and Adapters: How to Check Fit Before Ordering',
+  date: '2026-10-30',
+  excerpt: 'A buyer checklist for matching bucket teeth, adapters and retainers: verify three interfaces, document worn parts and send the right evidence before ordering.',
+  metaDescription: 'Check bucket tooth, adapter and retainer fit before ordering. Review pocket geometry, pin system, bucket lip and the evidence needed for a quotation.',
+  cover: '/images/prod-teeth.webp',
+  coverAlt: 'Yellow excavator bucket tooth showing its retaining opening and mounting pocket',
+  body: [bucketTeethFitGuide.replace(/^# [^\n]+\n\n/, '').trim()],
+  related: ['what-information-is-needed-for-a-custom-crusher-wear-parts-quote', 'what-inspection-records-should-buyers-request-for-crusher-wear-parts'],
+  relatedPages: [{ href: '/products/bucket-teeth-adapters/', label: 'Bucket teeth and adapters' }],
+};
+
+export const NEWS: NewsItem[] = [...(raw as NewsItem[]), bucketTeethArticle];
 
 export const getNews = (slug: string) => NEWS.find((n) => n.slug === slug);

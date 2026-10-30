@@ -111,6 +111,49 @@ h3 { font-size: 1.18rem; }
 .grid--3 { grid-template-columns: repeat(3, 1fr); }
 .grid--4 { grid-template-columns: repeat(4, 1fr); }
 
+/* 首页转化入口：保持三张卡片的视觉高度、内边距和 CTA 基线一致 */
+.conversion-cards { align-items: stretch; }
+.conversion-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 196px;
+  padding: 24px 24px 22px;
+  overflow: hidden;
+}
+.conversion-card h3 {
+  margin-bottom: 10px;
+  font-size: 1.16rem;
+  line-height: 1.28;
+}
+.conversion-card p {
+  flex: 1;
+  color: var(--body);
+  line-height: 1.62;
+}
+.conversion-card .code {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  width: fit-content;
+  margin-top: 20px;
+  color: var(--accent);
+  font-size: 0.88rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+.conversion-card .code span {
+  transition: transform 0.18s ease;
+}
+.conversion-card:hover .code span,
+.conversion-card:focus-visible .code span {
+  transform: translateX(3px);
+}
+.conversion-card:focus-visible {
+  outline: 3px solid rgba(194, 65, 12, 0.28);
+  outline-offset: 3px;
+}
+
+
 /* 统计带 */
 .stats {
   display: grid;
@@ -310,6 +353,8 @@ h3 { font-size: 1.18rem; }
 @media (max-width: 640px) {
   .section { padding: 64px 0; }
   .grid--4, .grid--3, .grid--2 { grid-template-columns: minmax(0, 1fr); }
+  .conversion-card { min-height: 0; padding: 22px 20px 20px; }
+  .conversion-card .code { margin-top: 16px; }
   .stats { grid-template-columns: 1fr 1fr; }
   .steps { grid-template-columns: 1fr; }
   .footer .cols { grid-template-columns: 1fr; }

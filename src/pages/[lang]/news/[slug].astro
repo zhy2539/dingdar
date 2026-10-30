@@ -34,7 +34,8 @@ const title = article('title');
 const excerpt = article('excerpt');
 const body = Array.from({ length: news.body.length }, (_, i) => article('b' + i)).filter((x) => x);
 const blocks = body.map((b) => marked.parse(b, { async: false, gfm: true }) as string);
-const metaDescription = news.metaDescription || excerpt;
+// 英文文章摘要不能覆盖已翻译页面的本地化摘要；Schema 与 meta 共用同一语种文本。
+const metaDescription = excerpt;
 const relatedPages = news.relatedPages ?? [];
 const alternateLangs = newsTranslationLangs(idx, news.body.length);
 const relatedProductSlugs: Record<number, string[]> = {
@@ -80,16 +81,15 @@ const relatedPosts = (news.related ?? []).flatMap((s) => {
   alternateLangs={alternateLangs}
   jsonLd={{
     '@context': 'https://schema.org',
-    '@type': 'NewsArticle',
+    '@type': 'Article',
     '@id': 'https://dingdar.com' + langPath(lang as Lang, '/news/' + slug + '/#article'),
     headline: title,
     datePublished: news.date,
-    dateModified: news.date,
     description: metaDescription,
     image: 'https://dingdar.com' + news.cover,
-     author: { '@type': 'Organization', name: 'DINGDAR Casting', url: 'https://dingdar.com/' },
-     publisher: { '@id': 'https://dingdar.com/#organization' },
-     mainEntityOfPage: { '@type': 'WebPage', '@id': 'https://dingdar.com' + langPath(lang as Lang, '/news/' + slug + '/') },
+    author: { '@type': 'Organization', name: 'DINGDAR Technical Team', url: 'https://dingdar.com/' },
+    publisher: { '@id': 'https://dingdar.com/#organization' },
+    mainEntityOfPage: { '@type': 'WebPage', '@id': 'https://dingdar.com' + langPath(lang as Lang, '/news/' + slug + '/') },
    }}
 >
   <section class="section" style="padding-top:64px;">

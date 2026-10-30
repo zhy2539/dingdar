@@ -750,6 +750,7 @@ export const es: Record<string, string> = {
   'ct.directTitle': '¿Prefieres contactar directamente?',
   'ct.responseTitle': 'Promesa de respuesta',
   'ct.responseText': 'Respuesta técnica en 12–24 horas. Cada consulta se lee como un requisito técnico, no como una petición de precio.',
+  'ct.mcPromiseShort': 'Respuesta técnica en 12–24 horas',
   'ct.hintRequired': 'Completa todos los campos obligatorios.',
   'ct.hintCaptcha': 'Marca la verificación de seguridad y vuelve a enviar.',
   'ct.hintEmail': 'Introduce una dirección de correo válida.',

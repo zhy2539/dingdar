@@ -21,9 +21,7 @@ const fields = [
 ];
 const title = lang === 'en' ? 'Request a Quote' : l('ct.formTitle');
 const subtitle = lang === 'en' ? 'Fields marked * are required. We reply with technical feedback within 12–24 hours.' : l('ct.formNote');
-const promise = lang === 'en'
-  ? 'Technical feedback within 12–24 hours. Every inquiry is read as a technical requirement, not a price request.'
-  : l('ct.responseText');
+const promise = lang === 'en' ? 'Technical feedback within 12–24 hours' : (l('ct.mcPromiseShort') || l('ct.responseText'));
 const submitLabel = lang === 'en' ? 'Send Inquiry' : l('ct.sendInquiry');
 const closeLabel = 'Close';
 const emptyHint = lang === 'en' ? 'Please complete all required fields.' : l('ct.hintRequired');
@@ -109,15 +107,16 @@ const waHref = 'https://wa.me/' + SITE.whatsappTel + '?text=' + encodeURICompone
           <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
         </button>
 
-        <p class="mc-promise">
-          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 12.5 5 5L20 6.5" /></svg>
-          <span>{promise}</span>
-        </p>
-
-        <p class="mc-alt">
-          <span class="mc-alt-label">WhatsApp</span>
-          <a href={waHref} target="_blank" rel="noopener">{SITE.whatsapp}</a>
-        </p>
+        <div class="mc-foot">
+          <p class="mc-promise">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 12.5 5 5L20 6.5" /></svg>
+            <span>{promise}</span>
+          </p>
+          <a class="mc-wa" href={waHref} target="_blank" rel="noopener" aria-label={'WhatsApp ' + SITE.whatsapp}>
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm0 18.15c-1.5 0-2.98-.4-4.26-1.16l-.31-.18-3.12.82.83-3.04-.2-.32a8.2 8.2 0 0 1-1.26-4.36c0-4.54 3.7-8.23 8.24-8.23 4.54 0 8.23 3.69 8.23 8.23 0 4.54-3.69 8.24-8.15 8.24zm4.52-6.16c-.25-.12-1.47-.72-1.7-.8-.23-.09-.4-.13-.56.12-.17.25-.64.8-.79.96-.14.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.38-1.72-.15-.25-.02-.39.11-.51.11-.11.25-.29.37-.44.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.42h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.6.13.17 1.77 2.7 4.28 3.79.6.26 1.06.41 1.42.53.6.19 1.14.16 1.57.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.15-1.18-.06-.11-.23-.17-.48-.29z"/></svg>
+            <span>{SITE.whatsapp}</span>
+          </a>
+        </div>
 
         <p class="hint" data-mc-status role="status" aria-live="polite"></p>
       </form>
@@ -210,25 +209,43 @@ const waHref = 'https://wa.me/' + SITE.whatsappTel + '?text=' + encodeURICompone
   .mc-submit svg { transition: transform 0.18s ease; }
   .mc-submit:hover svg { transform: translateX(3px); }
 
-  .mc-promise {
-    display: flex; align-items: flex-start; gap: 8px;
-    margin: 12px 0 0; padding: 9px 11px;
+  /* 底部一条信息条：承诺 + WhatsApp 备用通道 */
+  .mc-foot {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 8px 14px; flex-wrap: wrap;
+    margin: 12px 0 0; padding: 8px 12px;
     background: var(--bg-soft);
     border: 1px solid var(--line);
     border-radius: 10px;
-    font-size: 0.82rem; line-height: 1.5; color: var(--ink-2);
   }
-  .mc-promise svg { flex: 0 0 auto; color: #2f9e44; margin-top: 1px; }
-
-  .mc-alt {
-    display: flex; align-items: center; justify-content: center; gap: 8px;
-    margin: 12px 0 0; font-size: 0.82rem; color: var(--muted);
+  .mc-promise {
+    display: flex; align-items: center; gap: 7px;
+    margin: 0; font-size: 0.815rem; line-height: 1.4; color: var(--ink-2);
   }
-  .mc-alt a { color: var(--accent); font-weight: 700; text-decoration: none; }
-  .mc-alt a:hover { text-decoration: underline; }
-  .mc-alt-label { font-weight: 600; color: var(--ink-2); }
+  .mc-promise svg { flex: 0 0 auto; color: #2f9e44; }
+  .mc-wa {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 0.815rem; font-weight: 700; color: var(--accent);
+    text-decoration: none; white-space: nowrap;
+  }
+  .mc-wa:hover { color: var(--accent-hover); text-decoration: underline; }
+  .mc-wa svg { flex: 0 0 auto; }
 
   .mc-card .hint { margin-top: 10px; font-size: 0.82rem; }
+
+  /* 矮屏（1366×768 / 1280×720 笔记本）再收紧一档，保证首屏完整不裁切 */
+  @media (max-height: 820px) {
+    .mc-modal { padding: 3vh 20px 16px; }
+    .mc-card { max-height: 94vh; }
+    .mc-head { padding: 14px 26px 12px; gap: 12px; }
+    .mc-head h3 { font-size: 1.16rem; }
+    .mc-head p { font-size: 0.81rem; line-height: 1.45; }
+    .mc-body { padding: 14px 26px 16px; }
+    .mc-card .field { margin-bottom: 9px; }
+    .mc-card .field textarea { height: 66px; }
+    .mc-submit { margin-top: 6px; }
+    .mc-foot { margin-top: 10px; padding: 7px 10px; }
+  }
 
   @media (max-width: 640px) {
     .mc-modal { padding: 0; align-items: flex-end; }

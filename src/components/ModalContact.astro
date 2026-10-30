@@ -79,7 +79,7 @@ const waHref = 'https://wa.me/' + SITE.whatsappTel + '?text=' + encodeURICompone
             f.type === 'textarea' ? (
               <div class="field mc-wide">
                 <label for={'mc-' + f.name}>{f.label}</label>
-                <textarea id={'mc-' + f.name} name={f.name} rows="4" placeholder={f.placeholder} required={f.required}></textarea>
+                <textarea id={'mc-' + f.name} name={f.name} rows="3" placeholder={f.placeholder} required={f.required}></textarea>
               </div>
             ) : (
               <div class:list={['field', f.wide && 'mc-wide']}>
@@ -143,7 +143,7 @@ const waHref = 'https://wa.me/' + SITE.whatsappTel + '?text=' + encodeURICompone
     position: relative; z-index: 1;
     display: flex; flex-direction: column;
     width: 100%; max-width: 640px;
-    max-height: 88vh;
+    max-height: 90vh;
     background: #fff;
     border-radius: 20px;
     box-shadow: 0 30px 80px rgba(6, 14, 22, 0.38), 0 2px 6px rgba(6, 14, 22, 0.12);
@@ -153,13 +153,13 @@ const waHref = 'https://wa.me/' + SITE.whatsappTel + '?text=' + encodeURICompone
   /* 头部：浅底 + 图标，固定不随表单滚动 */
   .mc-head {
     display: flex; align-items: flex-start; gap: 14px;
-    padding: 24px 30px 20px;
+    padding: 20px 30px 16px;
     background: linear-gradient(180deg, #f7fafc 0%, #ffffff 100%);
     border-bottom: 1px solid var(--line);
   }
   .mc-badge {
     flex: 0 0 auto;
-    width: 42px; height: 42px; border-radius: 12px;
+    width: 40px; height: 40px; border-radius: 11px; margin-top: -6px;
     display: flex; align-items: center; justify-content: center;
     background: var(--accent-soft); color: var(--accent);
     border: 1px solid #f3d7c4;
@@ -167,7 +167,7 @@ const waHref = 'https://wa.me/' + SITE.whatsappTel + '?text=' + encodeURICompone
   .mc-head-text { min-width: 0; padding-right: 34px; }
   .mc-head h3 {
     font-size: 1.3rem; line-height: 1.25; letter-spacing: -0.01em;
-    margin: 0 0 6px;
+    margin: 0 0 5px;
   }
   .mc-head p {
     margin: 0; font-size: 0.875rem; line-height: 1.55; color: var(--muted);
@@ -184,11 +184,11 @@ const waHref = 'https://wa.me/' + SITE.whatsappTel + '?text=' + encodeURICompone
   .mc-close:hover { background: var(--bg-tint); color: var(--ink); border-color: var(--line); }
   .mc-close:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
-  .mc-body { padding: 22px 30px 24px; overflow-y: auto; }
+  .mc-body { padding: 18px 30px 20px; overflow-y: auto; overscroll-behavior: contain; }
   .mc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; }
   .mc-wide { grid-column: 1 / -1; }
 
-  .mc-card .field { margin-bottom: 14px; }
+  .mc-card .field { margin-bottom: 11px; }
   .mc-card .field label { font-size: 0.855rem; margin-bottom: 6px; }
   .mc-card .field input,
   .mc-card .field textarea {
@@ -212,11 +212,11 @@ const waHref = 'https://wa.me/' + SITE.whatsappTel + '?text=' + encodeURICompone
 
   .mc-promise {
     display: flex; align-items: flex-start; gap: 8px;
-    margin: 14px 0 0; padding: 10px 12px;
+    margin: 12px 0 0; padding: 9px 11px;
     background: var(--bg-soft);
     border: 1px solid var(--line);
     border-radius: 10px;
-    font-size: 0.79rem; line-height: 1.5; color: var(--ink-2);
+    font-size: 0.82rem; line-height: 1.5; color: var(--ink-2);
   }
   .mc-promise svg { flex: 0 0 auto; color: #2f9e44; margin-top: 1px; }
 

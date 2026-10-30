@@ -10,19 +10,6 @@ const fields = [
   { name: 'company', label: 'Company (optional)', type: 'text', required: false, placeholder: 'Company name (optional)' },
   { name: 'country', label: 'Country', type: 'text', required: false, placeholder: 'Country / region' },
   { name: 'phone', label: 'Phone / WhatsApp', type: 'tel', required: false, placeholder: '+86 138 0000 0000' },
-  { name: 'product', label: 'Product Interest', type: 'select', required: false, options: [
-    'Jaw crusher wear parts',
-    'Cone crusher wear parts',
-    'Impact crusher wear parts',
-    'Hammer crusher wear parts',
-    'Double roll crusher parts',
-    'Bucket teeth & adapters',
-    'Ball mill liners',
-    'Custom castings',
-    'Other / not sure yet',
-  ] },
-  { name: 'quantity', label: 'Quantity / Annual Volume', type: 'text', required: false, placeholder: 'e.g. 200 pcs per year' },
-  { name: 'reference_url', label: 'Drawing / Photo Link (optional)', type: 'url', required: false, placeholder: 'Google Drive, Dropbox or OneDrive URL' },
   { name: 'message', label: 'Message *', type: 'textarea', required: true, placeholder: 'Part number, drawing, equipment model, material or working conditions — whatever you have.' },
 ];
 ---
@@ -68,21 +55,13 @@ const fields = [
 
             <div class="grid grid--2" style="gap: 16px;">
               {fields.map((f) => (
-                f.type === 'select' ? (
-                  <div class="field" style="grid-column: 1 / -1;">
-                    <label for={f.name}>{f.label}</label>
-                    <select id={f.name} name={f.name}>
-                      <option value="">Select a category</option>
-                      {f.options.map((o) => <option value={o}>{o}</option>)}
-                    </select>
-                  </div>
-                ) : f.type === 'textarea' ? (
+                f.type === 'textarea' ? (
                   <div class="field" style="grid-column: 1 / -1;">
                     <label for={f.name}>{f.label}</label>
                     <textarea id={f.name} name={f.name} rows="6" placeholder={f.placeholder} required={f.required}></textarea>
                   </div>
                 ) : (
-                  <div class="field" style={f.name === 'reference_url' ? 'grid-column: 1 / -1;' : undefined}>
+                  <div class="field" style={f.name === 'phone' ? 'grid-column: 1 / -1;' : undefined}>
                     <label for={f.name}>{f.label}</label>
                     <input
                       id={f.name}
@@ -95,7 +74,6 @@ const fields = [
                         email: 'email',
                         company: 'organization',
                         country: 'country-name',
-                        reference_url: 'url',
                       }[f.name] || 'on'}
                     />
                   </div>

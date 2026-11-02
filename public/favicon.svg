@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
+  <title>DINGDAR</title>
+  <desc>DINGDAR Casting mark</desc>
+  <rect width="64" height="64" rx="12" fill="#101820"/>
+  <path d="M16 14h16c10 0 18 8 18 18s-8 18-18 18H16V14Zm11 10v16h5c4 0 7-3 7-8s-3-8-7-8h-5Z" fill="#f28b32"/>
+</svg>

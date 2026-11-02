@@ -18,7 +18,11 @@ const fields = [
   { name: 'country', label: lang === 'en' ? 'Country' : l('ct.f3.label').replace(' *', ''), type: 'text', required: false, placeholder: lang === 'en' ? 'Country / region' : l('ct.f3.placeholder') },
   { name: 'phone', label: lang === 'en' ? 'Phone / WhatsApp' : l('ct.fPhone'), type: 'tel', required: false, placeholder: '+86 138 0000 0000', wide: true },
   { name: 'part_reference', label: lang === 'en' ? 'Part number / machine model / product needed' : l('ct.fReference'), type: 'text', required: false, placeholder: lang === 'en' ? 'e.g. OEM part number, machine model or product name' : l('ct.fReferencePlaceholder'), wide: true },
-  { name: 'message', label: lang === 'en' ? 'Message *' : l('ct.f6.label'), type: 'textarea', required: true, placeholder: lang === 'en' ? 'Tell us the application, material, quantity or working conditions — whatever you have.' : l('ct.f6.placeholder') },
+  { name: 'product', label: lang === 'en' ? 'Product category' : l('ct.f4.label'), type: 'text', required: false, placeholder: lang === 'en' ? 'Jaw, cone, impact, hammer, bucket teeth or custom casting' : l('ct.fReferencePlaceholder') },
+  { name: 'quantity', label: lang === 'en' ? 'Quantity / annual volume' : l('ct.f5.label'), type: 'text', required: false, placeholder: lang === 'en' ? 'e.g. 1 set / 200 pcs per year' : l('ct.f5.placeholder') },
+  { name: 'delivery_market', label: lang === 'en' ? 'Delivery country / market' : l('ct.f3.label'), type: 'text', required: false, placeholder: lang === 'en' ? 'Destination country or port, if known' : l('ct.f3.placeholder') },
+  { name: 'material_hardness', label: lang === 'en' ? 'Material / hardness requirement' : l('ct.f1.label'), type: 'text', required: false, placeholder: lang === 'en' ? 'Grade, standard or hardness, if specified' : l('ct.f6.placeholder') },
+  { name: 'message', label: lang === 'en' ? 'Message *' : l('ct.f6.label'), type: 'textarea', required: true, placeholder: lang === 'en' ? 'Tell us the application, inspection records or working conditions — whatever you have.' : l('ct.f6.placeholder') },
 ];
 const title = lang === 'en' ? 'Technical Review & Quotation' : l('ct.formTitle');
 const subtitle = lang === 'en' ? 'Share a part number, machine model or product needed. We review the technical basis before preparing a clearer quotation.' : l('ct.formNote');

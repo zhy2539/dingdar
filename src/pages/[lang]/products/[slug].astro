@@ -123,7 +123,7 @@ const faqHeading = pui('faqHeading') || 'Buyer questions before ordering';
         <p>{pui('partsP')}</p>
       </div>
       <div class="grid grid--3">
-        {cat.parts.map((pt, i) => <ProductCard code={pt.code} name={partName(i, pt.name)} img={pt.img} />)}
+        {cat.parts.map((pt, i) => <ProductCard code={pt.code} name={partName(i, pt.name)} img={pt.img} description={pui('partCardDescription')} />)}
       </div>
       <div class="card" style="margin-top:32px;padding:26px 28px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;">
         <div>

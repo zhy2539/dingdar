@@ -18,7 +18,7 @@ export const fr: Record<string, string> = {
   'common.quoteChecklistEyebrow': 'Ressource acheteur',
   'common.quoteChecklistTitle': 'Checklist pour demander un devis de pièces d’usure de concasseur',
   'common.quoteChecklistText': 'Organisez la référence, l’application, la quantité, la destination et le périmètre de contrôle avant votre demande.',
-  'common.openChecklist': 'Ouvrir la checklist',
+  'common.openChecklist': 'Ouvrir la checklist (en anglais)',
   'common.whatsapp': 'WhatsApp',
   'common.sales': 'Ventes',
   'common.engineering': 'Ingénierie',
@@ -230,6 +230,7 @@ export const fr: Record<string, string> = {
   'pui.partsEyebrow': 'Pièces de référence',
   'pui.partsH2': 'Trouvez votre pièce',
   'pui.partsP': 'Références représentatives ci-dessous. Si votre modèle ou numéro de pièce n\'apparaît pas, envoyez-le et nous le ferons correspondre.',
+  'pui.partCardDescription': 'Produite selon votre plan, échantillon ou numéro de pièce.',
   'pui.cantFindTitle': 'Vous ne trouvez pas votre pièce ?',
   'pui.cantFindText': 'Envoyez le plan, l\'échantillon ou le numéro de pièce — nous le revoyons contre nos références et notre outillage existant.',
   'pui.discussBtn': 'Discuter de votre pièce',
@@ -760,6 +761,7 @@ export const fr: Record<string, string> = {
   'ct.hintEndpoint': 'Le formulaire n\'est pas encore configuré. Contactez-nous directement :',
   'ct.hintError': 'Une erreur est survenue. Réessayez ou utilisez WhatsApp / e-mail.',
   'ct.hintNetwork': 'Erreur réseau. Écrivez-nous à hugo@dingdar.com ou sur WhatsApp.',
+  'ct.fileNote': 'Ce formulaire ne permet pas de téléverser des fichiers. Envoyez les plans ou photos par WhatsApp ou via un lien partagé ; ne transmettez pas de mots de passe ni de liens confidentiels.',
 
   // sample
   'sp.heroEyebrow': 'Demander un échantillon',
@@ -786,6 +788,8 @@ export const fr: Record<string, string> = {
   'sp.u1': 'Plan ou photos de la pièce usée',
   'sp.u2': 'Matériau ou dureté attendus',
   'sp.u3': 'Ce que vous évaluerez avec l\'échantillon',
+  'sp.policyTitle': 'Comment la demande d’échantillon est confirmée',
+  'sp.policyText': 'Cette page ne publie pas de tarif fixe, de coût de transport ni de délai de préparation garanti. La disponibilité, le matériau, les dimensions, le périmètre de contrôle et les conditions d’échantillon ou de livraison sont confirmés pour chaque pièce et accord lors de la revue technique. Envoyez d’abord la référence, le modèle de machine et l’objectif d’évaluation ; nous identifierons les informations manquantes avant la production.',
   'sp.directTitle': 'Vous préférez parler directement ?',
   'sp.submitBtn': 'Demander un échantillon',
 

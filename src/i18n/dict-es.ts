@@ -18,7 +18,7 @@ export const es: Record<string, string> = {
   'common.quoteChecklistEyebrow': 'Recurso para compradores',
   'common.quoteChecklistTitle': 'Checklist para cotizar piezas de desgaste de trituradoras',
   'common.quoteChecklistText': 'Organiza la referencia de la pieza, la aplicación, la cantidad, el destino y el alcance de inspección antes de enviar tu consulta.',
-  'common.openChecklist': 'Abrir checklist',
+  'common.openChecklist': 'Abrir checklist (en inglés)',
   'common.whatsapp': 'WhatsApp',
   'common.sales': 'Ventas',
   'common.engineering': 'Ingeniería',
@@ -230,6 +230,7 @@ export const es: Record<string, string> = {
   'pui.partsEyebrow': 'Piezas de referencia',
   'pui.partsH2': 'Encuentra tu pieza',
   'pui.partsP': 'Referencias representativas abajo. Si tu modelo o número de pieza no aparece, envíalo y lo cotejamos.',
+  'pui.partCardDescription': 'Producida según plano, muestra o número de pieza.',
   'pui.cantFindTitle': '¿No encuentras tu pieza?',
   'pui.cantFindText': 'Envía el plano, muestra o número de pieza — lo revisamos contra nuestras referencias y utillaje existente.',
   'pui.discussBtn': 'Hablar de tu pieza',
@@ -760,6 +761,7 @@ export const es: Record<string, string> = {
   'ct.hintEndpoint': 'El formulario aún no está configurado. Contáctanos directamente:',
   'ct.hintError': 'Algo salió mal. Inténtalo de nuevo o usa WhatsApp / correo.',
   'ct.hintNetwork': 'Error de red. Escríbenos a hugo@dingdar.com o por WhatsApp.',
+  'ct.fileNote': 'Este formulario no carga archivos. Envía planos o fotos por WhatsApp o un enlace compartido; no envíes contraseñas ni enlaces confidenciales.',
 
   // sample
   'sp.heroEyebrow': 'Solicitar una muestra',
@@ -786,6 +788,8 @@ export const es: Record<string, string> = {
   'sp.u1': 'Plano o fotos de la pieza desgastada',
   'sp.u2': 'Material o dureza que esperas',
   'sp.u3': 'Qué evaluarás con la muestra',
+  'sp.policyTitle': 'Cómo se confirma la solicitud de muestra',
+  'sp.policyText': 'Esta página no publica una tarifa fija, un coste de transporte ni un plazo de preparación garantizados. La disponibilidad, el material, las dimensiones, el alcance de inspección y las condiciones de muestra o entrega se confirman para cada pieza y acuerdo durante la revisión técnica. Envíanos primero la referencia, el modelo de máquina y el objetivo de evaluación; identificaremos los datos que falten antes de producir.',
   'sp.directTitle': '¿Prefieres hablar directamente?',
   'sp.submitBtn': 'Solicitar muestra',
 

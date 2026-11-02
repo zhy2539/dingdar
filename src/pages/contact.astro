@@ -12,7 +12,11 @@ const fields = [
   { name: 'country', label: 'Country', type: 'text', required: false, placeholder: 'Country / region' },
   { name: 'phone', label: 'Phone / WhatsApp', type: 'tel', required: false, placeholder: '+86 138 0000 0000' },
   { name: 'part_reference', label: 'Part number / machine model / product needed', type: 'text', required: false, placeholder: 'e.g. OEM part number, machine model or product name' },
-  { name: 'message', label: 'Message *', type: 'textarea', required: true, placeholder: 'Tell us the application, material, quantity or working conditions — whatever you have.' },
+  { name: 'product', label: 'Product category', type: 'text', required: false, placeholder: 'Jaw, cone, impact, hammer, bucket teeth or custom casting' },
+  { name: 'quantity', label: 'Quantity / annual volume', type: 'text', required: false, placeholder: 'e.g. 1 set / 200 pcs per year' },
+  { name: 'delivery_market', label: 'Delivery country / market', type: 'text', required: false, placeholder: 'Destination country or port, if known' },
+  { name: 'material_hardness', label: 'Material / hardness requirement', type: 'text', required: false, placeholder: 'Grade, standard or hardness, if specified' },
+  { name: 'message', label: 'Message *', type: 'textarea', required: true, placeholder: 'Tell us the application, inspection records or working conditions — whatever you have.' },
 ];
 ---
 
@@ -95,7 +99,7 @@ const fields = [
               >Send drawings on WhatsApp instead</a>
               <p class="hint" id="form-status" role="status" aria-live="polite"></p>
               <p style="font-size:0.82rem;color:var(--muted);line-height:1.6;margin-top:12px;">
-                 No drawing yet? Enter a part number, machine model or product needed above. A photo, sample or additional details can be shared via WhatsApp after sending this form.
+                 No drawing yet? Enter a part number, machine model or product needed above. This form does not upload files. Send drawings or worn-part photos through WhatsApp or a share link in your message; do not send passwords or confidential access links.
               </p>
             </div>
           </form>

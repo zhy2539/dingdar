@@ -23,6 +23,10 @@ const fields = [
   { name: 'country', label: ct('f3.label').replace(' *', ''), type: 'text', required: false, placeholder: ct('f3.placeholder') },
   { name: 'phone', label: ct('fPhone'), type: 'tel', required: false, placeholder: '+86 138 0000 0000' },
   { name: 'part_reference', label: ct('fReference'), type: 'text', required: false, placeholder: ct('fReferencePlaceholder') },
+  { name: 'product', label: ct('f4.label'), type: 'text', required: false, placeholder: ct('fReferencePlaceholder') },
+  { name: 'quantity', label: ct('f5.label'), type: 'text', required: false, placeholder: ct('f5.placeholder') },
+  { name: 'delivery_market', label: ct('f3.label'), type: 'text', required: false, placeholder: ct('f3.placeholder') },
+  { name: 'material_hardness', label: ct('f1.label'), type: 'text', required: false, placeholder: ct('f6.placeholder') },
   { name: 'message', label: ct('f6.label'), type: 'textarea', required: true, placeholder: ct('f6.placeholder') },
 ];
 const helps = [0, 1, 2, 3].map((i) => ct('h' + i));
@@ -86,9 +90,10 @@ const helps = [0, 1, 2, 3].map((i) => ct('h' + i));
             </div>
 
             <div class="field" style="margin-top: 6px;">
-            <Turnstile />
-               <button type="submit" class="btn btn--primary btn--lg" style="width:100%;">{ct('sendReviewQuote')}</button>
+              <Turnstile />
+              <button type="submit" class="btn btn--primary btn--lg" style="width:100%;">{ct('sendReviewQuote')}</button>
               <p class="hint" id="form-status" role="status" aria-live="polite"></p>
+              <p style="font-size:0.82rem;color:var(--muted);line-height:1.6;margin-top:12px;">{ct('fileNote')}</p>
             </div>
           </form>
         </div>

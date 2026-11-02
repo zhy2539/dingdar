@@ -18,7 +18,7 @@ export const pt: Record<string, string> = {
   'common.quoteChecklistEyebrow': 'Recurso para compradores',
   'common.quoteChecklistTitle': 'Checklist para cotar peças de desgaste de britadores',
   'common.quoteChecklistText': 'Organize a referência da peça, a aplicação, a quantidade, o destino e o escopo de inspeção antes de enviar sua consulta.',
-  'common.openChecklist': 'Abrir checklist',
+  'common.openChecklist': 'Abrir checklist (em inglês)',
   'common.whatsapp': 'WhatsApp',
   'common.sales': 'Vendas',
   'common.engineering': 'Engenharia',
@@ -224,6 +224,7 @@ export const pt: Record<string, string> = {
   'pui.partsEyebrow': 'Posições de referência',
   'pui.partsH2': 'Encontre sua peça',
   'pui.partsP': 'Posições representativas abaixo. Se seu modelo ou número não aparecer, envie-o e faremos a correspondência.',
+  'pui.partCardDescription': 'Produzida conforme desenho, amostra ou número de peça.',
   'pui.cantFindTitle': 'Não encontrou sua peça?',
   'pui.cantFindText': 'Envie o desenho, amostra ou número de peça — verificaremos contra nossas posições e ferramental existente.',
   'pui.discussBtn': 'Discutir sua peça',
@@ -754,6 +755,7 @@ export const pt: Record<string, string> = {
   'ct.hintEndpoint': 'O formulário ainda não está configurado. Fale conosco diretamente:',
   'ct.hintError': 'Ocorreu um erro. Tente novamente ou use WhatsApp / e-mail.',
   'ct.hintNetwork': 'Erro de rede. Escreva para hugo@dingdar.com ou pelo WhatsApp.',
+  'ct.fileNote': 'Este formulário não aceita uploads. Envie desenhos ou fotos pelo WhatsApp ou por um link compartilhado; não envie senhas nem links confidenciais.',
 
   // sample
   'sp.heroEyebrow': 'Solicitar amostra',
@@ -780,6 +782,8 @@ export const pt: Record<string, string> = {
   'sp.u1': 'Desenho ou fotos da peça gasta',
   'sp.u2': 'Material ou dureza esperados',
   'sp.u3': 'O que você avaliará com a amostra',
+  'sp.policyTitle': 'Como o pedido de amostra é confirmado',
+  'sp.policyText': 'Esta página não publica uma taxa fixa, um custo de frete ou um prazo de preparação garantido. A disponibilidade, o material, as dimensões, o escopo de inspeção e as condições da amostra ou da entrega são confirmados para cada peça e acordo durante a revisão técnica. Envie primeiro a referência, o modelo da máquina e o objetivo da avaliação; identificaremos os dados que faltarem antes da produção.',
   'sp.directTitle': 'Prefere conversar diretamente?',
   'sp.submitBtn': 'Solicitar amostra',
 

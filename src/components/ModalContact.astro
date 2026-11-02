@@ -411,7 +411,14 @@ const waHref = 'https://wa.me/' + SITE.whatsappTel + '?text=' + encodeURICompone
         if (window.dingdarTrackEvent) await window.dingdarTrackEvent('inquiry_submitted', { form_type: 'quote', page_language: document.documentElement.lang || 'en', page_path: window.location.pathname });
         window.location.href = form.dataset.thankYouPath || '/thank-you/';
       } else {
-        showHint(form.dataset.hintErr || 'Something went wrong. Please try again or use WhatsApp / email.');
+        let detail = {};
+        try { detail = await res.json(); } catch (_) {}
+        const apiMessages = {
+          too_short: 'Please add a part number, equipment model, or a few words about your requirement.',
+          captcha_failed: 'Please complete the security check and try again.',
+          invalid_source: 'Please refresh the page and try again.',
+        };
+        showHint(apiMessages[detail.error] || form.dataset.hintErr || 'Something went wrong. Please try again or use WhatsApp / email.');
       }
     } catch {
       showHint(form.dataset.hintNet || 'Network error. Please email hugo@dingdar.com or message us on WhatsApp.');

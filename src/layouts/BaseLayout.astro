@@ -334,6 +334,12 @@ if (location.hostname === 'dingdar.com' || location.hostname === 'www.dingdar.co
           if (!form || !form.querySelector) return;
           var widget = form.querySelector('[data-turnstile]');
           if (!widget) return;
+          // Let each form's own handler report missing fields and invalid email first.
+          var requiredFields = Array.from(form.querySelectorAll('[required]'));
+          var hasMissingRequired = requiredFields.some(function (field) { return !String(field.value || '').trim(); });
+          var email = form.querySelector('input[type="email"]');
+          var emailValue = email ? String(email.value || '').trim() : '';
+          if (hasMissingRequired || (emailValue && !/^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$/.test(emailValue))) return;
           var token = form.querySelector('input[name="cf-turnstile-response"]');
           if (token && token.value) return;
           e.preventDefault();

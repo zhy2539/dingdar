@@ -194,7 +194,7 @@ export const fr: Record<string, string> = {
     'Certificats matière, rapports de contrôle dimensionnel, relevés de dureté et contrôles visuels sont disponibles comme convenu. Un contrôle NDT ou tiers peut aussi être organisé si spécifié.',
   'home.ctaTitle': 'Dites-nous ce que vous devez fabriquer',
   'home.ctaText':
-    'Envoyez un plan, un numéro de pièce ou un modèle d\'équipement — les plans aident mais ne sont pas nécessaires pour la première conversation. Nous répondons avec une réponse technique sous 12–24 heures.',
+    'Envoyez une référence, un modèle de machine ou le produit recherché. Nous vérifions la base technique avant de préparer un devis plus clair et répondons avec un retour technique sous 12–24 heures.',
 
   // products
   'prod.heroEyebrow': 'Catalogue produits',
@@ -716,9 +716,11 @@ export const fr: Record<string, string> = {
   'ct.heroTitle': 'Connectez-vous avec notre équipe projet',
   'ct.heroLead':
     'Envoyez votre plan, votre modèle d\'équipement ou votre besoin d\'approvisionnement. Les plans aident mais ne sont pas nécessaires pour la première conversation — nous organisons les informations techniques utiles pour une revue et un devis.',
-  'ct.formTitle': 'Demander un devis',
-  'ct.formNote': 'Les champs marqués * sont obligatoires. Nous répondons avec une réponse technique sous 12–24 heures.',
+  'ct.formTitle': 'Revue technique et devis',
+  'ct.formNote': 'Partagez la référence, le modèle de machine ou le produit recherché. Nous vérifions la base technique avant de préparer un devis plus clair.',
   'ct.fPhone': 'Téléphone / WhatsApp',
+  'ct.fReference': 'Référence / modèle de machine / produit recherché',
+  'ct.fReferencePlaceholder': 'p. ex. référence OEM, modèle de machine ou nom du produit',
   'ct.f0.label': 'Votre nom *',
   'ct.f0.placeholder': 'Nom complet',
   'ct.f1.label': 'E-mail professionnel *',
@@ -742,6 +744,7 @@ export const fr: Record<string, string> = {
   'ct.opt7': 'Autre / pas encore sûr',
   'ct.selectCategory': 'Sélectionner une catégorie',
   'ct.sendInquiry': 'Envoyer une demande',
+  'ct.sendReviewQuote': 'Demander une revue technique et un devis',
   'ct.helpsTitle': 'Ce qui nous aide à coter plus vite',
   'ct.h0': 'Plan ou numéro de pièce',
   'ct.h1': 'Matériau ou exigence de dureté',
@@ -749,8 +752,8 @@ export const fr: Record<string, string> = {
   'ct.h3': 'Quantité requise et marché de livraison',
   'ct.directTitle': 'Vous préférez nous contacter directement ?',
   'ct.responseTitle': 'Promesse de réponse',
-  'ct.responseText': 'Réponse technique sous 12–24 heures. Chaque demande est lue comme une exigence technique, pas une demande de prix.',
-  'ct.mcPromiseShort': 'Réponse technique sous 12–24 heures',
+  'ct.responseText': 'Nous vérifions la pièce et son application avant de préparer le devis, afin que le prix repose sur une base technique définie. Réponse technique sous 12–24 heures.',
+  'ct.mcPromiseShort': 'Revue technique avant devis · réponse sous 12–24 heures',
   'ct.hintRequired': 'Veuillez compléter tous les champs obligatoires.',
   'ct.hintCaptcha': 'Cochez la vérification de sécurité puis renvoyez le formulaire.',
   'ct.hintEmail': 'Veuillez saisir une adresse e-mail valide.',

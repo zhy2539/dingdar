@@ -194,7 +194,7 @@ export const es: Record<string, string> = {
     'Certificados de material, informes de inspección dimensional, registros de dureza e inspección visual están disponibles según lo acordado. La inspección NDT o de terceros también se puede concertar cuando se especifique.',
   'home.ctaTitle': 'Cuéntanos qué necesitas fabricar',
   'home.ctaText':
-    'Envía un plano, número de pieza o modelo de equipo — los planos ayudan pero no son necesarios para la primera conversación. Respondemos con respuesta técnica en 12–24 horas.',
+    'Envía un número de pieza, modelo de equipo o producto que necesites. Revisamos la base técnica antes de preparar un presupuesto más claro y respondemos con feedback técnico en 12–24 horas.',
 
   // products (listado)
   'prod.heroEyebrow': 'Catálogo de productos',
@@ -716,9 +716,11 @@ export const es: Record<string, string> = {
   'ct.heroTitle': 'Conecta con nuestro equipo de proyecto',
   'ct.heroLead':
     'Envía tu plano, modelo de equipo o requisito de abastecimiento. Los planos ayudan pero no son necesarios para la primera conversación — organizamos la información técnica necesaria para una revisión y presupuesto útiles.',
-  'ct.formTitle': 'Solicitar un presupuesto',
-  'ct.formNote': 'Los campos marcados con * son obligatorios. Respondemos con respuesta técnica en 12–24 horas.',
+  'ct.formTitle': 'Revisión técnica y presupuesto',
+  'ct.formNote': 'Comparte el número de pieza, modelo de máquina o producto que necesitas. Revisamos la base técnica antes de preparar un presupuesto más claro.',
   'ct.fPhone': 'Teléfono / WhatsApp',
+  'ct.fReference': 'Número de pieza / modelo de máquina / producto necesario',
+  'ct.fReferencePlaceholder': 'p. ej., número OEM, modelo de máquina o nombre del producto',
   'ct.f0.label': 'Tu nombre *',
   'ct.f0.placeholder': 'Nombre completo',
   'ct.f1.label': 'Correo de trabajo *',
@@ -742,6 +744,7 @@ export const es: Record<string, string> = {
   'ct.opt7': 'Otro / aún no lo sé',
   'ct.selectCategory': 'Selecciona una categoría',
   'ct.sendInquiry': 'Enviar consulta',
+  'ct.sendReviewQuote': 'Solicitar revisión técnica y presupuesto',
   'ct.helpsTitle': 'Qué nos ayuda a cotizar más rápido',
   'ct.h0': 'Plano o número de pieza',
   'ct.h1': 'Material o requisito de dureza',
@@ -749,8 +752,8 @@ export const es: Record<string, string> = {
   'ct.h3': 'Cantidad requerida y mercado de entrega',
   'ct.directTitle': '¿Prefieres contactar directamente?',
   'ct.responseTitle': 'Promesa de respuesta',
-  'ct.responseText': 'Respuesta técnica en 12–24 horas. Cada consulta se lee como un requisito técnico, no como una petición de precio.',
-  'ct.mcPromiseShort': 'Respuesta técnica en 12–24 horas',
+  'ct.responseText': 'Revisamos la pieza y su aplicación antes de preparar el presupuesto, para que el precio se base en requisitos técnicos definidos. Respuesta técnica en 12–24 horas.',
+  'ct.mcPromiseShort': 'Revisión técnica antes del presupuesto · respuesta en 12–24 horas',
   'ct.hintRequired': 'Completa todos los campos obligatorios.',
   'ct.hintCaptcha': 'Marca la verificación de seguridad y vuelve a enviar.',
   'ct.hintEmail': 'Introduce una dirección de correo válida.',

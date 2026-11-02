@@ -10,7 +10,8 @@ const fields = [
   { name: 'company', label: 'Company (optional)', type: 'text', required: false, placeholder: 'Company name (optional)' },
   { name: 'country', label: 'Country', type: 'text', required: false, placeholder: 'Country / region' },
   { name: 'phone', label: 'Phone / WhatsApp', type: 'tel', required: false, placeholder: '+86 138 0000 0000' },
-  { name: 'message', label: 'Message *', type: 'textarea', required: true, placeholder: 'Part number, drawing, equipment model, material or working conditions — whatever you have.' },
+  { name: 'part_reference', label: 'Part number / machine model / product needed', type: 'text', required: false, placeholder: 'e.g. OEM part number, machine model or product name' },
+  { name: 'message', label: 'Message *', type: 'textarea', required: true, placeholder: 'Tell us the application, material, quantity or working conditions — whatever you have.' },
 ];
 ---
 
@@ -21,11 +22,11 @@ const fields = [
 >
   <PageHero
     eyebrow="Contact"
-    title="Connect With Our Project Team"
-    lead="Send your drawing, equipment model or sourcing requirement. Drawings are helpful but not required for the first conversation — we organize the technical information needed for a useful review and quotation."
+     title="Get a Technical Review and Quotation"
+     lead="Send a part number, machine model, product needed or sourcing requirement. We review the available technical information, identify what is still missing and use it to prepare a clearer quotation — a drawing is helpful but not required for the first conversation."
     img="/images/contact-forklift.webp"
     imgAlt="Forklift in a warehouse used for industrial logistics"
-    ctaPrimary={{ label: 'Send Inquiry', href: '#inquiry-form' }}
+     ctaPrimary={{ label: 'Start Technical Review', href: '#inquiry-form' }}
     ctaSecondary={{ label: 'WhatsApp Us', href: 'https://wa.me/' + SITE.whatsappTel + '?text=' + encodeURIComponent(SITE.waText) }}
   />
 
@@ -33,8 +34,8 @@ const fields = [
     <div class="container">
       <div class="grid grid--2" style="grid-template-columns: 1.1fr 0.9fr; gap: 40px; align-items: start;">
         <div class="card" id="inquiry-form" style="padding: 34px 32px;">
-          <h2 style="font-size:1.5rem;">Request a Quote</h2>
-          <p style="font-size:0.95rem;color:var(--muted);margin:10px 0 24px;">Fields marked * are required. We reply with technical feedback within 12–24 hours.</p>
+           <h2 style="font-size:1.5rem;">Start a Technical Review</h2>
+           <p style="font-size:0.95rem;color:var(--muted);margin:10px 0 24px;">Share what you have. We review the part identity and application first, then return technical feedback and a quotation basis. Fields marked * are required.</p>
 
           <form id="inquiry" data-form-type="quote" action={SITE.formEndpoint} method="POST" novalidate>
             <div class="hp-field" aria-hidden="true">
@@ -83,7 +84,7 @@ const fields = [
 
             <Turnstile />
             <div class="field" style="margin-top: 6px;">
-              <button type="submit" class="btn btn--primary btn--lg" style="width:100%;">Send Inquiry</button>
+               <button type="submit" class="btn btn--primary btn--lg" style="width:100%;">Request Technical Review &amp; Quote</button>
               <a
                 href="https://wa.me/8619337861987?text=Hello%20DINGDAR%2C%20I%20would%20like%20a%20quotation.%20I%20can%20send%20the%20drawing%20or%20a%20photo%20of%20the%20worn%20part."
                 class="btn btn--ghost"
@@ -93,8 +94,7 @@ const fields = [
               >Send drawings on WhatsApp instead</a>
               <p class="hint" id="form-status" role="status" aria-live="polite"></p>
               <p style="font-size:0.82rem;color:var(--muted);line-height:1.6;margin-top:12px;">
-                No drawing yet? A part number, machine model or photo of the worn part is enough to start a technical review.
-                You can share additional details via WhatsApp after sending this form.
+                 No drawing yet? Enter a part number, machine model or product needed above. A photo, sample or additional details can be shared via WhatsApp after sending this form.
               </p>
             </div>
           </form>
@@ -130,8 +130,8 @@ const fields = [
 
           <div class="cta-band" style="padding: 28px 30px;">
             <div>
-              <h2 style="font-size:1.2rem;">Response promise</h2>
-              <p style="font-size:0.92rem;">Technical feedback within 12–24 hours. Each inquiry is read as a technical requirement, not a price request.</p>
+               <h2 style="font-size:1.2rem;">What you get from the review</h2>
+               <p style="font-size:0.92rem;">We check the available part and application details before preparing a quotation, so the price is tied to a defined technical basis. Technical feedback is provided within 12–24 hours.</p>
             </div>
           </div>
         </div>

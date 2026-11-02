@@ -17,12 +17,13 @@ const fields = [
   { name: 'company', label: lang === 'en' ? 'Company (optional)' : l('ct.f2.label').replace(' *', ''), type: 'text', required: false, placeholder: lang === 'en' ? 'Company name (optional)' : l('ct.f2.placeholder') },
   { name: 'country', label: lang === 'en' ? 'Country' : l('ct.f3.label'), type: 'text', required: false, placeholder: lang === 'en' ? 'Country / region' : l('ct.f3.placeholder') },
   { name: 'phone', label: lang === 'en' ? 'Phone / WhatsApp' : l('ct.fPhone'), type: 'tel', required: false, placeholder: '+86 138 0000 0000', wide: true },
-  { name: 'message', label: lang === 'en' ? 'Message *' : l('ct.f6.label'), type: 'textarea', required: true, placeholder: lang === 'en' ? 'Part number, drawing, equipment model, material or working conditions — whatever you have.' : l('ct.f6.placeholder') },
+  { name: 'part_reference', label: lang === 'en' ? 'Part number / machine model / product needed' : l('ct.fReference'), type: 'text', required: false, placeholder: lang === 'en' ? 'e.g. OEM part number, machine model or product name' : l('ct.fReferencePlaceholder'), wide: true },
+  { name: 'message', label: lang === 'en' ? 'Message *' : l('ct.f6.label'), type: 'textarea', required: true, placeholder: lang === 'en' ? 'Tell us the application, material, quantity or working conditions — whatever you have.' : l('ct.f6.placeholder') },
 ];
-const title = lang === 'en' ? 'Request a Quote' : l('ct.formTitle');
-const subtitle = lang === 'en' ? 'Fields marked * are required. We reply with technical feedback within 12–24 hours.' : l('ct.formNote');
+const title = lang === 'en' ? 'Technical Review & Quotation' : l('ct.formTitle');
+const subtitle = lang === 'en' ? 'Share a part number, machine model or product needed. We review the technical basis before preparing a clearer quotation.' : l('ct.formNote');
 const promise = lang === 'en' ? 'Technical feedback within 12–24 hours' : (l('ct.mcPromiseShort') || l('ct.responseText'));
-const submitLabel = lang === 'en' ? 'Send Inquiry' : l('ct.sendInquiry');
+const submitLabel = lang === 'en' ? 'Request Technical Review & Quote' : l('ct.sendReviewQuote');
 const closeLabel = 'Close';
 const emptyHint = lang === 'en' ? 'Please complete all required fields.' : l('ct.hintRequired');
 const emailHint = lang === 'en' ? 'Please enter a valid email address.' : l('ct.hintEmail');

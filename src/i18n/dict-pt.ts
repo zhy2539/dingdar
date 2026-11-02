@@ -188,7 +188,7 @@ export const pt: Record<string, string> = {
     'Certificados de material, relatórios de controle dimensional, registros de dureza e inspeção visual estão disponíveis conforme acordado. Ensaios não destrutivos ou inspeção por terceiros podem ser organizados se especificado.',
   'home.ctaTitle': 'Conte-nos o que você precisa fabricar',
   'home.ctaText':
-    'Envie um desenho, número de peça ou modelo de equipamento — desenhos ajudam, mas não são necessários para a primeira conversa. Respondemos com uma resposta técnica em 12–24 horas.',
+    'Envie o número da peça, o modelo da máquina ou o produto necessário. Revisamos a base técnica antes de preparar um orçamento mais claro e respondemos com feedback técnico em 12–24 horas.',
 
   // products
   'prod.heroEyebrow': 'Catálogo de produtos',
@@ -710,9 +710,11 @@ export const pt: Record<string, string> = {
   'ct.heroTitle': 'Conecte-se com nossa equipe de projeto',
   'ct.heroLead':
     'Envie seu desenho, modelo de equipamento ou necessidade de fornecimento. Desenhos ajudam, mas não são necessários para a primeira conversa — organizamos as informações técnicas úteis para revisão e cotação.',
-  'ct.formTitle': 'Solicitar orçamento',
-  'ct.formNote': 'Campos marcados com * são obrigatórios. Respondemos com uma resposta técnica em 12–24 horas.',
+  'ct.formTitle': 'Revisão técnica e orçamento',
+  'ct.formNote': 'Compartilhe o número da peça, o modelo da máquina ou o produto necessário. Revisamos a base técnica antes de preparar um orçamento mais claro.',
   'ct.fPhone': 'Telefone / WhatsApp',
+  'ct.fReference': 'Número da peça / modelo da máquina / produto necessário',
+  'ct.fReferencePlaceholder': 'ex.: número OEM, modelo da máquina ou nome do produto',
   'ct.f0.label': 'Seu nome *',
   'ct.f0.placeholder': 'Nome completo',
   'ct.f1.label': 'E-mail de trabalho *',
@@ -736,6 +738,7 @@ export const pt: Record<string, string> = {
   'ct.opt7': 'Outro / ainda não sei',
   'ct.selectCategory': 'Selecionar categoria',
   'ct.sendInquiry': 'Enviar consulta',
+  'ct.sendReviewQuote': 'Solicitar revisão técnica e orçamento',
   'ct.helpsTitle': 'O que nos ajuda a cotar mais rápido',
   'ct.h0': 'Desenho ou número de peça',
   'ct.h1': 'Material ou exigência de dureza',
@@ -743,8 +746,8 @@ export const pt: Record<string, string> = {
   'ct.h3': 'Quantidade necessária e mercado de destino',
   'ct.directTitle': 'Prefere falar diretamente?',
   'ct.responseTitle': 'Compromisso de resposta',
-  'ct.responseText': 'Resposta técnica em 12–24 horas. Cada consulta é lida como uma exigência técnica, não um pedido de preço.',
-  'ct.mcPromiseShort': 'Resposta técnica em 12–24 horas',
+  'ct.responseText': 'Revisamos a peça e sua aplicação antes de preparar o orçamento, para que o preço se baseie em requisitos técnicos definidos. Resposta técnica em 12–24 horas.',
+  'ct.mcPromiseShort': 'Revisão técnica antes do orçamento · resposta em 12–24 horas',
   'ct.hintRequired': 'Preencha todos os campos obrigatórios.',
   'ct.hintCaptcha': 'Marque a verificação de segurança e envie novamente.',
   'ct.hintEmail': 'Digite um endereço de e-mail válido.',

@@ -58,6 +58,7 @@ export function buildEmail(record, ex, createdAt) {
   row('产品兴趣', extra.product);
   row('年用量/数量', extra.quantity);
   row('图纸/参考', extra.reference_url);
+  row('零件号/设备型号/所需产品', extra.part_reference);
   row('来源页面', extra.source_title);
   row('路径', record.source_page);
   row('语种', record.lang);

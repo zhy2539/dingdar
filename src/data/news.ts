@@ -5,6 +5,7 @@
 // 所以新增文章请追加到数组末尾，不要调整既有文章的顺序。
 import raw from './news.json';
 import bucketTeethFitGuide from './articles/bucket-teeth-adapters-fit-guide.md?raw';
+import mn13JawPlateFitGuide from './articles/mn13-jaw-plate-fit-guide.md?raw';
 
 export interface NewsItem {
   slug: string;
@@ -40,6 +41,23 @@ const bucketTeethArticle: NewsItem = {
   relatedPages: [{ href: '/products/bucket-teeth-adapters/', label: 'Bucket teeth and adapters' }],
 };
 
-export const NEWS: NewsItem[] = [...(raw as NewsItem[]), bucketTeethArticle];
+const mn13JawPlateFitArticle: NewsItem = {
+  slug: 'mn13-jaw-plate-fit-guide',
+  title: 'How to Confirm Mn13 Jaw Plate Fit Before Ordering',
+  date: '2026-11-02',
+  excerpt: 'A buyer’s technical review guide to confirming Mn13 jaw plate fit from machine references, mounting geometry, photos, drawings, operating duty and inspection requirements.',
+  metaDescription: 'Confirm Mn13 jaw plate fit before ordering: check crusher model, plate position, mounting geometry, photos, drawings, operating duty and inspection evidence.',
+  cover: '/images/prod-jaw.webp',
+  coverAlt: 'Cast jaw crusher wear parts arranged for a technical fit review',
+  body: [mn13JawPlateFitGuide.replace(/^# [^\n]+\n\n/, '').trim()],
+  related: ['how-to-identify-the-correct-jaw-plate-for-your-crusher', 'what-information-is-needed-for-a-custom-crusher-wear-parts-quote', 'what-inspection-records-should-buyers-request-for-crusher-wear-parts'],
+  relatedPages: [
+    { href: '/products/jaw-crusher-wear-parts/', label: 'Jaw crusher wear parts' },
+    { href: '/quality/', label: 'Inspection guide' },
+    { href: '/crusher-wear-parts-quotation/', label: 'Crusher wear parts quotation checklist' },
+  ],
+};
+
+export const NEWS: NewsItem[] = [...(raw as NewsItem[]), bucketTeethArticle, mn13JawPlateFitArticle];
 
 export const getNews = (slug: string) => NEWS.find((n) => n.slug === slug);

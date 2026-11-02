@@ -57,6 +57,38 @@ const relatedProducts = (relatedProductSlugs[idx] || []).map((productSlug) => {
   const product = getCategory(productSlug)!;
   return { href: `/products/${productSlug}/`, label: product.shortName };
 });
+const faqBlocks = slug === 'mn13-jaw-plate-fit-guide'
+  ? [
+      ['Can I order an Mn13 jaw plate using only the crusher model?', 'A crusher model can start identification, but it is not sufficient to guarantee fit. Confirm the plate position, part reference, mounting geometry and tooth profile before production.'],
+      ['Does a similar-looking jaw plate mean it will fit my crusher?', 'No. Similar-looking plates can differ in mounting interfaces, seat geometry, thickness, tooth profile and jaw configuration. Confirm against a drawing, measurement record or sample.'],
+      ['Is Mn13 always the correct grade for jaw plates?', 'Not automatically. Material selection depends on duty, rock, impact, abrasion, feed conditions and the buyer’s specification.'],
+      ['What should I send when I do not have a drawing?', 'Send the crusher model, plate position, part number if known, photos of both faces, key dimensions where possible, and a note on rock type and wear pattern.'],
+      ['Which inspection documents should I request?', 'Request the records that match the order requirements, such as material, dimensional, hardness or visual inspection records, with their agreed method, scope and acceptance criteria.'],
+      ['Can a supplier confirm price and lead time from a photo?', 'A photo can support an initial review, but price, availability and lead time depend on the confirmed part reference, quantity, production scope, inspection requirements and delivery terms.'],
+    ]
+  : [];
+const articleJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  '@id': 'https://dingdar.com/news/' + slug + '/#article',
+  headline: title,
+  datePublished: date,
+  description: metaDescription,
+  image: 'https://dingdar.com' + cover,
+  author: { '@type': 'Organization', name: 'DINGDAR Technical Team', url: 'https://dingdar.com/' },
+  publisher: { '@id': 'https://dingdar.com/#organization' },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': 'https://dingdar.com/news/' + slug + '/' },
+};
+const faqJsonLd = faqBlocks.length > 0 ? {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  '@id': 'https://dingdar.com/news/' + slug + '/#faq',
+  mainEntity: faqBlocks.map(([name, text]) => ({
+    '@type': 'Question',
+    name,
+    acceptedAnswer: { '@type': 'Answer', text },
+  })),
+} : null;
 ---
 
 <BaseLayout
@@ -65,18 +97,7 @@ const relatedProducts = (relatedProductSlugs[idx] || []).map((productSlug) => {
   path={`/news/${slug}/`}
   image={cover.replace('.webp', '-og.webp')}
   alternateLangs={alternateLangs}
-  jsonLd={{
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    '@id': 'https://dingdar.com/news/' + slug + '/#article',
-    headline: title,
-    datePublished: date,
-    description: metaDescription,
-    image: 'https://dingdar.com' + cover,
-    author: { '@type': 'Organization', name: 'DINGDAR Technical Team', url: 'https://dingdar.com/' },
-    publisher: { '@id': 'https://dingdar.com/#organization' },
-    mainEntityOfPage: { '@type': 'WebPage', '@id': 'https://dingdar.com/news/' + slug + '/' },
-    }}>
+  jsonLd={faqJsonLd ? [articleJsonLd, faqJsonLd] : articleJsonLd}>
   <section class="section" style="padding-top:64px;">
     <div class="container" style="max-width:860px;">
       <nav class="breadcrumb" aria-label="Breadcrumb">

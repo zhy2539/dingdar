@@ -258,7 +258,8 @@ if (window.__ddAnalyticsAllowed) {
     <!-- Cloudflare Turnstile：显式渲染，隐藏弹窗内的控件延后到打开时再渲染 -->
     <script is:inline>
       window.ddTsRender = function (el) {
-        if (!el || el.dataset.tsRendered === '1' || !window.turnstile) return;
+        // QA mode validates the form flow without loading a real Turnstile challenge.
+        if (window.__ddQaMode || !el || el.dataset.tsRendered === '1' || !window.turnstile) return;
         try {
           var id = window.turnstile.render(el, {
             sitekey: el.dataset.sitekey,
@@ -271,13 +272,14 @@ if (window.__ddAnalyticsAllowed) {
       };
       window.ddTsReset = function (root) {
         var el = (root || document).querySelector('[data-turnstile]');
-        if (!el || !window.turnstile) return;
+        if (window.__ddQaMode || !el || !window.turnstile) return;
         if (el.dataset.tsId) {
           try { window.turnstile.reset(el.dataset.tsId); } catch (err) {}
         }
       };
       window.ddTsOnload = function () {
         window.__ddTsReady = true;
+        if (window.__ddQaMode) return;
         var list = document.querySelectorAll('[data-turnstile]');
         for (var i = 0; i < list.length; i++) {
           // 弹窗在关闭状态是 display:none，控件放进去会渲染成空白，等打开时再渲染

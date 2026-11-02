@@ -201,14 +201,15 @@ window.dingdarTrackEvent = function (name, params) {
    });
  };
 if (window.__ddAnalyticsAllowed) {
+  // Queue configuration before the first product/CTA event; only the library download is deferred.
+  gtag('js', new Date());
+  gtag('config', '${SITE.gaId}');
   window.addEventListener('load', function () {
     window.setTimeout(function () {
       var s = document.createElement('script');
       s.async = true;
       s.src = 'https://www.googletagmanager.com/gtag/js?id=${SITE.gaId}';
       document.head.appendChild(s);
-      gtag('js', new Date());
-      gtag('config', '${SITE.gaId}');
     }, 1200);
   });
 }`} />

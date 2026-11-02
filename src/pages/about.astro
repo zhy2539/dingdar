@@ -420,7 +420,7 @@ const dlFields = [
       return;
     }
     try {
-      const res = await fetch(endpoint, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
+      const res = await window.ddInquiryFetch(form, endpoint, data);
       if (res.ok) {
         try { gtag('event', 'profile_requested'); } catch {}
         form.style.display = 'none';

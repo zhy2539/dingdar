@@ -187,7 +187,7 @@ const uses = ['sp.u0', 'sp.u1', 'sp.u2', 'sp.u3'].map((k) => t(k));
       return;
     }
     try {
-      const res = await fetch(endpoint, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
+      const res = await window.ddInquiryFetch(form, endpoint, data);
       if (res.ok) {
         if (window.dingdarTrackEvent) await window.dingdarTrackEvent('sample_requested', { form_type: 'sample', page_language: document.documentElement.lang || 'en' });
         window.location.href = form.dataset.thankYouPath || '/thank-you/';

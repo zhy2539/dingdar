@@ -203,9 +203,9 @@ const fields = [
       return;
     }
     try {
-      const res = await fetch(endpoint, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
+      const res = await window.ddInquiryFetch(form, endpoint, data);
       if (res.ok) {
-        if (window.dingdarTrackEvent) await window.dingdarTrackEvent('inquiry_submitted', { form_type: 'quote', page_language: document.documentElement.lang || 'en', page_path: window.location.pathname });
+        if (window.dingdarTrackEvent) await window.dingdarTrackEvent('inquiry_submitted', { form_type: 'quote', form_surface: 'page', page_language: document.documentElement.lang || 'en', page_path: window.location.pathname });
         window.location.href = '/thank-you/';
       } else {
         let detail = '';

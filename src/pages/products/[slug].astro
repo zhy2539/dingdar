@@ -95,6 +95,32 @@ const deepDive = PRODUCT_DEEP_DIVE[cat.slug];
     ctaSecondary={{ label: 'Browse Parts ↓', href: '#parts' }}
   />
 
+  {cat.slug === 'jaw-crusher-wear-parts' && (
+    <section class="section jaw-pilot" data-jaw-pilot>
+      <div class="container">
+        <div class="sec-head">
+          <span class="eyebrow">Mn13 jaw plate sourcing</span>
+          <h2>Start With Your Machine. Confirm the Fit Before Ordering.</h2>
+          <p>A model name or a similar-looking plate is a starting reference, not a fit guarantee. Share what you have; the drawing or sample is used to confirm the final specification.</p>
+        </div>
+        <div class="grid grid--2">
+          <article class="card jaw-pilot-card">
+            <h3>Send first — no complete drawing required</h3>
+            <ul><li>Crusher model or part number, and fixed or movable position.</li><li>Working-face and mounting-face photos, if available.</li><li>Rock type and the current wear or failure pattern.</li></ul>
+            <a class="btn btn--primary" href="/contact/" data-modal-open data-product="Mn13 jaw plates" data-part-reference="Mn13 jaw plate — model / part number to confirm" data-cta-location="jaw_pilot">Discuss My Jaw Plate</a>
+          </article>
+          <article class="card jaw-pilot-card">
+            <h3>Confirm before production</h3>
+            <ul><li>Drawing revision, key dimensions, mounting features and tooth profile.</li><li>Material grade and inspection requirements matched to the duty.</li><li>Quantity, destination, quotation scope and agreed delivery basis.</li></ul>
+            <p>For supplier approval, ask for current, part-relevant documents. A website description is not a batch test report.</p>
+            <a href="/quality/">Review inspection requirements →</a>
+          </article>
+        </div>
+        <p class="jaw-pilot-note">References shown below are examples, not a declaration of stock or universal compatibility. Price, availability and lead time require confirmation for your part.</p>
+      </div>
+    </section>
+  )}
+
   <section class="section section--soft anchor" id="parts">
     <div class="container">
       <div class="sec-head center">
@@ -339,3 +365,12 @@ const deepDive = PRODUCT_DEEP_DIVE[cat.slug];
     cta="Request a Quote"
   />
 </BaseLayout>
+<style>
+  .jaw-pilot-card { padding: 26px; min-width: 0; }
+  .jaw-pilot-card h3 { font-size: 1.14rem; margin-bottom: 14px; }
+  .jaw-pilot-card ul { padding-left: 20px; margin: 0 0 22px; line-height: 1.8; }
+  .jaw-pilot-card p, .jaw-pilot-note { color: var(--muted); font-size: .92rem; line-height: 1.7; }
+  .jaw-pilot-card .btn { white-space: normal; max-width: 100%; }
+  .jaw-pilot-card a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+  .jaw-pilot-note { margin-top: 20px; }
+</style>

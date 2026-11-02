@@ -3,6 +3,7 @@ import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import ModalContact from '../components/ModalContact.astro';
+import InquiryFunnel from '../components/InquiryFunnel.astro';
 import { SITE } from '../data/config';
 import { HTML_LANGS, OG_LOCALES, hreflangUrls, langPath, type AnyLang } from '../i18n';
 
@@ -143,25 +144,7 @@ const ld = noindex ? [] : [orgLd, websiteLd, ...(hasBreadcrumbLd ? [] : [breadcr
     <meta name="twitter:description" content={seoDescription} />
     <meta name="twitter:image" content={ogImage} />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="preload"
-      as="style"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Merriweather:wght@400;700&display=swap"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Merriweather:wght@400;700&display=swap"
-      media="print"
-      onload="this.media='all'"
-    />
-    <noscript>
-      <link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Merriweather:wght@400;700&display=swap"
-      />
-    </noscript>
+    <!-- 使用现有系统字体回退，不请求外部字体样式表。 -->
 
     {preloadImages.map((p) => (
       p.endsWith('.webp') ? (
@@ -176,9 +159,20 @@ const ld = noindex ? [] : [orgLd, websiteLd, ...(hasBreadcrumbLd ? [] : [breadcr
 
     {ld.length > 0 && <script type="application/ld+json" set:html={JSON.stringify(ld)} />}
 
-    <!-- 仅正式域名采集，避免本地预览与 Pages 预览流量污染 Clarity -->
     <script is:inline>
-      if (window.location.hostname === 'dingdar.com' || window.location.hostname === 'www.dingdar.com') {
+      (function () {
+        var qa = new URLSearchParams(location.search).get('qa_mode');
+        try {
+          if (qa === '1') sessionStorage.setItem('dingdar_qa', '1');
+          if (qa === '0') sessionStorage.removeItem('dingdar_qa');
+          window.__ddQaMode = qa === '1' || sessionStorage.getItem('dingdar_qa') === '1';
+        } catch (_) { window.__ddQaMode = qa === '1'; }
+        window.__ddAnalyticsAllowed = !window.__ddQaMode && /^(www\.)?dingdar\.com$/.test(location.hostname) && !/^\/admin(?:\/|$)/.test(location.pathname);
+      })();
+    </script>
+    <!-- 仅正式域名且非QA会话采集，后台页不进入营销统计 -->
+    <script is:inline>
+      if (window.__ddAnalyticsAllowed) {
         (function(c,l,a,r,i,t,y){
           c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
           t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
@@ -189,19 +183,24 @@ const ld = noindex ? [] : [orgLd, websiteLd, ...(hasBreadcrumbLd ? [] : [breadcr
 
     {SITE.gaId && (
       <script is:inline set:html={`window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
+function gtag(){if(window.__ddAnalyticsAllowed) dataLayer.push(arguments);}
 window.dingdarTrackEvent = function (name, params) {
+   if (!window.__ddAnalyticsAllowed) return Promise.resolve();
    return new Promise(function (resolve) {
      var done = false;
      var finish = function () { if (!done) { done = true; resolve(); } };
      window.setTimeout(finish, 1000);
-     var payload = { event_callback: finish, event_timeout: 900 };
-     if (params) { for (var k in params) { if (Object.prototype.hasOwnProperty.call(params, k)) payload[k] = params[k]; } }
+     var payload = { event_callback: finish, event_timeout: 900, funnel_version: '20261102', page_path: location.pathname, page_language: document.documentElement.lang || 'en' };
+     var allowed = ['form_type','form_surface','product_slug','attempt_number','cta_location','error_code','error_stage','http_status'];
+     if (params) { allowed.forEach(function(k) { if (Object.prototype.hasOwnProperty.call(params,k)) payload[k] = params[k]; }); }
+     var segments = location.pathname.split('/').filter(Boolean);
+     var productIndex = segments.indexOf('products');
+     payload.product_slug = productIndex >= 0 && segments[productIndex + 1] ? segments[productIndex + 1] : 'other';
      try { gtag('event', name, payload); }
      catch (_) { finish(); }
    });
  };
-if (location.hostname === 'dingdar.com' || location.hostname === 'www.dingdar.com') {
+if (window.__ddAnalyticsAllowed) {
   window.addEventListener('load', function () {
     window.setTimeout(function () {
       var s = document.createElement('script');
@@ -235,47 +234,7 @@ if (location.hostname === 'dingdar.com' || location.hostname === 'www.dingdar.co
       <span class="wa-txt">WhatsApp Us</span>
     </a>
 
-    <script is:inline>
-      // 交互埋点：WhatsApp / 电话 / 邮箱 / 开始填表
-      // 全部用事件委托，不依赖各页面自己的脚本，新增页面也会自动生效
-      (function () {
-        function track(name, params) {
-          if (window.dingdarTrackEvent) { window.dingdarTrackEvent(name, params); return; }
-          try { gtag('event', name, params || {}); } catch (_) {}
-        }
-
-        document.addEventListener('click', function (e) {
-          var el = e.target && e.target.closest ? e.target : null;
-          if (!el) return;
-
-          // WhatsApp：悬浮按钮或任意 wa.me 链接
-          if (el.closest('[data-wa-float], a[href*="wa.me"]')) {
-            track('whatsapp_click');
-            return;
-          }
-          // 电话 / 邮箱
-          var link = el.closest('a[href^="tel:"], a[href^="mailto:"]');
-          if (link) {
-            var href = link.getAttribute('href') || '';
-            track(href.indexOf('tel:') === 0 ? 'tel_click' : 'email_click');
-          }
-        }, true);
-
-        // 一开始填写询盘表单就算一次 form_start（同一表单每页只记一次）
-        document.addEventListener('focusin', function (e) {
-          var el = e.target;
-          if (!el || !el.closest) return;
-          var form = el.closest('form');
-          if (!form) return;
-           var action = form.getAttribute('action') || '';
-           var formType = form.dataset.formType || (action.indexOf('/api/inquiry') !== -1 ? 'quote' : 'other');
-           if (form.dataset.gaStarted === '1') return;
-           form.dataset.gaStarted = '1';
-           track('form_start', { form_type: formType, page_language: document.documentElement.lang || 'en' });
-
-        }, true);
-      })();
-    </script>
+    <InquiryFunnel />
 
     <!-- 首次来源归因：只保存 UTM 与 referrer，不保存姓名、邮箱等个人信息 -->
     <script is:inline>

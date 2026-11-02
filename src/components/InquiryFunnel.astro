@@ -1,0 +1,119 @@
+---
+// One delegated listener per page; does not replace provider-side GA4 configuration.
+---
+<script is:inline>
+(function () {
+  if (window.__ddFunnelInstalled) return;
+  window.__ddFunnelInstalled = true;
+  var states = new WeakMap();
+  function isInquiry(form) {
+    if (!form || form.tagName !== 'FORM') return false;
+    try { return new URL(form.action, location.href).pathname === '/api/inquiry'; } catch (_) { return false; }
+  }
+  function state(form) {
+    if (!states.has(form)) states.set(form, { started: false, busy: false, attempt: 0 });
+    return states.get(form);
+  }
+  function product() {
+    var m = location.pathname.match(/\/products\/([a-z0-9-]+)\/?$/);
+    return m ? m[1] : 'other';
+  }
+  function meta(form) {
+    return {
+      funnel_version: '20261102', page_path: location.pathname,
+      page_language: document.documentElement.lang || 'en', product_slug: product(),
+      form_type: form && form.dataset.formType || 'quote',
+      form_surface: form && form.hasAttribute('data-mc-form') ? 'modal' : 'page',
+      attempt_number: form ? state(form).attempt : 0
+    };
+  }
+  function track(name, form, extra) {
+    if (window.dingdarTrackEvent) window.dingdarTrackEvent(name, Object.assign(meta(form), extra || {}));
+  }
+  function error(form, code, stage, status) {
+    track('inquiry_error', form, { error_code: code, error_stage: stage, http_status: status || 0 });
+  }
+  if (product() !== 'other') track('inquiry_product_view', null);
+  document.addEventListener('click', function (e) {
+    var el = e.target && e.target.closest ? e.target.closest('a,button') : null;
+    if (!el) return;
+    var href = el.getAttribute('href') || '';
+    var isCta = el.hasAttribute('data-modal-open');
+    try {
+      var u = new URL(href, location.href);
+      isCta = isCta || (u.origin === location.origin && (/\/(contact|request-sample)\/?$/.test(u.pathname) || u.hash === '#inquiry-form'));
+    } catch (_) {}
+    if (isCta && (href || el.hasAttribute('data-modal-open'))) {
+      track('inquiry_cta_click', null, { cta_location: el.dataset.ctaLocation || (el.closest('header') ? 'header' : el.closest('footer') ? 'footer' : 'content'), form_surface: el.hasAttribute('data-modal-open') ? 'modal' : 'page' });
+    }
+    if (el.closest('[data-wa-float],a[href*="wa.me"]')) track('whatsapp_click', null);
+    else if (href.indexOf('mailto:') === 0) track('email_click', null);
+    else if (href.indexOf('tel:') === 0) track('tel_click', null);
+  }, true);
+  document.addEventListener('input', function (e) {
+    var field = e.target;
+    if (!field || !field.closest || field.type === 'hidden' || field.closest('.hp-field')) return;
+    var form = field.closest('form');
+    if (!isInquiry(form) || state(form).started) return;
+    state(form).started = true;
+    // New event avoids ambiguity with GA4 automatic form_start. Legacy event retained once per form.
+    track('inquiry_form_start', form);
+    track('form_start', form);
+  }, true);
+  document.addEventListener('submit', function (e) {
+    var form = e.target;
+    if (!isInquiry(form)) return;
+    var s = state(form);
+    if (window.__ddQaMode) {
+      e.preventDefault(); e.stopImmediatePropagation();
+      var box = form.querySelector('[data-mc-status],#form-status,.hint');
+      if (box) box.textContent = 'QA mode: submission is blocked. No inquiry or email was sent.';
+      return;
+    }
+    if (s.busy) { e.preventDefault(); e.stopImmediatePropagation(); return; }
+    s.attempt++;
+    track('inquiry_submit_attempt', form);
+    var missing = Array.from(form.querySelectorAll('[required]')).some(function (f) { return !String(f.value || '').trim(); });
+    var email = form.querySelector('[type="email"]');
+    if (missing) error(form, 'required', 'validation');
+    else if (email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email.value.trim())) error(form, 'invalid_email', 'validation');
+    else if (form.querySelector('[data-turnstile]') && !form.querySelector('input[name="cf-turnstile-response"]')?.value) error(form, 'captcha_required', 'validation');
+  }, true);
+  window.ddInquiryFetch = async function (form, endpoint, data) {
+    if (!isInquiry(form) || new URL(endpoint, location.href).pathname !== '/api/inquiry') throw new Error('Invalid inquiry endpoint');
+    var s = state(form);
+    if (window.__ddQaMode || s.busy) throw new Error('Submission blocked');
+    s.busy = true;
+    var buttons = Array.from(form.querySelectorAll('button[type="submit"]'));
+    var disabledBefore = buttons.map(function (b) { return b.disabled; });
+    buttons.forEach(function (b) { b.disabled = true; });
+    form.setAttribute('aria-busy', 'true');
+    track('inquiry_request_sent', form);
+    var accepted = false;
+    try {
+      var res = await fetch(endpoint, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
+      var detail = await res.clone().json().catch(function () { return {}; });
+      if (!res.ok || detail.ok !== true) {
+        var known = ['too_short','captcha_failed','invalid_source','invalid_email','rate_limited','service_not_configured','delivery_failed','unreadable_body'];
+        error(form, known.indexOf(detail.error) >= 0 ? detail.error : 'unknown_response', 'server', res.status);
+        if (res.ok) return new Response(JSON.stringify({ ok: false, error: 'unknown_response' }), { status: 502, headers: { 'Content-Type': 'application/json' } });
+      } else {
+        accepted = true;
+        // Existing form handler owns inquiry_submitted. Do not emit success twice.
+        form.dataset.inquiryAccepted = '1';
+      }
+      return res;
+    } catch (err) {
+      error(form, 'network_error', 'network');
+      throw err;
+    } finally {
+      // Keep accepted forms locked during the success-event callback and redirect.
+      s.busy = accepted;
+      if (!accepted) {
+        buttons.forEach(function (b, i) { b.disabled = disabledBefore[i]; });
+        form.removeAttribute('aria-busy');
+      }
+    }
+  };
+})();
+</script>

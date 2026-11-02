@@ -1,0 +1,96 @@
+---
+import { langPath, type Lang } from '../i18n';
+
+interface Props { lang?: string; }
+const { lang = 'en' } = Astro.props;
+// Existing page descriptions are not independent certificates or order-specific test results.
+const copy = {
+  en: {
+    label: 'Before you choose a supplier', title: 'Review the Process. Specify the Evidence.',
+    intro: 'Use these existing guides to check the production route, define inspection requirements and prepare your first request.',
+    cards: [
+      ['Production & company overview', 'Review the casting routes, machining and inspection information on our company page.', 'Review company information'],
+      ['Inspection scope & records', 'Review chemistry, hardness and dimensional checks. Specify the records your order needs before production.', 'Read the inspection guide'],
+      ['Your first quotation request', 'Start with a part number or machine model. Use the checklist to identify missing details before quotation.', 'Open the quotation checklist'],
+    ],
+    note: 'These pages describe processes and requirements; they are not batch-specific test reports or proof of certification. For supplier approval, request current documents matched to the legal entity, part and required standard.',
+    english: '',
+  },
+  es: {
+    label: 'Antes de elegir proveedor', title: 'Revise el proceso. Defina la documentación.',
+    intro: 'Consulte estas guías para revisar la fabricación, definir la inspección y preparar su primera solicitud.',
+    cards: [
+      ['Empresa y producción', 'Revise la información de fundición, mecanizado e inspección en nuestra página de empresa.', 'Consultar la empresa'],
+      ['Inspección y registros', 'Revise los controles químicos, de dureza y dimensionales. Defina los registros necesarios antes de producir.', 'Guía de inspección'],
+      ['Primera solicitud de oferta', 'Empiece con la referencia de pieza o el modelo de máquina. La lista ayuda a identificar los datos que faltan.', 'Lista para solicitar oferta'],
+    ],
+    note: 'Estas páginas describen procesos y requisitos; no son informes de ensayo de un lote ni acreditan certificaciones. Solicite documentos vigentes vinculados a la entidad jurídica, la pieza y la norma exigida.',
+    english: ' (en inglés)',
+  },
+  fr: {
+    label: 'Avant de choisir un fournisseur', title: 'Examinez le procédé. Précisez les justificatifs.',
+    intro: 'Consultez ces guides pour examiner la fabrication, définir les contrôles et préparer votre première demande.',
+    cards: [
+      ['Entreprise et production', 'Consultez les informations sur la fonderie, l’usinage et les contrôles sur notre page entreprise.', 'Consulter l’entreprise'],
+      ['Contrôles et documents', 'Examinez les contrôles de composition, de dureté et de dimensions. Définissez les documents requis avant production.', 'Guide des contrôles'],
+      ['Première demande de devis', 'Commencez par une référence de pièce ou un modèle de machine. La liste permet de repérer les informations manquantes.', 'Liste pour le devis'],
+    ],
+    note: 'Ces pages décrivent des procédés et des exigences ; ce ne sont ni des rapports d’essai propres à un lot ni des preuves de certification. Demandez des documents à jour correspondant à l’entité juridique, à la pièce et à la norme requise.',
+    english: ' (en anglais)',
+  },
+  pt: {
+    label: 'Antes de escolher um fornecedor', title: 'Analise o processo. Defina os comprovativos.',
+    intro: 'Consulte estes guias para analisar a produção, definir a inspeção e preparar o primeiro pedido.',
+    cards: [
+      ['Empresa e produção', 'Consulte as informações sobre fundição, usinagem e inspeção na página da empresa.', 'Consultar a empresa'],
+      ['Inspeção e registros', 'Analise os controles de composição, dureza e dimensões. Defina os registros necessários antes da produção.', 'Guia de inspeção'],
+      ['Primeiro pedido de cotação', 'Comece com a referência da peça ou o modelo da máquina. A lista ajuda a identificar os dados em falta.', 'Lista para cotação'],
+    ],
+    note: 'Estas páginas descrevem processos e requisitos; não são relatórios de ensaio de um lote nem comprovam certificações. Solicite documentos atuais vinculados à entidade jurídica, à peça e à norma exigida.',
+    english: ' (em inglês)',
+  },
+  ru: {
+    label: 'Перед выбором поставщика', title: 'Изучите процесс. Определите документы.',
+    intro: 'Используйте эти материалы, чтобы изучить производство, согласовать контроль и подготовить первый запрос.',
+    cards: [
+      ['Компания и производство', 'Ознакомьтесь с информацией о литье, механической обработке и контроле на странице компании.', 'Информация о компании'],
+      ['Контроль и документы', 'Изучите контроль состава, твёрдости и размеров. Согласуйте необходимые документы до производства.', 'Руководство по контролю'],
+      ['Первый запрос цены', 'Начните с номера детали или модели машины. Контрольный список поможет определить недостающие сведения.', 'Список для запроса цены'],
+    ],
+    note: 'Эти страницы описывают процессы и требования, но не являются протоколами испытаний конкретной партии или подтверждением сертификации. Запросите актуальные документы для нужного юридического лица, детали и стандарта.',
+    english: ' (на английском)',
+  },
+};
+const c = copy[lang as keyof typeof copy] || copy.en;
+const links = [lang === 'en' ? '/about/' : langPath(lang as Lang, '/about/'), '/quality/', '/crusher-wear-parts-quotation/'];
+---
+<section class="section buyer-evidence" data-buyer-evidence aria-labelledby="buyer-evidence-title">
+  <div class="container">
+    <div class="sec-head">
+      <span class="eyebrow">{c.label}</span>
+      <h2 id="buyer-evidence-title">{c.title}</h2>
+      <p>{c.intro}</p>
+    </div>
+    <div class="evidence-grid">
+      {c.cards.map((card, i) => links[i] !== Astro.url.pathname && (
+        <article class="card evidence-card">
+          <h3>{card[0]}</h3>
+          <p>{card[1]}</p>
+          <a href={links[i]}>{card[2]}{i > 0 ? c.english : ''}<span aria-hidden="true"> →</span></a>
+        </article>
+      ))}
+    </div>
+    <p class="evidence-note">{c.note}</p>
+  </div>
+</section>
+<style>
+  .buyer-evidence { background: var(--bg-soft); }
+  .evidence-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+  .evidence-card { padding: 24px; display: flex; flex-direction: column; min-width: 0; }
+  .evidence-card h3 { font-size: 1.08rem; line-height: 1.4; margin: 0 0 12px; }
+  .evidence-card p { color: var(--muted); line-height: 1.7; margin: 0 0 20px; }
+  .evidence-card a { margin-top: auto; color: var(--accent); font-weight: 700; overflow-wrap: anywhere; }
+  .evidence-card a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+  .evidence-note { color: var(--muted); font-size: .86rem; line-height: 1.7; margin: 20px 0 0; max-width: 100ch; }
+  @media (max-width: 800px) { .evidence-grid { grid-template-columns: 1fr; } }
+</style>

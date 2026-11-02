@@ -15,7 +15,7 @@ const fields = [
   { name: 'name', label: lang === 'en' ? 'Your Name *' : l('ct.f0.label'), type: 'text', required: true, placeholder: lang === 'en' ? 'Full name' : l('ct.f0.placeholder') },
   { name: 'email', label: lang === 'en' ? 'Work Email *' : l('ct.f1.label'), type: 'email', required: true, placeholder: lang === 'en' ? 'name@company.com' : l('ct.f1.placeholder') },
   { name: 'company', label: lang === 'en' ? 'Company (optional)' : l('ct.f2.label').replace(' *', ''), type: 'text', required: false, placeholder: lang === 'en' ? 'Company name (optional)' : l('ct.f2.placeholder') },
-  { name: 'country', label: lang === 'en' ? 'Country' : l('ct.f3.label'), type: 'text', required: false, placeholder: lang === 'en' ? 'Country / region' : l('ct.f3.placeholder') },
+  { name: 'country', label: lang === 'en' ? 'Country' : l('ct.f3.label').replace(' *', ''), type: 'text', required: false, placeholder: lang === 'en' ? 'Country / region' : l('ct.f3.placeholder') },
   { name: 'phone', label: lang === 'en' ? 'Phone / WhatsApp' : l('ct.fPhone'), type: 'tel', required: false, placeholder: '+86 138 0000 0000', wide: true },
   { name: 'part_reference', label: lang === 'en' ? 'Part number / machine model / product needed' : l('ct.fReference'), type: 'text', required: false, placeholder: lang === 'en' ? 'e.g. OEM part number, machine model or product name' : l('ct.fReferencePlaceholder'), wide: true },
   { name: 'message', label: lang === 'en' ? 'Message *' : l('ct.f6.label'), type: 'textarea', required: true, placeholder: lang === 'en' ? 'Tell us the application, material, quantity or working conditions — whatever you have.' : l('ct.f6.placeholder') },
@@ -212,7 +212,11 @@ const waHref = 'https://wa.me/' + SITE.whatsappTel + '?text=' + encodeURICompone
     display: inline-flex; align-items: center; justify-content: center; gap: 10px;
     box-shadow: 0 10px 24px rgba(194, 65, 12, 0.24);
   }
-  .mc-submit svg { transition: transform 0.18s ease; }
+  .mc-submit { white-space: normal; line-height: 1.4; min-height: 54px; }
+  .mc-submit span { min-width: 0; overflow-wrap: anywhere; }
+  .mc-head, .mc-foot { flex-shrink: 0; }
+  .mc-body { min-height: 0; }
+  .mc-submit svg { flex-shrink: 0; transition: transform 0.18s ease; }
   .mc-submit:hover svg { transform: translateX(3px); }
 
   /* 底部一条信息条：承诺 + WhatsApp 备用通道 */

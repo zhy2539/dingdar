@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import CtaBand from '../components/CtaBand.astro';
 import FaqList from '../components/FaqList.astro';
+import BuyerEvidence from '../components/BuyerEvidence.astro';
 import { SITE } from '../data/config';
 
 const path = '/quality/';
@@ -163,6 +164,8 @@ const faqs = [
       <FaqList items={faqs} />
     </div>
   </section>
+
+  <BuyerEvidence />
 
   <CtaBand
     title="Specify the Evidence Up Front"

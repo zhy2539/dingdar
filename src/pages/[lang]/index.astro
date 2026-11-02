@@ -5,6 +5,7 @@ import AboutBand from '../../components/AboutBand.astro';
 import IndustryTabs from '../../components/IndustryTabs.astro';
 import CtaBand from '../../components/CtaBand.astro';
 import FaqList from '../../components/FaqList.astro';
+import BuyerEvidence from '../../components/BuyerEvidence.astro';
 import { CATEGORIES } from '../../data/products';
 import { STATS, MATERIALS, PROCESSES, QUALIFICATIONS, BUYER_CONCERNS, COMPLIANCE } from '../../data/config';
 import { dicts, LANG_CODES, getT, langPath, type Lang } from '../../i18n';
@@ -264,4 +265,5 @@ const steps = [0, 1, 2, 3].map((i) => ({ title: home('h' + i + '.title'), text: 
     text={home('ctaText')}
     cta={common('getQuote')}
   />
+  <BuyerEvidence lang={lang} />
 </BaseLayout>

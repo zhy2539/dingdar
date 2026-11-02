@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import { SITE } from '../data/config';
 import Turnstile from '../components/Turnstile.astro';
+import BuyerEvidence from '../components/BuyerEvidence.astro';
 
 const fields = [
   { name: 'name', label: 'Your Name *', type: 'text', required: true, placeholder: 'Full name' },
@@ -62,7 +63,7 @@ const fields = [
                     <textarea id={f.name} name={f.name} rows="6" placeholder={f.placeholder} required={f.required}></textarea>
                   </div>
                 ) : (
-                  <div class="field" style={f.name === 'phone' ? 'grid-column: 1 / -1;' : undefined}>
+                  <div class="field" style={['phone', 'part_reference'].includes(f.name) ? 'grid-column: 1 / -1;' : undefined}>
                     <label for={f.name}>{f.label}</label>
                     <input
                       id={f.name}
@@ -138,9 +139,11 @@ const fields = [
       </div>
     </div>
   </section>
+  <BuyerEvidence />
 </BaseLayout>
 
 <style>
+  #inquiry .btn { white-space: normal; line-height: 1.4; }
   .contact-list li { display: flex; justify-content: space-between; gap: 16px; padding: 9px 0; border-top: 1px solid var(--bg-tint); font-size: 0.94rem; align-items: baseline; }
   .contact-list .k { color: var(--muted); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; min-width: 96px; }
   .contact-list a { color: var(--ink); font-weight: 600; }

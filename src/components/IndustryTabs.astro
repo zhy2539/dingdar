@@ -17,7 +17,7 @@ const { eyebrow, title, tabs } = Astro.props;
         <picture>
           <source media="(max-width: 768px)" srcset={tab.img.replace('.webp', '-mobile.webp')} type="image/webp" />
           <source srcset={tab.img.replace('.webp', '-960.webp')} type="image/webp" />
-          <img src={tab.img} alt="" loading="lazy" width="960" height="540" />
+          <img src={tab.img} alt={tab.imgAlt} loading="lazy" width="960" height="540" />
         </picture>
       </div>
     ))}

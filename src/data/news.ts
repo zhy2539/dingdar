@@ -6,6 +6,7 @@
 import raw from './news.json';
 import bucketTeethFitGuide from './articles/bucket-teeth-adapters-fit-guide.md?raw';
 import mn13JawPlateFitGuide from './articles/mn13-jaw-plate-fit-guide.md?raw';
+import crusherWearPartsSelection from './articles/crusher-wear-parts-selection.md?raw';
 
 export interface NewsItem {
   slug: string;
@@ -58,6 +59,26 @@ const mn13JawPlateFitArticle: NewsItem = {
   ],
 };
 
-export const NEWS: NewsItem[] = [...(raw as NewsItem[]), bucketTeethArticle, mn13JawPlateFitArticle];
+const crusherWearPartsSelectionArticle: NewsItem = {
+  slug: 'crusher-wear-parts-selection',
+  title: 'Crusher Wear Parts Selection: A Practical Guide for Mining, Aggregate and Equipment Buyers',
+  date: '2026-11-06',
+  excerpt: 'Choose jaw plates, cone liners and blow bars by machine fit, feed conditions, wear pattern, material and inspection requirements.',
+  metaDescription: 'Choose jaw plates, cone liners and blow bars by machine fit, feed conditions, wear pattern, material and inspection requirements.',
+  cover: '/images/prod-jaw.webp',
+  coverAlt: 'Crusher jaw and cone wear parts prepared for technical selection',
+  body: [crusherWearPartsSelection.replace(/^# [^\n]+\n\n/, '').trim()],
+  related: ['how-to-identify-the-correct-jaw-plate-for-your-crusher', 'what-information-is-needed-for-a-custom-crusher-wear-parts-quote', 'what-inspection-records-should-buyers-request-for-crusher-wear-parts'],
+  relatedPages: [
+    { href: '/products/jaw-crusher-wear-parts/', label: 'Jaw crusher wear parts' },
+    { href: '/products/cone-crusher-wear-parts/', label: 'Cone crusher wear parts' },
+    { href: '/products/impact-crusher-wear-parts/', label: 'Impact crusher wear parts' },
+    { href: '/materials/', label: 'Wear-part materials guide' },
+    { href: '/quality/', label: 'Quality and inspection' },
+    { href: '/crusher-wear-parts-quotation/', label: 'Quotation checklist' },
+  ],
+};
+
+export const NEWS: NewsItem[] = [...(raw as NewsItem[]), bucketTeethArticle, mn13JawPlateFitArticle, crusherWearPartsSelectionArticle];
 
 export const getNews = (slug: string) => NEWS.find((n) => n.slug === slug);

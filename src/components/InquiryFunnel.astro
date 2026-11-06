@@ -56,9 +56,8 @@
     var form = field.closest('form');
     if (!isInquiry(form) || state(form).started) return;
     state(form).started = true;
-    // New event avoids ambiguity with GA4 automatic form_start. Legacy event retained once per form.
+    // Use a namespaced event so GA4's automatic form_start cannot double-count the custom funnel start.
     track('inquiry_form_start', form);
-    track('form_start', form);
   }, true);
   document.addEventListener('submit', function (e) {
     var form = e.target;

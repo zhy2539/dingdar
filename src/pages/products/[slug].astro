@@ -33,24 +33,23 @@ const specValue = (prefix: string) => {
 };
 const materialSpec = specValue('Material:');
 const routeSpec = specValue('Casting routes:');
-const serviceLd = {
+const productLd = {
   '@context': 'https://schema.org',
-  '@type': 'Service',
-  '@id': SITE.domain + path + '#service',
+  '@type': 'Product',
+  '@id': SITE.domain + path + '#product',
   name: cat.cardTitle,
   description: cat.intro,
   image: [SITE.domain + cat.heroImg, SITE.domain + cat.bannerImg],
   url: SITE.domain + path,
-  serviceType: 'Custom casting and wear-part manufacturing',
-  provider: { '@id': SITE.domain + '/#organization' },
-  areaServed: 'Worldwide',
-  // 这是报价制 B2B 服务，不是带有价格、退货或配送承诺的零售商品 Offer。
+  brand: { '@id': SITE.domain + '/#organization' },
+  manufacturer: { '@id': SITE.domain + '/#organization' },
+  category: 'Crusher wear parts',
   ...(materialSpec ? { material: materialSpec } : {}),
   additionalProperty: [
     ...(materialSpec ? [{ '@type': 'PropertyValue', name: 'Material', value: materialSpec }] : []),
     ...(routeSpec ? [{ '@type': 'PropertyValue', name: 'Casting process', value: routeSpec }] : []),
   ],
-  // B2B 页面采用询价模式，不输出没有公开依据的价格、评分或评论。
+  // 这是按图纸、样件或料号询价的 B2B 产品页；没有公开价格、评分或评论，故不输出 Offer。
 };
 const faqLd = {
   '@context': 'https://schema.org',
@@ -84,7 +83,7 @@ const reviewSteps = ['Casting', 'Heat Treatment', 'Machining', 'Inspection & Fin
 const deepDive = PRODUCT_DEEP_DIVE[cat.slug];
 ---
 
-<BaseLayout title={cat.title} description={cat.cardDesc} path={path} image={cat.heroImg.replace('.webp', '-og.webp')} jsonLd={[breadcrumbLd, serviceLd, faqLd, pageLd]} preloadImages={[cat.bannerImg]}>
+<BaseLayout title={cat.title} description={cat.cardDesc} path={path} image={cat.heroImg.replace('.webp', '-og.webp')} jsonLd={[breadcrumbLd, productLd, faqLd, pageLd]} preloadImages={[cat.bannerImg]}>
   <PageHero
     eyebrow="Product category"
     title={cat.h1}

@@ -1,4 +1,4 @@
-# How to Confirm Mn13 Jaw Plate Fit Before Ordering
+## How to Confirm Mn13 Jaw Plate Fit Before Ordering
 
 A crusher model or a similar-looking plate can start an Mn13 jaw plate review, but neither proves final fit. Before ordering, identify the crusher make and model, the fixed or movable position, a part number or drawing where available, and clear views of both the working and mounting faces. Final production geometry should be confirmed against an approved drawing, measurement record or physical sample.
 

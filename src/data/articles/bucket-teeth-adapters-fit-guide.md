@@ -1,4 +1,4 @@
-# Bucket Teeth and Adapters: How to Check Fit Before Ordering
+## Bucket Teeth and Adapters: How to Check Fit Before Ordering
 
 A bucket tooth and adapter should be ordered as a matched connection, not as two items that merely look similar. Before requesting a replacement, identify the machine and bucket, check the tooth-to-adapter interface and retaining system, and compare the old part's mounting geometry with a drawing, part number or clear photographs. Material selection comes after fit and working duty. This guide gives excavator and loader buyers a practical way to prepare that information without claiming that one tooth fits every bucket of the same machine model.
 

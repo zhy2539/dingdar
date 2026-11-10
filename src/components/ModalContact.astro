@@ -430,6 +430,11 @@ const waHref = 'https://wa.me/' + SITE.whatsappTel + '?text=' + encodeURICompone
           too_short: 'Please add a part number, equipment model, or a few words about your requirement.',
           captcha_failed: 'Please complete the security check and try again.',
           invalid_source: 'Please refresh the page and try again.',
+          invalid_email: 'Please enter a valid work email address.',
+          rate_limited: 'Please wait a while before sending another inquiry.',
+          service_not_configured: 'The inquiry service is being configured. Please use WhatsApp or email instead.',
+          delivery_failed: 'We could not deliver this inquiry. Please use WhatsApp or email instead.',
+          unreadable_body: 'We could not read the form. Please refresh the page and try again.',
         };
         showHint(apiMessages[detail.error] || form.dataset.hintErr || 'Something went wrong. Please try again or use WhatsApp / email.');
       }

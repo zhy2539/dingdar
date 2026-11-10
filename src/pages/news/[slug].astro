@@ -87,6 +87,8 @@ const articleJsonLd = {
   image: 'https://dingdar.com' + cover,
   author: { '@type': 'Organization', name: 'DINGDAR Technical Team', url: 'https://dingdar.com/' },
   publisher: { '@id': 'https://dingdar.com/#organization' },
+  isPartOf: { '@id': 'https://dingdar.com/#website' },
+  inLanguage: 'en',
   mainEntityOfPage: { '@type': 'WebPage', '@id': 'https://dingdar.com/news/' + slug + '/' },
 };
 const faqJsonLd = faqBlocks.length > 0 ? {

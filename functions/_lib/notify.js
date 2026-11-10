@@ -87,7 +87,7 @@ export function buildEmail(record, ex, createdAt) {
       <a href="https://dingdar.com/admin/" style="display:inline-block;margin-left:8px;color:#c2410c;text-decoration:none;font-size:13px;padding:9px 4px">打开询盘后台</a>
     </div>
     <div style="padding:11px 22px;background:#f8fafc;border-top:1px solid #e2e8f0;font-size:11px;color:#94a3b8;line-height:1.7">
-      这条询盘已存进 Cloudflare 数据库，后台可标记状态、导出 CSV。此邮件由 dingdar.com 自动发送。
+      这条询盘已由 dingdar.com 接收并发送到配置的线索处理链路。请以后台或邮件记录为准，此邮件由 dingdar.com 自动发送。
     </div>
   </div>
 </div>`;

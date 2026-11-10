@@ -18,17 +18,17 @@ const breadcrumbLd = {
   ],
 };
 
-const serviceLd = {
+const productLd = {
   '@context': 'https://schema.org',
-  '@type': 'Service',
-  '@id': SITE.domain + path + '#service',
+  '@type': 'Product',
+  '@id': SITE.domain + path + '#product',
   name: 'Ball Mill Liners',
   description:
     'Shell liners, head and end liners and grate plates for ball mills and rod mills, including pearlitic chrome-moly steel liners for rod mills and ball mills, cast in high-manganese (Mn13, Mn18, Mn18Cr2), pearlitic chrome-moly and high-chromium iron, produced to drawing, part number or worn sample.',
   image: [SITE.domain + '/images/factory-mill-head.webp', SITE.domain + '/images/factory-gear-ring.webp'],
   url: SITE.domain + path,
-  brand: { '@type': 'Brand', name: 'DINGDAR' },
-  manufacturer: { '@type': 'Organization', name: 'DINGDAR Casting', url: SITE.domain },
+  brand: { '@id': SITE.domain + '/#organization' },
+  manufacturer: { '@id': SITE.domain + '/#organization' },
   category: 'Grinding mill wear parts',
   material: 'High-manganese steel (Mn13, Mn18, Mn18Cr2), pearlitic chrome-moly steel, high-chromium cast iron (Cr15–Cr26)',
   additionalProperty: [
@@ -135,7 +135,7 @@ const faqs = [
   description="Ball mill shell liners, head and end liners and grate plates cast in Mn13, Mn18Cr2, pearlitic chrome-moly and high-chrome iron, produced to drawing or part number."
   path={path}
   alternateLangs={['en']}
-  jsonLd={[breadcrumbLd, serviceLd, {
+  jsonLd={[breadcrumbLd, productLd, {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
     mainEntity: faqs.map((f) => ({

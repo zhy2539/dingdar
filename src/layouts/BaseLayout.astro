@@ -259,16 +259,37 @@ if (window.__ddAnalyticsAllowed) {
     <script is:inline>
       window.ddTsRender = function (el) {
         // QA mode validates the form flow without loading a real Turnstile challenge.
-        if (window.__ddQaMode || !el || el.dataset.tsRendered === '1' || !window.turnstile) return;
+        if (window.__ddQaMode || !el || el.dataset.tsRendered === '1') return;
+        if (!window.turnstile) {
+          el.dataset.tsState = 'unavailable';
+          el.setAttribute('aria-label', 'Security verification is unavailable. Please refresh and try again.');
+          return;
+        }
         try {
           var id = window.turnstile.render(el, {
             sitekey: el.dataset.sitekey,
             theme: 'light',
             size: 'normal',
+            callback: function () {
+              el.dataset.tsState = 'verified';
+              el.removeAttribute('data-ts-error');
+            },
+            'expired-callback': function () {
+              el.dataset.tsState = 'expired';
+              el.setAttribute('data-ts-error', 'Security check expired. Please complete it again.');
+            },
+            'error-callback': function (code) {
+              el.dataset.tsState = 'error';
+              el.setAttribute('data-ts-error', 'Security check could not load. Please refresh and try again.');
+              el.dataset.tsErrorCode = String(code || 'unknown');
+            },
           });
           el.dataset.tsRendered = '1';
           el.dataset.tsId = id;
-        } catch (err) {}
+        } catch (err) {
+          el.dataset.tsState = 'error';
+          el.setAttribute('data-ts-error', 'Security check could not load. Please refresh and try again.');
+        }
       };
       window.ddTsReset = function (root) {
         var el = (root || document).querySelector('[data-turnstile]');
@@ -306,9 +327,13 @@ if (window.__ddAnalyticsAllowed) {
           if (token && token.value) return;
           e.preventDefault();
           e.stopImmediatePropagation();
+          var state = widget.dataset.tsState;
           var hint =
-            form.dataset.hintCaptcha ||
-            'Please tick the security check just above the button, then submit again.';
+            widget.getAttribute('data-ts-error') ||
+            (state === 'unavailable'
+              ? 'The security check is still loading. Please refresh the page and try again.'
+              : form.dataset.hintCaptcha ||
+                'Please tick the security check just above the button, then submit again.');
           var box = form.querySelector('#form-status, [data-mc-status], .hint');
           if (box) {
             box.textContent = hint;

@@ -54,6 +54,7 @@ E:\豆包工作内容存放\丁达尔建站\
 
 生产环境变量（仅在 Cloudflare Pages → Settings → Environment variables 配置，不写入仓库）：
 
+- `ADMIN_USERNAME`：后台登录账号
 - `ADMIN_PASSWORD`：后台登录密码
 - `ADMIN_SECRET`：随机长字符串，用于签发管理 Cookie 和 IP 哈希；生产环境必填
 - `DB`：Cloudflare D1 绑定变量

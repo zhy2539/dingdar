@@ -383,7 +383,8 @@ const title = '询盘后台 · DINGDAR';
         <div class="login-card">
           <span class="mark">DD</span>
           <h2>登录询盘后台</h2>
-          <p>输入后台密码。密码保存在 Cloudflare Pages 的环境变量 <code>ADMIN_PASSWORD</code> 中。</p>
+          <p>请输入后台账号和密码。账号保存在 Cloudflare Pages 的环境变量 <code>ADMIN_USERNAME</code> 中，密码保存在 <code>ADMIN_PASSWORD</code> 中。</p>
+          <input id="username" type="text" autocomplete="username" placeholder="后台账号" />
           <input id="pw" type="password" autocomplete="current-password" placeholder="后台密码" />
           <div class="row">
             <button class="btn--primary" id="do-login">登录</button>
@@ -718,15 +719,16 @@ const title = '询盘后台 · DINGDAR';
       });
 
       $('#do-login').addEventListener('click', async () => {
+        const username = $('#username').value.trim();
         const password = $('#pw').value;
-        if (!password) return;
+        if (!username || !password) return;
         $('#login-msg').textContent = '验证中…';
         let res;
         try {
           res = await fetch('/api/admin/login', {
             method: 'POST',
             headers: { 'content-type': 'application/json' },
-            body: JSON.stringify({ password }),
+            body: JSON.stringify({ username, password }),
           });
         } catch {
           $('#login-msg').textContent = '网络异常，请重试';
@@ -742,6 +744,9 @@ const title = '询盘后台 · DINGDAR';
         }
       });
 
+      $('#username').addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') $('#pw').focus();
+      });
       $('#pw').addEventListener('keydown', (e) => {
         if (e.key === 'Enter') $('#do-login').click();
       });

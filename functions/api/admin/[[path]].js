@@ -1,13 +1,14 @@
 /**
  * 询盘后台接口：/api/admin/*
  *
- *   POST   /api/admin/login              { password }        登录，种签名 Cookie
- *   POST   /api/admin/logout                                 退出
- *   GET    /api/admin/inquiries          ?status=&q=&limit=   列表
- *   POST   /api/admin/update             { id, status }       标记状态
- *   GET    /api/admin/export             ?status=             导出 CSV
+ *   POST   /api/admin/login              { username, password } 登录，签名 Cookie
+ *   POST   /api/admin/logout                                  退出
+ *   GET    /api/admin/inquiries          ?status=&q=&limit=    列表
+ *   POST   /api/admin/update             { id, status }        标记状态
+ *   GET    /api/admin/export             ?status=              导出 CSV
  *
  * 需要的环境变量（Cloudflare Pages → Settings → Environment variables）：
+ *   ADMIN_USERNAME  后台登录账号
  *   ADMIN_PASSWORD  后台登录密码，自己定
  *   ADMIN_SECRET    随机长字符串，用于签发 Cookie 与 IP 哈希
  * 需要 D1 绑定：变量名 DB
@@ -114,8 +115,8 @@ export async function onRequest({ request, env, params }) {
   const url = new URL(request.url);
   const method = request.method;
 
-  if (!env.ADMIN_PASSWORD || !env.ADMIN_SECRET) {
-    return json({ ok: false, error: 'not_configured', message: 'ADMIN_PASSWORD / ADMIN_SECRET 未设置' }, 503);
+  if (!env.ADMIN_USERNAME || !env.ADMIN_PASSWORD || !env.ADMIN_SECRET) {
+    return json({ ok: false, error: 'not_configured', message: 'ADMIN_USERNAME / ADMIN_PASSWORD / ADMIN_SECRET 未设置' }, 503);
   }
 
   if (route === 'login' && method === 'POST') {
@@ -124,9 +125,11 @@ export async function onRequest({ request, env, params }) {
       return json({ ok: false, error: 'rate_limited' }, 429, { 'retry-after': '900' });
     }
     const body = await request.json().catch(() => ({}));
-    if (!safeEqual(String(body.password || ''), env.ADMIN_PASSWORD)) {
+    const usernameOk = safeEqual(String(body.username || ''), env.ADMIN_USERNAME);
+    const passwordOk = safeEqual(String(body.password || ''), env.ADMIN_PASSWORD);
+    if (!usernameOk || !passwordOk) {
       await recordLoginFailure(env, ipHash);
-      return json({ ok: false, error: 'bad_password' }, 401);
+      return json({ ok: false, error: usernameOk ? 'bad_password' : 'bad_credentials' }, 401);
     }
     await clearLoginFailures(env, ipHash);
     const token = await issueToken(env.ADMIN_SECRET);

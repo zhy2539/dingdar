@@ -740,7 +740,7 @@ const title = '询盘后台 · DINGDAR';
           load();
         } else {
           const d = await res.json().catch(() => ({}));
-          $('#login-msg').textContent = d.message || (d.error === 'bad_password' ? '密码不正确' : '登录失败');
+          $('#login-msg').textContent = d.message || (d.error === 'bad_credentials' || d.error === 'bad_password' ? '账号或密码不正确' : '登录失败');
         }
       });
 

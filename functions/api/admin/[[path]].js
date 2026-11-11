@@ -129,7 +129,8 @@ export async function onRequest({ request, env, params }) {
     const passwordOk = safeEqual(String(body.password || ''), env.ADMIN_PASSWORD);
     if (!usernameOk || !passwordOk) {
       await recordLoginFailure(env, ipHash);
-      return json({ ok: false, error: usernameOk ? 'bad_password' : 'bad_credentials' }, 401);
+      // Keep credential failures indistinguishable to avoid username enumeration.
+      return json({ ok: false, error: 'bad_credentials' }, 401);
     }
     await clearLoginFailures(env, ipHash);
     const token = await issueToken(env.ADMIN_SECRET);

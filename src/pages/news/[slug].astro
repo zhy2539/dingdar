@@ -67,16 +67,25 @@ const faqBlocks = slug === 'mn13-jaw-plate-fit-guide'
       ['Which inspection documents should I request?', 'Request the records that match the order requirements, such as material, dimensional, hardness or visual inspection records, with their agreed method, scope and acceptance criteria.'],
       ['Can a supplier confirm price and lead time from a photo?', 'A photo can support an initial review, but price, availability and lead time depend on the confirmed part reference, quantity, production scope, inspection requirements and delivery terms.'],
     ]
-  : slug === 'crusher-wear-parts-selection'
-    ? [
-        ['What is the most important input for crusher wear parts selection?', 'The machine and part reference come first: model, position, part number, drawing or sample. Operating information such as feed material, feed size, impact level and current wear pattern then helps match the material and profile to the duty.'],
-        ['Are harder crusher wear parts always better?', 'No. Hardness helps describe resistance to scratching, but it does not by itself describe toughness, carbide structure, matrix support or cracking risk. The material should be selected for the dominant failure mode and the actual impact and abrasion conditions.'],
-        ['Can a supplier quote without a finished drawing?', 'A part number, equipment model, sample or clear worn-part photographs can start a technical review. Missing dimensions, material and acceptance details should be confirmed before the quotation and production basis are finalized.'],
-        ['Which material is used for jaw plates?', 'DINGDAR’s product information lists high-manganese steel, including Mn13, Mn18 and variants, for jaw plates. Alloy grades can be reviewed against the application. The final selection depends on machine fit, feed conditions, wear pattern and agreed specification.'],
-        ['What inspection documents should buyers request?', 'The agreed scope can include a chemical composition report, hardness results, dimensional inspection, visual inspection, NDT and third-party inspection. Requirements should be stated before production so the release documents match the order.'],
-        ['How should I start a crusher wear parts enquiry?', 'Send the machine model, part number or drawing if available, along with photos or a sample reference, application, feed conditions, current wear pattern, quantity, delivery country and inspection requirements. This gives the supplier a clear basis for reviewing fit, material and quotation scope.'],
-      ]
-    : [];
+    : slug === 'crusher-wear-parts-selection'
+      ? [
+          ['What is the most important input for crusher wear parts selection?', 'The machine and part reference come first: model, position, part number, drawing or sample. Operating information such as feed material, feed size, impact level and current wear pattern then helps match the material and profile to the duty.'],
+          ['Are harder crusher wear parts always better?', 'No. Hardness helps describe resistance to scratching, but it does not by itself describe toughness, carbide structure, matrix support or cracking risk. The material should be selected for the dominant failure mode and the actual impact and abrasion conditions.'],
+          ['Can a supplier quote without a finished drawing?', 'A part number, equipment model, sample or clear worn-part photographs can start a technical review. Missing dimensions, material and acceptance details should be confirmed before the quotation and production basis are finalized.'],
+          ['Which material is used for jaw plates?', 'DINGDAR’s product information lists high-manganese steel, including Mn13, Mn18 and variants, for jaw plates. Alloy grades can be reviewed against the application. The final selection depends on machine fit, feed conditions, wear pattern and agreed specification.'],
+          ['What inspection documents should buyers request?', 'The agreed scope can include a chemical composition report, hardness results, dimensional inspection, visual inspection, NDT and third-party inspection. Requirements should be stated before production so the release documents match the order.'],
+          ['How should I start a crusher wear parts enquiry?', 'Send the machine model, part number or drawing if available, along with photos or a sample reference, application, feed conditions, current wear pattern, quantity, delivery country and inspection requirements. This gives the supplier a clear basis for reviewing fit, material and quotation scope.'],
+        ]
+      : slug === 'custom-crusher-wear-parts-quote-moq-lead-time-checklist'
+        ? [
+            ['What information is needed for a custom crusher wear parts quote?', 'Send the machine model, part number or drawing, application and feed conditions, quantity, destination country, delivery plan and inspection requirements. Photos or a worn sample can start a review when a complete drawing is unavailable.'],
+            ['What is the MOQ for crusher wear parts?', 'MOQ is an economic quantity determined by the part geometry, tooling, material, heat treatment, inspection scope and order plan. It should be confirmed for the specific part rather than assumed from a general supplier policy.'],
+            ['How is custom casting lead time calculated?', 'Custom casting lead time includes technical review, pattern or tooling work when needed, production, cooling, heat treatment, machining, inspection, packing and shipping coordination. The confirmed time depends on the part and agreed scope.'],
+            ['Can a foundry quote from a photo?', 'A clear photo can start identification, but a final quotation normally needs a part reference, machine model, drawing, dimensions or sample, plus quantity and application details. Missing inputs should be listed before production.'],
+            ['Which inspection records should buyers request?', 'Common records include material or heat analysis, dimensional inspection, hardness results and visual or marking records. NDT or third-party inspection can be added when the part and project require it.'],
+            ['How can buyers reduce quotation delays?', 'Put the current drawing revision, part position, quantity, destination, application, delivery target and acceptance documents in one request. Mark unknown items clearly so the supplier can ask focused questions instead of making hidden assumptions.'],
+          ]
+        : [];
 const articleJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Article',

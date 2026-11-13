@@ -7,6 +7,7 @@ import raw from './news.json';
 import bucketTeethFitGuide from './articles/bucket-teeth-adapters-fit-guide.md?raw';
 import mn13JawPlateFitGuide from './articles/mn13-jaw-plate-fit-guide.md?raw';
 import crusherWearPartsSelection from './articles/crusher-wear-parts-selection.md?raw';
+import customCrusherQuoteChecklist from './articles/custom-crusher-wear-parts-quote-moq-lead-time-checklist.md?raw';
 
 export interface NewsItem {
   slug: string;
@@ -79,6 +80,25 @@ const crusherWearPartsSelectionArticle: NewsItem = {
   ],
 };
 
-export const NEWS: NewsItem[] = [...(raw as NewsItem[]), bucketTeethArticle, mn13JawPlateFitArticle, crusherWearPartsSelectionArticle];
+const customCrusherQuoteChecklistArticle: NewsItem = {
+  slug: 'custom-crusher-wear-parts-quote-moq-lead-time-checklist',
+  title: 'Custom Crusher Wear Parts Quote: MOQ, Lead Time and Buyer Checklist',
+  date: '2026-11-13',
+  excerpt: 'Learn what buyers should send for a custom crusher wear parts quote and how part identity, MOQ, tooling, lead time and inspection scope affect the quotation.',
+  metaDescription: 'Learn what to send for a custom crusher wear parts quote and how part identity, MOQ, tooling, lead time and inspection scope affect the quotation.',
+  cover: '/images/news-fire-worker.webp',
+  coverAlt: 'Foundry worker operating machinery near molten metal and intense flames',
+  body: [customCrusherQuoteChecklist.replace(/^# [^\n]+\n\n/, '').trim()],
+  related: ['crusher-wear-parts-moq-lead-time', 'what-information-is-needed-for-a-custom-crusher-wear-parts-quote', 'what-inspection-records-should-buyers-request-for-crusher-wear-parts'],
+  relatedPages: [
+    { href: '/crusher-wear-parts-quotation/', label: 'Crusher wear parts quotation checklist' },
+    { href: '/products/custom-castings/', label: 'Custom castings' },
+    { href: '/products/jaw-crusher-wear-parts/', label: 'Jaw crusher wear parts' },
+    { href: '/products/cone-crusher-wear-parts/', label: 'Cone crusher wear parts' },
+    { href: '/products/impact-crusher-wear-parts/', label: 'Impact crusher wear parts' },
+  ],
+};
+
+export const NEWS: NewsItem[] = [...(raw as NewsItem[]), bucketTeethArticle, mn13JawPlateFitArticle, crusherWearPartsSelectionArticle, customCrusherQuoteChecklistArticle];
 
 export const getNews = (slug: string) => NEWS.find((n) => n.slug === slug);

@@ -323,22 +323,25 @@ if (window.__ddAnalyticsAllowed) {
           var email = form.querySelector('input[type="email"]');
           var emailValue = email ? String(email.value || '').trim() : '';
           if (hasMissingRequired || (emailValue && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(emailValue))) return;
-          var token = form.querySelector('input[name="cf-turnstile-response"]');
-          if (token && token.value) return;
-          e.preventDefault();
-          e.stopImmediatePropagation();
-          var state = widget.dataset.tsState;
-          var hint =
-            widget.getAttribute('data-ts-error') ||
-            (state === 'unavailable'
-              ? 'The security check is still loading. Please refresh the page and try again.'
-              : form.dataset.hintCaptcha ||
-                'Please tick the security check just above the button, then submit again.');
-          var box = form.querySelector('#form-status, [data-mc-status], .hint');
-          if (box) {
-            box.textContent = hint;
-            box.style.color = '#d9480f';
-          }
+           var token = form.querySelector('input[name="cf-turnstile-response"]');
+           if (token && token.value) return;
+           var state = widget.dataset.tsState;
+           // If the widget itself failed to load, let the server decide whether
+           // Turnstile is required. This avoids a client-side dead end when the
+           // site is configured to fail open; a strict server still returns
+           // captcha_failed and the form handler shows the fallback contact path.
+           if (state === 'error' || state === 'unavailable') return;
+           e.preventDefault();
+           e.stopImmediatePropagation();
+           var hint =
+             widget.getAttribute('data-ts-error') ||
+             form.dataset.hintCaptcha ||
+             'Please tick the security check just above the button, then submit again.';
+           var box = form.querySelector('#form-status, [data-mc-status], .hint');
+           if (box) {
+             box.textContent = hint;
+             box.style.color = '#d9480f';
+           }
         },
         true
       );

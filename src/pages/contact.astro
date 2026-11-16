@@ -218,11 +218,13 @@ const fields = [
           invalid_email: 'Please enter a valid work email address.',
           invalid_source: 'Please refresh the page and try again.',
           too_short: 'Please add a part number, equipment model, or a few words about your requirement.',
-          captcha_failed: 'Please complete the security check and try again.',
-          rate_limited: 'Please wait a while before sending another inquiry.',
-          service_not_configured: 'The inquiry service is being configured. Please use WhatsApp or email instead.',
-        };
-        status.textContent = messages[detail.error] || 'Something went wrong. Please try again or use WhatsApp / email.';
+           captcha_failed: 'The security check could not be completed. Please refresh once. If it still fails, send the same details by WhatsApp or email below.',
+           rate_limited: 'Please wait a while before sending another inquiry.',
+           service_not_configured: 'The inquiry service is being configured. Please use WhatsApp or email instead.',
+           delivery_failed: 'We could not deliver this inquiry. Please use WhatsApp or email instead.',
+           unreadable_body: 'We could not read the form. Please refresh the page and try again.',
+         };
+         status.textContent = messages[detail.error] || 'Something went wrong. Please try again or use WhatsApp / email.';
         status.style.color = '#d9480f';
       }
     } catch {

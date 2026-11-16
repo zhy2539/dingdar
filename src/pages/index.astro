@@ -28,6 +28,16 @@ const faqs = [
   },
 ];
 
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.q,
+    acceptedAnswer: { '@type': 'Answer', text: faq.a },
+  })),
+};
+
 const industries = [
   { title: 'Mining & Quarrying', text: 'Wear parts for jaw, cone, impact and hammer crushers used across hard rock and aggregate circuits.', img: '/images/H8bb76d8bdb4e44db9b044002488080b3J.webp', imgAlt: 'Open-pit mining operation loading crushed rock' },
   { title: 'Sand & Aggregate Plants', text: 'Crushing and screening wear components with dependable supply for continuous plant operation.', img: '/images/H3b8c84a71c2c4e4abf3df732901b8638g.webp', imgAlt: 'Aerial view of a sand and aggregate processing plant' },
@@ -40,6 +50,7 @@ const industries = [
   title="Crusher Wear Parts Manufacturer | DINGDAR Casting"
   description="Crusher wear parts from DINGDAR: jaw plates, cone mantles, blow bars and bucket teeth made to drawing, sample or part number. Request a quote."
   path="/"
+  jsonLd={[faqLd]}
   preloadImages={['/images/factory-gear-ring-full.webp']}
 >
   <PageHero

@@ -188,6 +188,34 @@ const labels = isEnglish ? {
 
   <section class="section">
     <div class="container">
+      <div class="sec-head">
+        <span class="eyebrow">Buyer review checklist</span>
+        <h2>What to Confirm Before Requesting a Quote</h2>
+        <p>Process selection is part-specific. These inputs help the foundry compare geometry, material, quantity and inspection scope before recommending a route.</p>
+      </div>
+      <div class="grid grid--2 buyer-review-grid">
+        <article class="card buyer-review-card">
+          <h3>Part and operating information</h3>
+          <ul class="check-list">
+            <li>Drawing, sample, part number or equipment model.</li>
+            <li>Critical dimensions, wall sections, interfaces and machining allowance.</li>
+            <li>Working material, impact or abrasion conditions and current failure pattern.</li>
+          </ul>
+        </article>
+        <article class="card buyer-review-card">
+          <h3>Supply and acceptance information</h3>
+          <ul class="check-list">
+            <li>Required quantity, repeat-supply expectation and delivery market.</li>
+            <li>Material grade, heat-treatment requirement and target hardness when known.</li>
+            <li>Dimensional, visual, hardness, NDT or third-party inspection records required for release.</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
       <div class="sec-head"><span class="eyebrow">{labels.faq}</span><h2>Questions buyers usually ask</h2></div>
       <FaqList items={process.faq} />
     </div>
@@ -219,6 +247,12 @@ const labels = isEnglish ? {
     .check-list li { position:relative; padding:15px 18px 15px 42px; background:#fff; border:1px solid var(--line); color:var(--ink-2); line-height:1.55; }
     .check-list li::before { content:'✓'; position:absolute; left:18px; top:14px; color:var(--accent); font-weight:800; }
     .narrow-copy { max-width:880px; }
+    .buyer-review-grid { align-items:stretch; }
+    .buyer-review-card { padding:26px 28px; }
+    .buyer-review-card h3 { margin-bottom:16px; }
+    .check-list { list-style:none; padding:0; margin:0; display:grid; gap:12px; }
+    .check-list li { position:relative; padding-left:26px; color:var(--muted); line-height:1.65; }
+    .check-list li::before { content:'✓'; position:absolute; left:0; color:var(--accent); font-weight:800; }
     .related-links { border-top:1px solid var(--line); }
     .center-actions { justify-content:center; }
     @media (max-width: 1050px) { .process-flow { grid-template-columns:repeat(3,1fr); } }

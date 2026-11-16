@@ -26,6 +26,16 @@ const faqs = [
   { q: t('home.fq2.q'), a: t('home.fq2.a') },
   { q: t('home.fq3.q'), a: t('home.fq3.a') },
 ];
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  inLanguage: lang,
+  mainEntity: faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.q,
+    acceptedAnswer: { '@type': 'Answer', text: faq.a },
+  })),
+};
 
 const industries = [0, 1, 2, 3].map((i) => ({ title: home('ind' + i + '.title'), text: home('ind' + i + '.text') }));
 const industryImgs = [
@@ -43,6 +53,7 @@ const steps = [0, 1, 2, 3].map((i) => ({ title: home('h' + i + '.title'), text: 
   path={langPath(lang as Lang, '/')}
   lang={lang}
   enPath="/"
+  jsonLd={[faqLd]}
   preloadImages={['/images/factory-gear-ring-full.webp']}
 >
   <PageHero

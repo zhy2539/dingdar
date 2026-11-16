@@ -1,0 +1,222 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import { SITE } from '../../data/config';
+import Turnstile from '../../components/Turnstile.astro';
+import BuyerEvidence from '../../components/BuyerEvidence.astro';
+import { dicts, LANG_CODES, getT, langPath, type Lang } from '../../i18n';
+
+export function getStaticPaths() {
+  return LANG_CODES.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params;
+const t = getT(lang as Lang);
+const ct = (key: string) => t('ct.' + key);
+const common = (key: string) => t('common.' + key);
+const langHref = (enPath: string) => langPath(lang as Lang, enPath);
+
+const fields = [
+  { name: 'name', label: ct('f0.label'), type: 'text', required: true, placeholder: ct('f0.placeholder') },
+  { name: 'email', label: ct('f1.label'), type: 'email', required: true, placeholder: ct('f1.placeholder') },
+  { name: 'company', label: ct('f2.label').replace(' *', ''), type: 'text', required: false, placeholder: ct('f2.placeholder') },
+  { name: 'country', label: ct('f3.label').replace(' *', ''), type: 'text', required: false, placeholder: ct('f3.placeholder') },
+  { name: 'phone', label: ct('fPhone'), type: 'tel', required: false, placeholder: '+86 138 0000 0000' },
+  { name: 'part_reference', label: ct('fReference'), type: 'text', required: false, placeholder: ct('fReferencePlaceholder') },
+  { name: 'product', label: ct('f4.label'), type: 'text', required: false, placeholder: ct('fReferencePlaceholder') },
+  { name: 'quantity', label: ct('f5.label'), type: 'text', required: false, placeholder: ct('f5.placeholder') },
+  { name: 'delivery_market', label: ct('f3.label'), type: 'text', required: false, placeholder: ct('f3.placeholder') },
+  { name: 'material_hardness', label: ct('f1.label'), type: 'text', required: false, placeholder: ct('f6.placeholder') },
+  { name: 'message', label: ct('f6.label'), type: 'textarea', required: true, placeholder: ct('f6.placeholder') },
+];
+const helps = [0, 1, 2, 3].map((i) => ct('h' + i));
+---
+
+<BaseLayout
+  title={t('meta.contact.title')}
+  description={t('meta.contact.desc')}
+  path={langPath(lang as Lang, '/contact/')}
+  lang={lang}
+  enPath="/contact/"
+>
+  <PageHero
+    eyebrow={ct('heroEyebrow')}
+    title={ct('heroTitle')}
+    lead={ct('heroLead')}
+    img="/images/contact-forklift.webp"
+    imgAlt="Forklift in a warehouse used for industrial logistics"
+    ctaPrimary={{ label: common('sendInquiry'), href: '#inquiry-form' }}
+    ctaSecondary={{ label: common('whatsappUs'), href: 'https://wa.me/' + SITE.whatsappTel + '?text=' + encodeURIComponent(SITE.waText) }}
+  />
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="grid grid--2" style="grid-template-columns: 1.1fr 0.9fr; gap: 40px; align-items: start;">
+        <div class="card" id="inquiry-form" style="padding: 34px 32px;">
+          <h2 style="font-size:1.5rem;">{ct('formTitle')}</h2>
+          <p style="font-size:0.95rem;color:var(--muted);margin:10px 0 24px;">{ct('formNote')}</p>
+
+          <form id="inquiry" data-form-type="quote" action={SITE.formEndpoint} method="POST" novalidate data-hint-required={ct('hintRequired')} data-hint-email={ct('hintEmail')} data-hint-captcha={ct('hintCaptcha')} data-thank-you-path={langPath(lang as Lang, '/thank-you/')}>
+            <div class="hp-field" aria-hidden="true">
+              <label>Leave this field empty</label>
+              <input type="text" name="_honey" tabindex="-1" autocomplete="off" />
+            </div>
+            <input type="hidden" name="_subject" value="New inquiry from dingdar.com" />
+            <input type="hidden" name="source_page" value={'https://dingdar.com' + langPath(lang as Lang, '/contact/')} />
+            <input type="hidden" name="source_title" value={t('meta.contact.title')} />
+            <input type="hidden" name="page_language" value={lang} />
+            <input type="hidden" name="utm_source" value="" />
+            <input type="hidden" name="utm_medium" value="" />
+            <input type="hidden" name="utm_campaign" value="" />
+            <input type="hidden" name="utm_content" value="" />
+            <input type="hidden" name="utm_term" value="" />
+            <input type="hidden" name="referrer" value="" />
+            <input type="hidden" name="first_page" value="" />
+
+            <div class="grid grid--2" style="gap: 16px;">
+              {fields.map((f) => (
+                f.type === 'textarea' ? (
+                  <div class="field" style="grid-column: 1 / -1;">
+                    <label for={f.name}>{f.label}</label>
+                    <textarea id={f.name} name={f.name} rows="6" placeholder={f.placeholder} required={f.required}></textarea>
+                  </div>
+                ) : (
+                  <div class="field" style={['phone', 'part_reference'].includes(f.name) ? 'grid-column: 1 / -1;' : undefined}>
+                    <label for={f.name}>{f.label}</label>
+                    <input id={f.name} name={f.name} type={f.type} placeholder={f.placeholder} required={f.required} />
+                  </div>
+                )
+              ))}
+            </div>
+
+            <div class="field" style="margin-top: 6px;">
+              <Turnstile />
+              <button type="submit" class="btn btn--primary btn--lg" style="width:100%;">{ct('sendReviewQuote')}</button>
+              <p class="hint" id="form-status" role="status" aria-live="polite"></p>
+              <p style="font-size:0.82rem;color:var(--muted);line-height:1.6;margin-top:12px;">{ct('fileNote')}</p>
+            </div>
+          </form>
+        </div>
+
+        <div>
+          <div class="card" style="padding: 30px 28px; margin-bottom: 24px;">
+            <h3 style="font-size:1.15rem;margin-bottom:16px;">{ct('helpsTitle')}</h3>
+            <ul>
+              {helps.map((x) => (
+                <li style="padding:8px 0;border-top:1px solid var(--bg-tint);display:flex;gap:10px;font-size:0.94rem;">
+                  <span style="color:var(--accent);font-weight:800;">✓</span>{x}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="card" style="padding: 30px 28px; margin-bottom: 24px;">
+            <h3 style="font-size:1.15rem;margin-bottom:16px;">{ct('directTitle')}</h3>
+            <ul class="contact-list">
+              <li><span class="k">{common('whatsapp')}</span><a href={'https://wa.me/' + SITE.whatsappTel + '?text=' + encodeURIComponent(SITE.waText)}>{SITE.whatsapp}</a></li>
+              <li><span class="k">{common('sales')}</span><a href={'mailto:' + SITE.email}>{SITE.email}</a></li>
+              <li><span class="k">{common('engineering')}</span><a href={'mailto:' + SITE.engineeringEmail}>{SITE.engineeringEmail}</a></li>
+              <li><span class="k">{common('quality')}</span><a href={'mailto:' + SITE.qualityEmail}>{SITE.qualityEmail}</a></li>
+              <li><span class="k">{common('location')}</span><span>{SITE.location}, China</span></li>
+            </ul>
+          </div>
+
+          <div class="cta-band" style="padding: 28px 30px;">
+            <div>
+              <h2 style="font-size:1.2rem;">{ct('responseTitle')}</h2>
+              <p style="font-size:0.92rem;">{ct('responseText')}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <BuyerEvidence lang={lang} />
+</BaseLayout>
+
+<style>
+  #inquiry .btn { white-space: normal; line-height: 1.4; }
+  .contact-list li { display: flex; justify-content: space-between; gap: 16px; padding: 9px 0; border-top: 1px solid var(--bg-tint); font-size: 0.94rem; align-items: baseline; }
+  .contact-list .k { color: var(--muted); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; min-width: 96px; }
+  .contact-list a { color: var(--ink); font-weight: 600; }
+  .contact-list a:hover { color: var(--accent); }
+  @media (max-width: 900px) { .grid--2[style] { grid-template-columns: 1fr !important; } }
+</style>
+
+<script>
+  const form = document.getElementById('inquiry');
+  const status = document.getElementById('form-status');
+  const endpoint = form.getAttribute('action') || '';
+  const attributionKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+  const attribution = new URLSearchParams(window.location.search);
+  attributionKeys.forEach((key) => {
+    const input = form.elements.namedItem(key);
+    if (input) input.value = attribution.get(key) || '';
+  });
+  const referrerInput = form.elements.namedItem('referrer');
+  if (referrerInput) referrerInput.value = document.referrer || '';
+  const firstPageInput = form.elements.namedItem('first_page');
+  try {
+    const saved = JSON.parse(sessionStorage.getItem('dingdar_attribution') || '{}');
+    if (firstPageInput && typeof saved.first_page === 'string') firstPageInput.value = saved.first_page;
+  } catch (_) {}
+  try {
+    const saved = JSON.parse(sessionStorage.getItem('dingdar_attribution') || '{}');
+    Object.entries(saved).forEach(([key, value]) => {
+      const input = form.elements.namedItem(key);
+      if (input && typeof value === 'string') input.value = value;
+    });
+  } catch (_) {}
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    status.textContent = '';
+    const data = new FormData(form);
+    if (data.get('_honey')) return;
+    const name = data.get('name')?.trim();
+    const email = data.get('email')?.trim();
+    const company = data.get('company')?.trim();
+    const country = data.get('country')?.trim();
+    const message = data.get('message')?.trim();
+    if (!name || !email || !message) {
+      status.textContent = form.dataset.hintRequired || 'Please complete all required fields.';
+      status.style.color = '#d9480f';
+      return;
+    }
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+      status.textContent = form.dataset.hintEmail || 'Please enter a valid email address.';
+      status.style.color = '#d9480f';
+      return;
+    }
+    if (!endpoint) {
+      status.innerHTML = 'The form endpoint is not configured yet. Please contact us directly: <a href="mailto:hugo@dingdar.com" style="color:#e8590c;font-weight:700;">hugo@dingdar.com</a> or <a href="https://wa.me/8619337861987?text=Hello%20DINGDAR%2C%20I%20found%20your%20website%20and%20would%20like%20to%20ask%20about%20your%20cast%20wear%20parts.%20Please%20share%20more%20details." style="color:#e8590c;font-weight:700;">WhatsApp</a>.';
+      return;
+    }
+    try {
+      const res = await window.ddInquiryFetch(form, endpoint, data);
+      if (res.ok) {
+        if (window.dingdarTrackEvent) await window.dingdarTrackEvent('inquiry_submitted', { form_type: 'quote', form_surface: 'page', page_language: document.documentElement.lang || 'en', page_path: window.location.pathname });
+        window.location.href = form.dataset.thankYouPath || '/thank-you/';
+      } else {
+        let detail = {};
+        try { detail = await res.json(); } catch (_) {}
+        const messages = {
+          invalid_email: 'Please enter a valid work email address.',
+          invalid_source: 'Please refresh the page and try again.',
+          too_short: 'Please add a part number, equipment model, or a few words about your requirement.',
+          captcha_failed: 'The security check could not be completed. Please refresh once. If it still fails, send the same details by WhatsApp or email below.',
+          rate_limited: 'Please wait a while before sending another inquiry.',
+          service_not_configured: 'The inquiry service is being configured. Please use WhatsApp or email instead.',
+          delivery_failed: 'We could not deliver this inquiry. Please use WhatsApp or email instead.',
+          unreadable_body: 'We could not read the form. Please refresh the page and try again.',
+        };
+        status.textContent = messages[detail.error] || 'Something went wrong. Please try again or use WhatsApp / email.';
+        status.style.color = '#d9480f';
+      }
+    } catch {
+      status.textContent = 'Network error. Please email us at hugo@dingdar.com or message us on WhatsApp.';
+      status.style.color = '#d9480f';
+    }
+  });
+</script>
+

@@ -76,7 +76,7 @@
     var email = form.querySelector('[type="email"]');
     if (missing) error(form, 'required', 'validation');
     else if (email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email.value.trim())) error(form, 'invalid_email', 'validation');
-    else if (form.querySelector('[data-turnstile]') && !form.querySelector('input[name="cf-turnstile-response"]')?.value) error(form, 'captcha_required', 'validation');
+    else if (form.querySelector('[data-turnstile]') && !form.querySelector('input[name="cf-turnstile-response"]')?.value && !['error','unavailable'].includes(form.querySelector('[data-turnstile]')?.dataset.tsState || '')) error(form, 'captcha_required', 'validation');
   }, true);
   window.ddInquiryFetch = async function (form, endpoint, data) {
     if (!isInquiry(form) || new URL(endpoint, location.href).pathname !== '/api/inquiry') throw new Error('Invalid inquiry endpoint');

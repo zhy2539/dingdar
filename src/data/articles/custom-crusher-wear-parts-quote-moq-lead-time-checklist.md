@@ -173,7 +173,7 @@ Put the current drawing revision, part position, quantity, destination, applicat
 
 **DINGDAR Technical Team** reviews crusher wear parts, custom castings and inspection requirements for mining, quarrying, aggregate and heavy-equipment buyers. The team uses machine references, drawings, samples, application information and agreed quality documents as the basis for technical review.
 
-*Reviewed by the DINGDAR Technical Review Team. Published November 12, 2026.*
+*Reviewed by the DINGDAR Technical Review Team. Published November 13, 2026.*
 
 ## Conclusion
 

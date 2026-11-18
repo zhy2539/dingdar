@@ -428,7 +428,7 @@ const waHref = 'https://wa.me/' + SITE.whatsappTel + '?text=' + encodeURICompone
         try { detail = await res.json(); } catch (_) {}
         const apiMessages = {
           too_short: 'Please add a part number, equipment model, or a few words about your requirement.',
-          captcha_failed: 'Please complete the security check and try again.',
+          captcha_failed: 'The security check could not be completed. Please refresh once. If it still fails, email hugo@dingdar.com or use WhatsApp below.',
           invalid_source: 'Please refresh the page and try again.',
           invalid_email: 'Please enter a valid work email address.',
           rate_limited: 'Please wait a while before sending another inquiry.',

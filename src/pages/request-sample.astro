@@ -207,9 +207,11 @@ const sampleFields = [
           invalid_email: 'Please enter a valid work email address.',
           invalid_source: 'Please refresh the page and try again.',
           too_short: 'Please add the part reference, machine model or evaluation purpose.',
-          captcha_failed: 'Please complete the security check and try again.',
+          captcha_failed: 'The security check could not be completed. Please refresh once. If it still fails, email hugo@dingdar.com or use WhatsApp below.',
           rate_limited: 'Please wait a while before sending another request.',
           service_not_configured: 'The request service is being configured. Please use WhatsApp or email instead.',
+          delivery_failed: 'We could not deliver this request. Please use WhatsApp or email instead.',
+          unreadable_body: 'We could not read the request. Please refresh the page and try again.',
         };
         status.textContent = messages[detail.error] || 'Something went wrong. Please try again or use WhatsApp / email.';
         status.style.color = '#d9480f';
